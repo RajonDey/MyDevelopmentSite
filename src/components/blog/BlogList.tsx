@@ -1,7 +1,17 @@
 import React from "react";
 import BlogCard from "@/components/blog/BlogCard";
 
-const BlogList = ({ posts }) => {
+interface Post {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  excerpt: {
+    rendered: string;
+  };
+}
+
+const BlogList: React.FC<{ posts: Post[] }> = ({ posts }) => {
   return (
     <div>
       {posts.map((post) => (
