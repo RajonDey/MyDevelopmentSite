@@ -15,6 +15,7 @@ const BlogCard: React.FC<{ post: Post }> = ({ post }) => {
     <div>
       <h2>{post.title.rendered}</h2>
       <p>{post.excerpt.rendered}</p>
+      Test
     </div>
   );
 };
