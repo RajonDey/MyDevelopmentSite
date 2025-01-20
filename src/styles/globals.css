@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors */
+  --color-primary: #1dbf73; /* Fiverr's green */
+  --color-secondary: #62646a; /* Fiverr's gray */
+  --color-background: #ffffff; /* White */
+  --color-footer-bg: #0e0e0e; /* Dark background for footer */
+  --color-text: #222325; /* Dark text */
+  --color-text-light: #ffffff; /* Light text */
+  --color-cta: #1dbf73; /* CTA button color */
+
+  /* Fonts */
+  --font-primary: "Inter", sans-serif; /* Fiverr uses a clean sans-serif font */
+}
+
+/* Apply global styles */
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
