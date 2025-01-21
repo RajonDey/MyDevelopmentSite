@@ -67,6 +67,19 @@ export default function Footer() {
               GitHub
             </a>
           </div>
+
+          {/* Buy Me a Coffee Section */}
+          <div className="mt-4">
+            <h3 className="font-bold text-lg">Support My Work</h3>
+            <a
+              href="https://buymeacoffee.com/your-profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[#19a463] transition-colors"
+            >
+              Buy Me a Coffee
+            </a>
+          </div>
         </div>
       </div>
 

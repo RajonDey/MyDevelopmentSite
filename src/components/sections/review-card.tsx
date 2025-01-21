@@ -19,7 +19,7 @@ export function ReviewCard({
 }: ReviewCardProps) {
   return (
     <Card>
-      <CardContent className="p-4">
+      <CardContent>
         <div className="flex items-start gap-4">
           <Image
             src={avatar || "/placeholder.svg"}
@@ -38,16 +38,16 @@ export function ReviewCard({
                       key={i}
                       className={`w-4 h-4 ${
                         i < rating
-                          ? "fill-primary"
-                          : "fill-muted stroke-muted-foreground"
+                          ? "text-primary fill-current"
+                          : "text-secondary"
                       }`}
                     />
                   ))}
                 </div>
               </div>
-              <span className="text-sm text-muted-foreground">{date}</span>
+              <span className="text-sm text-secondary">{date}</span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">{comment}</p>
+            <p className="mt-2 text-sm text-secondary">{comment}</p>
           </div>
         </div>
       </CardContent>

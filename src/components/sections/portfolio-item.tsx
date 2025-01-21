@@ -13,18 +13,18 @@ export function PortfolioItem({
   image,
 }: PortfolioItemProps) {
   return (
-    <Card className="overflow-hidden">
+    <Card>
       <div className="relative h-64">
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover rounded-t-lg"
         />
       </div>
-      <CardContent className="p-4">
+      <CardContent>
         <h3 className="font-semibold mb-2">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-sm text-secondary">{description}</p>
       </CardContent>
     </Card>
   );
