@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { services, portfolio, reviews } from "@/data/mock-data";
 import { ServiceCard } from "@/components/sections/service-card";
-import { PortfolioItem } from "@/components/sections/portfolio-item";
 import { ReviewCard } from "@/components/sections/review-card";
+import { PortfolioCard } from "@/components/sections/portfolio-card";
 
 export default function AboutPage() {
   return (
@@ -86,7 +86,7 @@ export default function AboutPage() {
         <h2 className="text-2xl font-bold mb-6">Portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {portfolio.map((item, index) => (
-            <PortfolioItem key={index} {...item} />
+            <PortfolioCard key={index} {...item} />
           ))}
         </div>
       </section>
