@@ -1,77 +1,163 @@
 export const services = [
   {
     id: 1,
-    title: "Next.js Web Development",
-    description: "Custom web applications built with Next.js and React",
+    title: "Custom Web Application Development",
+    description:
+      "Transform your ideas into reality with custom web applications designed for scalability, efficiency, and user engagement.",
     price: 499,
     image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Responsive and interactive UI/UX",
+      "Backend development with RESTful APIs or GraphQL",
+      "Integration with third-party services",
+      "Performance optimization",
+    ],
+    platforms: [],
+    technologies: ["React", "Next.js", "Node.js", "Three.js"],
     faqs: [
       {
-        question: "What do I need to get started???",
+        question: "What technologies do you use?",
         answer:
-          "Just provide me with your project requirements, and I’ll take care of the rest!",
+          "I primarily use React, Next.js, Node.js, and Three.js to build modern and high-performance web applications.",
       },
       {
-        question: "Do you offer revisions?",
+        question: "Do you offer ongoing support?",
         answer:
-          "Yes, I offer unlimited revisions until you’re satisfied with the final product.",
+          "Yes, I provide maintenance and support packages to ensure your application runs smoothly after launch.",
       },
     ],
   },
   {
     id: 2,
-    title: "Full Stack Development",
-    description: "End-to-end web development solutions",
+    title: "E-Commerce Website Development",
+    description:
+      "Build high-performing online stores with seamless user experiences, secure payment gateways, and robust inventory management.",
     price: 799,
     image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Custom storefronts using Shopify, WooCommerce, or headless e-commerce solutions",
+      "Payment gateway integration (Stripe, PayPal, etc.)",
+      "Mobile-friendly and SEO-optimized designs",
+    ],
+    platforms: ["Shopify", "WooCommerce"],
+    technologies: [],
     faqs: [
       {
-        question: "What do I need to get started?",
+        question: "Which platforms do you work with?",
         answer:
-          "Just provide me with your project requirements, and I’ll take care of the rest!",
+          "I specialize in Shopify, WooCommerce, and headless e-commerce solutions.",
       },
       {
-        question: "Do you offer revisions?",
+        question: "Can you integrate payment gateways?",
         answer:
-          "Yes, I offer unlimited revisions until you’re satisfied with the final product.",
+          "Yes, I can integrate payment gateways like Stripe, PayPal, and more.",
       },
     ],
   },
   {
     id: 3,
-    title: "UI/UX Design",
-    description: "Modern and intuitive user interface design",
-    price: 399,
+    title: "Headless CMS Website Development",
+    description:
+      "Develop modern, content-rich websites using headless CMS platforms for flexibility, scalability, and faster performance.",
+    price: 699,
     image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Content management with platforms like Contentful or Strapi",
+      "Dynamic content delivery via APIs",
+      "Customizable front-end frameworks (React, Next.js)",
+    ],
+    platforms: ["Contentful", "Strapi", "Sanity"],
+    technologies: ["React", "Next.js"],
     faqs: [
       {
-        question: "What do I need to get started?",
-        answer:
-          "Just provide me with your project requirements, and I’ll take care of the rest!",
+        question: "What CMS platforms do you use?",
+        answer: "I work with platforms like Contentful, Strapi, and Sanity.",
       },
       {
-        question: "Do you offer revisions?",
+        question: "Can you customize the front-end?",
         answer:
-          "Yes, I offer unlimited revisions until you’re satisfied with the final product.",
+          "Yes, I use React and Next.js to create fully customizable front-end experiences.",
       },
     ],
   },
   {
     id: 4,
-    title: "Website Maintenance",
-    description: "Ongoing support and maintenance services",
-    price: 299,
+    title: "WordPress Website Development",
+    description:
+      "Design and develop custom WordPress websites with tailored themes, plugins, and functionalities to meet your business goals.",
+    price: 499,
     image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Custom theme development and customization",
+      "Plugin integration and development",
+      "SEO optimization and performance tuning",
+    ],
+    platforms: ["WordPress"],
+    technologies: [],
     faqs: [
       {
-        question: "What do I need to get started?",
+        question: "Do you create custom themes?",
         answer:
-          "Just provide me with your project requirements, and I’ll take care of the rest!",
+          "Yes, I design and develop custom WordPress themes to match your brand.",
       },
       {
-        question: "Do you offer revisions?",
+        question: "Can you optimize my WordPress site for SEO?",
         answer:
-          "Yes, I offer unlimited revisions until you’re satisfied with the final product.",
+          "Absolutely! I ensure your site is optimized for search engines and performs well.",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Email Template Development",
+    description:
+      "Design and code responsive email templates that work across all devices and email clients, ensuring your campaigns look professional and engaging.",
+    price: 199,
+    image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Mobile-friendly and responsive designs",
+      "Cross-client compatibility (Gmail, Outlook, Apple Mail, etc.)",
+      "Custom branding and styling",
+    ],
+    platforms: [],
+    technologies: [],
+    faqs: [
+      {
+        question: "Are your email templates mobile-friendly?",
+        answer:
+          "Yes, all templates are designed to be fully responsive and work seamlessly on mobile devices.",
+      },
+      {
+        question: "Do you test for email client compatibility?",
+        answer:
+          "Yes, I test templates across major email clients like Gmail, Outlook, and Apple Mail.",
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "Website Maintenance & Consultation",
+    description:
+      "Ensure your website remains secure, up-to-date, and optimized with ongoing maintenance and expert consultation services.",
+    price: 299,
+    image: "/placeholder.svg?height=200&width=300",
+    features: [
+      "Regular updates, backups, and security patches",
+      "Performance monitoring and optimization",
+      "Strategic advice on technology stack and scalability",
+    ],
+    platforms: [],
+    technologies: [],
+    faqs: [
+      {
+        question: "What does maintenance include?",
+        answer:
+          "Regular updates, backups, security patches, and performance optimization.",
+      },
+      {
+        question: "Can you help with scaling my website?",
+        answer:
+          "Yes, I provide consultation on scaling your website and improving its architecture.",
       },
     ],
   },

@@ -5,18 +5,16 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 
 interface ServiceCardProps {
-  id: number; // Add an ID for routing
+  id: number;
   title: string;
-  description: string;
+  description: string; 
   price: number;
-  image: string;
+  image: string; 
 }
 
 export function ServiceCard({
   id,
   title,
-  description,
-  price,
   image,
 }: ServiceCardProps) {
   return (
@@ -32,11 +30,7 @@ export function ServiceCard({
         </div>
         <CardContent>
           <h3 className="font-semibold mb-2">{title}</h3>
-          <p className="text-sm text-secondary">{description}</p>
-          <div className="mt-4 flex justify-between items-center">
-            <span className="font-semibold">From ${price}</span>
-            <Button variant="secondary">View details</Button>
-          </div>
+          <Button variant="text">View details</Button>
         </CardContent>
       </Card>
     </Link>

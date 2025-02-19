@@ -1,4 +1,3 @@
-// types/service.ts
 export interface Service {
   id: number;
   title: {
@@ -14,5 +13,8 @@ export interface Service {
   acf: {
     price?: number; // Optional custom fields
     faqs?: { question: string; answer: string }[];
+    features?: string[];
+    platforms?: string[];
+    technologies?: string[];
   };
 }

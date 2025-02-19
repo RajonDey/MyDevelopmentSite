@@ -7,6 +7,7 @@ interface ServiceOverviewProps {
     title: {
       rendered: string;
     };
+    description: string;
     excerpt: {
       rendered: string;
     };
@@ -21,8 +22,6 @@ interface ServiceOverviewProps {
 }
 
 export function ServiceOverview({ service }: ServiceOverviewProps) {
-  // Remove HTML tags from the excerpt
-  const description = service.excerpt.rendered.replace(/<[^>]+>/g, "");
 
   return (
     <div className="mb-8">
@@ -38,7 +37,7 @@ export function ServiceOverview({ service }: ServiceOverviewProps) {
         </div>
       </div>
       <h1 className="text-3xl font-bold mb-4">{service.title.rendered}</h1>
-      <p className="text-gray-600 mb-4">{description}</p>
+      <p className="text-gray-600 mb-4">{service.description}</p>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <Image

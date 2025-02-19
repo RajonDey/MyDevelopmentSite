@@ -24,16 +24,15 @@ export default function AboutPage() {
               className="rounded-full"
             />
             <div>
-              <h1 className="text-2xl font-bold">John Developer</h1>
+              <h1 className="text-2xl font-bold">Rajon Dey</h1>
               <div className="flex items-center gap-1 mt-1">
                 <Star className="w-4 h-4 fill-primary" />
                 <span className="font-medium">4.9</span>
                 <span className="text-muted-foreground">(150)</span>
               </div>
               <div className="flex gap-2 mt-2">
-                <Badge>Pakistan</Badge>
-                <Badge variant="outline">English</Badge>
-                <Badge variant="outline">Urdu</Badge>
+                <Badge>Bangladesh</Badge>
+                <Badge>English</Badge>
               </div>
             </div>
           </div>
@@ -41,9 +40,13 @@ export default function AboutPage() {
           <div className="mt-8 space-y-4">
             <h2 className="text-xl font-semibold">About me</h2>
             <p className="text-muted-foreground">
-              Professional and detail-oriented Full Stack Developer specializing
-              in React and Next.js. I create responsive, user-friendly websites
-              that combine seamless functionality with visual appeal.
+              👨‍💻 A Software Developer with expertise in React, Next.js, Node.js,
+              and Three.js. I specialize in creating scalable, efficient, and
+              user-friendly web applications. My passion lies in transforming
+              ideas into reality by leveraging modern technologies and
+              collaborative problem-solving. I’m also experienced in building
+              websites using Headless CMS and platforms like WordPress, Shopify,
+              Wix, and Squarespace.
             </p>
           </div>
 
@@ -51,16 +54,28 @@ export default function AboutPage() {
             <Badge>Next.js expert</Badge>
             <Badge>React developer</Badge>
             <Badge>Full stack development</Badge>
-            <Badge>UI/UX design</Badge>
+            <Badge>UI/UX</Badge>
           </div>
         </div>
 
         <div className="w-full md:w-72">
           <Card className="p-4">
-            <Button className="w-full mb-4">Contact me</Button>
-            <Button variant="outline" className="w-full">
-              Book a consultation
-            </Button>
+            <a
+              href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20services.`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="w-full mb-4">Contact me</Button>
+            </a>
+            <a
+              href="https://calendly.com/rajondey"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary" className="w-full">
+                Book a consultation
+              </Button>
+            </a>
             <p className="text-sm text-center text-muted-foreground mt-4">
               Average response time: 1 hour
             </p>
@@ -77,7 +92,7 @@ export default function AboutPage() {
           ))}
         </div>
         <Link href="/services">
-          <Button variant="outline">View All</Button>
+          <Button variant="secondary">View All</Button>
         </Link>
       </section>
 
