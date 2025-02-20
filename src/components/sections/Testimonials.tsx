@@ -23,7 +23,9 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial) => (
             <Card key={testimonial.id}>
-              <p className="text-gray-700 mb-4">"{testimonial.comment}"</p>
+              <p className="text-gray-700 mb-4">
+                &quot;{testimonial.comment}&quot;
+              </p>
               <p className="text-[var(--color-primary)] font-semibold">
                 - {testimonial.name}
               </p>
