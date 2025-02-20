@@ -3,16 +3,21 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { services, reviews } from "@/data/mock-data";
 
-interface ServiceDetailsPageProps {
-  params: {
-    id: string;
-  };
+// Define the params interface
+interface ServiceParams {
+  id: string;
 }
 
-export default function ServiceDetailsPage({
+// Update the page component to handle Promise params
+export default async function ServiceDetailsPage({
   params,
-}: ServiceDetailsPageProps) {
-  const service = services.find((svc) => svc.id === Number(params.id));
+}: {
+  params: Promise<ServiceParams>;
+}) {
+  // Await the params since they're a Promise in Next.js 15
+  const resolvedParams = await params;
+
+  const service = services.find((svc) => svc.id === Number(resolvedParams.id));
 
   if (!service) {
     return notFound();
@@ -132,4 +137,11 @@ export default function ServiceDetailsPage({
       </div>
     </div>
   );
+}
+
+// Add static params generation
+export async function generateStaticParams(): Promise<ServiceParams[]> {
+  return services.map((service) => ({
+    id: service.id.toString(), // Convert to string since params expects strings
+  }));
 }

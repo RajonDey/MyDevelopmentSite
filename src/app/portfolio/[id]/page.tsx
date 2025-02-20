@@ -3,17 +3,22 @@ import { notFound } from "next/navigation";
 import { portfolio } from "@/data/mock-data";
 import Image from "next/image";
 
-interface PortfolioDetailsPageProps {
-  params: {
-    id: string;
-  };
+// Define the params interface
+interface PortfolioParams {
+  id: string;
 }
 
-export default function PortfolioDetailsPage({
+// Update the page component to handle Promise params
+export default async function PortfolioDetailsPage({
   params,
-}: PortfolioDetailsPageProps) {
+}: {
+  params: Promise<PortfolioParams>;
+}) {
+  // Await the params since they're a Promise in Next.js 15
+  const resolvedParams = await params;
+
   // Find the portfolio project by ID in the mock data
-  const project = portfolio.find((p) => p.id === parseInt(params.id));
+  const project = portfolio.find((p) => p.id === parseInt(resolvedParams.id));
 
   if (!project) {
     return notFound();
@@ -48,4 +53,11 @@ export default function PortfolioDetailsPage({
       </div>
     </div>
   );
+}
+
+// Optional: Add static params generation if you want static builds
+export async function generateStaticParams(): Promise<PortfolioParams[]> {
+  return portfolio.map((project) => ({
+    id: project.id.toString(), // Convert to string since params expects strings
+  }));
 }

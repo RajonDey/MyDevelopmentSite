@@ -1,4 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { ReactNode } from "react"; // Import ReactNode for children type
+
+// Define the ModalProps interface
+interface ModalProps {
+  isOpen: boolean; // Whether the modal is visible or not
+  onClose: () => void; // Function to close the modal
+  children: ReactNode; // Content inside the modal (can be anything)
+}
 
 export function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
@@ -20,7 +28,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
               onClick={onClose}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
-              &times;
+              ×
             </button>
             {children}
           </motion.div>
