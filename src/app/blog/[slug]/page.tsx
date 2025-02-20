@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface BlogDetailsPageProps {
   params: {
-    slug: string,
+    slug: string;
   };
 }
 

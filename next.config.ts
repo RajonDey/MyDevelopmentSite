@@ -8,9 +8,7 @@ const nextConfig: NextConfig = {
       "development-admin.rajondey.com",
     ],
   },
-  experimental: {
-    appDir: true,
-  },
+  experimental: {},
 };
 
 export default nextConfig;
