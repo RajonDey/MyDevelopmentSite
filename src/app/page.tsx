@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
-import { services, portfolio, reviews } from "@/data/mock-data";
+import { services, portfolio, reviews, blogPosts } from "@/data/mock-data";
 import { ServiceCard } from "@/components/sections/service-card";
-import { ReviewCard } from "@/components/sections/review-card";
 import { PortfolioCard } from "@/components/sections/portfolio-card";
+import { BlogCard } from "@/components/sections/blog-card";
+import { ReviewCard } from "@/components/sections/review-card";
 
 export default function AboutPage() {
   return (
@@ -82,7 +83,6 @@ export default function AboutPage() {
           </Card>
         </div>
       </div>
-
       {/* Services Section */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-6">My Services</h2>
@@ -99,11 +99,35 @@ export default function AboutPage() {
       {/* Portfolio Section */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-6">Portfolio</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {portfolio.map((item, index) => (
-            <PortfolioCard key={index} {...item} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+          {portfolio.map((item) => (
+            <PortfolioCard
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              image={item.image}
+              description={item.description}
+              category={item.category}
+              // isDetailed={false} (defaults to false)
+            />
           ))}
         </div>
+        <Link href="/portfolio">
+          <Button variant="secondary">View All</Button>
+        </Link>
+      </section>
+
+      {/* Blog Section */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold mb-6">Recent Blog Posts</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+          {blogPosts.slice(0, 2).map((post) => (
+            <BlogCard key={post.id} {...post} />
+          ))}
+        </div>
+        <Link href="/blog">
+          <Button variant="secondary">View All</Button>
+        </Link>
       </section>
 
       {/* Reviews Section */}

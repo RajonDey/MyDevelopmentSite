@@ -1,33 +1,75 @@
-// components/sections/portfolio-card.tsx
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/Button";
 
 interface PortfolioCardProps {
+  id: number;
   title: string;
   description: string;
   image: string;
+  category: string;
+  technologies?: string[];
+  client?: string;
+  completionDate?: string;
+  features?: string[];
+  liveLink?: string | null;
+  githubLink?: string | null;
+  isDetailed?: boolean;
 }
 
 export function PortfolioCard({
+  id,
   title,
   description,
   image,
+  category,
+  liveLink,
+  githubLink,
+  isDetailed = false,
 }: PortfolioCardProps) {
   return (
-    <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className="hover:shadow-lg transition-shadow cursor-pointer">
       <div className="relative h-48">
-        <Image src={image} alt={title} fill className="object-cover" />
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover rounded-t-lg"
+        />
       </div>
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{title}</h2>
-        <p className="text-gray-600">{description}</p>
-        <Link
-          href="#"
-          className="mt-4 inline-block text-blue-500 hover:underline"
-        >
-          View Project
-        </Link>
-      </div>
-    </div>
+      <CardContent className="p-4">
+        <h3 className="font-semibold text-lg mb-2">{title}</h3>
+        {isDetailed && (
+          <>
+            <p className="text-gray-600 text-sm mb-3">{description}</p>
+            <Badge variant="secondary" className="mb-3">
+              {category}
+            </Badge>
+            <div className="flex gap-2">
+              {liveLink && (
+                <Link href={liveLink} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm">
+                    Live Demo
+                  </Button>
+                </Link>
+              )}
+              {githubLink && (
+                <Link
+                  href={githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="sm">
+                    GitHub
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </>
+        )}
+      </CardContent>
+    </Card>
   );
 }
