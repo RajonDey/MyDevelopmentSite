@@ -26,6 +26,9 @@ export const services = [
           "Yes, I provide maintenance and support packages to ensure your application runs smoothly after launch.",
       },
     ],
+    metaTitle: "Custom Web Application Development | Rajon Dey",
+    metaDescription:
+      "Hire Rajon Dey for custom web application development using React, Next.js, and Node.js. Scalable and efficient solutions for your business.",
   },
   {
     id: 2,
@@ -53,6 +56,9 @@ export const services = [
           "Yes, I can integrate payment gateways like Stripe, PayPal, and more.",
       },
     ],
+    metaTitle: "E-Commerce Website Development | Rajon Dey",
+    metaDescription:
+      "Expert e-commerce website development by Rajon Dey. Build your online store with Shopify, WooCommerce, or custom solutions.",
   },
   {
     id: 3,
@@ -79,6 +85,9 @@ export const services = [
           "Yes, I use React and Next.js to create fully customizable front-end experiences.",
       },
     ],
+    metaTitle: "Headless CMS Website Development | Rajon Dey",
+    metaDescription:
+      "Flexible and scalable headless CMS websites by Rajon Dey using Contentful, Strapi, and Next.js for modern content management.",
   },
   {
     id: 4,
@@ -106,6 +115,9 @@ export const services = [
           "Absolutely! I ensure your site is optimized for search engines and performs well.",
       },
     ],
+    metaTitle: "WordPress Website Development | Rajon Dey",
+    metaDescription:
+      "Custom WordPress websites by Rajon Dey with tailored themes and plugins. SEO-optimized and performance-tuned for your business.",
   },
   {
     id: 5,
@@ -133,6 +145,9 @@ export const services = [
           "Yes, I test templates across major email clients like Gmail, Outlook, and Apple Mail.",
       },
     ],
+    metaTitle: "Email Template Development | Rajon Dey",
+    metaDescription:
+      "Responsive email templates by Rajon Dey. Professional designs compatible with Gmail, Outlook, and more for your campaigns.",
   },
   {
     id: 6,
@@ -160,6 +175,9 @@ export const services = [
           "Yes, I provide consultation on scaling your website and improving its architecture.",
       },
     ],
+    metaTitle: "Website Maintenance & Consultation | Rajon Dey",
+    metaDescription:
+      "Website maintenance and consultation by Rajon Dey. Keep your site secure and optimized with expert support.",
   },
 ];
 
@@ -182,6 +200,9 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: "https://www.portfolio.rajondey.com",
+    metaTitle: "E-commerce Marketplace Portfolio | Rajon Dey",
+    metaDescription:
+      "Check out Rajon Dey’s e-commerce marketplace project built with Next.js and Stripe. A responsive, high-traffic online store.",
   },
   {
     id: 2,
@@ -201,6 +222,9 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: "https://www.portfolio.rajondey.com",
+    metaTitle: "Social Media Analytics Dashboard | Rajon Dey",
+    metaDescription:
+      "Rajon Dey’s social media analytics dashboard project using React and Firebase. Real-time tracking for marketing teams.",
   },
   {
     id: 3,
@@ -220,6 +244,9 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: "https://www.portfolio.rajondey.com",
+    metaTitle: "Fitness App Landing Page | Rajon Dey",
+    metaDescription:
+      "Rajon Dey’s fitness app landing page project with Next.js and Tailwind CSS. Optimized for conversions and SEO.",
   },
   {
     id: 4,
@@ -239,6 +266,9 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: "https://www.portfolio.rajondey.com",
+    metaTitle: "Headless CMS Blog Portfolio | Rajon Dey",
+    metaDescription:
+      "Explore Rajon Dey’s headless CMS blog project with React and Contentful. Dynamic and scalable content management.",
   },
   {
     id: 5,
@@ -258,6 +288,9 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: "https://www.portfolio.rajondey.com",
+    metaTitle: "Restaurant Booking System | Rajon Dey",
+    metaDescription:
+      "Rajon Dey’s restaurant booking system project with Next.js and MongoDB. User-friendly online reservations.",
   },
   {
     id: 6,
@@ -277,9 +310,86 @@ export const portfolio = [
     ],
     liveLink: "https://www.portfolio.rajondey.com",
     githubLink: null,
+    metaTitle: "Artist Portfolio Website | Rajon Dey",
+    metaDescription:
+      "Rajon Dey’s artist portfolio site project with Next.js and Three.js. Stunning gallery design for creatives.",
   },
 ];
-// Keep your existing services, reviews, and blogPosts data here...
+
+export const blogPosts = [
+  {
+    id: 1,
+    title: "Building a Performant E-commerce Site with Next.js",
+    excerpt:
+      "Learn how to create a fast, scalable e-commerce platform using Next.js, Tailwind CSS, and server-side rendering.",
+    date: "January 15, 2024",
+    slug: "building-ecommerce-nextjs",
+    image: "/placeholder.svg?height=200&width=300",
+    content: `...`, // unchanged
+    metaTitle: "Building E-commerce Sites with Next.js | Rajon Dey",
+    metaDescription:
+      "Learn to build a fast e-commerce site with Next.js and Tailwind CSS. Rajon Dey’s guide to scalable online stores.",
+  },
+  {
+    id: 2,
+    title: "Mastering React Hooks for State Management",
+    excerpt:
+      "A deep dive into React Hooks like useState and useEffect, with practical examples for managing state in modern apps.",
+    date: "March 10, 2024",
+    slug: "mastering-react-hooks",
+    image: "/placeholder.svg?height=200&width=300",
+    content: `...`, // unchanged
+    metaTitle: "Mastering React Hooks | Rajon Dey",
+    metaDescription:
+      "Rajon Dey’s guide to mastering React Hooks like useState and useEffect for efficient state management.",
+  },
+  {
+    id: 3,
+    title: "Creating a Headless CMS Blog with Strapi and Next.js",
+    excerpt:
+      "Step-by-step guide to building a blog using Strapi as a headless CMS and Next.js for the front-end.",
+    date: "June 20, 2024",
+    slug: "headless-cms-strapi-nextjs",
+    image: "/placeholder.svg?height=200&width=300",
+    content: `...`, // unchanged
+    metaTitle: "Headless CMS Blog with Strapi & Next.js | Rajon Dey",
+    metaDescription:
+      "Build a headless CMS blog with Strapi and Next.js. Rajon Dey’s step-by-step development tutorial.",
+  },
+];
+
+export const staticPages = {
+  home: {
+    metaTitle: "Rajon Dey | Freelance Software Developer",
+    metaDescription:
+      "Hire Rajon Dey, a freelance software developer specializing in Next.js, React, and e-commerce solutions. Affordable, high-quality development services.",
+  },
+  services: {
+    metaTitle: "Services | Rajon Dey Software Development",
+    metaDescription:
+      "Explore Rajon Dey’s software development services: custom web apps, e-commerce, headless CMS, and more. Expert solutions for your needs.",
+  },
+  portfolio: {
+    metaTitle: "Portfolio | Rajon Dey Software Development",
+    metaDescription:
+      "View Rajon Dey’s portfolio of software development projects, including e-commerce platforms, dashboards, and creative websites.",
+  },
+  blog: {
+    metaTitle: "Blog | Rajon Dey Software Development",
+    metaDescription:
+      "Read Rajon Dey’s blog on software development, featuring Next.js, React, and headless CMS tutorials.",
+  },
+  faq: {
+    metaTitle: "FAQ | Rajon Dey Software Development Services",
+    metaDescription:
+      "Answers to common questions about Rajon Dey’s freelance software development services, pricing, and process.",
+  },
+  contact: {
+    metaTitle: "Contact Rajon Dey | Software Development Services",
+    metaDescription:
+      "Contact Rajon Dey for custom software development, e-commerce, or maintenance. Book a free consultation today!",
+  },
+};
 
 export const reviews = [
   {
@@ -300,64 +410,45 @@ export const reviews = [
   },
 ];
 
-export const blogPosts = [
+export const faqs = [
   {
-    id: 1,
-    title: "Building a Performant E-commerce Site with Next.js",
-    excerpt:
-      "Learn how to create a fast, scalable e-commerce platform using Next.js, Tailwind CSS, and server-side rendering.",
-    date: "January 15, 2024",
-    slug: "building-ecommerce-nextjs",
-    image: "/placeholder.svg?height=200&width=300",
-    content: `
-      <p>Next.js is a game-changer for e-commerce development due to its server-side rendering (SSR) and static site generation (SSG) capabilities. In this post, I’ll walk you through building a performant online store.</p>
-      <h2>Setting Up the Project</h2>
-      <p>Start by initializing a Next.js app:</p>
-      <pre><code class="language-bash">npx create-next-app@latest ecommerce-store --ts</code></pre>
-      <p>Next, install Tailwind CSS for styling:</p>
-      <pre><code class="language-bash">npm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p</code></pre>
-      <h2>Optimizing Performance</h2>
-      <p>Use Next.js Image component for optimized images:</p>
-      <pre><code class="language-jsx">import Image from "next/image";\n\nfunction ProductCard({ product }) {\n  return (\n    <div>\n      <Image src={product.image} alt={product.name} width={300} height={200} />\n      <h3>{product.name}</h3>\n    </div>\n  );\n}</code></pre>
-      <p>This approach ensures fast load times and a great user experience.</p>
-    `,
+    question: "What types of development services do you offer?",
+    answer:
+      "I provide a range of services including:<ul><li>Custom web application development</li><li>E-commerce solutions</li><li>Headless CMS websites</li><li>WordPress development</li><li>Email template design</li><li>Website maintenance</li></ul>Whether you need a full-stack project or a specific feature, I’ve got you covered!",
   },
   {
-    id: 2,
-    title: "Mastering React Hooks for State Management",
-    excerpt:
-      "A deep dive into React Hooks like useState and useEffect, with practical examples for managing state in modern apps.",
-    date: "March 10, 2024",
-    slug: "mastering-react-hooks",
-    image: "/placeholder.svg?height=200&width=300",
-    content: `
-      <p>React Hooks revolutionized how we handle state and side effects. Let’s explore two key hooks: <code>useState</code> and <code>useEffect</code>.</p>
-      <h2>Using useState</h2>
-      <p>Here’s a simple counter example:</p>
-      <pre><code class="language-jsx">import { useState } from "react";\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>Increment</button>\n    </div>\n  );\n}</code></pre>
-      <h2>Fetching Data with useEffect</h2>
-      <p>Fetch API data on mount:</p>
-      <pre><code class="language-jsx">import { useState, useEffect } from "react";\n\nfunction UserList() {\n  const [users, setUsers] = useState([]);\n  useEffect(() => {\n    fetch("https://api.example.com/users")\n      .then(res => res.json())\n      .then(data => setUsers(data));\n  }, []);\n  return <ul>{users.map(user => <li key={user.id}>{user.name}</li>)}</ul>;\n}</code></pre>
-      <p>Hooks simplify state logic and make components reusable.</p>
-    `,
+    question: "How long does a typical project take?",
+    answer:
+      "Project timelines depend on complexity. For example:<ul><li>A simple landing page: 1-2 weeks</li><li>A full e-commerce platform: 4-8 weeks</li></ul>I’ll provide a detailed timeline after discussing your requirements.",
   },
   {
-    id: 3,
-    title: "Creating a Headless CMS Blog with Strapi and Next.js",
-    excerpt:
-      "Step-by-step guide to building a blog using Strapi as a headless CMS and Next.js for the front-end.",
-    date: "June 20, 2024",
-    slug: "headless-cms-strapi-nextjs",
-    image: "/placeholder.svg?height=200&width=300",
-    content: `
-      <p>A headless CMS like Strapi paired with Next.js is perfect for dynamic blogs. Here’s how to set it up.</p>
-      <h2>Install Strapi</h2>
-      <p>Create a new Strapi project:</p>
-      <pre><code class="language-bash">npx create-strapi-app my-blog --quickstart</code></pre>
-      <h2>Fetch Posts in Next.js</h2>
-      <p>Use getStaticProps to fetch blog posts:</p>
-      <pre><code class="language-jsx">export async function getStaticProps() {\n  const res = await fetch("http://localhost:1337/api/posts");\n  const posts = await res.json();\n  return { props: { posts } };\n}\n\nfunction Blog({ posts }) {\n  return (\n    <div>\n      {posts.map(post => (\n        <article key={post.id}>\n          <h2>{post.title}</h2>\n          <p>{post.content}</p>\n        </article>\n      ))}\n    </div>\n  );\n}</code></pre>
-      <p>This setup offers flexibility and fast static generation.</p>
-    `,
+    question: "What is your development process?",
+    answer:
+      "My process includes:<ol><li><strong>Discovery</strong>: Understanding your needs</li><li><strong>Planning</strong>: Outlining scope and timeline</li><li><strong>Development</strong>: Coding with regular updates</li><li><strong>Testing</strong>: Ensuring quality</li><li><strong>Delivery</strong>: Launching your project with support</li></ol>I keep you informed every step of the way.",
+  },
+  {
+    question: "Do you offer ongoing support after project completion?",
+    answer:
+      "Yes! I offer maintenance packages that can include:<ul><li>Bug fixes</li><li>Feature additions</li><li>Performance tweaks</li></ul>Support is tailored to your needs to keep your site updated and secure.",
+  },
+  {
+    question: "How much do your services cost?",
+    answer:
+      "Pricing varies by project scope. Examples include:<ul><li>Email templates: Starting at $199</li><li>Custom web applications: Starting at $499</li></ul>I’ll provide a detailed quote after our consultation to match your budget and goals.",
+  },
+  {
+    question: "What technologies do you specialize in?",
+    answer:
+      "I’m skilled in modern stacks and platforms like:<ul><li>React</li><li>Next.js</li><li>Node.js</li><li>Three.js</li><li>Shopify</li><li>WordPress</li><li>Headless CMS (Contentful, Strapi)</li></ul>I choose the best tools for your project.",
+  },
+  {
+    question: "Can you work with my existing website or codebase?",
+    answer:
+      "Absolutely! I can:<ul><li>Enhance your current site</li><li>Fix issues</li><li>Integrate new features</li></ul>Just let me know what you’re working with, and I’ll adapt to your setup.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "It’s simple:<ol><li>Contact me via the <a href='/contact' class='text-green-500 hover:underline'>contact page</a></li><li>Message me on WhatsApp (+880 1737-997143)</li><li>Book a free consultation on <a href='https://calendly.com/rajondey' target='_blank' rel='noopener noreferrer' class='text-green-500 hover:underline'>Calendly</a></li></ol>We’ll discuss your project, and I’ll get you a proposal within 24-48 hours!",
   },
 ];

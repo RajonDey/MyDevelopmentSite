@@ -1,0 +1,89 @@
+{
+  "name": "Rajon Dey - Software Developer",
+  "short_name": "Rajon Dey",
+  "description": "Freelance Software Developer specializing in Next.js, React, e-commerce solutions, and more. Building scalable, high-quality web applications.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "technology",
+    "software",
+    "web development",
+    "programming",
+    "next.js",
+    "react",
+    "node.js",
+    "e-commerce",
+    "headless cms",
+    "wordpress",
+    "email templates",
+    "software development",
+    "mern stack",
+    "express",
+    "mongodb",
+    "typescript",
+    "react native",
+    "aws",
+    "docker",
+    "firebase",
+    "supabase",
+    "postgresql",
+    "mysql",
+    "javascript",
+    "html",
+    "css",
+    "git",
+    "github",
+    "problem solving",
+    "full stack development",
+    "software engineering"
+  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "View Portfolio",
+      "short_name": "Portfolio",
+      "description": "Explore Rajon’s software development projects",
+      "url": "/portfolio",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact Rajon",
+      "short_name": "Contact",
+      "description": "Get in touch for development inquiries",
+      "url": "/contact",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "Check out Rajon’s development services",
+      "url": "/services",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Blog",
+      "description": "Read Rajon’s software development blog",
+      "url": "/blog",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
