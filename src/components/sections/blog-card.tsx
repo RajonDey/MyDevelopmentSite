@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/Card";
 import Link from "next/link"; // Add this for linking
 
 interface BlogCardProps {
-  id: number;
   title: string;
   excerpt: string;
   date: string;
@@ -14,7 +13,6 @@ interface BlogCardProps {
 }
 
 export function BlogCard({
-  id,
   title,
   excerpt,
   date,

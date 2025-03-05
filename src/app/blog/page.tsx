@@ -2,6 +2,7 @@ import { blogPosts, staticPages } from "@/data/mock-data";
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
+import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 
 export const metadata: Metadata = {
   title: staticPages.blog.metaTitle,
@@ -34,6 +35,7 @@ export default function BlogPage() {
             <BlogCard key={post.id} {...post} isDetailed={true} />
           ))}
         </div>
+        <BeehiivSubscribe />
       </div>
     </>
   );

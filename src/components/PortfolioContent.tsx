@@ -7,8 +7,22 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/badge";
 
+
+interface PortfolioItem {
+  id: string | number;
+  image: string;
+  title: string;
+  category: string;
+  completionDate: string;
+  description: string;
+  features: string[];
+  technologies: string[];
+  liveLink?: string;
+  githubLink?: string | null;
+}
+
 interface PortfolioContentProps {
-  portfolio: any[]; // Replace with your portfolio type
+  portfolio: PortfolioItem[]; 
 }
 
 export default function PortfolioContent({ portfolio }: PortfolioContentProps) {

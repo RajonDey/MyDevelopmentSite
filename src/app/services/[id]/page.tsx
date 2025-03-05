@@ -137,7 +137,7 @@ export default async function ServiceDetailsPage({
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {service.platforms.map((platform, index) => (
-                    <Badge key={index} variant="secondary">
+                    <Badge key={index} >
                       {platform}
                     </Badge>
                   ))}
@@ -153,7 +153,7 @@ export default async function ServiceDetailsPage({
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {service.technologies.map((tech, index) => (
-                    <Badge key={index} variant="outline">
+                    <Badge key={index}>
                       {tech}
                     </Badge>
                   ))}

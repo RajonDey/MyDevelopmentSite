@@ -61,13 +61,13 @@ export function ServiceCard({
               {(platforms.length > 0 || technologies.length > 0) && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {platforms.map((platform, index) => (
-                    <Badge key={index} variant="secondary">
-                      {platform}
+                    <Badge key={index} className="bg-secondary text-secondary-foreground">
+                    {platform}
                     </Badge>
                   ))}
                   {technologies.map((tech, index) => (
-                    <Badge key={index} variant="outline">
-                      {tech}
+                    <Badge key={index} className="border border-input bg-background">
+                    {tech}
                     </Badge>
                   ))}
                 </div>

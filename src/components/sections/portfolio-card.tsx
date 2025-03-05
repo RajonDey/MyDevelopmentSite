@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/Button";
 
 interface PortfolioCardProps {
-  id: number;
   title: string;
   description: string;
   image: string;
@@ -20,7 +19,6 @@ interface PortfolioCardProps {
 }
 
 export function PortfolioCard({
-  id,
   title,
   description,
   image,
@@ -44,13 +42,13 @@ export function PortfolioCard({
         {isDetailed && (
           <>
             <p className="text-gray-600 text-sm mb-3">{description}</p>
-            <Badge variant="secondary" className="mb-3">
+            <Badge className="mb-3">
               {category}
             </Badge>
             <div className="flex gap-2">
               {liveLink && (
                 <Link href={liveLink} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline">
                     Live Demo
                   </Button>
                 </Link>
@@ -61,7 +59,7 @@ export function PortfolioCard({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline">
                     GitHub
                   </Button>
                 </Link>

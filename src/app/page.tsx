@@ -11,6 +11,7 @@ import { PortfolioCard } from "@/components/sections/portfolio-card";
 import { BlogCard } from "@/components/sections/blog-card";
 import { ReviewCard } from "@/components/sections/review-card";
 import { SEO } from "@/components/seo";
+import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 
 export const metadata: Metadata = {
   title: staticPages.home.metaTitle,
@@ -120,12 +121,10 @@ export default function AboutPage() {
             {portfolio.map((item) => (
               <PortfolioCard
                 key={item.id}
-                id={item.id}
                 title={item.title}
                 image={item.image}
                 description={item.description}
                 category={item.category}
-                // isDetailed={false} (defaults to false)
               />
             ))}
           </div>
@@ -155,6 +154,11 @@ export default function AboutPage() {
               <ReviewCard key={index} {...review} />
             ))}
           </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="mb-16">
+          <BeehiivSubscribe />
         </section>
       </div>
     </>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: staticPages.portfolio.metaDescription,
   openGraph: {
     ...staticPages.portfolio,
-    url: "https://yourdomain.com/portfolio", // Replace with your domain
+    url: "https://development.rajondey.com/portfolio",
   },
 };
 
