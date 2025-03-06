@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { staticPages } from "@/data/mock-data";
 import { Metadata } from "next";
 import SchemaOrg from "./SchemaOrg";
+import ClientSessionProvider from "@/components/ClientSessionProvider";
 
 export const metadata: Metadata = {
   title: staticPages.home.metaTitle,
@@ -49,12 +50,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <SchemaOrg /> 
+        <SchemaOrg />
       </head>
       <body>
-        <Header />
-        <main className="py-16">{children}</main>
-        <Footer />
+        <ClientSessionProvider>
+          <Header />
+          <main className="py-16">{children}</main>
+          <Footer />
+        </ClientSessionProvider>
       </body>
     </html>
   );
