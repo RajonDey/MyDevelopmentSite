@@ -13,7 +13,7 @@ export default function DashboardPage() {
     if (status === "unauthenticated") {
       router.push("/signin");
     }
-  }, [status]);
+  }, [status, router]);
 
   if (status === "loading") return <p>Loading...</p>;
 
