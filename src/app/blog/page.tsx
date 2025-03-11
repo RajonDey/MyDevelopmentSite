@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
+import { WPPost } from "@/types/post";
 
 export const metadata: Metadata = {
   title: "My Blog",
@@ -16,17 +17,6 @@ export const metadata: Metadata = {
 };
 
 // Define the shape of a WordPress post
-interface WPPost {
-  id: number;
-  slug: string;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  content: { rendered: string };
-  featured_media?: number; // Optional: For featured image
-  link: string;
-}
-
 async function fetchPosts(): Promise<WPPost[]> {
   const res = await fetch(
     "https://development-admin.rajondey.com/wp-json/wp/v2/posts",
@@ -62,10 +52,10 @@ export default async function BlogPage() {
             <BlogCard
               key={post.id}
               title={post.title.rendered}
-              excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")} // Strip HTML tags
+              excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
               date={new Date(post.date).toLocaleDateString()}
               slug={post.slug}
-              image="/placeholder.svg" // Update this later with featured image
+              image={post.image || "/placeholder.svg"} 
               isDetailed={true}
             />
           ))}

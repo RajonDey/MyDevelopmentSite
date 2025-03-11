@@ -49,7 +49,7 @@ export default async function BlogPostPage({
         title={post.title.rendered}
         description={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
         url={`/blog/${post.slug}`}
-        image="/placeholder.svg" // Update with featured image later
+        image={post.image || "/placeholder.svg"} // Update with featured image later
       />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <article>
@@ -63,7 +63,7 @@ export default async function BlogPostPage({
             </p>
             <div className="relative h-64 md:h-96 rounded-lg overflow-hidden">
               <Image
-                src="/placeholder.svg" // Update with featured image later
+                src={post.image || "/placeholder.svg"}
                 alt={post.title.rendered}
                 fill
                 className="object-cover"
