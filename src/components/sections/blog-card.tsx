@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/Card";
-import Link from "next/link"; // Add this for linking
+import Link from "next/link";
 
 interface BlogCardProps {
   title: string;
@@ -8,7 +8,6 @@ interface BlogCardProps {
   date: string;
   slug: string;
   image: string;
-  content?: string;
   isDetailed?: boolean;
 }
 

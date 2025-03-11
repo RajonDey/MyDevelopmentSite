@@ -16,7 +16,7 @@ interface PortfolioCardProps {
   liveLink?: string | null;
   githubLink?: string | null;
   isDetailed?: boolean;
-}
+} 
 
 export function PortfolioCard({
   title,
@@ -28,46 +28,46 @@ export function PortfolioCard({
   isDetailed = false,
 }: PortfolioCardProps) {
   return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-      <div className="relative h-48">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={title}
-          fill
-          className="object-cover rounded-t-lg"
-        />
-      </div>
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-2">{title}</h3>
-        {isDetailed && (
-          <>
-            <p className="text-gray-600 text-sm mb-3">{description}</p>
-            <Badge className="mb-3">
-              {category}
-            </Badge>
-            <div className="flex gap-2">
-              {liveLink && (
-                <Link href={liveLink} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline">
-                    Live Demo
-                  </Button>
-                </Link>
-              )}
-              {githubLink && (
-                <Link
-                  href={githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="outline">
-                    GitHub
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </>
-        )}
-      </CardContent>
-    </Card>
+    <Link href="/portfolio">
+      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+        <div className="relative h-96">
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={title}
+            fill
+            className="object-cover rounded-t-lg"
+          />
+        </div>
+        <CardContent className="p-4">
+          <h3 className="font-semibold text-lg mb-2">{title}</h3>
+          {isDetailed && (
+            <>
+              <p className="text-gray-600 text-sm mb-3">{description}</p>
+              <Badge className="mb-3">{category}</Badge>
+              <div className="flex gap-2">
+                {liveLink && (
+                  <Link
+                    href={liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline">Live Demo</Button>
+                  </Link>
+                )}
+                {githubLink && (
+                  <Link
+                    href={githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline">GitHub</Button>
+                  </Link>
+                )}
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

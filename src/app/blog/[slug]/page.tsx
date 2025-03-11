@@ -1,11 +1,11 @@
-import { blogPosts } from "@/data/mock-data";
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
-
+import { fetchPost, fetchPosts } from "@/lib/wp-api";
+import { WPPost } from "@/types/post";
 interface BlogParams {
   slug: string;
 }
@@ -16,17 +16,16 @@ export async function generateMetadata({
   params: Promise<BlogParams>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
-  if (!post) return {};
+  const post = await fetchPost(resolvedParams.slug);
 
   return {
-    title: post.metaTitle,
-    description: post.metaDescription,
+    title: post.title.rendered,
+    description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
     openGraph: {
-      title: post.metaTitle,
-      description: post.metaDescription,
+      title: post.title.rendered,
+      description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
       url: `https://development.rajondey.com/blog/${post.slug}`,
-      images: [{ url: post.image }],
+      images: [{ url: "/placeholder.svg" }],
     },
   };
 }
@@ -37,29 +36,35 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
-  if (!post) return notFound();
+  let post: WPPost;
+  try {
+    post = await fetchPost(resolvedParams.slug);
+  } catch {
+    return notFound();
+  }
 
   return (
     <>
       <SEO
-        title={post.metaTitle}
-        description={post.metaDescription}
+        title={post.title.rendered}
+        description={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
         url={`/blog/${post.slug}`}
-        image={post.image}
+        image="/placeholder.svg" // Update with featured image later
       />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <article>
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-              {post.title}
+              {post.title.rendered}
             </h1>
-            <p className="text-gray-500 text-sm mb-4">{post.date}</p>
+            <p className="text-gray-500 text-sm mb-4">
+              {new Date(post.date).toLocaleDateString()}
+            </p>
             <div className="relative h-64 md:h-96 rounded-lg overflow-hidden">
               <Image
-                src={post.image}
-                alt={post.title}
+                src="/placeholder.svg" // Update with featured image later
+                alt={post.title.rendered}
                 fill
                 className="object-cover"
               />
@@ -68,8 +73,10 @@ export default async function BlogPostPage({
 
           {/* Content */}
           <div className="prose prose-lg max-w-none text-gray-800 mb-8">
-            <p className="text-gray-600 italic mb-6">{post.excerpt}</p>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <p className="text-gray-600 italic mb-6">
+              {post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+            </p>
+            <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
           </div>
 
           {/* CTA */}
@@ -80,7 +87,7 @@ export default async function BlogPostPage({
             </p>
             <a
               href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I%20loved%20your%20post%20on%20${encodeURIComponent(
-                post.title
+                post.title.rendered
               )}!`}
               target="_blank"
               rel="noopener noreferrer"
@@ -101,8 +108,9 @@ export default async function BlogPostPage({
   );
 }
 
-export async function generateStaticParams(): Promise<BlogParams[]> {
-  return blogPosts.map((post) => ({
+export async function generateStaticParams() {
+  const posts = await fetchPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }

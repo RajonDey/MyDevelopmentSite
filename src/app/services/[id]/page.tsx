@@ -95,9 +95,16 @@ export default async function ServiceDetailsPage({
           {/* Left Column: Service Details */}
           <div className="lg:col-span-2">
             {/* Title and Description */}
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">
-              {service.title}
-            </h1>
+            <div className="flex">
+              {service.icon && (
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black mr-3 transition-all duration-300 hover:scale-110 hover:bg-gray-800">
+                  <service.icon className="w-6 h-6 text-white" />
+                </div>
+              )}
+              <h1 className="text-2xl md:text-3xl font-bold mb-4">
+                {service.title}
+              </h1>
+            </div>
             <p className="text-gray-600 mb-6">{service.description}</p>
 
             {/* Image */}
@@ -137,9 +144,7 @@ export default async function ServiceDetailsPage({
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {service.platforms.map((platform, index) => (
-                    <Badge key={index} >
-                      {platform}
-                    </Badge>
+                    <Badge key={index}>{platform}</Badge>
                   ))}
                 </div>
               </section>
@@ -153,9 +158,7 @@ export default async function ServiceDetailsPage({
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {service.technologies.map((tech, index) => (
-                    <Badge key={index}>
-                      {tech}
-                    </Badge>
+                    <Badge key={index}>{tech}</Badge>
                   ))}
                 </div>
               </section>
@@ -218,7 +221,7 @@ export default async function ServiceDetailsPage({
 
           {/* Right Column: Sticky Pricing Card */}
           <div className="lg:col-span-1">
-            <div className="sticky top-4 bg-white p-6 rounded-lg shadow-md border border-gray-200">
+            <div className="sticky top-6 bg-white p-6 rounded-lg shadow-md border border-gray-200">
               <h2 className="text-xl font-semibold mb-4">Pricing</h2>
               <div className="mb-4">
                 <p className="text-gray-600 text-sm">Starting at</p>

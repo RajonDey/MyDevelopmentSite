@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
-import { staticPages, services, portfolio, reviews, blogPosts } from "@/data/mock-data";
+import { staticPages, services, portfolio, reviews } from "@/data/mock-data";
 import { Metadata } from "next";
 import { ServiceCard } from "@/components/sections/service-card";
 import { PortfolioCard } from "@/components/sections/portfolio-card";
@@ -12,6 +12,8 @@ import { BlogCard } from "@/components/sections/blog-card";
 import { ReviewCard } from "@/components/sections/review-card";
 import { SEO } from "@/components/seo";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
+import { fetchPosts } from "@/lib/wp-api"; // Import from lib
+import { WPPost } from "@/types/post"; // Import type from types folder
 
 export const metadata: Metadata = {
   title: staticPages.home.metaTitle,
@@ -22,7 +24,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  // Add async here
+  const posts: WPPost[] = await fetchPosts(); // Await is now valid
+
   return (
     <>
       <SEO
@@ -101,10 +106,11 @@ export default function AboutPage() {
             </Card>
           </div>
         </div>
+
         {/* Services Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">My Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
@@ -137,8 +143,15 @@ export default function AboutPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">Recent Blog Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-            {blogPosts.slice(0, 2).map((post) => (
-              <BlogCard key={post.id} {...post} />
+            {posts.slice(0, 2).map((post) => (
+              <BlogCard
+                key={post.id}
+                title={post.title.rendered}
+                excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+                date={new Date(post.date).toLocaleDateString()}
+                slug={post.slug}
+                image={post.image || "/placeholder.svg"} 
+              />
             ))}
           </div>
           <Link href="/blog">

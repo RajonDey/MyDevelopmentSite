@@ -6,7 +6,7 @@ import { PortfolioCard } from "@/components/sections/portfolio-card";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/badge";
-
+import { X } from "lucide-react";
 
 interface PortfolioItem {
   id: string | number;
@@ -22,7 +22,7 @@ interface PortfolioItem {
 }
 
 interface PortfolioContentProps {
-  portfolio: PortfolioItem[]; 
+  portfolio: PortfolioItem[];
 }
 
 export default function PortfolioContent({ portfolio }: PortfolioContentProps) {
@@ -51,7 +51,7 @@ export default function PortfolioContent({ portfolio }: PortfolioContentProps) {
         </p>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {portfolio.map((project) => (
           <div
             key={project.id}
@@ -71,17 +71,16 @@ export default function PortfolioContent({ portfolio }: PortfolioContentProps) {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto p-6 relative"
+            className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto p-6 relative custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-xl"
+              className="absolute top-0 right-0 w-8 h-8 rounded-full bg-black text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-gray-800 z-10"
             >
-              ✕
+              <X className="w-5 h-5" />
             </button>
-
-            <div className="relative h-64 mb-6">
+            <div className="relative h-96 mb-6">
               <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}

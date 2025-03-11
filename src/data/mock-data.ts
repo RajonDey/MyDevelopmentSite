@@ -1,3 +1,12 @@
+import {
+  Code,
+  ShoppingCart,
+  Layers,
+  Globe,
+  Mail,
+  Wrench,
+} from "lucide-react";
+
 export const services = [
   {
     id: 1,
@@ -5,6 +14,7 @@ export const services = [
     description:
       "Transform your ideas into reality with custom web applications designed for scalability, efficiency, and user engagement.",
     price: 499,
+    icon: Code, // Represents coding/development
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Responsive and interactive UI/UX",
@@ -36,6 +46,7 @@ export const services = [
     description:
       "Build high-performing online stores with seamless user experiences, secure payment gateways, and robust inventory management.",
     price: 799,
+    icon: ShoppingCart, // Represents e-commerce
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Custom storefronts using Shopify, WooCommerce, or headless e-commerce solutions",
@@ -66,6 +77,7 @@ export const services = [
     description:
       "Develop modern, content-rich websites using headless CMS platforms for flexibility, scalability, and faster performance.",
     price: 699,
+    icon: Layers, // Represents layered/headless architecture
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Content management with platforms like Contentful or Strapi",
@@ -95,6 +107,7 @@ export const services = [
     description:
       "Design and develop custom WordPress websites with tailored themes, plugins, and functionalities to meet your business goals.",
     price: 499,
+    icon: Globe, 
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Custom theme development and customization",
@@ -125,6 +138,7 @@ export const services = [
     description:
       "Design and code responsive email templates that work across all devices and email clients, ensuring your campaigns look professional and engaging.",
     price: 199,
+    icon: Mail, // Represents email
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Mobile-friendly and responsive designs",
@@ -155,6 +169,7 @@ export const services = [
     description:
       "Ensure your website remains secure, up-to-date, and optimized with ongoing maintenance and expert consultation services.",
     price: 299,
+    icon: Wrench, // Represents maintenance/repair
     image: "/placeholder.svg?height=200&width=300",
     features: [
       "Regular updates, backups, and security patches",
@@ -184,135 +199,113 @@ export const services = [
 export const portfolio = [
   {
     id: 1,
-    title: "E-commerce Marketplace",
+    title: "Social Media Platform",
     description:
-      "A fully responsive e-commerce platform with product listings, cart functionality, and secure payment integration. Designed to handle high traffic and provide a seamless shopping experience.",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Web Development",
-    technologies: ["Next.js", "Node.js", "Stripe", "Tailwind CSS"],
-    client: "ShopTrendy Inc.",
-    completionDate: "August 2023",
+      "A dynamic social media app with real-time sharing and user engagement features.",
+    image: "/portfolio-images/clicks.jpg",
+    category: "Web Application",
+    technologies: ["React", "Sanity", "Tailwind", "MongoDB"],
+    client: "N/A",
+    completionDate: "2022",
     features: [
-      "User authentication and profiles",
-      "Real-time inventory management",
-      "Integrated payment gateway",
-      "Mobile-first design",
+      "Real-time post sharing",
+      "User authentication",
+      "Responsive design",
+      "Sanity CMS integration",
     ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: "https://www.portfolio.rajondey.com",
-    metaTitle: "E-commerce Marketplace Portfolio | Rajon Dey",
+    liveLink: "https://rdc-clicks.netlify.app/",
+    githubLink: "https://github.com/RajonDey/clicks-project",
+    metaTitle: "Clicks, a Social Media Platform | Rajon Dey",
     metaDescription:
-      "Check out Rajon Dey’s e-commerce marketplace project built with Next.js and Stripe. A responsive, high-traffic online store.",
+      "Explore Rajon Dey’s Clicks social media app with React and Sanity.",
   },
   {
     id: 2,
-    title: "Social Media Analytics Dashboard",
+    title: "Web 3.0 Blockchain Project",
     description:
-      "A sleek dashboard for tracking social media performance across multiple platforms. Features interactive charts, real-time data updates, and a customizable UI for marketing teams.",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "UI/UX Design",
-    technologies: ["React", "Chart.js", "Firebase", "Material-UI"],
-    client: "DigitalPulse Agency",
-    completionDate: "May 2023",
+      "A Web 3.0 app enabling decentralized transactions with blockchain technology.",
+    image: "/portfolio-images/coinic.jpg",
+    category: "Web Application",
+    technologies: ["React", "Solidity", "Alchemy", "Hardhat", "Ghiphy"],
+    client: "N/A (Learning Project)",
+    completionDate: "2022",
     features: [
-      "Real-time analytics tracking",
-      "Cross-platform integration (Twitter, Instagram, LinkedIn)",
-      "Custom report generation",
-      "Dark mode support",
+      "Decentralized transactions",
+      "Smart contract integration",
+      "Real-time data updates",
+      "Responsive UI",
     ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: "https://www.portfolio.rajondey.com",
-    metaTitle: "Social Media Analytics Dashboard | Rajon Dey",
+    liveLink: "https://rdc-coinic.netlify.app/",
+    githubLink: "https://github.com/RajonDey/coinic-project",
+    metaTitle: "Coinic, Web 3.0 Blockchain Project | Rajon Dey",
     metaDescription:
-      "Rajon Dey’s social media analytics dashboard project using React and Firebase. Real-time tracking for marketing teams.",
+      "Discover Rajon Dey’s Coinic Web 3.0 blockchain project with React.",
   },
   {
     id: 3,
-    title: "Fitness App Landing Page",
+    title: "Powerful AI Platform Landing Page",
     description:
-      "A vibrant landing page for a fitness app, designed to attract users with bold visuals, smooth animations, and a clear call-to-action. Optimized for conversions and SEO.",
-    image: "/placeholder.svg?height=200&width=300",
+      "A sleek landing page for an AI platform with optimized user engagement.",
+    image: "/portfolio-images/debtify.jpg",
     category: "Web Design",
-    technologies: ["Next.js", "Framer Motion", "Tailwind CSS"],
-    client: "FitLife Co.",
-    completionDate: "January 2024",
+    technologies: ["HTML", "Tailwind CSS"],
+    client: "N/A",
+    completionDate: "2021",
     features: [
-      "Interactive animations",
-      "Responsive design across devices",
+      "AI-driven design elements",
+      "Responsive layout",
+      "Fast load times",
       "SEO optimization",
-      "Fast load times with SSG",
     ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: "https://www.portfolio.rajondey.com",
-    metaTitle: "Fitness App Landing Page | Rajon Dey",
+    liveLink: "https://rajondey.github.io/projects/debtify/",
+    githubLink: "https://github.com/RajonDey/projects",
+    metaTitle: "Debtify, A Powerful AI Platform Landing Page | Rajon Dey",
     metaDescription:
-      "Rajon Dey’s fitness app landing page project with Next.js and Tailwind CSS. Optimized for conversions and SEO.",
+      "See Rajon Dey’s Debtify AI platform landing page with Tailwind CSS.",
   },
   {
     id: 4,
-    title: "Headless CMS Blog",
+    title: "Hosting Platform Website",
     description:
-      "A modern blog platform built with a headless CMS, featuring dynamic content delivery, a custom front-end, and an admin panel for easy content management.",
-    image: "/placeholder.svg?height=200&width=300",
+      "A modern hosting platform site with robust cloud hosting features.",
+    image: "/portfolio-images/hypo-hosting.jpg",
     category: "Web Development",
-    technologies: ["React", "Contentful", "GraphQL", "Tailwind CSS"],
-    client: "TechBit Media",
-    completionDate: "October 2023",
+    technologies: ["Bootstrap"],
+    client: "N/A (Learning Project)",
+    completionDate: "2021",
     features: [
-      "Dynamic content via headless CMS",
-      "Custom-built admin dashboard",
-      "Search functionality",
-      "Category filtering",
+      "Cloud hosting solutions",
+      "Responsive design",
+      "Fast performance",
+      "User-friendly UI",
     ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: "https://www.portfolio.rajondey.com",
-    metaTitle: "Headless CMS Blog Portfolio | Rajon Dey",
+    liveLink: "https://rajondey.github.io/Portfolios/Hypohonting/",
+    githubLink: "https://github.com/RajonDey/Portfolios",
+    metaTitle: "Hypo Hosting, A Hosting Platform Website | Rajon Dey",
     metaDescription:
-      "Explore Rajon Dey’s headless CMS blog project with React and Contentful. Dynamic and scalable content management.",
+      "View Rajon Dey’s Hypo Hosting platform site with Bootstrap.",
   },
   {
     id: 5,
-    title: "Restaurant Booking System",
+    title: "Invitation Email Template",
     description:
-      "An online reservation system for a restaurant chain, with a user-friendly interface for booking tables, viewing menus, and managing reservations.",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Web Development",
-    technologies: ["Next.js", "MongoDB", "Node.js", "Shadcn UI"],
-    client: "TasteHaven Restaurants",
-    completionDate: "March 2024",
+      "A professional email template for event invitations with responsive design.",
+    image: "/portfolio-images/rsvp-email.jpg",
+    category: "Email Development",
+    technologies: ["HTML", "CSS"],
+    client: "CVS Health",
+    completionDate: "2021",
     features: [
-      "Real-time table availability",
-      "Email confirmation system",
-      "Admin panel for staff",
-      "Multi-language support",
+      "Responsive email layout",
+      "Event RSVP functionality",
+      "Cross-client compatibility",
+      "Clean design",
     ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: "https://www.portfolio.rajondey.com",
-    metaTitle: "Restaurant Booking System | Rajon Dey",
+    liveLink: "https://rajondey.github.io/projects/emails/RSVP/Vaux/",
+    githubLink: "https://github.com/RajonDey/projects/tree/master/emails",
+    metaTitle: "RSVP, An Invitation Email Template | Rajon Dey",
     metaDescription:
-      "Rajon Dey’s restaurant booking system project with Next.js and MongoDB. User-friendly online reservations.",
-  },
-  {
-    id: 6,
-    title: "Portfolio Website for Artist",
-    description:
-      "A visually stunning portfolio site for an artist, showcasing their artwork with a gallery layout, smooth transitions, and a contact form for commissions.",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Web Design",
-    technologies: ["Next.js", "Three.js", "Tailwind CSS"],
-    client: "Emma Carter (Independent Artist)",
-    completionDate: "June 2024",
-    features: [
-      "Interactive 3D gallery",
-      "Contact form integration",
-      "Responsive grid layout",
-      "High-resolution image optimization",
-    ],
-    liveLink: "https://www.portfolio.rajondey.com",
-    githubLink: null,
-    metaTitle: "Artist Portfolio Website | Rajon Dey",
-    metaDescription:
-      "Rajon Dey’s artist portfolio site project with Next.js and Three.js. Stunning gallery design for creatives.",
+      "Check Rajon Dey’s RSVP email template for CVS Health events.",
   },
 ];
 

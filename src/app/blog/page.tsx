@@ -1,24 +1,51 @@
-import { blogPosts, staticPages } from "@/data/mock-data";
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 
 export const metadata: Metadata = {
-  title: staticPages.blog.metaTitle,
-  description: staticPages.blog.metaDescription,
+  title: "My Blog",
+  description:
+    "Dive into my latest posts on web development, React, Next.js, and more.",
   openGraph: {
-    ...staticPages.blog,
+    title: "My Blog",
+    description:
+      "Dive into my latest posts on web development, React, Next.js, and more.",
     url: "https://development.rajondey.com/blog",
   },
 };
 
-export default function BlogPage() {
+// Define the shape of a WordPress post
+interface WPPost {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  date: string;
+  content: { rendered: string };
+  featured_media?: number; // Optional: For featured image
+  link: string;
+}
+
+async function fetchPosts(): Promise<WPPost[]> {
+  const res = await fetch(
+    "https://development-admin.rajondey.com/wp-json/wp/v2/posts",
+    {
+      next: { revalidate: 3600 }, // Revalidate every hour
+    }
+  );
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  return res.json();
+}
+
+export default async function BlogPage() {
+  const posts = await fetchPosts();
+
   return (
     <>
       <SEO
-        title={staticPages.blog.metaTitle}
-        description={staticPages.blog.metaDescription}
+        title="My Blog"
+        description="Dive into my latest posts on web development, React, Next.js, and more."
         url="/blog"
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -31,8 +58,16 @@ export default function BlogPage() {
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post) => (
-            <BlogCard key={post.id} {...post} isDetailed={true} />
+          {posts.map((post) => (
+            <BlogCard
+              key={post.id}
+              title={post.title.rendered}
+              excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")} // Strip HTML tags
+              date={new Date(post.date).toLocaleDateString()}
+              slug={post.slug}
+              image="/placeholder.svg" // Update this later with featured image
+              isDetailed={true}
+            />
           ))}
         </div>
         <BeehiivSubscribe />
