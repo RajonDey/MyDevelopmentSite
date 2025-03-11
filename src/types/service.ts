@@ -9,9 +9,9 @@ export interface Service {
   excerpt: {
     rendered: string;
   };
-  featured_media: number; // Featured image ID
+  featured_media: number; 
   acf: {
-    price?: number; // Optional custom fields
+    price?: number; 
     faqs?: { question: string; answer: string }[];
     features?: string[];
     platforms?: string[];

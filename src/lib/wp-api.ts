@@ -1,6 +1,8 @@
-import { WPPost } from "@/types/post";
+import { WPPost } from "@/types/post"; // Adjust path to match your types file
 
-const WP_API_URL = process.env.NEXT_PUBLIC_WP_API_URL || "https://development-admin.rajondey.com/wp-json/wp/v2"; // Fallback for local dev without .env
+const WP_API_URL =
+  process.env.NEXT_PUBLIC_WP_API_URL ||
+  "https://development-admin.rajondey.com/wp-json/wp/v2";
 
 export async function fetchPosts(): Promise<WPPost[]> {
   const res = await fetch(`${WP_API_URL}/posts`, {
@@ -20,10 +22,9 @@ export async function fetchPosts(): Promise<WPPost[]> {
 }
 
 export async function fetchPost(slug: string): Promise<WPPost> {
-  const res = await fetch(
-    `${WP_API_URL}/posts?slug=${slug}`,
-    { next: { revalidate: 3600 } }
-  );
+  const res = await fetch(`${WP_API_URL}/posts?slug=${slug}`, {
+    next: { revalidate: 3600 },
+  });
   if (!res.ok) throw new Error("Failed to fetch post");
   const posts = await res.json();
   if (!posts.length) throw new Error("Post not found");

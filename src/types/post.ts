@@ -1,13 +1,3 @@
-export interface Post {
-  id: number;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  content: { rendered: string };
-  slug: string;
-  date: string;
-}
-
-
 export interface WPPost {
   id: number;
   slug: string;

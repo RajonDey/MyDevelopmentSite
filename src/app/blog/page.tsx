@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
-import { WPPost } from "@/types/post";
+import { fetchPosts } from "@/lib/wp-api";
 
 export const metadata: Metadata = {
   title: "My Blog",
@@ -15,18 +15,6 @@ export const metadata: Metadata = {
     url: "https://development.rajondey.com/blog",
   },
 };
-
-// Define the shape of a WordPress post
-async function fetchPosts(): Promise<WPPost[]> {
-  const res = await fetch(
-    "https://development-admin.rajondey.com/wp-json/wp/v2/posts",
-    {
-      next: { revalidate: 3600 }, // Revalidate every hour
-    }
-  );
-  if (!res.ok) throw new Error("Failed to fetch posts");
-  return res.json();
-}
 
 export default async function BlogPage() {
   const posts = await fetchPosts();
@@ -55,7 +43,7 @@ export default async function BlogPage() {
               excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
               date={new Date(post.date).toLocaleDateString()}
               slug={post.slug}
-              image={post.image || "/placeholder.svg"} 
+              image={post.image || "/placeholder.svg"} // image should now work
               isDetailed={true}
             />
           ))}
