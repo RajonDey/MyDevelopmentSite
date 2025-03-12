@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { fetchPost, fetchPosts } from "@/lib/wp-api";
 import { WPPost } from "@/types/post";
+
 interface BlogParams {
   slug: string;
 }
@@ -25,7 +26,7 @@ export async function generateMetadata({
       title: post.title.rendered,
       description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
       url: `https://development.rajondey.com/blog/${post.slug}`,
-      images: [{ url: "/placeholder.svg" }],
+      images: [{ url: post.image || "/placeholder.svg" }],
     },
   };
 }
@@ -43,65 +44,96 @@ export default async function BlogPostPage({
     return notFound();
   }
 
+  // Clean excerpt text for display (remove HTML and Tailwind classes if present)
+  const excerptText = post.excerpt.rendered
+    .replace(/<[^>]+>/g, "")
+    .replace(/class="[^"]*"/g, "");
+
   return (
     <>
       <SEO
         title={post.title.rendered}
-        description={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+        description={excerptText}
         url={`/blog/${post.slug}`}
-        image={post.image || "/placeholder.svg"} // Update with featured image later
+        image={post.image || "/placeholder.svg"}
       />
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <article>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <article className="blog-detail space-y-12">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <header className="space-y-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
               {post.title.rendered}
             </h1>
-            <p className="text-gray-500 text-sm mb-4">
-              {new Date(post.date).toLocaleDateString()}
+            <p className="text-gray-500 text-sm sm:text-base font-medium">
+              {new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
-            <div className="relative h-64 md:h-96 rounded-lg overflow-hidden">
-              <Image
-                src={post.image || "/placeholder.svg"}
-                alt={post.title.rendered}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
+            {post.image && (
+              <div className="relative mt-8 h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+                <Image
+                  src={post.image || "/placeholder.svg"}
+                  alt={post.title.rendered}
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                  priority
+                />
+              </div>
+            )}
+          </header>
 
           {/* Content */}
-          <div className="prose prose-lg max-w-none text-gray-800 mb-8">
-            <p className="text-gray-600 italic mb-6">
-              {post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+          <section className="space-y-8 text-gray-700">
+            <p className="text-lg sm:text-xl italic text-gray-600 leading-relaxed border-l-4 border-green-500 pl-4">
+              {excerptText}
             </p>
-            <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
-          </div>
+            <div
+              className="space-y-6 leading-relaxed text-base sm:text-lg font-normal text-gray-800 
+                [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-8 
+                [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-gray-800 
+                [&_p]:leading-relaxed 
+                [&_ul]:list-disc [&_ul]:pl-6 
+                [&_ol]:list-decimal [&_ol]:pl-6 
+                [&_figure]:max-w-full [&_figure]:mx-auto [&_figure]:my-8 
+                [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:shadow-md 
+                [&_figcaption]:text-center [&_figcaption]:text-gray-600 [&_figcaption]:text-sm [&_figcaption]:mt-2 
+                [&_a]:text-green-600 [&_a]:hover:underline"
+              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+            />
+          </section>
 
-          {/* CTA */}
-          <div className="bg-gray-100 p-6 rounded-lg text-center">
-            <h3 className="text-lg font-semibold mb-2">Enjoyed This Post?</h3>
-            <p className="text-gray-600 mb-4">
+          {/* CTA Section */}
+          <aside className="bg-gray-50 p-6 sm:p-8 rounded-2xl shadow-md border border-gray-100">
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 text-center">
+              Enjoyed This Post?
+            </h3>
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 text-center">
               Let’s connect to discuss your next project or idea!
             </p>
-            <a
-              href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I%20loved%20your%20post%20on%20${encodeURIComponent(
-                post.title.rendered
-              )}!`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-green-500 hover:bg-green-600 text-white">
-                Contact Me
-              </Button>
-            </a>
-            <Link href="/blog">
-              <Button variant="outline" className="ml-4">
-                Back to Blog
-              </Button>
-            </Link>
-          </div>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <a
+                href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I%20loved%20your%20post%20on%20${encodeURIComponent(
+                  post.title.rendered
+                )}!`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200">
+                  Contact Me
+                </Button>
+              </a>
+              <Link href="/blog">
+                <Button
+                  variant="outline"
+                  className="w-full sm:w-auto text-gray-600 hover:text-green-600 border-gray-300 hover:border-green-400 hover:bg-green-50 font-semibold px-6 py-2.5 rounded-full transition-all duration-200"
+                >
+                  Back to Blog
+                </Button>
+              </Link>
+            </div>
+          </aside>
         </article>
       </div>
     </>
