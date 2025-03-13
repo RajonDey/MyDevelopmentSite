@@ -41,7 +41,7 @@ export default async function AboutPage() {
           <div className="flex-1">
             <div className="flex items-start gap-4">
               <Image
-                src="/placeholder.svg?height=100&width=100"
+                src="/profile-pic.png"
                 alt="Profile"
                 width={100}
                 height={100}
@@ -147,7 +147,7 @@ export default async function AboutPage() {
               <BlogCard
                 key={post.id}
                 title={post.title.rendered}
-                excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+                // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
                 date={new Date(post.date).toLocaleDateString()}
                 slug={post.slug}
                 image={post.image || "/placeholder.svg"} 
@@ -170,7 +170,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="mb-16">
+        <section className="mb-2">
           <BeehiivSubscribe />
         </section>
       </div>

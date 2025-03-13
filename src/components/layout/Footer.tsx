@@ -1,95 +1,127 @@
 import Link from "next/link";
+import { Linkedin, Twitter, Github, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--color-footer-bg)] text-[var(--color-text-light)] py-12">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-4">
-        {/* Quick Links */}
+    <footer className="bg-gray-900 text-gray-300 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Services */}
         <div className="flex flex-col space-y-4">
-          <h3 className="font-bold text-lg">Categories</h3>
-          <Link href="/services" className="hover:text-[var(--color-primary)]">
-            Services
+          <h3 className="text-lg font-semibold text-white">Services</h3>
+          <Link
+            href="/services"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Web Development
           </Link>
-          <Link href="/portfolio" className="hover:text-[var(--color-primary)]">
+          <Link
+            href="/portfolio"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
             Portfolio
           </Link>
-          <Link href="/blog" className="hover:text-[var(--color-primary)]">
+          <Link
+            href="/blog"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
             Blog
           </Link>
         </div>
 
+        {/* About */}
         <div className="flex flex-col space-y-4">
-          <h3 className="font-bold text-lg">About</h3>
-          <Link href="/about" className="hover:text-[var(--color-primary)]">
+          <h3 className="text-lg font-semibold text-white">About</h3>
+          <Link
+            href="/about"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
             About Me
           </Link>
-          <Link href="/contact" className="hover:text-[var(--color-primary)]">
+          <Link
+            href="/contact"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
             Contact
           </Link>
         </div>
 
+        {/* Resources */}
         <div className="flex flex-col space-y-4">
-          <h3 className="font-bold text-lg">Support</h3>
-          <Link href="/faq" className="hover:text-[var(--color-primary)]">
+          <h3 className="text-lg font-semibold text-white">Resources</h3>
+          <Link
+            href="/faq"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
             FAQ
           </Link>
           <Link
             href="/privacy-policy"
-            className="hover:text-[var(--color-primary)]"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
           >
             Privacy Policy
           </Link>
+          <Link
+            href="/sitemap.xml"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Sitemap
+          </Link>
         </div>
 
-        {/* Social Media Icons */}
+        {/* Connect */}
         <div className="flex flex-col space-y-4">
-          <h3 className="font-bold text-lg">Follow Me</h3>
-          <div className="flex space-x-4">
+          <h3 className="text-lg font-semibold text-white">Connect</h3>
+          <div className="flex flex-col space-y-2">
             <a
-              href="https://linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/rajondey/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--color-primary)]"
+              className="flex items-center space-x-2 hover:text-green-400 transition-colors duration-200 text-sm"
             >
-              LinkedIn
+              <Linkedin className="w-5 h-5" />
+              <span>LinkedIn</span>
             </a>
             <a
-              href="https://twitter.com/your-profile"
+              href="https://www.threads.net/@rajjon.dey"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--color-primary)]"
+              className="flex items-center space-x-2 hover:text-green-400 transition-colors duration-200 text-sm"
             >
-              Twitter
+              <Mail className="w-5 h-5" />
+              <span>Threads</span>
             </a>
             <a
-              href="https://github.com/your-profile"
+              href="https://twitter.com/rajjon_dey"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--color-primary)]"
+              className="flex items-center space-x-2 hover:text-green-400 transition-colors duration-200 text-sm"
             >
-              GitHub
+              <Twitter className="w-5 h-5" />
+              <span>Twitter</span>
+            </a>
+            <a
+              href="https://github.com/RajonDey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 hover:text-green-400 transition-colors duration-200 text-sm"
+            >
+              <Github className="w-5 h-5" />
+              <span>GitHub</span>
             </a>
           </div>
-
-          {/* Buy Me a Coffee Section */}
-          <div className="mt-4">
-            <h3 className="font-bold text-lg">Support My Work</h3>
-            <a
-              href="https://buymeacoffee.com/your-profile"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-[#19a463] transition-colors"
-            >
-              Buy Me a Coffee
-            </a>
-          </div>
+          <Link
+            href="/contact"
+            className="w-fit inline-block mt-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition-colors duration-200"
+          >
+            Get in Touch
+          </Link>
         </div>
       </div>
 
       {/* Copyright Notice */}
-      <div className="text-center mt-8 pt-8 border-t border-[var(--color-secondary)]">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} Rajon Dey. All rights reserved.
+      <div className="text-center mt-8 pt-6 border-t border-gray-700">
+        <p className="text-sm text-gray-400">
+          © {new Date().getFullYear()} Rajon Dey. All rights reserved.
         </p>
       </div>
     </footer>

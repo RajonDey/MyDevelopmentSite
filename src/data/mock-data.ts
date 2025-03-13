@@ -388,6 +388,7 @@ export const reviews = [
   {
     name: "Alex Smith",
     rating: 5,
+    platform: "Fiverr",
     comment:
       "Excellent work! Delivered the project on time and with great quality.",
     date: "2 weeks ago",
@@ -396,6 +397,7 @@ export const reviews = [
   {
     name: "Sarah Johnson",
     rating: 5,
+    platform: "Fiverr",
     comment:
       "Very professional and skilled developer. Would definitely work with again!",
     date: "1 month ago",

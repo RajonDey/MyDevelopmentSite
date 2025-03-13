@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface BlogCardProps {
   title: string;
-  excerpt: string;
+  // excerpt: string;
   date: string;
   slug: string;
   image: string;
@@ -13,7 +13,7 @@ interface BlogCardProps {
 
 export function BlogCard({
   title,
-  excerpt,
+  // excerpt,
   date,
   image,
   slug,
@@ -31,10 +31,10 @@ export function BlogCard({
           />
         </div>
         <CardContent className="p-4">
-          <h3 className="font-semibold text-lg mb-2">{title}</h3>
+          <h3 className="font-semibold text-lg mb-2 min-h-[84px] min-h-84 overflow-auto">{title}</h3>
           {isDetailed && (
             <>
-              <p className="text-gray-600 text-sm mb-3">{excerpt}</p>
+              {/* <p className="text-gray-600 text-sm mb-3">{excerpt}</p> */}
               <p className="text-sm text-gray-500 mb-3">{date}</p>
             </>
           )}

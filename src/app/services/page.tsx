@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { services, staticPages } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
 import { Metadata } from "next";
-import { ServiceCard } from "@/components/sections/service-card"; 
+import { ServiceCard } from "@/components/sections/service-card";
 
 export const metadata: Metadata = {
   title: staticPages.services.metaTitle,
@@ -44,33 +43,31 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="text-center">
-          <Card className="p-6 inline-block">
-            <h2 className="text-xl font-semibold mb-4">
-              Ready to Start Your Project?
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Contact me today to discuss your requirements or book a
-              consultation!
-            </p>
-            <div className="flex gap-4 justify-center">
-              <a
-                href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20services.`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button>Contact Me</Button>
-              </a>
-              <a
-                href="https://calendly.com/rajondey"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="secondary">Book a Consultation</Button>
-              </a>
-            </div>
-          </Card>
-        </section>
+        <aside className="bg-gray-50 p-6 sm:p-8 rounded-2xl shadow-md border border-gray-100">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 text-center">
+            Ready to Start Your Project?
+          </h3>
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 text-center">
+            Contact me today to discuss your requirements or book a
+            consultation!
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20services.`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button>Contact Me</Button>
+            </a>
+            <a
+              href="https://calendly.com/rajondey"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary">Book a Consultation</Button>
+            </a>
+          </div>
+        </aside>
       </div>
     </>
   );

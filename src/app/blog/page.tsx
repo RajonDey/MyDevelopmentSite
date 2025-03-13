@@ -2,22 +2,56 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
-import { fetchPosts } from "@/lib/wp-api";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "My Blog",
   description:
     "Dive into my latest posts on web development, React, Next.js, and more.",
-  openGraph: {
-    title: "My Blog",
-    description:
-      "Dive into my latest posts on web development, React, Next.js, and more.",
-    url: "https://development.rajondey.com/blog",
-  },
 };
 
-export default async function BlogPage() {
-  const posts = await fetchPosts();
+async function fetchPostsPage(page: number, perPage: number = 9) {
+  const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
+  const res = await fetch(
+    `${WP_API_URL}/posts?per_page=${perPage}&page=${page}`,
+    {
+      next: { revalidate: 3600 },
+    }
+  );
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  const posts = await res.json();
+  const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+
+  return {
+    posts: await Promise.all(
+      posts.map(async (post: { id: number; featured_media: number; title: { rendered: string }; excerpt: { rendered: string }; date: string; slug: string }) => ({
+        ...post,
+        image: post.featured_media
+          ? await fetchFeaturedImage(post.featured_media)
+          : "/placeholder.svg",
+      }))
+    ),
+    totalPages,
+  };
+}
+
+async function fetchFeaturedImage(mediaId: number): Promise<string> {
+  const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
+  const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) return "/placeholder.svg";
+  const media = await res.json();
+  return media.source_url || "/placeholder.svg";
+}
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
+  const page = parseInt(searchParams.page || "1", 10);
+  const { posts, totalPages } = await fetchPostsPage(page);
 
   return (
     <>
@@ -40,14 +74,32 @@ export default async function BlogPage() {
             <BlogCard
               key={post.id}
               title={post.title.rendered}
-              excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+              // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
               date={new Date(post.date).toLocaleDateString()}
               slug={post.slug}
-              image={post.image || "/placeholder.svg"} // image should now work
+              image={post.image || "/placeholder.svg"}
               isDetailed={true}
             />
           ))}
         </div>
+
+        <div className="flex justify-center gap-4 mt-8">
+          {page > 1 && (
+            <Link href={`/blog?page=${page - 1}`}>
+              <button className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700">
+                Previous
+              </button>
+            </Link>
+          )}
+          {page < totalPages && (
+            <Link href={`/blog?page=${page + 1}`}>
+              <button className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700">
+                Next
+              </button>
+            </Link>
+          )}
+        </div>
+
         <BeehiivSubscribe />
       </div>
     </>

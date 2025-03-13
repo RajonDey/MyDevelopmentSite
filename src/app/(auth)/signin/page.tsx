@@ -66,16 +66,15 @@ export default function SignInPage() {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Button
           type="submit"
-          className="w-full bg-green-500 hover:bg-green-600 text-white"
+          className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center"
         >
           <Mail className="w-5 h-5 mr-2" />
           Sign In with Email
         </Button>
       </form>
       <div className="mt-4 text-center">
-        <Link href="/forgot-password" className="text-blue-600 hover:underline">
-          Forgot Password?
-        </Link>
+          <Link href="/forgot-password" className="underline">Forgot Password?</Link>
+        
       </div>
       <div className="mt-6 text-center">
         <p className="text-gray-600 mb-2">Or sign in with:</p>
