@@ -6,7 +6,7 @@ const SchemaOrg = () => {
     "@type": "Person",
     name: "Rajon Dey",
     jobTitle: "Software Developer",
-    url: "https://yourdomain.com", // Replace with your domain
+    url: "https://development.rajondey.com", // Replace with your domain
     sameAs: [
       "https://github.com/rajondey", // Update with your profiles
       "https://linkedin.com/in/rajondey",

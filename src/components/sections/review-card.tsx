@@ -18,7 +18,7 @@ export function ReviewCard({
   avatar,
 }: ReviewCardProps) {
   return (
-    <Card>
+    <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardContent>
         <div className="flex items-start gap-4">
           <Image

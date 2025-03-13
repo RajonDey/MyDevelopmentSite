@@ -2,14 +2,14 @@ import { faqs, staticPages } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import FAQAccordion from "@/components/FAQAccordion"; // New client component
+import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata = {
   title: staticPages.faq.metaTitle,
   description: staticPages.faq.metaDescription,
   openGraph: {
     ...staticPages.faq,
-    url: "https://yourdomain.com/faq", // Replace with your domain
+    url: "https://development.rajondey.com/faq",
   },
 };
 

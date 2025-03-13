@@ -124,7 +124,7 @@ export default async function AboutPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">Portfolio</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-            {portfolio.map((item) => (
+            {portfolio.slice(0, 2).map((item) => (
               <PortfolioCard
                 key={item.id}
                 title={item.title}
@@ -150,7 +150,7 @@ export default async function AboutPage() {
                 // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
                 date={new Date(post.date).toLocaleDateString()}
                 slug={post.slug}
-                image={post.image || "/placeholder.svg"} 
+                image={post.image || "/placeholder.svg"}
               />
             ))}
           </div>
@@ -167,6 +167,15 @@ export default async function AboutPage() {
               <ReviewCard key={index} {...review} />
             ))}
           </div>
+          <a
+            href="https://www.fiverr.com/rajjohin#Reviews"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="secondary" className="mt-2">
+              View All
+            </Button>
+          </a>
         </section>
 
         {/* Newsletter Section */}

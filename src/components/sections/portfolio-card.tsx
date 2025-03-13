@@ -29,7 +29,7 @@ export function PortfolioCard({
 }: PortfolioCardProps) {
   return (
     <Link href="/portfolio">
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+      <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
         <div className="relative h-96">
           <Image
             src={image || "/placeholder.svg"}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: staticPages.contact.metaDescription,
   openGraph: {
     ...staticPages.contact,
-    url: "https://yourdomain.com/contact",
+    url: "https://development.rajondey.com/contact",
   },
 };
 
@@ -39,7 +39,7 @@ export default function ContactPage() {
           <Card className="p-6 shadow-md">
             <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
             <form
-              action="https://formspree.io/f/your-form-id" // Replace with your Formspree ID or backend endpoint
+              action="https://formspree.io/f/mpwpzgzq" // Replace with your actual Formspree ID
               method="POST"
               className="space-y-4"
             >
@@ -55,7 +55,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
                   placeholder="Your Name"
                 />
               </div>
@@ -71,7 +71,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -87,17 +87,30 @@ export default function ContactPage() {
                   name="message"
                   required
                   rows={4}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
                   placeholder="Tell me about your project..."
                 />
               </div>
+              <input
+                type="hidden"
+                name="_subject"
+                value="New Contact Form Submission"
+              />
+              <input
+                type="hidden"
+                name="_next"
+                value="https://development.rajondey.com/thank-you" 
+              />
               <Button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white"
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md transition-colors"
               >
                 Send Message
               </Button>
             </form>
+            <p className="text-sm text-gray-500 mt-4 text-center">
+              Your info is safe with me—no spam, ever.
+            </p>
           </Card>
 
           {/* Contact Info & CTA */}
@@ -129,10 +142,10 @@ export default function ContactPage() {
                     height={24}
                   />
                   <a
-                    href="mailto:rajondey@example.com" // Replace with your email
+                    href="mailto:contact@rajondey.com" // Replace with your email
                     className="text-gray-700 hover:text-green-500"
                   >
-                    rajondey@example.com
+                    contact@rajondey.com
                   </a>
                 </div>
               </div>

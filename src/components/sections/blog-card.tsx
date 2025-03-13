@@ -21,7 +21,7 @@ export function BlogCard({
 }: BlogCardProps) {
   return (
     <Link href={`/blog/${slug}`}>
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+      <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
         <div className="relative h-48">
           <Image
             src={image || "/placeholder.svg"}
@@ -31,7 +31,9 @@ export function BlogCard({
           />
         </div>
         <CardContent className="p-4">
-          <h3 className="font-semibold text-lg mb-2 min-h-[84px] min-h-84 overflow-auto">{title}</h3>
+          <h3 className="font-semibold text-lg mb-2 min-h-[84px] min-h-84 overflow-auto">
+            {title}
+          </h3>
           {isDetailed && (
             <>
               {/* <p className="text-gray-600 text-sm mb-3">{excerpt}</p> */}
