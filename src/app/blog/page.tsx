@@ -24,12 +24,21 @@ async function fetchPostsPage(page: number, perPage: number = 9) {
 
   return {
     posts: await Promise.all(
-      posts.map(async (post: { id: number; featured_media: number; title: { rendered: string }; excerpt: { rendered: string }; date: string; slug: string }) => ({
-        ...post,
-        image: post.featured_media
-          ? await fetchFeaturedImage(post.featured_media)
-          : "/placeholder.svg",
-      }))
+      posts.map(
+        async (post: {
+          id: number;
+          featured_media: number;
+          title: { rendered: string };
+          excerpt: { rendered: string };
+          date: string;
+          slug: string;
+        }) => ({
+          ...post,
+          image: post.featured_media
+            ? await fetchFeaturedImage(post.featured_media)
+            : "/placeholder.svg",
+        })
+      )
     ),
     totalPages,
   };
@@ -48,9 +57,10 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const page = parseInt(searchParams.page || "1", 10);
+  const resolvedSearchParams = await searchParams; // Await the Promise
+  const page = parseInt(resolvedSearchParams.page || "1", 10);
   const { posts, totalPages } = await fetchPostsPage(page);
 
   return (
