@@ -14,6 +14,7 @@ import {
   User,
   LogIn,
   LogOut,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -27,7 +28,7 @@ export default function Header() {
     { href: "/services", label: "Services", icon: Briefcase },
     { href: "/portfolio", label: "Portfolio", icon: FolderGit2 },
     { href: "/blog", label: "Blog", icon: PenSquare },
-    { href: "/learn", label: "Learn", icon: PenSquare },
+    { href: "/learn", label: "Learn", icon: BookOpen },
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 
