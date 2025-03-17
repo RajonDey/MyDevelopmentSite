@@ -6,7 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 import {
   Menu,
   X,
-  Home,
+  // Home,
   Briefcase,
   FolderGit2,
   PenSquare,
@@ -23,10 +23,11 @@ export default function Header() {
 
   // Navigation items
   const navItems = [
-    { href: "/", label: "Home", icon: Home },
+    // { href: "/", label: "Home", icon: Home },
     { href: "/services", label: "Services", icon: Briefcase },
     { href: "/portfolio", label: "Portfolio", icon: FolderGit2 },
     { href: "/blog", label: "Blog", icon: PenSquare },
+    { href: "/learn", label: "Learn", icon: PenSquare },
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 

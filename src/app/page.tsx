@@ -55,8 +55,8 @@ export default async function AboutPage() {
                   <span className="text-muted-foreground">(150)</span>
                 </div>
                 <div className="flex gap-2 mt-2">
+                  <Badge>Sylhet</Badge>
                   <Badge>Bangladesh</Badge>
-                  <Badge>English</Badge>
                 </div>
               </div>
             </div>
@@ -77,7 +77,8 @@ export default async function AboutPage() {
             <div className="mt-6 flex flex-wrap gap-2">
               <Badge>Next.js expert</Badge>
               <Badge>React developer</Badge>
-              <Badge>Full stack development</Badge>
+              <Badge>Full stack</Badge>
+              <Badge>WordPress</Badge>
               <Badge>UI/UX</Badge>
             </div>
           </div>
