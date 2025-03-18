@@ -3,14 +3,13 @@ import { SEO } from "@/components/seo";
 import LearningContent from "./LearningContent";
 import Link from "next/link";
 
-// Define the props type for a dynamic route
-interface CategoryPageProps {
-  params: { category: string };
-}
-
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+type Props = {
+params: { category: string };
+searchParams: { [key: string]: string | string[] | undefined };
+};
+export async function generateMetadata(
+{ params }: Props
+): Promise<Metadata> {
   const category =
     params.category === "javascript" ? "JavaScript" : "Databases";
   return {
@@ -65,7 +64,8 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
   return media.source_url || "/placeholder.svg";
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+// Default export with inferred props
+export default async function CategoryPage({ params }: Props) {
   const posts = await fetchLearningPosts();
 
   const categoryPosts =
