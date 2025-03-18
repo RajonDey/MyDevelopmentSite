@@ -54,7 +54,7 @@ export const metadata = {
   description: "Explore tutorials on JavaScript and Databases.",
 };
 
-// No explicit props typing for the page
+// Suppress the TypeScript error for Next.js type generation bug
 export default async function CategoryPage({
   params,
 }: {
