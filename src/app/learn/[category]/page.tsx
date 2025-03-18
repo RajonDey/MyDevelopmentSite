@@ -1,15 +1,13 @@
-import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import LearningContent from "./LearningContent";
 import Link from "next/link";
 
-type Props = {
-params: { category: string };
-searchParams: { [key: string]: string | string[] | undefined };
-};
-export async function generateMetadata(
-{ params }: Props
-): Promise<Metadata> {
+// No explicit props typing for generateMetadata
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}) {
   const category =
     params.category === "javascript" ? "JavaScript" : "Databases";
   return {
@@ -28,23 +26,15 @@ async function fetchLearningPosts() {
   const posts = await res.json();
 
   const fetchedPosts = await Promise.all(
-    posts.map(
-      async (post: {
-        id: number;
-        featured_media: number;
-        title: { rendered: string };
-        content: { rendered: string };
-        categories: number[];
-      }) => ({
-        id: post.id,
-        title: post.title.rendered,
-        content: post.content.rendered,
-        categories: post.categories,
-        image: post.featured_media
-          ? await fetchFeaturedImage(post.featured_media)
-          : "/placeholder.svg",
-      })
-    )
+    posts.map(async (post) => ({
+      id: post.id,
+      title: post.title.rendered,
+      content: post.content.rendered,
+      categories: post.categories,
+      image: post.featured_media
+        ? await fetchFeaturedImage(post.featured_media)
+        : "/placeholder.svg",
+    }))
   );
 
   console.log(`Total posts fetched: ${fetchedPosts.length}`);
@@ -54,7 +44,7 @@ async function fetchLearningPosts() {
   return fetchedPosts;
 }
 
-async function fetchFeaturedImage(mediaId: number): Promise<string> {
+async function fetchFeaturedImage(mediaId: number) {
   const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
   const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
     next: { revalidate: 3600 },
@@ -64,8 +54,12 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
   return media.source_url || "/placeholder.svg";
 }
 
-// Default export with inferred props
-export default async function CategoryPage({ params }: Props) {
+// No explicit props typing for the page
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
   const posts = await fetchLearningPosts();
 
   const categoryPosts =
