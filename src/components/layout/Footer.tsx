@@ -44,6 +44,12 @@ export default function Footer() {
             About Me
           </Link>
           <Link
+            href="/resources"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Resources
+          </Link>
+          <Link
             href="/contact"
             className="hover:text-green-400 transition-colors duration-200 text-sm"
           >

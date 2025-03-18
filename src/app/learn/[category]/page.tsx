@@ -3,11 +3,14 @@ import { SEO } from "@/components/seo";
 import LearningContent from "./LearningContent";
 import Link from "next/link";
 
+// Define the props type for a dynamic route
+interface CategoryPageProps {
+  params: { category: string };
+}
+
 export async function generateMetadata({
   params,
-}: {
-  params: { category: string };
-}): Promise<Metadata> {
+}: CategoryPageProps): Promise<Metadata> {
   const category =
     params.category === "javascript" ? "JavaScript" : "Databases";
   return {
@@ -62,11 +65,7 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
   return media.source_url || "/placeholder.svg";
 }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const posts = await fetchLearningPosts();
 
   const categoryPosts =
@@ -93,7 +92,6 @@ export default async function CategoryPage({
         url={`/learn/${params.category}`}
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Back to Learn Page Link */}
         <Link
           href="/learn"
           className="inline-flex items-center text-green-600 hover:underline mb-6"
