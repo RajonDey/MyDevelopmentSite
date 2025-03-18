@@ -2,20 +2,6 @@ import { SEO } from "@/components/seo";
 import LearningContent from "./LearningContent";
 import Link from "next/link";
 
-// No explicit props typing for generateMetadata
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: string };
-}) {
-  const category =
-    params.category === "javascript" ? "JavaScript" : "Databases";
-  return {
-    title: `${category} | Learning | Rajon Dey`,
-    description: `Explore tutorials on ${category}.`,
-  };
-}
-
 // Fetch Learning Posts (Server-side)
 async function fetchLearningPosts() {
   const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
@@ -26,15 +12,23 @@ async function fetchLearningPosts() {
   const posts = await res.json();
 
   const fetchedPosts = await Promise.all(
-    posts.map(async (post) => ({
-      id: post.id,
-      title: post.title.rendered,
-      content: post.content.rendered,
-      categories: post.categories,
-      image: post.featured_media
-        ? await fetchFeaturedImage(post.featured_media)
-        : "/placeholder.svg",
-    }))
+    posts.map(
+      async (post: {
+        id: number;
+        featured_media: number;
+        title: { rendered: string };
+        content: { rendered: string };
+        categories: number[];
+      }) => ({
+        id: post.id,
+        title: post.title.rendered,
+        content: post.content.rendered,
+        categories: post.categories,
+        image: post.featured_media
+          ? await fetchFeaturedImage(post.featured_media)
+          : "/placeholder.svg",
+      })
+    )
   );
 
   console.log(`Total posts fetched: ${fetchedPosts.length}`);
@@ -53,6 +47,12 @@ async function fetchFeaturedImage(mediaId: number) {
   const media = await res.json();
   return media.source_url || "/placeholder.svg";
 }
+
+// Static metadata as a fallback
+export const metadata = {
+  title: "Learning | Rajon Dey",
+  description: "Explore tutorials on JavaScript and Databases.",
+};
 
 // No explicit props typing for the page
 export default async function CategoryPage({
@@ -74,15 +74,14 @@ export default async function CategoryPage({
       categoryPosts,
   };
 
+  const category =
+    params.category === "javascript" ? "JavaScript" : "Databases";
+
   return (
     <>
       <SEO
-        title={`${
-          params.category === "javascript" ? "JavaScript" : "Databases"
-        } | Learning | Rajon Dey`}
-        description={`Explore tutorials on ${
-          params.category === "javascript" ? "JavaScript" : "Databases"
-        }.`}
+        title={`${category} | Learning | Rajon Dey`}
+        description={`Explore tutorials on ${category}.`}
         url={`/learn/${params.category}`}
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
