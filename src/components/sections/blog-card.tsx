@@ -24,7 +24,7 @@ export function BlogCard({
       <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
         <div className="relative h-48">
           <Image
-            src={image || "/placeholder.svg"}
+            src={image || "/development-blog-placeholder.png"}
             alt={title}
             fill
             className="object-cover rounded-t-lg"

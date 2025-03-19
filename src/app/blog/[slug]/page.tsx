@@ -26,7 +26,7 @@ export async function generateMetadata({
       title: post.title.rendered,
       description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
       url: `https://development.rajondey.com/blog/${post.slug}`,
-      images: [{ url: post.image || "/placeholder.svg" }],
+      images: [{ url: post.image || "/development-blog-placeholder.png" }],
     },
   };
 }
@@ -55,7 +55,7 @@ export default async function BlogPostPage({
         title={post.title.rendered}
         description={excerptText}
         url={`/blog/${post.slug}`}
-        image={post.image || "/placeholder.svg"}
+        image={post.image || "/development-blog-placeholder.png"}
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <article className="blog-detail space-y-12">
@@ -74,7 +74,7 @@ export default async function BlogPostPage({
             {post.image && (
               <div className="relative mt-8 h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl border border-gray-100">
                 <Image
-                  src={post.image || "/placeholder.svg"}
+                  src={post.image || "/development-blog-placeholder.png"}
                   alt={post.title.rendered}
                   fill
                   className="object-cover transition-transform duration-300 hover:scale-105"

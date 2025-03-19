@@ -36,7 +36,7 @@ async function fetchPostsPage(page: number, perPage: number = 9) {
           ...post,
           image: post.featured_media
             ? await fetchFeaturedImage(post.featured_media)
-            : "/placeholder.svg",
+            : "/development-blog-placeholder.png",
         })
       )
     ),
@@ -49,9 +49,9 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
   const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
     next: { revalidate: 3600 },
   });
-  if (!res.ok) return "/placeholder.svg";
+  if (!res.ok) return "/development-blog-placeholder.png";
   const media = await res.json();
-  return media.source_url || "/placeholder.svg";
+  return media.source_url || "/development-blog-placeholder.png";
 }
 
 export default async function BlogPage({
@@ -87,7 +87,7 @@ export default async function BlogPage({
               // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
               date={new Date(post.date).toLocaleDateString()}
               slug={post.slug}
-              image={post.image || "/placeholder.svg"}
+              image={post.image || "/development-blog-placeholder.png"}
               isDetailed={true}
             />
           ))}

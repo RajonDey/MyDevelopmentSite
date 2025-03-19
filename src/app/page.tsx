@@ -151,7 +151,7 @@ export default async function AboutPage() {
                 // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
                 date={new Date(post.date).toLocaleDateString()}
                 slug={post.slug}
-                image={post.image || "/placeholder.svg"}
+                image={post.image || "/development-blog-placeholder.png"}
               />
             ))}
           </div>

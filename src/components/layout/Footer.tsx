@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Linkedin, Twitter, Github, Mail } from "lucide-react";
+import { Linkedin, Twitter, Github, Mail, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -38,10 +38,10 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <h3 className="text-lg font-semibold text-white">About</h3>
           <Link
-            href="/about"
-            className="hover:text-green-400 transition-colors duration-200 text-sm"
+            href="https://portfolio.rajondey.com/"
+            className="hover:text-green-400 transition-colors duration-200 text-sm flex gap-1"
           >
-            About Me
+            About Me <ExternalLink className="w-4 h-4" />
           </Link>
           <Link
             href="/resources"

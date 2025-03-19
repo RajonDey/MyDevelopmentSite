@@ -15,7 +15,7 @@ export const services = [
       "Transform your ideas into reality with custom web applications designed for scalability, efficiency, and user engagement.",
     price: 499,
     icon: Code, // Represents coding/development
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/portfolio-images/clicks.jpg?height=200&width=300",
     features: [
       "Responsive and interactive UI/UX",
       "Backend development with RESTful APIs or GraphQL",
@@ -47,7 +47,7 @@ export const services = [
       "Build high-performing online stores with seamless user experiences, secure payment gateways, and robust inventory management.",
     price: 799,
     icon: ShoppingCart, // Represents e-commerce
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/portfolio-images/coinic.jpg?height=200&width=300",
     features: [
       "Custom storefronts using Shopify, WooCommerce, or headless e-commerce solutions",
       "Payment gateway integration (Stripe, PayPal, etc.)",
@@ -78,7 +78,7 @@ export const services = [
       "Develop modern, content-rich websites using headless CMS platforms for flexibility, scalability, and faster performance.",
     price: 699,
     icon: Layers, // Represents layered/headless architecture
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/portfolio-images/clicks.jpg?height=200&width=300",
     features: [
       "Content management with platforms like Contentful or Strapi",
       "Dynamic content delivery via APIs",
@@ -107,8 +107,8 @@ export const services = [
     description:
       "Design and develop custom WordPress websites with tailored themes, plugins, and functionalities to meet your business goals.",
     price: 499,
-    icon: Globe, 
-    image: "/placeholder.svg?height=200&width=300",
+    icon: Globe,
+    image: "/portfolio-images/debtify.jpg?height=200&width=300",
     features: [
       "Custom theme development and customization",
       "Plugin integration and development",
@@ -139,7 +139,7 @@ export const services = [
       "Design and code responsive email templates that work across all devices and email clients, ensuring your campaigns look professional and engaging.",
     price: 199,
     icon: Mail, // Represents email
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/portfolio-images/rsvp-email.jpg?height=200&width=300",
     features: [
       "Mobile-friendly and responsive designs",
       "Cross-client compatibility (Gmail, Outlook, Apple Mail, etc.)",
@@ -170,7 +170,7 @@ export const services = [
       "Ensure your website remains secure, up-to-date, and optimized with ongoing maintenance and expert consultation services.",
     price: 299,
     icon: Wrench, // Represents maintenance/repair
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/portfolio-images/hypo-hosting.jpg?height=200&width=300",
     features: [
       "Regular updates, backups, and security patches",
       "Performance monitoring and optimization",
@@ -317,7 +317,7 @@ export const blogPosts = [
       "Learn how to create a fast, scalable e-commerce platform using Next.js, Tailwind CSS, and server-side rendering.",
     date: "January 15, 2024",
     slug: "building-ecommerce-nextjs",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/development-blog-placeholder.png?height=200&width=300",
     content: `...`, // unchanged
     metaTitle: "Building E-commerce Sites with Next.js | Rajon Dey",
     metaDescription:
@@ -330,7 +330,7 @@ export const blogPosts = [
       "A deep dive into React Hooks like useState and useEffect, with practical examples for managing state in modern apps.",
     date: "March 10, 2024",
     slug: "mastering-react-hooks",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/development-blog-placeholder.png?height=200&width=300",
     content: `...`, // unchanged
     metaTitle: "Mastering React Hooks | Rajon Dey",
     metaDescription:
@@ -343,7 +343,7 @@ export const blogPosts = [
       "Step-by-step guide to building a blog using Strapi as a headless CMS and Next.js for the front-end.",
     date: "June 20, 2024",
     slug: "headless-cms-strapi-nextjs",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/development-blog-placeholder.png?height=200&width=300",
     content: `...`, // unchanged
     metaTitle: "Headless CMS Blog with Strapi & Next.js | Rajon Dey",
     metaDescription:
@@ -392,7 +392,7 @@ export const reviews = [
     comment:
       "Excellent work! Delivered the project on time and with great quality.",
     date: "2 weeks ago",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "https://randomuser.me/api/portraits/women/2.jpg?height=40&width=40",
   },
   {
     name: "Sarah Johnson",
@@ -401,7 +401,7 @@ export const reviews = [
     comment:
       "Very professional and skilled developer. Would definitely work with again!",
     date: "1 month ago",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "https://randomuser.me/api/portraits/women/8.jpg?height=40&width=40",
   },
 ];
 

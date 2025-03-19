@@ -28,7 +28,7 @@ export default function ResourcesPage() {
           postsData.map(async (post: { id: number; title: { rendered: string }; content: { rendered: string }; categories: number[]; featured_media: number | null }) => {
             const image = post.featured_media
               ? await fetchFeaturedImage(post.featured_media)
-              : "/placeholder.svg";
+              : "/development-blog-placeholder.png";
             return {
               id: post.id,
               title: post.title.rendered,
@@ -54,9 +54,9 @@ export default function ResourcesPage() {
     async function fetchFeaturedImage(mediaId: number) {
       const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
       const res = await fetch(`${WP_API_URL}/media/${mediaId}`);
-      if (!res.ok) return "/placeholder.svg";
+      if (!res.ok) return "/development-blog-placeholder.png";
       const media = await res.json();
-      return media.source_url || "/placeholder.svg";
+      return media.source_url || "/development-blog-placeholder.png";
     }
 
     fetchLearningPosts();

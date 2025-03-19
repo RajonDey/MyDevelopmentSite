@@ -248,7 +248,7 @@ export default async function ServiceDetailsPage({
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="flex items-center mb-4">
                   <Image
-                    src="/placeholder.svg?height=48&width=48"
+                    src="/profile-pic.png?height=48&width=48"
                     alt="Rajon Dey"
                     width={48}
                     height={48}
@@ -256,7 +256,7 @@ export default async function ServiceDetailsPage({
                   />
                   <div>
                     <p className="font-medium text-gray-800">Rajon Dey</p>
-                    <p className="text-sm text-gray-600">Level 2 Seller</p>
+                    <p className="text-sm text-gray-600">10 Years of Experience</p>
                   </div>
                 </div>
                 <div className="flex items-center">

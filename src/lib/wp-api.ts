@@ -31,7 +31,7 @@ export async function fetchPosts(): Promise<WPPost[]> {
       ...post,
       image: post.featured_media
         ? await fetchFeaturedImage(post.featured_media)
-        : "/placeholder.svg",
+        : "/development-blog-placeholder.png",
     }))
   );
 }
@@ -49,7 +49,7 @@ export async function fetchPost(slug: string): Promise<WPPost> {
     ...post,
     image: post.featured_media
       ? await fetchFeaturedImage(post.featured_media)
-      : "/placeholder.svg",
+      : "/development-blog-placeholder.png",
   };
 }
 
@@ -57,7 +57,7 @@ async function fetchFeaturedImage(mediaId: number): Promise<string> {
   const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
     next: { revalidate: 3600 },
   });
-  if (!res.ok) return "/placeholder.svg";
+  if (!res.ok) return "/development-blog-placeholder.png";
   const media = await res.json();
-  return media.source_url || "/placeholder.svg";
+  return media.source_url || "/development-blog-placeholder.png";
 }
