@@ -1,99 +1,83 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { SEO } from "@/components/seo";
-import Link from "next/link";
 import LearningContentWrapper from "./LearningContentWrapper";
 
-// Fetch Learning Posts (Server-side)
-async function fetchLearningPosts() {
-  const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
-  const res = await fetch(`${WP_API_URL}/learning?per_page=100`, {
-    next: { revalidate: 3600 }, // Revalidate every hour
-  });
-  if (!res.ok) throw new Error("Failed to fetch learning posts");
-  const posts = await res.json();
-
-  const fetchedPosts = await Promise.all(
-    posts.map(
-      async (post: {
-        id: number;
-        featured_media: number;
-        title: { rendered: string };
-        content: { rendered: string };
-        categories: number[];
-      }) => ({
-        id: post.id,
-        title: post.title.rendered,
-        content: post.content.rendered,
-        categories: post.categories,
-        image: post.featured_media
-          ? await fetchFeaturedImage(post.featured_media)
-          : "/placeholder.svg",
-      })
-    )
-  );
-
-  console.log(`Total posts fetched: ${fetchedPosts.length}`);
-  console.log("Categories present:", [
-    ...new Set(fetchedPosts.flatMap((post) => post.categories)),
-  ]);
-  return fetchedPosts;
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  categories: number[];
+  image: string;
 }
 
-async function fetchFeaturedImage(mediaId: number) {
-  const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
-  const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) return "/placeholder.svg";
-  const media = await res.json();
-  return media.source_url || "/placeholder.svg";
-}
+export default function ResourcesPage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
-// Static metadata as a fallback
-export const metadata = {
-  title: "Learning | Rajon Dey",
-  description: "Explore tutorials on JavaScript and Databases.",
-};
+  useEffect(() => {
+    async function fetchLearningPosts() {
+      const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
+      try {
+        const res = await fetch(`${WP_API_URL}/learning?per_page=100`);
+        if (!res.ok) throw new Error("Failed to fetch learning posts");
+        const postsData = await res.json();
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
-  const posts = await fetchLearningPosts();
+        const fetchedPosts = await Promise.all(
+          postsData.map(async (post: { id: number; title: { rendered: string }; content: { rendered: string }; categories: number[]; featured_media: number | null }) => {
+            const image = post.featured_media
+              ? await fetchFeaturedImage(post.featured_media)
+              : "/placeholder.svg";
+            return {
+              id: post.id,
+              title: post.title.rendered,
+              content: post.content.rendered,
+              categories: post.categories,
+              image,
+            };
+          })
+        );
+
+        setPosts(fetchedPosts);
+        console.log(`Total posts fetched: ${fetchedPosts.length}`);
+        console.log("Categories present:", [
+          ...new Set(fetchedPosts.flatMap((post) => post.categories)),
+        ]);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function fetchFeaturedImage(mediaId: number) {
+      const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
+      const res = await fetch(`${WP_API_URL}/media/${mediaId}`);
+      if (!res.ok) return "/placeholder.svg";
+      const media = await res.json();
+      return media.source_url || "/placeholder.svg";
+    }
+
+    fetchLearningPosts();
+  }, []);
 
   return (
     <>
       <SEO
-        title={`${
-          params.category === "javascript" ? "JavaScript" : "Databases"
-        } | Learning | Rajon Dey`}
-        description={`Explore tutorials on ${
-          params.category === "javascript" ? "JavaScript" : "Databases"
-        }.`}
-        url={`/learn/${params.category}`}
+        title="Resources | Rajon Dey"
+        description="Explore tutorials on JavaScript and Databases."
+        url="/resources"
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link
-          href="/learn"
-          className="inline-flex items-center text-green-600 hover:underline mb-6"
-        >
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Back to Learn Page
-        </Link>
-        <LearningContentWrapper posts={posts} category={params.category} />
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          Resources
+        </h1>
+        {loading ? (
+          <p className="text-gray-500">Loading resources...</p>
+        ) : (
+          <LearningContentWrapper posts={posts} />
+        )}
       </div>
     </>
   );

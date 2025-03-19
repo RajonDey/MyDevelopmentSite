@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import LearningContent from "./LearningContent";
 
 interface Post {
@@ -10,15 +11,11 @@ interface Post {
   image: string;
 }
 
-export default function LearningContentWrapper({
-  posts,
-  category,
-}: {
-  posts: Post[];
-  category: string;
-}) {
+export default function LearningContentWrapper({ posts }: { posts: Post[] }) {
+  const [category, setCategory] = useState<"javascript" | "databases">(
+    "javascript"
+  );
 
-  // Filter posts based on the category
   const categoryPosts =
     category === "javascript"
       ? posts.filter(
@@ -31,8 +28,33 @@ export default function LearningContentWrapper({
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-8">
-      <LearningContent posts={categorizedPosts} />
+    <div className="flex flex-col gap-8">
+      {/* Category Selector */}
+      <div className="flex gap-4">
+        <button
+          onClick={() => setCategory("javascript")}
+          className={`px-4 py-2 rounded-lg ${
+            category === "javascript"
+              ? "bg-green-500 text-white"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          JavaScript
+        </button>
+        <button
+          onClick={() => setCategory("databases")}
+          className={`px-4 py-2 rounded-lg ${
+            category === "databases"
+              ? "bg-green-500 text-white"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          Databases
+        </button>
+      </div>
+      <div className="flex flex-col md:flex-row gap-8">
+        <LearningContent posts={categorizedPosts} />
+      </div>
     </div>
   );
 }
