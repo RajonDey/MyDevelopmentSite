@@ -1,6 +1,6 @@
 import { SEO } from "@/components/seo";
-import LearningContent from "./LearningContent";
 import Link from "next/link";
+import LearningContentWrapper from "./LearningContentWrapper";
 
 // Fetch Learning Posts (Server-side)
 async function fetchLearningPosts() {
@@ -54,7 +54,6 @@ export const metadata = {
   description: "Explore tutorials on JavaScript and Databases.",
 };
 
-// Suppress the TypeScript error for Next.js type generation bug
 export default async function CategoryPage({
   params,
 }: {
@@ -62,26 +61,15 @@ export default async function CategoryPage({
 }) {
   const posts = await fetchLearningPosts();
 
-  const categoryPosts =
-    params.category === "javascript"
-      ? posts.filter(
-          (post) => post.categories.includes(13) || post.categories.includes(50)
-        ) // JavaScript: IDs 13, 50
-      : posts.filter((post) => post.categories.includes(52)); // Database: ID 52
-
-  const categorizedPosts = {
-    [params.category === "javascript" ? "JavaScript" : "Database"]:
-      categoryPosts,
-  };
-
-  const category =
-    params.category === "javascript" ? "JavaScript" : "Databases";
-
   return (
     <>
       <SEO
-        title={`${category} | Learning | Rajon Dey`}
-        description={`Explore tutorials on ${category}.`}
+        title={`${
+          params.category === "javascript" ? "JavaScript" : "Databases"
+        } | Learning | Rajon Dey`}
+        description={`Explore tutorials on ${
+          params.category === "javascript" ? "JavaScript" : "Databases"
+        }.`}
         url={`/learn/${params.category}`}
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -105,12 +93,7 @@ export default async function CategoryPage({
           </svg>
           Back to Learn Page
         </Link>
-        <div className="flex flex-col md:flex-row gap-8">
-          <LearningContent posts={categorizedPosts} />
-        </div>
-        <p className="text-sm text-gray-500 mt-4">
-          Showing {categoryPosts.length} posts in {params.category}.
-        </p>
+        <LearningContentWrapper posts={posts} category={params.category} />
       </div>
     </>
   );
