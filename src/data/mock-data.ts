@@ -355,32 +355,32 @@ export const staticPages = {
   home: {
     metaTitle: "Rajon Dey | Freelance Software Developer",
     metaDescription:
-      "Hire Rajon Dey, a freelance software developer specializing in Next.js, React, and e-commerce solutions. Affordable, high-quality development services.",
+      "Hire Rajon Dey, a freelance software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
   },
   services: {
-    metaTitle: "Services | Rajon Dey Software Development",
+    metaTitle: "Software Development Services | Rajon Dey",
     metaDescription:
-      "Explore Rajon Dey’s software development services: custom web apps, e-commerce, headless CMS, and more. Expert solutions for your needs.",
+      "Need custom software, web apps, or e-commerce platforms? Rajon Dey offers expert Next.js, React, and Node.js development services for your business. Contact me!",
   },
   portfolio: {
     metaTitle: "Portfolio | Rajon Dey Software Development",
     metaDescription:
-      "View Rajon Dey’s portfolio of software development projects, including e-commerce platforms, dashboards, and creative websites.",
+      "See Rajon Dey’s software development portfolio: web apps, e-commerce platforms, and more built with Next.js, React, and Node.js. Hire me for your next project!",
   },
   blog: {
-    metaTitle: "Blog | Rajon Dey Software Development",
+    metaTitle: "Blog | Next.js & React Tutorials | Rajon Dey",
     metaDescription:
-      "Read Rajon Dey’s blog on software development, featuring Next.js, React, and headless CMS tutorials.",
+      "Learn software development with Rajon Dey’s blog: Next.js, React, and full-stack tutorials for developers. Stay updated with the latest tips and tricks!",
   },
   faq: {
     metaTitle: "FAQ | Rajon Dey Software Development Services",
     metaDescription:
-      "Answers to common questions about Rajon Dey’s freelance software development services, pricing, and process.",
+      "Got questions? Find answers about Rajon Dey’s freelance software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
   },
   contact: {
-    metaTitle: "Contact Rajon Dey | Software Development Services",
+    metaTitle: "Contact Rajon Dey | Software Developer",
     metaDescription:
-      "Contact Rajon Dey for custom software development, e-commerce, or maintenance. Book a free consultation today!",
+      "Contact Rajon Dey for expert software development services: custom apps, e-commerce, and more with Next.js & React. Book a free consultation today!",
   },
 };
 

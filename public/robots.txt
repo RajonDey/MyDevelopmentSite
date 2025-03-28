@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://development.rajondey.com/sitemap.xml

@@ -1,7 +1,7 @@
 {
   "name": "Rajon Dey - Software Developer",
   "short_name": "Rajon Dey",
-  "description": "Freelance Software Developer specializing in Next.js, React, e-commerce solutions, and more. Building scalable, high-quality web applications.",
+  "description": "Hire Rajon Dey, a Freelance Software Developer specializing in Next.js, React, and full-stack solutions. Get scalable, high-quality software tailored to your business needs—contact me today!",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -23,7 +23,7 @@
   "categories": [
     "technology",
     "software",
-    "web development",
+    "software development",
     "programming",
     "next.js",
     "react",
@@ -51,7 +51,11 @@
     "github",
     "problem solving",
     "full stack development",
-    "software engineering"
+    "software engineering",
+    "freelance developer",
+    "custom software solutions",
+    "shopify development",
+    "wordpress development"
   ],
   "lang": "en-US",
   "dir": "ltr",
@@ -59,29 +63,30 @@
   "scope": "/",
   "shortcuts": [
     {
-      "name": "View Portfolio",
+      "name": "See My Work",
       "short_name": "Portfolio",
-      "description": "Explore Rajon’s software development projects",
+      "description": "See Rajon Dey’s successful software development projects",
       "url": "/portfolio",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Contact Rajon",
       "short_name": "Contact",
-      "description": "Get in touch for development inquiries",
+      "description": "Get in touch for software development inquiries",
       "url": "/contact",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Services",
       "short_name": "Services",
-      "description": "Check out Rajon’s development services",
+      "description": "Check out Rajon’s software development services",
       "url": "/services",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Blog",
-      "description": "Read Rajon’s software development blog",
+      "name": "Learn Software Development",
+      "short_name": "Blog",
+      "description": "Learn Next.js, React, and more with Rajon Dey’s blog",
       "url": "/blog",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     }

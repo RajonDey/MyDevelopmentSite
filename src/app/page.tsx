@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
 import { staticPages, services, portfolio, reviews } from "@/data/mock-data";
 import { Metadata } from "next";
 import { ServiceCard } from "@/components/sections/service-card";
@@ -168,15 +168,27 @@ export default async function AboutPage() {
               <ReviewCard key={index} {...review} />
             ))}
           </div>
-          <a
-            href="https://www.fiverr.com/rajjohin#Reviews"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="secondary" className="mt-2">
-              View All
-            </Button>
-          </a>
+          <div className="mt-4 flex gap-4">
+            <a
+              href="https://www.fiverr.com/rajjohin#Reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary">View All Fiverr Reviews</Button>
+            </a>
+            <a
+              href="https://g.page/r/CXGw54VFb9QEEAE/review"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="outline"
+                className="flex gap-1 justify-center items-center"
+              >
+                Leave a Google Review <ExternalLink className="w-4 h-4" />
+              </Button>
+            </a>
+          </div>
         </section>
 
         {/* Newsletter Section */}

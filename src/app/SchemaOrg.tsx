@@ -21,6 +21,18 @@ const SchemaOrg = () => {
       "https://hashnode.com/@rajondey",
       "https://www.youtube.com/@rajon_dey",
     ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Sylhet",
+      addressCountry: "Bangladesh",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      telephone: "+8801737997143", // Replace with your actual phone number
+      email: "rajondeyofficial@gmail.com", // Replace with your actual email
+      url: "https://development.rajondey.com/contact",
+    },
     worksFor: {
       "@type": "Organization",
       name: "Rajon Dey - Freelance Software Development",
@@ -28,10 +40,52 @@ const SchemaOrg = () => {
     },
     offers: {
       "@type": "Service",
-      name: "Web Development Services",
+      serviceType: "Software Development",
+      provider: {
+        "@type": "Person",
+        name: "Rajon Dey",
+      },
+      category: "Software Development",
       description:
-        "Custom web apps, e-commerce solutions, and headless CMS integration.",
+        "Custom software solutions, including web apps, e-commerce platforms, and backend systems. High-quality, scalable solutions for businesses worldwide.",
       areaServed: "Worldwide",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Software Development Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom Software Development",
+              description:
+                "Build tailored software solutions using Next.js, React, and Node.js.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "E-commerce Platforms",
+              description:
+                "Develop e-commerce platforms with Shopify, WooCommerce, or custom solutions.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Backend Systems & APIs",
+              description:
+                "Create robust backend systems and APIs using Node.js, Express, and MongoDB.",
+            },
+          },
+        ],
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://development.rajondey.com",
     },
   };
 
