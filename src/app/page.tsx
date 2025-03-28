@@ -14,6 +14,7 @@ import { SEO } from "@/components/seo";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 import { fetchPosts } from "@/lib/wp-api"; // Import from lib
 import { WPPost } from "@/types/post"; // Import type from types folder
+import he from "he";
 
 export const metadata: Metadata = {
   title: staticPages.home.metaTitle,
@@ -144,16 +145,33 @@ export default async function AboutPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6">Recent Blog Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-            {posts.slice(0, 2).map((post) => (
-              <BlogCard
-                key={post.id}
-                title={post.title.rendered}
-                // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
-                date={new Date(post.date).toLocaleDateString()}
-                slug={post.slug}
-                image={post.image || "/development-blog-placeholder.png"}
-              />
-            ))}
+            {posts.length > 0 ? (
+              posts.slice(0, 2).map((post) => (
+                <BlogCard
+                  key={post.id}
+                  title={post.title.rendered}
+                  excerpt={
+                    he
+                      .decode(
+                        post.excerpt.rendered
+                          .replace(/<[^>]+>/g, "") // Remove HTML tags
+                          .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
+                      )
+                      .trim() // Remove leading/trailing whitespace
+                      .slice(0, 100) + // Optional: Limit to 150 characters for consistency
+                    (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 100
+                      ? "..."
+                      : "") // Add ellipsis if truncated
+                  }
+                  date={new Date(post.date).toLocaleDateString()}
+                  slug={post.slug}
+                  image={post.image || "/development-blog-placeholder.png"}
+                  isDetailed={true}
+                />
+              ))
+            ) : (
+              <p>No blog posts available at the moment.</p>
+            )}
           </div>
           <Link href="/blog">
             <Button variant="secondary">View All</Button>

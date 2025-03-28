@@ -3,6 +3,7 @@ import { SEO } from "@/components/seo";
 import { BlogCard } from "@/components/sections/blog-card";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 import Link from "next/link";
+import he from "he";
 
 export const metadata: Metadata = {
   title: "My Blog",
@@ -84,7 +85,19 @@ export default async function BlogPage({
             <BlogCard
               key={post.id}
               title={post.title.rendered}
-              // excerpt={post.excerpt.rendered.replace(/<[^>]+>/g, "")}
+              excerpt={
+                      he
+                        .decode(
+                          post.excerpt.rendered
+                            .replace(/<[^>]+>/g, "") // Remove HTML tags
+                            .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
+                        )
+                        .trim() // Remove leading/trailing whitespace
+                        .slice(0, 100) + // Optional: Limit to 150 characters for consistency
+                        (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 100
+                          ? "..."
+                          : "") // Add ellipsis if truncated
+                    }
               date={new Date(post.date).toLocaleDateString()}
               slug={post.slug}
               image={post.image || "/development-blog-placeholder.png"}

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { fetchPost, fetchPosts } from "@/lib/wp-api";
 import { WPPost } from "@/types/post";
+import he from "he";
 
 interface BlogParams {
   slug: string;
@@ -87,7 +88,19 @@ export default async function BlogPostPage({
           {/* Content */}
           <section className="space-y-8 text-gray-700">
             <p className="text-lg sm:text-xl italic text-gray-600 leading-relaxed border-l-4 border-green-500 pl-4">
-              {excerptText}
+            {
+              he
+                .decode(
+                  post.excerpt.rendered
+                    .replace(/<[^>]+>/g, "") // Remove HTML tags
+                    .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
+                )
+                .trim() // Remove leading/trailing whitespace
+                .slice(0, 500) + // Optional: Limit to 150 characters for consistency
+                (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 500
+                  ? "..."
+                  : "") // Add ellipsis if truncated
+            }
             </p>
             <div
               className="space-y-6 leading-relaxed text-base sm:text-lg font-normal text-gray-800 
