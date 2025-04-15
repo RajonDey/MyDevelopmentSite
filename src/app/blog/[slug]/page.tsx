@@ -88,31 +88,39 @@ export default async function BlogPostPage({
           {/* Content */}
           <section className="space-y-8 text-gray-700">
             <p className="text-lg sm:text-xl italic text-gray-600 leading-relaxed border-l-4 border-green-500 pl-4">
-            {
-              he
-                .decode(
-                  post.excerpt.rendered
-                    .replace(/<[^>]+>/g, "") // Remove HTML tags
-                    .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
-                )
-                .trim() // Remove leading/trailing whitespace
-                .slice(0, 500) + // Optional: Limit to 150 characters for consistency
-                (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 500
-                  ? "..."
-                  : "") // Add ellipsis if truncated
-            }
+              {
+                he
+                  .decode(
+                    post.excerpt.rendered
+                      .replace(/<[^>]+>/g, "") // Remove HTML tags
+                      .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
+                  )
+                  .trim() // Remove leading/trailing whitespace
+                  .slice(0, 500) + // Optional: Limit to 150 characters for consistency
+                  (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 500
+                    ? "..."
+                    : "") // Add ellipsis if truncated
+              }
             </p>
             <div
               className="space-y-6 leading-relaxed text-base sm:text-lg font-normal text-gray-800 
-                [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-8 
-                [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-gray-800 
-                [&_p]:leading-relaxed 
-                [&_ul]:list-disc [&_ul]:pl-6 
-                [&_ol]:list-decimal [&_ol]:pl-6 
-                [&_figure]:max-w-full [&_figure]:mx-auto [&_figure]:my-8 
-                [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:shadow-md 
-                [&_figcaption]:text-center [&_figcaption]:text-gray-600 [&_figcaption]:text-sm [&_figcaption]:mt-2 
-                [&_a]:text-green-600 [&_a]:hover:underline"
+              [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-8 
+              [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-gray-800 [&_h3]:mt-6 
+              [&_h4]:text-lg [&_h4]:font-medium [&_h4]:text-gray-800 [&_h4]:mt-4 
+              [&_p]:leading-relaxed [&_p]:my-4 
+              [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 
+              [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 
+              [&_li]:my-2 
+              [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:my-6 [&_blockquote]:text-gray-600 [&_blockquote]:italic 
+              [&_code]:font-mono [&_code]:text-sm [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded 
+              [&_pre]:bg-gray-900 [&_pre]:text-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:my-6 [&_pre]:font-mono [&_pre]:text-sm 
+              [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse 
+              [&_th]:bg-gray-100 [&_th]:font-semibold [&_th]:text-gray-800 [&_th]:px-4 [&_th]:py-3 [&_th]:border [&_th]:border-gray-300 
+              [&_td]:px-4 [&_td]:py-3 [&_td]:border [&_td]:border-gray-300 [&_td]:text-gray-700 
+              [&_figure]:max-w-full [&_figure]:mx-auto [&_figure]:my-8 
+              [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:shadow-md 
+              [&_figcaption]:text-center [&_figcaption]:text-gray-600 [&_figcaption]:text-sm [&_figcaption]:mt-2 
+              [&_a]:text-green-600 [&_a]:hover:underline [&_a]:transition-colors [&_a]:duration-200"
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />
           </section>
