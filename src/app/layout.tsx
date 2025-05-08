@@ -36,10 +36,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   icons: {
-    icon: [
-      { url: "/icon-192x192.png" },
-      { url: "/icon-512x512.png", sizes: "512x512" },
-    ],
+    icon: "/favicon.ico",
   },
 };
 
@@ -59,6 +56,15 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-TT9FG5TF');`}
         </Script>
+
+        {/* ✅ Umami Analytics */}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="629d0b97-44a8-490a-b4b8-dec240a13ac0"
+          strategy="afterInteractive"
+        />
+
         <SchemaOrg />
       </head>
       <body>
