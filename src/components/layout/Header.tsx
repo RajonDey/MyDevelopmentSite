@@ -90,7 +90,7 @@ export default function Header() {
               </Button>
             )}
             {/* CTA Button */}
-            <Link href="/contact">
+            <Link href="/hire">
               <Button className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-200">
                 Work With Me
               </Button>
@@ -156,7 +156,7 @@ export default function Header() {
             )}
 
             {/* Mobile CTA */}
-            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/hire" onClick={() => setIsMobileMenuOpen(false)}>
               <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-base font-medium py-2 rounded-md transition-colors duration-200">
                 Work With Me
               </Button>

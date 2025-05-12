@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
       "randomuser.me",
       "www.rajondey.com",
       "development-admin.rajondey.com",
+      "images.unsplash.com",
+      "unsplash.com"
     ],
   },
   experimental: {},
