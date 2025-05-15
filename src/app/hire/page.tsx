@@ -1,16 +1,20 @@
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
+import Link from "next/link";
 
 
-import HeroSection from "./HeroSection";
-import StorySection from "./StorySection";
-import AudienceSection from "./AudienceSection";
-import FeaturesSection from "./FeatureSection";
-import PortfolioSection from "./PortfolioSection";
-import TestimonialsSection from "./TestimonialSection";
-import FAQSection from "./FAQSection";
-import ContactSection from "./ContactSection";
-import PricingSection from "./PricingSection";
+import HeroSection from "./sections/HeroSection";
+import StorySection from "./sections/StorySection";
+import AudienceSection from "./sections/AudienceSection";
+import FeaturesSection from "./sections/FeatureSection";
+import TestimonialsSection from "./sections/TestimonialSection";
+import FAQSection from "./sections/FAQSection";
+import ContactSection from "./sections/ContactSection";
+import PricingSection from "./sections/PricingSection";
+import FiverrProjects from "./sections/FiverrProjects";
+
+import { portfolio } from "@/data/mock-data";
+import { PortfolioCard } from "@/components/sections/portfolio-card";
 
 
 export const metadata: Metadata = {
@@ -71,10 +75,36 @@ export default function HirePage() {
         <FeaturesSection />
 
         {/* Portfolio Section */}
-        <PortfolioSection />
+        <section className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            <span className="highlight">Results-Driven</span> Portfolio
+          </h2>
+          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto text-center">
+            Don&apos;t just take my word for it. See how these websites
+            transformed businesses like yours.
+            <Link href="/portfolio">
+              <span className="highlight">View All</span>
+            </Link>
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+            {portfolio.slice(0, 2).map((item) => (
+              <PortfolioCard
+                key={item.id}
+                title={item.title}
+                image={item.image}
+                description={item.description}
+                category={item.category}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* Testimonials Section */}
         <TestimonialsSection />
+
+        {/* Fiverr Projects Section */}
+        <FiverrProjects />
 
         {/* FAQ Section */}
         <FAQSection />

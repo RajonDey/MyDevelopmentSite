@@ -48,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script async src="https://tally.so/widgets/embed.js" />
         {/* Google Tag Manager - Head */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
