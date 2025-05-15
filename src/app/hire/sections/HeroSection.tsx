@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/badge";
@@ -109,15 +108,16 @@ export default function HeroSection() {
             </div>
 
             <div className="relative rounded-md overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
-                alt="Website design screenshot"
+              <video
+                src="/videos/rd-website-preview.mp4"
                 width={800}
                 height={200}
                 className="w-full h-auto object-cover rounded-md transition-transform duration-300 hover:scale-[1.02]"
-                priority
+                autoPlay
+                loop
+                muted
+                playsInline
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 pointer-events-none"></div>
             </div>
 
             {/* Decorative elements */}
