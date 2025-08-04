@@ -50,7 +50,7 @@ export function PortfolioCard({
             className={`object-cover rounded-t-lg transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
             }`}
-            onLoadingComplete={() => setIsLoading(false)}
+            onLoad={() => setIsLoading(false)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             quality={85}
           />

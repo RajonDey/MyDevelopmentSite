@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Star } from "lucide-react";
+import { ExternalLink, Star, Clock, Users, Award } from "lucide-react";
 import { staticPages, services, portfolio, reviews } from "@/data/mock-data";
 import { Metadata } from "next";
 import { ServiceCard } from "@/components/sections/service-card";
@@ -69,7 +69,7 @@ export default async function AboutPage() {
                 Node.js, and Three.js. I specialize in creating scalable,
                 efficient, and user-friendly web applications. My passion lies
                 in transforming ideas into reality by leveraging modern
-                technologies and collaborative problem-solving. I’m also
+                technologies and collaborative problem-solving. I'm also
                 experienced in building websites using Headless CMS and
                 platforms like WordPress, Shopify, Wix, and Squarespace.
               </p>
@@ -108,6 +108,58 @@ export default async function AboutPage() {
             </Card>
           </div>
         </div>
+
+        {/* Social Proof Section - NEW */}
+        <section className="mb-16 bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-4">
+              Trusted by 50+ Clients Worldwide
+            </h2>
+            <p className="text-muted-foreground">
+              Delivering results that speak for themselves
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="text-center">
+              <div className="flex justify-center mb-2">
+                <Award className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="font-semibold text-lg">4.9/5 Rating</h3>
+              <p className="text-sm text-muted-foreground">
+                Across all platforms
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="flex justify-center mb-2">
+                <Clock className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-lg">24-48 Hours</h3>
+              <p className="text-sm text-muted-foreground">
+                Average delivery time
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="flex justify-center mb-2">
+                <Users className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="font-semibold text-lg">100% Satisfaction</h3>
+              <p className="text-sm text-muted-foreground">
+                Guaranteed results
+              </p>
+            </div>
+          </div>
+
+          {/* Urgency Banner */}
+          <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-4 rounded-lg text-center">
+            <p className="font-semibold">
+              🎉 Limited Time: Free Website Audit + Strategy Session
+            </p>
+            <p className="text-sm opacity-90">
+              Book your slot before it's gone!
+            </p>
+          </div>
+        </section>
 
         {/* Services Section */}
         <section className="mb-16">
