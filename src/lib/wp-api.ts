@@ -1,63 +1,35 @@
 import { WPPost } from "@/types/post";
 
-const WP_API_URL =
-  process.env.NEXT_PUBLIC_WP_API_URL ||
-  "https://development-admin.rajondey.com/wp-json/wp/v2";
-
 export async function fetchPosts(): Promise<WPPost[]> {
-  const posts: WPPost[] = [];
-  let page = 1;
-  const perPage = 100; // Max allowed by WordPress API
+  try {
+    const res = await fetch("http://localhost:3000/api/posts", {
+      next: { revalidate: 3600 },
+    });
 
-  while (true) {
-    const res = await fetch(
-      `${WP_API_URL}/posts?per_page=${perPage}&page=${page}`,
-      {
-        next: { revalidate: 3600 },
-      }
-    );
-    if (!res.ok) throw new Error("Failed to fetch posts");
+    if (!res.ok) {
+      throw new Error(`Failed to fetch posts: ${res.status} ${res.statusText}`);
+    }
 
-    const data = await res.json();
-    posts.push(...data);
-
-    const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
-    if (page >= totalPages) break;
-    page++;
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw error;
   }
-
-  return Promise.all(
-    posts.map(async (post: WPPost) => ({
-      ...post,
-      image: post.featured_media
-        ? await fetchFeaturedImage(post.featured_media)
-        : "/development-blog-placeholder.png",
-    }))
-  );
 }
 
 export async function fetchPost(slug: string): Promise<WPPost> {
-  const res = await fetch(`${WP_API_URL}/posts?slug=${slug}`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) throw new Error("Failed to fetch post");
-  const posts = await res.json();
-  if (!posts.length) throw new Error("Post not found");
+  try {
+    const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+      next: { revalidate: 3600 },
+    });
 
-  const post = posts[0];
-  return {
-    ...post,
-    image: post.featured_media
-      ? await fetchFeaturedImage(post.featured_media)
-      : "/development-blog-placeholder.png",
-  };
-}
+    if (!res.ok) {
+      throw new Error(`Failed to fetch post: ${res.status} ${res.statusText}`);
+    }
 
-async function fetchFeaturedImage(mediaId: number): Promise<string> {
-  const res = await fetch(`${WP_API_URL}/media/${mediaId}`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) return "/development-blog-placeholder.png";
-  const media = await res.json();
-  return media.source_url || "/development-blog-placeholder.png";
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error;
+  }
 }
