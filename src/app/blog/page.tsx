@@ -6,25 +6,38 @@ import { WPPost } from "@/types/post";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, BookOpen, TrendingUp, Clock } from "lucide-react";
+import {
+  BookOpen,
+  FileText,
+  Code,
+  Database,
+  Clock,
+  TrendingUp,
+} from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export const metadata: Metadata = {
-  title: "Blog - Web Development Tutorials & Insights | Rajon Dey",
+  title: "Blog & Learn - Web Development Tutorials & Resources | Rajon Dey",
   description:
-    "Learn web development with practical tutorials on React, Next.js, and modern web technologies. Expert insights from Rajon Dey.",
+    "Learn web development with practical tutorials, courses and guides on React, Next.js, databases, and modern web technologies. Expert insights from Rajon Dey.",
   keywords:
-    "web development blog, React tutorials, Next.js guides, programming tips, software development",
+    "web development blog, React tutorials, Next.js guides, programming tips, software development, learning resources, database tutorials",
 };
 
-// Blog categories for filtering
+// Blog and learning categories for filtering
 const categories = [
-  { id: "all", name: "All Posts", icon: BookOpen },
+  { id: "all", name: "All Content", icon: BookOpen },
+  { id: "blog", name: "Blog Posts", icon: TrendingUp },
+  { id: "learn", name: "Learning", icon: Clock },
+  // Blog categories
   { id: "react", name: "React", icon: TrendingUp },
   { id: "nextjs", name: "Next.js", icon: Clock },
   { id: "wordpress", name: "WordPress", icon: BookOpen },
   { id: "ecommerce", name: "E-commerce", icon: TrendingUp },
-  { id: "tutorials", name: "Tutorials", icon: BookOpen },
+  // Learning categories
+  { id: "javascript", name: "JavaScript", icon: BookOpen },
+  { id: "database", name: "Databases", icon: BookOpen },
 ];
 
 function BlogGrid({
@@ -118,8 +131,8 @@ export default async function BlogPage() {
   return (
     <>
       <SEO
-        title="Blog - Web Development Tutorials & Insights | Rajon Dey"
-        description="Learn web development with practical tutorials on React, Next.js, and modern web technologies. Expert insights from Rajon Dey."
+        title="Blog & Learn - Web Development Tutorials & Resources | Rajon Dey"
+        description="Learn web development with practical tutorials, courses and guides on React, Next.js, databases, and modern web technologies. Expert insights from Rajon Dey."
         url="/blog"
         type="blog"
         tags={[
@@ -128,15 +141,18 @@ export default async function BlogPage() {
           "Next.js",
           "tutorials",
           "programming",
+          "learning resources",
+          "database tutorials",
         ]}
       />
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Web Development Blog</h1>
+          <h1 className="text-4xl font-bold mb-4">Blog & Learning Resources</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Learn from practical tutorials, industry insights, and expert tips
-            on React, Next.js, and modern web development technologies.
+            Learn from practical tutorials, industry insights, comprehensive
+            guides, and expert tips on React, Next.js, databases and modern web
+            development technologies.
           </p>
         </div>
 
@@ -159,53 +175,102 @@ export default async function BlogPage() {
           </div>
         </div>
 
-        {/* Search and Filter */}
+        {/* Content Categories */}
         <div className="mb-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Search */}
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search articles..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </div>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <Button
-                  key={category.id}
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2"
-                >
-                  <category.icon className="w-4 h-4" />
-                  {category.name}
-                </Button>
-              ))}
-            </div>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Link href="/blog">
+              <Button
+                variant="secondary"
+                className="border-b-2 border-green-500 text-green-700"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                All Articles
+              </Button>
+            </Link>
+            <Link href="/learn/javascript">
+              <Button variant="secondary">
+                <Code className="w-5 h-5 mr-2" />
+                JavaScript
+              </Button>
+            </Link>
+            <Link href="/learn/databases">
+              <Button variant="secondary">
+                <Database className="w-5 h-5 mr-2" />
+                Databases
+              </Button>
+            </Link>
+            <Link href="/blog?category=react">
+              <Button variant="secondary">
+                <FileText className="w-5 h-5 mr-2" />
+                React
+              </Button>
+            </Link>
+            <Link href="/blog?category=nextjs">
+              <Button variant="secondary">
+                <FileText className="w-5 h-5 mr-2" />
+                Next.js
+              </Button>
+            </Link>
           </div>
         </div>
 
-        {/* Featured Post */}
-        {posts.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Featured Article</h2>
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-xl">
-              <BlogCard
-                title={posts[0].title.rendered}
-                excerpt={posts[0].excerpt.rendered}
-                date={posts[0].date}
-                slug={posts[0].slug}
-                image={posts[0].image}
-                isDetailed={true}
-                priority={true}
-              />
+        {/* Featured Posts section removed */}
+
+        {/* Learning Topics Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">Learning Topics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* JavaScript Topic Card */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <Code className="w-8 h-8 text-yellow-500" />
+                <h3 className="text-xl font-semibold">JavaScript</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Learn JavaScript fundamentals, advanced techniques, and modern
+                ES6+ features.
+              </p>
+              <div className="space-y-2 mb-4">
+                <div className="text-sm font-medium">Topics include:</div>
+                <ul className="text-sm text-gray-600 pl-5 list-disc">
+                  <li>Promises & Async/Await</li>
+                  <li>ES6+ Features</li>
+                  <li>DOM Manipulation</li>
+                </ul>
+              </div>
+              <Link href="/learn/javascript">
+                <Button variant="outline" className="w-full">
+                  View JavaScript Resources
+                </Button>
+              </Link>
+            </div>
+
+            {/* Database Topic Card */}
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="flex items-center space-x-3 mb-4">
+                <Database className="w-8 h-8 text-blue-500" />
+                <h3 className="text-xl font-semibold">Databases</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Learn about SQL and NoSQL databases, data modeling, and
+                optimization techniques.
+              </p>
+              <div className="space-y-2 mb-4">
+                <div className="text-sm font-medium">Topics include:</div>
+                <ul className="text-sm text-gray-600 pl-5 list-disc">
+                  <li>SQL Fundamentals</li>
+                  <li>MongoDB & NoSQL</li>
+                  <li>Data Modeling</li>
+                </ul>
+              </div>
+              <Link href="/learn/databases">
+                <Button variant="outline" className="w-full">
+                  View Database Resources
+                </Button>
+              </Link>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Blog Posts */}
         <div className="mb-12">

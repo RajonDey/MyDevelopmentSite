@@ -46,13 +46,9 @@ export default function FAQPage() {
               discuss your project.
             </p>
             <div className="flex gap-4 justify-center">
-              <a
-                href="https://wa.me/01737997143?text=Hi%20Rajon,%20I%20have%20a%20question%20about%20your%20services!"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/order">
                 <Button className="bg-green-500 hover:bg-green-600 text-white">
-                  Contact Me
+                  Order Services
                 </Button>
               </a>
               <a

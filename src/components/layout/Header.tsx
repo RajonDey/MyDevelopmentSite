@@ -6,15 +6,16 @@ import { useSession, signOut } from "next-auth/react";
 import {
   Menu,
   X,
-  // Home,
   Briefcase,
   FolderGit2,
-  PenSquare,
   Mail,
   User,
   LogIn,
   LogOut,
   BookOpen,
+  ShoppingCart,
+  Settings,
+  UserPlus,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -27,8 +28,8 @@ export default function Header() {
     // { href: "/", label: "Home", icon: Home },
     { href: "/services", label: "Services", icon: Briefcase },
     { href: "/portfolio", label: "Portfolio", icon: FolderGit2 },
-    { href: "/blog", label: "Blog", icon: PenSquare },
-    { href: "/learn", label: "Learn", icon: BookOpen },
+    { href: "/blog", label: "Blog & Learn", icon: BookOpen },
+    { href: "/hire", label: "Hire Me", icon: ShoppingCart },
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 
@@ -58,41 +59,88 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Auth Links (Separated) */}
+          {/* Auth Links with Dropdown */}
           <div className="flex items-center space-x-4">
             {session ? (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors duration-200 text-sm font-medium uppercase tracking-wide"
-                >
-                  <User className="w-4 h-4" />
-                  <span>Dashboard</span>
-                </Link>
-                <Button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  variant="outline"
-                  className="flex items-center space-x-1 text-gray-700 hover:text-red-600 border-gray-300 hover:border-red-300 hover:bg-red-50 transition-colors duration-200 text-sm font-medium px-3 py-1 rounded-md"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Sign Out</span>
-                </Button>
-              </>
+              <div className="relative group">
+                <button className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors duration-200 p-2 rounded-full hover:bg-gray-100">
+                  <User className="w-5 h-5" />
+                </button>
+
+                {/* Dropdown Menu */}
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block border border-gray-200">
+                  <Link
+                    href="/dashboard"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <User className="w-4 h-4 mr-2" />
+                      Dashboard
+                    </span>
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <User className="w-4 h-4 mr-2" />
+                      Profile
+                    </span>
+                  </Link>
+                  <Link
+                    href="/settings"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Settings
+                    </span>
+                  </Link>
+                  <button
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 border-t border-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </span>
+                  </button>
+                </div>
+              </div>
             ) : (
-              <Button variant="secondary">
-                <Link
-                  href="/signin"
-                  className="flex items-center space-x-1 transition-colors duration-200 text-sm font-medium uppercase tracking-wide"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span>Sign In</span>
-                </Link>
-              </Button>
+              <div className="relative group">
+                <button className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors duration-200 p-2 rounded-full hover:bg-gray-100">
+                  <User className="w-5 h-5" />
+                </button>
+
+                {/* Dropdown Menu */}
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block border border-gray-200">
+                  <Link
+                    href="/signin"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <LogIn className="w-4 h-4 mr-2" />
+                      Sign In
+                    </span>
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    <span className="flex items-center">
+                      <UserPlus className="w-4 h-4 mr-2" />
+                      Create Account
+                    </span>
+                  </Link>
+                </div>
+              </div>
             )}
-            {/* CTA Button */}
-            <Link href="/hire">
+
+            {/* CTA Button - Order Services */}
+            <Link href="/order">
               <Button className="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-200">
-                Work With Me
+                Order Services
               </Button>
             </Link>
           </div>
@@ -127,38 +175,72 @@ export default function Header() {
             {/* Mobile Auth Links */}
             {session ? (
               <>
+                <div className="border-t border-gray-200 pt-2 mt-2">
+                  <h3 className="text-xs text-gray-500 uppercase tracking-wider mb-2 px-2">
+                    Account
+                  </h3>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <User className="w-5 h-5" />
+                    <span>Dashboard</span>
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <User className="w-5 h-5" />
+                    <span>Profile</span>
+                  </Link>
+                  <Link
+                    href="/settings"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Settings className="w-5 h-5" />
+                    <span>Settings</span>
+                  </Link>
+                  <Button
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    variant="outline"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-red-600 border-gray-300 hover:border-red-300 hover:bg-red-50 transition-colors duration-200 text-base font-medium w-full text-left py-2 mt-2 rounded-md"
+                  >
+                    <LogOut className="w-5 h-5" />
+                    <span>Sign Out</span>
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div className="border-t border-gray-200 pt-2 mt-2">
+                <h3 className="text-xs text-gray-500 uppercase tracking-wider mb-2 px-2">
+                  Account
+                </h3>
                 <Link
-                  href="/dashboard"
+                  href="/signin"
                   className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <User className="w-5 h-5" />
-                  <span>Dashboard</span>
+                  <LogIn className="w-5 h-5" />
+                  <span>Sign In</span>
                 </Link>
-                <Button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  variant="outline"
-                  className="flex items-center space-x-2 text-gray-700 hover:text-red-600 border-gray-300 hover:border-red-300 hover:bg-red-50 transition-colors duration-200 text-base font-medium w-full text-left py-2 rounded-md"
+                <Link
+                  href="/signup"
+                  className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <LogOut className="w-5 h-5" />
-                  <span>Sign Out</span>
-                </Button>
-              </>
-            ) : (
-              <Link
-                href="/signin"
-                className="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200 text-base font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <LogIn className="w-5 h-5" />
-                <span>Sign In</span>
-              </Link>
+                  <UserPlus className="w-5 h-5" />
+                  <span>Create Account</span>
+                </Link>
+              </div>
             )}
 
             {/* Mobile CTA */}
-            <Link href="/hire" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-base font-medium py-2 rounded-md transition-colors duration-200">
-                Work With Me
+            <Link href="/order" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-base font-medium py-2 rounded-md transition-colors duration-200 mt-4">
+                Order Services
               </Button>
             </Link>
           </nav>

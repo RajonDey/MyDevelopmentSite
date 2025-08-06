@@ -444,6 +444,6 @@ export const faqs = [
   {
     question: "How do I get started?",
     answer:
-      "It's simple:<ol><li>Visit the <a href='/order' class='text-green-500 hover:underline'>order page</a> to select services</li><li>Contact me via the <a href='/contact' class='text-green-500 hover:underline'>contact page</a></li><li>Book a free consultation on <a href='https://calendly.com/rajondey' target='_blank' rel='noopener noreferrer' class='text-green-500 hover:underline'>Calendly</a></li></ol>We'll discuss your project, and I'll get you a proposal within 24-48 hours!",
+      "It's simple:<ol><li>Contact me via the <a href='/contact' class='text-green-500 hover:underline'>contact page</a></li><li>Message me on WhatsApp (+880 1737-997143)</li><li>Book a free consultation on <a href='https://calendly.com/rajondey' target='_blank' rel='noopener noreferrer' class='text-green-500 hover:underline'>Calendly</a></li></ol>We'll discuss your project, and I'll get you a proposal within 24-48 hours!",
   },
 ];

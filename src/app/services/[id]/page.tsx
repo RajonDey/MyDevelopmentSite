@@ -111,14 +111,8 @@ export default function ServicePage({ params }: ServicePageProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I'm%20interested%20in%20your%20${encodeURIComponent(
-                service.title
-              )}%20service.`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="w-full sm:w-auto">Get Started Now</Button>
+            <a href="/order">
+              <Button className="w-full sm:w-auto">Order Now</Button>
             </a>
             <a
               href="https://calendly.com/rajondey"
@@ -239,14 +233,8 @@ export default function ServicePage({ params }: ServicePageProps) {
             Let's discuss your project and create something amazing together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I'm%20interested%20in%20your%20${encodeURIComponent(
-                service.title
-              )}%20service.%20Can%20we%20discuss%20my%20project?`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="w-full sm:w-auto">Start Your Project</Button>
+            <a href="/order">
+              <Button className="w-full sm:w-auto">Order Services</Button>
             </a>
             <a
               href="https://calendly.com/rajondey"

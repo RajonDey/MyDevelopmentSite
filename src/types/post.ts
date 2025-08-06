@@ -7,5 +7,6 @@ export interface WPPost {
   content: { rendered: string };
   featured_media?: number;
   link: string;
-  image?: string; 
+  image?: string;
+  categories?: string[];
 }

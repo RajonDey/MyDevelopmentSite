@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { SEO } from "@/components/seo";
+import { useRouter, useParams } from "next/navigation";
 import LearningContentWrapper from "./LearningContentWrapper";
 
 interface Post {
@@ -13,6 +14,11 @@ interface Post {
 }
 
 export default function ResourcesPage() {
+  const router = useRouter();
+  const params = useParams();
+  const category = params.category as string;
+
+  // No longer redirecting - we'll use the learn page directly
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,18 +31,26 @@ export default function ResourcesPage() {
         const postsData = await res.json();
 
         const fetchedPosts = await Promise.all(
-          postsData.map(async (post: { id: number; title: { rendered: string }; content: { rendered: string }; categories: number[]; featured_media: number | null }) => {
-            const image = post.featured_media
-              ? await fetchFeaturedImage(post.featured_media)
-              : "/development-blog-placeholder.png";
-            return {
-              id: post.id,
-              title: post.title.rendered,
-              content: post.content.rendered,
-              categories: post.categories,
-              image,
-            };
-          })
+          postsData.map(
+            async (post: {
+              id: number;
+              title: { rendered: string };
+              content: { rendered: string };
+              categories: number[];
+              featured_media: number | null;
+            }) => {
+              const image = post.featured_media
+                ? await fetchFeaturedImage(post.featured_media)
+                : "/development-blog-placeholder.png";
+              return {
+                id: post.id,
+                title: post.title.rendered,
+                content: post.content.rendered,
+                categories: post.categories,
+                image,
+              };
+            }
+          )
         );
 
         setPosts(fetchedPosts);
@@ -62,21 +76,33 @@ export default function ResourcesPage() {
     fetchLearningPosts();
   }, []);
 
+  // Use category from URL params
+  const topicCategory = params.category as string;
+  const categoryName =
+    topicCategory === "javascript"
+      ? "JavaScript"
+      : topicCategory === "databases"
+      ? "Databases"
+      : "Learning";
+
   return (
     <>
       <SEO
-        title="Resources | Rajon Dey"
-        description="Explore tutorials on JavaScript and Databases."
-        url="/resources"
+        title={`${categoryName} Learning Resources | Rajon Dey`}
+        description={`Explore tutorials and guides on ${categoryName}.`}
+        url={`/learn/${topicCategory}`}
       />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-          Resources
+          {categoryName} Resources
         </h1>
         {loading ? (
           <p className="text-gray-500">Loading resources...</p>
         ) : (
-          <LearningContentWrapper posts={posts} />
+          <LearningContentWrapper
+            posts={posts}
+            initialCategory={topicCategory}
+          />
         )}
       </div>
     </>

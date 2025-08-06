@@ -86,12 +86,8 @@ export default async function AboutPage() {
 
           <div className="w-full md:w-72">
             <Card className="p-4">
-              <a
-                href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20services.`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="w-full mb-4">Contact me</Button>
+              <a href="/order">
+                <Button className="w-full mb-4">Order Services</Button>
               </a>
               <a
                 href="https://calendly.com/rajondey"

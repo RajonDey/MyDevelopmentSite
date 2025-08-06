@@ -11,9 +11,15 @@ interface Post {
   image: string;
 }
 
-export default function LearningContentWrapper({ posts }: { posts: Post[] }) {
+export default function LearningContentWrapper({
+  posts,
+  initialCategory = "javascript",
+}: {
+  posts: Post[];
+  initialCategory?: string;
+}) {
   const [category, setCategory] = useState<"javascript" | "databases">(
-    "javascript"
+    initialCategory === "databases" ? "databases" : "javascript"
   );
 
   const categoryPosts =

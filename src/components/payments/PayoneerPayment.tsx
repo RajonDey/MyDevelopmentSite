@@ -78,15 +78,9 @@ export default function PayoneerPayment({ service }: PayoneerPaymentProps) {
         {loading ? "Processing..." : "Pay Custom Amount"}
       </Button>
 
-      <a
-        href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20${encodeURIComponent(
-          service.title
-        )}%20service.`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="/order" rel="noopener noreferrer">
         <Button variant="outline" className="w-full">
-          Contact Me
+          Order Now
         </Button>
       </a>
 

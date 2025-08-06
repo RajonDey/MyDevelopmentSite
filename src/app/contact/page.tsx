@@ -249,9 +249,7 @@ export default function ContactPage() {
               </h2>
               <div className="space-y-4">
                 <a
-                  href="https://wa.me/01737997143?text=Hi%20Rajon,%20I'm%20interested%20in%20working%20with%20you%20on%20a%20project."
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/order"
                   className="flex items-center gap-3 p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
                 >
                   <Image

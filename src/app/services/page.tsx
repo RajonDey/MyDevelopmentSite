@@ -52,12 +52,8 @@ export default function ServicesPage() {
             consultation!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href={`https://wa.me/01737997143?text=Hi%20there,%20I%20am%20interested%20in%20your%20services.`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button>Contact Me</Button>
+            <a href="/order">
+              <Button>Order Services</Button>
             </a>
             <a
               href="https://calendly.com/rajondey"

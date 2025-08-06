@@ -134,15 +134,9 @@ export default async function BlogPostPage({
               Let’s connect to discuss your next project or idea!
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href={`https://wa.me/01737997143?text=Hi%20Rajon,%20I%20loved%20your%20post%20on%20${encodeURIComponent(
-                  post.title.rendered
-                )}!`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/order">
                 <Button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200">
-                  Contact Me
+                  Order Services
                 </Button>
               </a>
               <Link href="/blog">

@@ -15,22 +15,22 @@ export default function Footer() {
             Web Development
           </Link>
           <Link
+            href="/order"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Order Services
+          </Link>
+          <Link
+            href="/hire"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Hire Me
+          </Link>
+          <Link
             href="/portfolio"
             className="hover:text-green-400 transition-colors duration-200 text-sm"
           >
             Portfolio
-          </Link>
-          <Link
-            href="/blog"
-            className="hover:text-green-400 transition-colors duration-200 text-sm"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/learn"
-            className="hover:text-green-400 transition-colors duration-200 text-sm"
-          >
-            Learn
           </Link>
         </div>
 
@@ -44,10 +44,10 @@ export default function Footer() {
             About Me <ExternalLink className="w-4 h-4" />
           </Link>
           <Link
-            href="/resources"
+            href="/blog"
             className="hover:text-green-400 transition-colors duration-200 text-sm"
           >
-            Resources
+            Blog & Learn
           </Link>
           <Link
             href="/contact"
