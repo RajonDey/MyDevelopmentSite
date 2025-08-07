@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/common/ui/Card";
 import Image from "next/image";
 
 interface ReviewCardProps {
@@ -8,6 +8,8 @@ interface ReviewCardProps {
   comment: string;
   date: string;
   avatar: string;
+  company?: string;
+  platform?: string;
 }
 
 export function ReviewCard({
@@ -16,6 +18,8 @@ export function ReviewCard({
   comment,
   date,
   avatar,
+  company,
+  platform,
 }: ReviewCardProps) {
   return (
     <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
@@ -32,6 +36,7 @@ export function ReviewCard({
             <div className="flex justify-between items-start">
               <div>
                 <h4 className="font-semibold">{name}</h4>
+                {company && <p className="text-xs text-gray-600">{company}</p>}
                 <div className="flex items-center gap-1 mt-1">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
@@ -43,6 +48,11 @@ export function ReviewCard({
                       }`}
                     />
                   ))}
+                  {platform && (
+                    <span className="text-xs bg-gray-100 px-2 py-0.5 rounded ml-2">
+                      {platform}
+                    </span>
+                  )}
                 </div>
               </div>
               <span className="text-sm text-secondary">{date}</span>

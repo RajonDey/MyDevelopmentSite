@@ -1,9 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { WPPost } from "@/types/post";
-import { BlogCard } from "@/components/sections/blog-card";
+import { useState, useEffect, useMemo } from "react";
+import { WPPost } from "@/types/blog";
+import { BlogCard } from "@/components/features/blog/BlogCard";
 import { BookOpen, FileText, Code, Database, Search } from "lucide-react";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/common/ui/tabs";
+import FilterDropdown from "@/components/common/ui/FilterDropdown";
 
 // Define content categories
 const categories = [
@@ -19,45 +26,85 @@ const categories = [
   { id: "database", name: "Databases", icon: Database },
 ];
 
-export default function BlogLearnContent({ posts }: { posts: WPPost[] }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("all");
-  const [filteredPosts, setFilteredPosts] = useState<WPPost[]>(posts);
-  const [learningContent, setLearningContent] = useState<any[]>([]);
-  const [isLearningView, setIsLearningView] = useState(false);
+// Extract unique category names for the filter dropdown
+// (We use this directly in the FilterDropdown component)
 
-  // Filter posts when search or category changes
-  useEffect(() => {
-    const filtered = posts.filter((post) => {
+export default function BlogLearnContent({
+  posts,
+  initialCategory,
+}: {
+  posts: WPPost[];
+  initialCategory?: string;
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState(initialCategory || "all");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [isLearningView, setIsLearningView] = useState(
+    initialCategory === "javascript" ||
+      initialCategory === "database" ||
+      initialCategory === "learn"
+  );
+
+  // Use memo for filtered posts based on search, tab, and category
+  const filteredPosts = useMemo(() => {
+    if (!posts || posts.length === 0) return [];
+
+    return posts.filter((post) => {
+      // Match search term in title or excerpt
       const matchesSearch =
-        searchTerm === "" ||
+        !searchTerm ||
         post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.rendered.toLowerCase().includes(searchTerm.toLowerCase());
 
-      const matchesCategory =
+      // Match primary tab category
+      const matchesPrimaryCategory =
         activeTab === "all" ||
-        post.categories?.includes(activeTab) ||
+        (post.categories && post.categories.includes(activeTab)) ||
         post.title.rendered.toLowerCase().includes(activeTab.toLowerCase());
 
-      return matchesSearch && matchesCategory;
+      // Match dropdown selected category
+      const matchesDropdownCategory =
+        !selectedCategory ||
+        selectedCategory === "" ||
+        (post.categories &&
+          post.categories.some((cat) => {
+            const category = categories.find((c) => c.id === cat);
+            return category && category.name === selectedCategory;
+          }));
+
+      return matchesSearch && matchesPrimaryCategory && matchesDropdownCategory;
     });
+  }, [searchTerm, activeTab, selectedCategory, posts]);
 
-    setFilteredPosts(filtered);
-
-    // Set learning view flag
+  // Set learning view flag when tab changes and handle initialCategory setting
+  useEffect(() => {
+    // Update learning view flag when tab changes
     setIsLearningView(
       activeTab === "javascript" ||
         activeTab === "database" ||
         activeTab === "learn"
     );
-  }, [searchTerm, activeTab, posts]);
 
-  // Fetch learning content if in learning view
-  useEffect(() => {
-    if (isLearningView) {
-      // This would typically fetch specialized learning content
-      // For now we're using the same posts but would be customized in production
+    // If initialCategory is provided but doesn't match any tab ID directly,
+    // try to find a matching category by name or slug
+    if (initialCategory && initialCategory !== activeTab) {
+      const matchingCategory = categories.find(
+        (cat) =>
+          cat.id === initialCategory ||
+          cat.id.toLowerCase() === initialCategory.toLowerCase() ||
+          cat.name.toLowerCase() === initialCategory.toLowerCase()
+      );
+
+      if (matchingCategory) {
+        setActiveTab(matchingCategory.id);
+      }
     }
+  }, [activeTab, initialCategory]);
+
+  // Additional setup for learning view if needed
+  useEffect(() => {
+    // Any additional setup when switching to learning view
+    // For now we just use the isLearningView flag to determine the UI layout
   }, [isLearningView]);
 
   return (
@@ -74,6 +121,16 @@ export default function BlogLearnContent({ posts }: { posts: WPPost[] }) {
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          {/* Category Filter Dropdown */}
+          <div className="w-full md:w-auto">
+            <FilterDropdown
+              options={categories.map((cat) => cat.name)}
+              onSelect={setSelectedCategory}
+              placeholder="Filter by category"
+              selectedValue={selectedCategory}
             />
           </div>
         </div>
@@ -145,7 +202,7 @@ export default function BlogLearnContent({ posts }: { posts: WPPost[] }) {
                   excerpt={post.excerpt.rendered}
                   date={post.date}
                   slug={post.slug}
-                  image={post.image}
+                  image={post.image || "/development-blog-placeholder.png"}
                   isDetailed={true}
                   priority={index < 3}
                 />
@@ -158,8 +215,29 @@ export default function BlogLearnContent({ posts }: { posts: WPPost[] }) {
                 No content found
               </h3>
               <p className="text-gray-500">
-                Try adjusting your search or filter criteria.
+                {searchTerm && selectedCategory ? (
+                  <>
+                    No results for &ldquo;{searchTerm}&rdquo; in{" "}
+                    {selectedCategory} category.
+                  </>
+                ) : searchTerm ? (
+                  <>No results for &ldquo;{searchTerm}&rdquo;.</>
+                ) : selectedCategory ? (
+                  <>No content found in {selectedCategory} category.</>
+                ) : (
+                  <>Try adjusting your search or filter criteria.</>
+                )}
               </p>
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedCategory("");
+                  setActiveTab("all");
+                }}
+                className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Reset filters
+              </button>
             </div>
           )}
         </TabsContent>

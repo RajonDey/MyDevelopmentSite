@@ -1,109 +1,111 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import { Metadata } from "next";
 import { SEO } from "@/components/seo";
-import { useRouter, useParams } from "next/navigation";
-import LearningContentWrapper from "./LearningContentWrapper";
+import { Suspense } from "react";
+import { WPPost } from "@/types/post";
+import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  categories: number[];
-  image: string;
+type Props = {
+  params: { category: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const category = params.category;
+  const categoryName =
+    category === "javascript"
+      ? "JavaScript"
+      : category === "databases"
+      ? "Databases"
+      : category === "react"
+      ? "React"
+      : category === "nextjs"
+      ? "Next.js"
+      : category.charAt(0).toUpperCase() + category.slice(1);
+
+  return {
+    title: `${categoryName} Learning Resources | Rajon Dey`,
+    description: `Learn ${categoryName} with tutorials, guides and resources by Rajon Dey. Expert insights and practical examples.`,
+  };
 }
 
-export default function ResourcesPage() {
-  const router = useRouter();
-  const params = useParams();
-  const category = params.category as string;
+async function getPosts(): Promise<WPPost[]> {
+  try {
+    const res = await fetch("http://localhost:3000/api/posts", {
+      next: { revalidate: 3600 },
+    });
 
-  // No longer redirecting - we'll use the learn page directly
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchLearningPosts() {
-      const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
-      try {
-        const res = await fetch(`${WP_API_URL}/learning?per_page=100`);
-        if (!res.ok) throw new Error("Failed to fetch learning posts");
-        const postsData = await res.json();
-
-        const fetchedPosts = await Promise.all(
-          postsData.map(
-            async (post: {
-              id: number;
-              title: { rendered: string };
-              content: { rendered: string };
-              categories: number[];
-              featured_media: number | null;
-            }) => {
-              const image = post.featured_media
-                ? await fetchFeaturedImage(post.featured_media)
-                : "/development-blog-placeholder.png";
-              return {
-                id: post.id,
-                title: post.title.rendered,
-                content: post.content.rendered,
-                categories: post.categories,
-                image,
-              };
-            }
-          )
-        );
-
-        setPosts(fetchedPosts);
-        console.log(`Total posts fetched: ${fetchedPosts.length}`);
-        console.log("Categories present:", [
-          ...new Set(fetchedPosts.flatMap((post) => post.categories)),
-        ]);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      } finally {
-        setLoading(false);
-      }
+    if (!res.ok) {
+      throw new Error("Failed to fetch posts");
     }
 
-    async function fetchFeaturedImage(mediaId: number) {
-      const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
-      const res = await fetch(`${WP_API_URL}/media/${mediaId}`);
-      if (!res.ok) return "/development-blog-placeholder.png";
-      const media = await res.json();
-      return media.source_url || "/development-blog-placeholder.png";
-    }
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
+}
 
-    fetchLearningPosts();
-  }, []);
+function LearnSkeleton() {
+  return (
+    <div className="p-8 text-center">
+      <div className="h-8 w-48 bg-gray-200 rounded-md mx-auto mb-8 animate-pulse"></div>
+      <div className="max-w-7xl mx-auto">
+        <div className="h-12 w-full bg-gray-200 rounded-md mb-8 animate-pulse"></div>
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-1 h-96 bg-gray-100 rounded-lg animate-pulse"></div>
+          <div className="col-span-2 h-96 bg-gray-100 rounded-lg animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-  // Use category from URL params
-  const topicCategory = params.category as string;
+export default async function CategoryPage({ params }: Props) {
+  const posts = await getPosts();
+  const { category } = params;
+
+  // Format the category name for display
   const categoryName =
-    topicCategory === "javascript"
+    category === "javascript"
       ? "JavaScript"
-      : topicCategory === "databases"
+      : category === "databases"
       ? "Databases"
-      : "Learning";
+      : category === "react"
+      ? "React"
+      : category === "nextjs"
+      ? "Next.js"
+      : category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <>
       <SEO
         title={`${categoryName} Learning Resources | Rajon Dey`}
-        description={`Explore tutorials and guides on ${categoryName}.`}
-        url={`/learn/${topicCategory}`}
+        description={`Learn ${categoryName} with tutorials, guides and resources by Rajon Dey. Expert insights and practical examples.`}
+        url={`/learn/${category}`}
+        type="website"
+        tags={[
+          categoryName.toLowerCase(),
+          "learning",
+          "tutorials",
+          "web development",
+          "programming",
+        ]}
       />
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-          {categoryName} Resources
-        </h1>
-        {loading ? (
-          <p className="text-gray-500">Loading resources...</p>
-        ) : (
-          <LearningContentWrapper
-            posts={posts}
-            initialCategory={topicCategory}
-          />
-        )}
+      <div className="px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">
+            {categoryName} Learning Resources
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            In-depth tutorials, comprehensive guides, and structured learning
+            paths for {categoryName.toLowerCase()}.
+          </p>
+        </div>
+
+        {/* Content */}
+        <Suspense fallback={<LearnSkeleton />}>
+          <BlogLearnContent posts={posts} initialCategory={category} />
+        </Suspense>
       </div>
     </>
   );

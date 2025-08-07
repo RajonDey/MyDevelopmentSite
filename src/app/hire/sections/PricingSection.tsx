@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/FullCard";
+} from "@/components/common/ui/FullCard";
 import { Check, Package, Shield, Clock } from "lucide-react";
 
 export default function PricingSection() {

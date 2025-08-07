@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { WPCategory } from "@/types/post";
 
 const WP_API_URL = "https://development-admin.rajondey.com/wp-json/wp/v2";
 
@@ -40,17 +41,58 @@ export async function GET() {
       page++;
     }
 
-    // Fetch featured images for all posts
+    // Fetch categories data to have both IDs and names
+    const categoriesRes = await fetch(`${WP_API_URL}/categories?per_page=100`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+      next: { revalidate: 3600 },
+    });
+
+    let categories: WPCategory[] = [];
+    if (categoriesRes.ok) {
+      categories = await categoriesRes.json();
+    } else {
+      console.error(
+        "Failed to fetch categories:",
+        categoriesRes.status,
+        categoriesRes.statusText
+      );
+    }
+
+    // Fetch featured images for all posts and add category information
     const postsWithImages = await Promise.all(
       posts.map(async (post) => {
         try {
+          // Get featured image
           const image = post.featured_media
             ? await fetchFeaturedImage(post.featured_media)
             : "/development-blog-placeholder.png";
-          return { ...post, image };
+
+          // Map category IDs to category slugs that can be used as filter identifiers
+          const categoryIds: number[] = post.categories || [];
+          const categoryDetails = categoryIds
+            .map((id: number) => {
+              const category = categories.find(
+                (cat: WPCategory) => cat.id === id
+              );
+              return category ? category.slug : null;
+            })
+            .filter(Boolean);
+
+          return {
+            ...post,
+            image,
+            categories: categoryDetails,
+          };
         } catch (error) {
           console.error("Error fetching featured image:", error);
-          return { ...post, image: "/development-blog-placeholder.png" };
+          return {
+            ...post,
+            image: "/development-blog-placeholder.png",
+            categories: [],
+          };
         }
       })
     );

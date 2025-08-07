@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-import { PortfolioCard } from "@/components/sections/portfolio-card";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/badge";
+import { PortfolioCard } from "@/components/features/portfolio/portfolio-card";
+import { Button } from "@/components/common/ui/Button";
+import { Badge } from "@/components/common/ui/badge";
 import { X } from "lucide-react";
 
 interface PortfolioItem {

@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/common/ui/Card";
+import { Badge } from "@/components/common/ui/badge";
+import { Button } from "@/components/common/ui/Button";
 import { useState } from "react";
 
 interface PortfolioCardProps {

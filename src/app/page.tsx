@@ -1,15 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/common/ui/Button";
+import { Card } from "@/components/common/ui/Card";
+import { Badge } from "@/components/common/ui/badge";
 import { ExternalLink, Star, Clock, Users, Award } from "lucide-react";
 import { staticPages, services, portfolio, reviews } from "@/data/mock-data";
 import { Metadata } from "next";
-import { ServiceCard } from "@/components/sections/service-card";
-import { PortfolioCard } from "@/components/sections/portfolio-card";
-import { BlogCard } from "@/components/sections/blog-card";
+import { ServiceCard } from "@/components/features/services/service-card";
+import { PortfolioCard } from "@/components/features/portfolio/portfolio-card";
+import { BlogCard } from "@/components/features/blog/BlogCard";
 import { ReviewCard } from "@/components/sections/review-card";
+import { ClientLogos } from "@/components/sections/client-logos";
+import { FeaturedTestimonial } from "@/components/sections/FeaturedTestimonial";
+import { ProblemSolution } from "@/components/sections/ProblemSolution";
+import { WorkProcess } from "@/components/sections/WorkProcess";
+import { EnhancedCTA } from "@/components/sections/EnhancedCTA";
 import { SEO } from "@/components/seo";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
 import { fetchPosts } from "@/lib/wp-api"; // Import from lib
@@ -69,7 +74,7 @@ export default async function AboutPage() {
                 Node.js, and Three.js. I specialize in creating scalable,
                 efficient, and user-friendly web applications. My passion lies
                 in transforming ideas into reality by leveraging modern
-                technologies and collaborative problem-solving. I'm also
+                technologies and collaborative problem-solving. I&apos;m also
                 experienced in building websites using Headless CMS and
                 platforms like WordPress, Shopify, Wix, and Squarespace.
               </p>
@@ -105,7 +110,10 @@ export default async function AboutPage() {
           </div>
         </div>
 
-        {/* Social Proof Section - NEW */}
+        {/* Problem/Solution Statement - NEW */}
+        <ProblemSolution />
+
+        {/* Social Proof Section */}
         <section className="mb-16 bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-2xl">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold mb-4">
@@ -152,7 +160,7 @@ export default async function AboutPage() {
               🎉 Limited Time: Free Website Audit + Strategy Session
             </p>
             <p className="text-sm opacity-90">
-              Book your slot before it's gone!
+              Book your slot before it&apos;s gone!
             </p>
           </div>
         </section>
@@ -169,6 +177,9 @@ export default async function AboutPage() {
             <Button variant="secondary">View All</Button>
           </Link>
         </section>
+
+        {/* Work Process Section - NEW */}
+        <WorkProcess />
 
         {/* Portfolio Section */}
         <section className="mb-16">
@@ -187,6 +198,16 @@ export default async function AboutPage() {
           <Link href="/portfolio">
             <Button variant="secondary">View All</Button>
           </Link>
+        </section>
+
+        {/* Client Logos Section - MOVED UP */}
+        <section className="mb-16 py-8 border-y border-gray-100">
+          <h2 className="text-2xl font-bold mb-6">Trusted By</h2>
+          <div className="overflow-hidden">
+            <div className="py-4">
+              <ClientLogos />
+            </div>
+          </div>
         </section>
 
         {/* Blog Section */}
@@ -226,22 +247,56 @@ export default async function AboutPage() {
           </Link>
         </section>
 
-        {/* Reviews Section */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6">Reviews</h2>
-          <div className="space-y-6">
+        {/* Enhanced Reviews Section */}
+        <section className="mb-16">
+          <div className="flex flex-wrap justify-between items-center mb-8">
+            <h2 className="text-2xl font-bold">Client Success Stories</h2>
+            <div className="flex gap-2">
+              <a
+                href="https://www.fiverr.com/rajjohin#Reviews"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-600 hover:underline flex items-center gap-1"
+              >
+                <span>All Reviews</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Featured Testimonial */}
+          <div className="mb-8">
+            <FeaturedTestimonial testimonial={reviews[0]} />
+          </div>
+
+          {/* Stats section showing numbers */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div className="text-center p-4">
+              <p className="text-3xl font-bold text-green-600">50+</p>
+              <p className="text-sm text-gray-600">Happy Clients</p>
+            </div>
+            <div className="text-center p-4">
+              <p className="text-3xl font-bold text-green-600">100+</p>
+              <p className="text-sm text-gray-600">Projects Completed</p>
+            </div>
+            <div className="text-center p-4">
+              <p className="text-3xl font-bold text-green-600">4.9</p>
+              <p className="text-sm text-gray-600">Average Rating</p>
+            </div>
+            <div className="text-center p-4">
+              <p className="text-3xl font-bold text-green-600">95%</p>
+              <p className="text-sm text-gray-600">Repeat Clients</p>
+            </div>
+          </div>
+
+          {/* Individual testimonials */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {reviews.map((review, index) => (
               <ReviewCard key={index} {...review} />
             ))}
           </div>
-          <div className="mt-4 flex gap-4">
-            <a
-              href="https://www.fiverr.com/rajjohin#Reviews"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="secondary">View All Fiverr Reviews</Button>
-            </a>
+
+          <div className="mt-8 flex gap-4 justify-center">
             <a
               href="https://g.page/r/CXGw54VFb9QEEAE/review"
               target="_blank"
@@ -256,6 +311,9 @@ export default async function AboutPage() {
             </a>
           </div>
         </section>
+
+        {/* Enhanced CTA - NEW */}
+        <EnhancedCTA />
 
         {/* Newsletter Section */}
         <section className="mb-2">

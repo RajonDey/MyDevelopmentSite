@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 import { UserPlus } from "lucide-react";
 
 const supabase = createClient(

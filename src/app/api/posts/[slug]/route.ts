@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { WPCategory } from "@/types/post";
 
 const WP_API_URL =
   process.env.NEXT_PUBLIC_WP_API_URL ||
@@ -33,11 +34,37 @@ export async function GET(
     }
 
     const post = posts[0];
+
+    // Fetch featured image
     const image = post.featured_media
       ? await fetchFeaturedImage(post.featured_media)
       : "/development-blog-placeholder.png";
 
-    return NextResponse.json({ ...post, image });
+    // Fetch categories to map IDs to slugs
+    const categoryIds: number[] = post.categories || [];
+    let categorySlugs: string[] = [];
+
+    if (categoryIds.length > 0) {
+      const categoriesRes = await fetch(
+        `${WP_API_URL}/categories?include=${categoryIds.join(",")}`,
+        {
+          headers: { Accept: "application/json" },
+          cache: "no-store",
+        }
+      );
+
+      if (categoriesRes.ok) {
+        const categories: WPCategory[] = await categoriesRes.json();
+        categorySlugs = categories.map((cat) => cat.slug).filter(Boolean);
+      }
+    }
+
+    return NextResponse.json({
+      ...post,
+      image,
+      category_ids: categoryIds,
+      categories: categorySlugs,
+    });
   } catch (error) {
     console.error("Error fetching post:", error);
     return NextResponse.json(

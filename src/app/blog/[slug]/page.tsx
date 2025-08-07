@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 import Link from "next/link";
 import { fetchPost, fetchPosts } from "@/lib/wp-api";
 import { WPPost } from "@/types/post";

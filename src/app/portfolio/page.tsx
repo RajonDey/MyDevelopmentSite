@@ -1,6 +1,6 @@
 import { portfolio, staticPages } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
-import PortfolioContent from "@/components/PortfolioContent"; // New client component
+import EnhancedPortfolioContent from "@/components/features/portfolio/EnhancedPortfolioContent";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function PortfolioPage() {
         description={staticPages.portfolio.metaDescription}
         url="/portfolio"
       />
-      <PortfolioContent portfolio={portfolio} />
+      <EnhancedPortfolioContent portfolio={portfolio} />
     </>
   );
 }

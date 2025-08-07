@@ -1,7 +1,7 @@
 import { faqs, staticPages } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/common/ui/Card";
+import { Button } from "@/components/common/ui/Button";
 import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata = {

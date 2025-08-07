@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/common/ui/Button";
+import { Badge } from "@/components/common/ui/badge";
 import { ExternalLink, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 

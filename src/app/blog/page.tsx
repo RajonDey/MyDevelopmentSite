@@ -1,21 +1,11 @@
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
-import { BlogCard } from "@/components/sections/blog-card";
-import { BlogCardSkeleton } from "@/components/ui/skeleton";
+import { BlogCardSkeleton } from "@/components/common/ui/skeleton";
 import { WPPost } from "@/types/post";
 import { Suspense } from "react";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/badge";
-import {
-  BookOpen,
-  FileText,
-  Code,
-  Database,
-  Clock,
-  TrendingUp,
-} from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { Button } from "@/components/common/ui/Button";
+import { BookOpen, Clock, TrendingUp } from "lucide-react";
+import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
 
 export const metadata: Metadata = {
   title: "Blog & Learn - Web Development Tutorials & Resources | Rajon Dey",
@@ -25,85 +15,26 @@ export const metadata: Metadata = {
     "web development blog, React tutorials, Next.js guides, programming tips, software development, learning resources, database tutorials",
 };
 
-// Blog and learning categories for filtering
-const categories = [
-  { id: "all", name: "All Content", icon: BookOpen },
-  { id: "blog", name: "Blog Posts", icon: TrendingUp },
-  { id: "learn", name: "Learning", icon: Clock },
-  // Blog categories
-  { id: "react", name: "React", icon: TrendingUp },
-  { id: "nextjs", name: "Next.js", icon: Clock },
-  { id: "wordpress", name: "WordPress", icon: BookOpen },
-  { id: "ecommerce", name: "E-commerce", icon: TrendingUp },
-  // Learning categories
-  { id: "javascript", name: "JavaScript", icon: BookOpen },
-  { id: "database", name: "Databases", icon: BookOpen },
-];
-
-function BlogGrid({
-  posts,
-  searchTerm,
-  selectedCategory,
-}: {
-  posts: WPPost[];
-  searchTerm: string;
-  selectedCategory: string;
-}) {
-  // Filter posts based on search term and category
-  const filteredPosts = posts.filter((post) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.rendered.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesCategory =
-      selectedCategory === "all" ||
-      post.categories?.includes(selectedCategory) ||
-      post.title.rendered
-        .toLowerCase()
-        .includes(selectedCategory.toLowerCase());
-
-    return matchesSearch && matchesCategory;
-  });
-
-  if (filteredPosts.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-600 mb-2">
-          No posts found
-        </h3>
-        <p className="text-gray-500">
-          Try adjusting your search or filter criteria.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredPosts.map((post, index) => (
-        <BlogCard
-          key={post.id}
-          title={post.title.rendered}
-          excerpt={post.excerpt.rendered}
-          date={post.date}
-          slug={post.slug}
-          image={post.image}
-          isDetailed={true}
-          priority={index < 3}
-        />
-      ))}
-    </div>
-  );
-}
-
 function BlogSkeleton() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[...Array(6)].map((_, index) => (
-        <BlogCardSkeleton key={index} />
-      ))}
+    <div className="p-8 text-center">
+      <div className="h-8 w-48 bg-gray-200 rounded-md mx-auto mb-8 animate-pulse"></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto mb-8">
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="h-32 bg-gray-100 rounded-lg animate-pulse"
+          ></div>
+        ))}
+      </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="h-12 w-full bg-gray-200 rounded-md mb-8 animate-pulse"></div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, index) => (
+            <BlogCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -145,7 +76,7 @@ export default async function BlogPage() {
           "database tutorials",
         ]}
       />
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Blog & Learning Resources</h1>
@@ -157,7 +88,7 @@ export default async function BlogPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-7xl mx-auto">
           <div className="text-center p-4 bg-green-50 rounded-lg">
             <BookOpen className="w-8 h-8 text-green-600 mx-auto mb-2" />
             <h3 className="font-semibold">{posts.length}+ Articles</h3>
@@ -175,113 +106,13 @@ export default async function BlogPage() {
           </div>
         </div>
 
-        {/* Content Categories */}
-        <div className="mb-8">
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link href="/blog">
-              <Button
-                variant="secondary"
-                className="border-b-2 border-green-500 text-green-700"
-              >
-                <BookOpen className="w-5 h-5 mr-2" />
-                All Articles
-              </Button>
-            </Link>
-            <Link href="/learn/javascript">
-              <Button variant="secondary">
-                <Code className="w-5 h-5 mr-2" />
-                JavaScript
-              </Button>
-            </Link>
-            <Link href="/learn/databases">
-              <Button variant="secondary">
-                <Database className="w-5 h-5 mr-2" />
-                Databases
-              </Button>
-            </Link>
-            <Link href="/blog?category=react">
-              <Button variant="secondary">
-                <FileText className="w-5 h-5 mr-2" />
-                React
-              </Button>
-            </Link>
-            <Link href="/blog?category=nextjs">
-              <Button variant="secondary">
-                <FileText className="w-5 h-5 mr-2" />
-                Next.js
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Featured Posts section removed */}
-
-        {/* Learning Topics Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Learning Topics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* JavaScript Topic Card */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="flex items-center space-x-3 mb-4">
-                <Code className="w-8 h-8 text-yellow-500" />
-                <h3 className="text-xl font-semibold">JavaScript</h3>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Learn JavaScript fundamentals, advanced techniques, and modern
-                ES6+ features.
-              </p>
-              <div className="space-y-2 mb-4">
-                <div className="text-sm font-medium">Topics include:</div>
-                <ul className="text-sm text-gray-600 pl-5 list-disc">
-                  <li>Promises & Async/Await</li>
-                  <li>ES6+ Features</li>
-                  <li>DOM Manipulation</li>
-                </ul>
-              </div>
-              <Link href="/learn/javascript">
-                <Button variant="outline" className="w-full">
-                  View JavaScript Resources
-                </Button>
-              </Link>
-            </div>
-
-            {/* Database Topic Card */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="flex items-center space-x-3 mb-4">
-                <Database className="w-8 h-8 text-blue-500" />
-                <h3 className="text-xl font-semibold">Databases</h3>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Learn about SQL and NoSQL databases, data modeling, and
-                optimization techniques.
-              </p>
-              <div className="space-y-2 mb-4">
-                <div className="text-sm font-medium">Topics include:</div>
-                <ul className="text-sm text-gray-600 pl-5 list-disc">
-                  <li>SQL Fundamentals</li>
-                  <li>MongoDB & NoSQL</li>
-                  <li>Data Modeling</li>
-                </ul>
-              </div>
-              <Link href="/learn/databases">
-                <Button variant="outline" className="w-full">
-                  View Database Resources
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Blog Posts */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Latest Articles</h2>
-          <Suspense fallback={<BlogSkeleton />}>
-            <BlogGrid posts={posts} searchTerm="" selectedCategory="all" />
-          </Suspense>
-        </div>
+        {/* Content with filtering */}
+        <Suspense fallback={<BlogSkeleton />}>
+          <BlogLearnContent posts={posts} />
+        </Suspense>
 
         {/* Newsletter Signup */}
-        <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 rounded-2xl text-center">
+        <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 rounded-2xl text-center mt-12 max-w-7xl mx-auto">
           <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
           <p className="text-lg mb-6 opacity-90">
             Get the latest web development tutorials and insights delivered to

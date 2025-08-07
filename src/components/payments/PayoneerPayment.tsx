@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 import { services } from "@/data/mock-data";
 
 interface PayoneerPaymentProps {

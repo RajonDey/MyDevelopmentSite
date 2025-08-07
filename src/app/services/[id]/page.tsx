@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { services } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/badge";
-import { Check, Star, Clock, Users, Award } from "lucide-react";
+import { Button } from "@/components/common/ui/Button";
+import { Card } from "@/components/common/ui/Card";
+import { Badge } from "@/components/common/ui/badge";
+import { Check, Star, Clock, Users } from "lucide-react";
 import { Metadata } from "next";
 
 interface ServicePageProps {
@@ -202,7 +203,15 @@ export default function ServicePage({ params }: ServicePageProps) {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full">Choose {tier.name}</Button>
+                  <Link
+                    href={`/order?service=${encodeURIComponent(
+                      service.title
+                    )}&tier=${encodeURIComponent(tier.name)}&price=${
+                      tier.price
+                    }`}
+                  >
+                    <Button className="w-full">Choose {tier.name}</Button>
+                  </Link>
                 </div>
               </Card>
             ))}

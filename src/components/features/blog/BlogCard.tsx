@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/common/ui/Card";
 import Link from "next/link";
 import he from "he";
 import { useState } from "react";

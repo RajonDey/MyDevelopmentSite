@@ -3,7 +3,7 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/common/ui/Button";
+import { Card } from "@/components/common/ui/Card";
 import Image from "next/image";
 import { staticPages } from "@/data/mock-data";
 import { Metadata } from "next";

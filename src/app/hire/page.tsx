@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import Link from "next/link";
 
-
 import HeroSection from "./sections/HeroSection";
 import StorySection from "./sections/StorySection";
 import AudienceSection from "./sections/AudienceSection";
@@ -14,13 +13,13 @@ import PricingSection from "./sections/PricingSection";
 import FiverrProjects from "./sections/FiverrProjects";
 
 import { portfolio } from "@/data/mock-data";
-import { PortfolioCard } from "@/components/sections/portfolio-card";
-
+import { PortfolioCard } from "@/components/features/portfolio/portfolio-card";
 
 export const metadata: Metadata = {
-  title: "Hire Rajon Dey - Web Developer for Coaches, Creators & Startups",
+  title:
+    "Start a Project with Rajon Dey - Web Developer for Coaches, Creators & Startups",
   description:
-    "Hire a freelance web developer to build SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!",
+    "Start your web development project with a specialist in SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!",
   keywords: [
     "web developer for coaches",
     "web developer for creators",
@@ -30,9 +29,10 @@ export const metadata: Metadata = {
     "modern fast website for small business",
   ],
   openGraph: {
-    title: "Hire Rajon Dey - Web Developer for Coaches, Creators & Startups",
+    title:
+      "Start a Project with Rajon Dey - Web Developer for Coaches, Creators & Startups",
     description:
-      "Hire a freelance web developer to build SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!",
+      "Start your web development project with a specialist in SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!",
     url: "https://development.rajondey.com/hire",
     type: "website",
     images: [
@@ -40,15 +40,16 @@ export const metadata: Metadata = {
         url: "/og-image-hire.jpg",
         width: 1200,
         height: 630,
-        alt: "Hire Rajon Dey - Web Developer",
+        alt: "Start a Project with Rajon Dey - Web Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire Rajon Dey - Web Developer for Coaches, Creators & Startups",
+    title:
+      "Start a Project with Rajon Dey - Web Developer for Coaches, Creators & Startups",
     description:
-      "Hire a freelance web developer to build SEO-friendly, fast, and modern websites. Book a free discovery call!",
+      "Start your web development project with a specialist in SEO-friendly, fast, and modern websites. Book a free discovery call!",
     images: ["/og-image-hire.jpg"],
   },
 };
@@ -57,8 +58,8 @@ export default function HirePage() {
   return (
     <>
       <SEO
-        title="Hire Rajon Dey - Web Developer for Coaches, Creators & Startups"
-        description="Hire a freelance web developer to build SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!"
+        title="Start a Project with Rajon Dey - Web Developer for Coaches, Creators & Startups"
+        description="Start your web development project with a specialist in SEO-friendly, fast, and modern websites for small businesses, coaches, and startups. Book a free discovery call today!"
         url="/hire"
       />
       <div className="min-h-screen">

@@ -17,7 +17,7 @@ import {
   Settings,
   UserPlus,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/common/ui/Button";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function Header() {
     { href: "/services", label: "Services", icon: Briefcase },
     { href: "/portfolio", label: "Portfolio", icon: FolderGit2 },
     { href: "/blog", label: "Blog & Learn", icon: BookOpen },
-    { href: "/hire", label: "Hire Me", icon: ShoppingCart },
+    { href: "/hire", label: "Start a Project", icon: ShoppingCart },
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 

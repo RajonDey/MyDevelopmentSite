@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/common/ui/Button";
+import { Card } from "@/components/common/ui/Card";
+import { Badge } from "@/components/common/ui/badge";
 import {
   Code,
   ShoppingCart,

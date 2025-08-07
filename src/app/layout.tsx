@@ -1,5 +1,5 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/common/layout/Header";
+import Footer from "@/components/common/layout/Footer";
 import "@/styles/globals.css";
 import { staticPages } from "@/data/mock-data";
 import { Metadata } from "next";

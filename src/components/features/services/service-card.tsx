@@ -1,8 +1,16 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/badge";
-import { LucideIcon } from "lucide-react";
+import { Card, CardContent } from "@/components/common/ui/Card";
+import { Button } from "@/components/common/ui/Button";
+import { Badge } from "@/components/common/ui/badge";
+import {
+  Code,
+  ShoppingCart,
+  Layers,
+  Globe,
+  Mail,
+  Wrench,
+  LucideIcon,
+} from "lucide-react";
 
 interface ServiceCardProps {
   id: number;
@@ -14,7 +22,7 @@ interface ServiceCardProps {
   platforms?: string[];
   technologies?: string[];
   isDetailed?: boolean;
-  icon?: LucideIcon;
+  iconName?: string;
 }
 
 export function ServiceCard({
@@ -26,8 +34,25 @@ export function ServiceCard({
   platforms = [],
   technologies = [],
   isDetailed = false,
-  icon: Icon,
+  iconName,
 }: ServiceCardProps) {
+  // Map icon names to actual components
+  const getIconComponent = (name?: string): LucideIcon | null => {
+    if (!name) return null;
+
+    const iconMap: Record<string, LucideIcon> = {
+      Code,
+      ShoppingCart,
+      Layers,
+      Globe,
+      Mail,
+      Wrench,
+    };
+
+    return iconMap[name as keyof typeof iconMap] || null;
+  };
+
+  const IconComponent = iconName ? getIconComponent(iconName) : null;
   return (
     <Link href={`/services/${id}`}>
       <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
@@ -35,9 +60,9 @@ export function ServiceCard({
           // Detailed view (used on /services page)
           <>
             <CardContent className="p-4 max-h-[480px] min-h-[480px] custom-scrollbar">
-              {Icon && (
+              {IconComponent && (
                 <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black mr-3 transition-all duration-300 group-hover:scale-105 group-hover:bg-gray-800 mb-2 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.25)]">
-                  <Icon className="w-6 h-6 text-white" />
+                  <IconComponent className="w-6 h-6 text-white" />
                 </div>
               )}
               <h3 className="font-semibold text-lg mb-2 min-h-14">{title}</h3>
@@ -87,9 +112,9 @@ export function ServiceCard({
         ) : (
           // Minimal view (used on homepage)
           <CardContent className="p-6">
-            {Icon && (
+            {IconComponent && (
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black mr-3 transition-all duration-300 group-hover:scale-105 group-hover:bg-gray-800 mb-2 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.25)]">
-                <Icon className="w-6 h-6 text-white" />
+                <IconComponent className="w-6 h-6 text-white" />
               </div>
             )}
             <div>
