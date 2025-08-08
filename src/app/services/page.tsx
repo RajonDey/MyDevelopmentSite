@@ -1,7 +1,7 @@
 import { services, staticPages } from "@/data/mock-data";
 import { SEO } from "@/components/seo";
 import { Metadata } from "next";
-import EnhancedServiceContent from "@/components/EnhancedServiceContent";
+import EnhancedServiceContent from "@/components/features/services/EnhancedServiceContent";
 
 export const metadata: Metadata = {
   title: staticPages.services.metaTitle,

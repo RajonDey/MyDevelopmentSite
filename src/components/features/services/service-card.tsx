@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/common/ui/Card";
 import { Button } from "@/components/common/ui/Button";
 import { Badge } from "@/components/common/ui/badge";
+import { getServicePriceDescription } from "@/data/pricing";
 import {
   Code,
   ShoppingCart,
@@ -9,11 +10,12 @@ import {
   Globe,
   Mail,
   Wrench,
+  Settings,
   LucideIcon,
 } from "lucide-react";
 
 interface ServiceCardProps {
-  id: number;
+  id: string | number; // Updated to support string IDs
   title: string;
   description?: string;
   price?: number;
@@ -47,6 +49,7 @@ export function ServiceCard({
       Globe,
       Mail,
       Wrench,
+      Settings,
     };
 
     return iconMap[name as keyof typeof iconMap] || null;
@@ -72,7 +75,9 @@ export function ServiceCard({
                 </p>
               )}
               {price !== undefined && (
-                <p className="text-lg font-bold text-primary mb-3">${price}</p>
+                <p className="text-lg font-bold text-primary mb-3">
+                  {getServicePriceDescription(`${id}`)}
+                </p>
               )}
               {features.length > 0 && (
                 <ul className="list-disc pl-4 text-sm text-muted-foreground mb-4">
@@ -102,7 +107,7 @@ export function ServiceCard({
                 </div>
               )}
               <Button
-                variant="text"
+                variant="outline"
                 className="transition-all duration-300 group-hover:scale-105 group-hover:text-primary"
               >
                 View Details
@@ -128,9 +133,11 @@ export function ServiceCard({
               )}
             </div>
             {price !== undefined && (
-              <p className="text-gray-600 text-sm mb-4">Starting at ${price}</p>
+              <p className="text-gray-600 text-sm mb-4">
+                {getServicePriceDescription(`${id}`)}
+              </p>
             )}
-            <Button variant="text">Learn More</Button>
+            <Button variant="outline">Learn More</Button>
           </CardContent>
         )}
       </Card>

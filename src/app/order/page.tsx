@@ -1,40 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { Button } from "@/components/common/ui/Button";
-import { Card } from "@/components/common/ui/Card";
-import { Badge } from "@/components/common/ui/badge";
+import {
+  servicePricing,
+  getServicePricing,
+  calculateServiceTotal,
+} from "@/data/pricing";
 import {
   Code,
   ShoppingCart,
-  Zap,
+  Globe,
   Workflow,
   Mail,
   Database,
-  Check,
   Upload,
-  DollarSign,
-  Clock,
   Shield,
-  FileText,
 } from "lucide-react";
 
 export default function OrderPage() {
   const [selectedService, setSelectedService] = useState("custom-web");
   const [selectedOptions, setSelectedOptions] = useState<{
-    [key: string]: any;
+    [key: string]: string | boolean;
   }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [projectDetails, setProjectDetails] = useState({
-    homePages: 1,
-    innerPages: 0,
+    // Common fields
     name: "",
     email: "",
     phone: "",
     skype: "",
     notes: "",
     couponCode: "",
+
+    // Service-specific fields
+    homePages: 1,
+    innerPages: 0,
+    templateCount: 1,
+    workflowCount: 1,
   });
 
   // Service categories
@@ -46,22 +50,22 @@ export default function OrderPage() {
       description: "React, Next.js, TypeScript",
     },
     {
-      id: "headless-cms",
-      name: "Headless CMS Solutions",
-      icon: Database,
-      description: "Contentful, Sanity, WordPress",
-    },
-    {
       id: "ecommerce",
       name: "E-commerce Platforms",
       icon: ShoppingCart,
       description: "Shopify, Custom Next.js Stores",
     },
     {
-      id: "performance",
-      name: "Performance Optimization",
-      icon: Zap,
-      description: "30%+ Page Load Reduction",
+      id: "headless-cms",
+      name: "Headless CMS Solutions",
+      icon: Database,
+      description: "Contentful, Sanity, WordPress",
+    },
+    {
+      id: "wordpress",
+      name: "WordPress Development",
+      icon: Globe,
+      description: "Custom themes & plugins",
     },
     {
       id: "automation",
@@ -80,7 +84,7 @@ export default function OrderPage() {
   // Service options with pricing
   const serviceOptions = {
     "custom-web": {
-      basePrice: 499,
+      basePrice: servicePricing["custom-web"].basePrice, // Use centralized pricing
       options: {
         framework: {
           label: "Framework Selection",
@@ -126,7 +130,7 @@ export default function OrderPage() {
       },
     },
     "headless-cms": {
-      basePrice: 699,
+      basePrice: servicePricing["headless-cms"].basePrice, // Use centralized pricing
       options: {
         "cms-platform": {
           label: "CMS Platform",
@@ -154,7 +158,7 @@ export default function OrderPage() {
       },
     },
     ecommerce: {
-      basePrice: 799,
+      basePrice: servicePricing["ecommerce"].basePrice, // Use centralized pricing
       options: {
         platform: {
           label: "E-commerce Platform",
@@ -184,31 +188,34 @@ export default function OrderPage() {
         },
       },
     },
-    performance: {
-      basePrice: 299,
+    wordpress: {
+      basePrice: servicePricing["wordpress"].basePrice, // Use centralized pricing
       options: {
-        audit: {
-          label: "Performance Audit",
-          type: "checkbox",
-          price: 0,
-          description: "Comprehensive performance analysis",
+        "theme-type": {
+          label: "Theme Type",
+          type: "radio",
+          default: "custom",
+          options: [
+            { value: "custom", label: "Custom Theme", price: 0 },
+            { value: "premium", label: "Premium Theme", price: -50 },
+          ],
         },
-        optimization: {
-          label: "Code Optimization",
-          type: "checkbox",
-          price: 0,
-          description: "Bundle size and loading optimization",
-        },
-        caching: {
-          label: "Advanced Caching",
+        "seo-optimization": {
+          label: "SEO Optimization",
           type: "checkbox",
           price: 99,
-          description: "Redis, CDN implementation",
+          description: "On-page SEO optimization for WordPress",
+        },
+        woocommerce: {
+          label: "WooCommerce Integration",
+          type: "checkbox",
+          price: 149,
+          description: "Add e-commerce functionality",
         },
       },
     },
     automation: {
-      basePrice: 299,
+      basePrice: servicePricing["automation"].basePrice, // Use centralized pricing
       options: {
         platform: {
           label: "Automation Platform",
@@ -235,7 +242,7 @@ export default function OrderPage() {
       },
     },
     "email-templates": {
-      basePrice: 199,
+      basePrice: servicePricing["email-templates"].basePrice, // Use centralized pricing
       options: {
         "template-count": {
           label: "Number of Templates",
@@ -263,44 +270,306 @@ export default function OrderPage() {
     },
   };
 
-  const handleOptionChange = (optionKey: string, value: any) => {
+  // Define types for option types
+  type RadioOption = {
+    label: string;
+    type: "radio";
+    default: string;
+    options: Array<{ value: string; label: string; price: number }>;
+  };
+
+  type CheckboxOption = {
+    label: string;
+    type: "checkbox";
+    price: number;
+    description: string;
+  };
+
+  const handleOptionChange = (optionKey: string, value: string | boolean) => {
     setSelectedOptions((prev) => ({
       ...prev,
       [optionKey]: value,
     }));
   };
 
+  // Service-specific Project Detail Components
+  // Service-specific Project Detail Components that use pricing data
+  const PageBasedServiceDetails = ({ serviceId }: { serviceId: string }) => {
+    const pricing = getServicePricing(serviceId);
+
+    return (
+      <div className="mb-6">
+        <label className="block text-sm font-medium mb-2">Total Pages</label>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">
+              Home Pages
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={projectDetails.homePages}
+              onChange={(e) =>
+                setProjectDetails((prev) => ({
+                  ...prev,
+                  homePages: parseInt(e.target.value) || 1,
+                }))
+              }
+              className="w-full p-2 border rounded"
+            />
+            <div className="text-xs text-gray-500 mt-1">
+              Base ${pricing?.basePrice} includes 1st page, +$
+              {pricing?.homePagePrice} for each additional
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">
+              Inner Pages
+            </label>
+            <input
+              type="number"
+              min="0"
+              value={projectDetails.innerPages}
+              onChange={(e) =>
+                setProjectDetails((prev) => ({
+                  ...prev,
+                  innerPages: parseInt(e.target.value) || 0,
+                }))
+              }
+              className="w-full p-2 border rounded"
+            />
+            <div className="text-xs text-gray-500 mt-1">
+              ${pricing?.innerPagePrice} each
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const UnitBasedServiceDetails = ({
+    serviceId,
+    unitName,
+    countField,
+  }: {
+    serviceId: string;
+    unitName: string;
+    countField: "templateCount" | "workflowCount";
+  }) => {
+    const pricing = getServicePricing(serviceId);
+
+    return (
+      <div className="mb-6">
+        <label className="block text-sm font-medium mb-2">{unitName}s</label>
+        <div className="grid grid-cols-1 gap-4">
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">
+              Number of {unitName}s
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={projectDetails[countField]}
+              onChange={(e) =>
+                setProjectDetails((prev) => ({
+                  ...prev,
+                  [countField]: parseInt(e.target.value) || 1,
+                }))
+              }
+              className="w-full p-2 border rounded"
+            />
+            <div className="text-xs text-gray-500 mt-1">
+              ${pricing?.basePrice} for first {unitName}, $
+              {pricing?.additionalUnitPrice} each additional
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const calculateTotal = () => {
-    const service =
-      serviceOptions[selectedService as keyof typeof serviceOptions];
-    let total = service.basePrice;
-
-    // Add option costs
-    Object.keys(service.options).forEach((optionKey) => {
-      const option = service.options[optionKey as keyof typeof service.options];
-      const selectedValue = selectedOptions[optionKey];
-
-      if (option.type === "checkbox" && selectedValue) {
-        total += option.price;
-      } else if (option.type === "radio" && selectedValue) {
-        const selectedOption = option.options.find(
-          (opt: any) => opt.value === selectedValue
-        );
-        if (selectedOption) {
-          total += selectedOption.price;
-        }
-      }
-    });
-
-    // Add page costs
-    total += projectDetails.homePages * 499;
-    total += projectDetails.innerPages * 249;
-
-    return total;
+    // Using the centralized pricing logic from pricing.ts
+    return calculateServiceTotal(
+      selectedService,
+      projectDetails.homePages,
+      projectDetails.innerPages,
+      selectedService === "email-templates"
+        ? projectDetails.templateCount
+        : selectedService === "automation"
+        ? projectDetails.workflowCount
+        : 0,
+      selectedOptions,
+      serviceOptions[selectedService as keyof typeof serviceOptions]
+    );
   };
 
   const total = calculateTotal();
   const upfrontPayment = total * 0.5;
+
+  // Form validation
+  const isFormValid = () => {
+    return (
+      projectDetails.name.trim() !== "" &&
+      projectDetails.email.trim() !== "" &&
+      projectDetails.phone.trim() !== ""
+    );
+  };
+
+  // Handle order submission
+  const handleSubmitOrder = async () => {
+    if (!isFormValid()) {
+      alert("Please fill in all required fields (Name, Email, Phone)");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Format selected options for display
+      const formatSelectedOptions = () => {
+        let optionsText = "";
+        Object.entries(selectedOptions).forEach(([key, value]) => {
+          if (value) {
+            if (typeof value === "string") {
+              optionsText += `${key}: ${value}\n`;
+            } else if (value === true) {
+              optionsText += `✓ ${key}\n`;
+            }
+          }
+        });
+        return optionsText;
+      };
+
+      // Format service details based on service type
+      const formatServiceDetails = () => {
+        let details = "";
+        if (
+          ["custom-web", "headless-cms", "ecommerce", "wordpress"].includes(
+            selectedService
+          )
+        ) {
+          details = `Pages: ${projectDetails.homePages} home page(s), ${projectDetails.innerPages} inner page(s)`;
+        } else if (selectedService === "email-templates") {
+          details = `Templates: ${projectDetails.templateCount} template(s)`;
+        } else if (selectedService === "automation") {
+          details = `Workflows: ${projectDetails.workflowCount} workflow(s)`;
+        }
+        return details;
+      };
+
+      // Create formatted message for Tally
+      const orderMessage = `
+🛒 NEW ORDER SUBMISSION
+
+📋 SERVICE DETAILS:
+Service: ${serviceCategories.find((s) => s.id === selectedService)?.name}
+${formatServiceDetails()}
+
+⚙️ SELECTED OPTIONS:
+${formatSelectedOptions()}
+
+👤 CLIENT INFORMATION:
+Name: ${projectDetails.name}
+Email: ${projectDetails.email}
+Phone: ${projectDetails.phone}
+${projectDetails.skype ? `Skype: ${projectDetails.skype}` : ""}
+
+📝 PROJECT DETAILS:
+${projectDetails.notes || "No additional details provided"}
+
+💰 PRICING:
+Total Project Cost: $${total.toFixed(2)}
+50% Upfront Payment: $${upfrontPayment.toFixed(2)}
+
+🕐 ORDER INFO:
+Order ID: ORD-${Date.now()}
+Timestamp: ${new Date().toLocaleString()}
+      `.trim();
+
+      // Submit to Tally form
+      const tallyFormData = new FormData();
+      tallyFormData.append("name", projectDetails.name);
+      tallyFormData.append("email", projectDetails.email);
+      tallyFormData.append("phone", projectDetails.phone);
+      tallyFormData.append("message", orderMessage);
+
+      // Create order object
+      const orderData = {
+        // Order details
+        service: selectedService,
+        serviceTitle: serviceCategories.find((s) => s.id === selectedService)
+          ?.name,
+        selectedOptions,
+        projectDetails,
+
+        // Pricing
+        total,
+        upfrontPayment,
+
+        // Additional metadata
+        timestamp: new Date().toISOString(),
+        orderId: `ORD-${Date.now()}`,
+
+        // Service-specific details
+        serviceDetails: {
+          homePages: projectDetails.homePages,
+          innerPages: projectDetails.innerPages,
+          templateCount: projectDetails.templateCount,
+          workflowCount: projectDetails.workflowCount,
+        },
+
+        // Formatted message for easy reading
+        formattedMessage: orderMessage,
+      };
+
+      // Submit to our API
+      const response = await fetch("/api/submit-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Show success message
+        alert(
+          `✅ Order submitted successfully!\n\nOrder ID: ${result.orderId}\n\n${
+            result.message
+          }\n\nTotal: $${total.toFixed(
+            2
+          )}\nUpfront (50%): $${upfrontPayment.toFixed(2)}`
+        );
+
+        // Reset form
+        setProjectDetails({
+          name: "",
+          email: "",
+          phone: "",
+          skype: "",
+          notes: "",
+          couponCode: "",
+          homePages: 1,
+          innerPages: 0,
+          templateCount: 1,
+          workflowCount: 1,
+        });
+        setSelectedOptions({});
+      } else {
+        throw new Error(result.error || "Failed to submit order");
+      }
+    } catch (error) {
+      console.error("Order submission error:", error);
+      alert(
+        "Failed to submit order. Please try again or contact me directly at contact@rajondey.com"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -332,7 +601,34 @@ export default function OrderPage() {
               {serviceCategories.map((service) => (
                 <button
                   key={service.id}
-                  onClick={() => setSelectedService(service.id)}
+                  onClick={() => {
+                    setSelectedService(service.id);
+                    // Reset service-specific fields based on the selected service
+                    if (
+                      [
+                        "custom-web",
+                        "headless-cms",
+                        "ecommerce",
+                        "wordpress",
+                      ].includes(service.id)
+                    ) {
+                      setProjectDetails((prev) => ({
+                        ...prev,
+                        homePages: 1,
+                        innerPages: 0,
+                      }));
+                    } else if (service.id === "email-templates") {
+                      setProjectDetails((prev) => ({
+                        ...prev,
+                        templateCount: 1,
+                      }));
+                    } else if (service.id === "automation") {
+                      setProjectDetails((prev) => ({
+                        ...prev,
+                        workflowCount: 1,
+                      }));
+                    }
+                  }}
                   className={`p-4 rounded-lg border-2 transition-all ${
                     selectedService === service.id
                       ? "border-green-500 bg-green-50"
@@ -372,29 +668,35 @@ export default function OrderPage() {
 
                         {option.type === "radio" && (
                           <div className="space-y-2">
-                            {option.options.map((opt: any) => (
-                              <label
-                                key={opt.value}
-                                className="flex items-center space-x-3 cursor-pointer"
-                              >
-                                <input
-                                  type="radio"
-                                  name={key}
-                                  value={opt.value}
-                                  checked={selectedOptions[key] === opt.value}
-                                  onChange={(e) =>
-                                    handleOptionChange(key, e.target.value)
-                                  }
-                                  className="text-green-600"
-                                />
-                                <span className="flex-1">{opt.label}</span>
-                                <span className="text-sm text-gray-500">
-                                  {opt.price === 0
-                                    ? "Included"
-                                    : `+$${opt.price}`}
-                                </span>
-                              </label>
-                            ))}
+                            {(option as RadioOption).options.map(
+                              (opt: {
+                                value: string;
+                                label: string;
+                                price: number;
+                              }) => (
+                                <label
+                                  key={opt.value}
+                                  className="flex items-center space-x-3 cursor-pointer"
+                                >
+                                  <input
+                                    type="radio"
+                                    name={key}
+                                    value={opt.value}
+                                    checked={selectedOptions[key] === opt.value}
+                                    onChange={(e) =>
+                                      handleOptionChange(key, e.target.value)
+                                    }
+                                    className="text-green-600"
+                                  />
+                                  <span className="flex-1">{opt.label}</span>
+                                  <span className="text-sm text-gray-500">
+                                    {opt.price === 0
+                                      ? "Included"
+                                      : `+$${opt.price}`}
+                                  </span>
+                                </label>
+                              )
+                            )}
                           </div>
                         )}
 
@@ -402,17 +704,19 @@ export default function OrderPage() {
                           <label className="flex items-center space-x-3 cursor-pointer">
                             <input
                               type="checkbox"
-                              checked={selectedOptions[key] || false}
+                              checked={Boolean(selectedOptions[key])}
                               onChange={(e) =>
                                 handleOptionChange(key, e.target.checked)
                               }
                               className="text-green-600"
                             />
-                            <span className="flex-1">{option.description}</span>
+                            <span className="flex-1">
+                              {(option as CheckboxOption).description}
+                            </span>
                             <span className="text-sm text-gray-500">
-                              {option.price === 0
+                              {(option as CheckboxOption).price === 0
                                 ? "Free"
-                                : `+$${option.price}`}
+                                : `+$${(option as CheckboxOption).price}`}
                             </span>
                           </label>
                         )}
@@ -427,54 +731,29 @@ export default function OrderPage() {
               <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-8">
                 <h2 className="text-xl font-semibold mb-4">Project Details</h2>
 
-                {/* Page Count */}
-                <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">
-                    Total Pages
-                  </label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs text-gray-500 mb-1">
-                        Home Pages
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        value={projectDetails.homePages}
-                        onChange={(e) =>
-                          setProjectDetails((prev) => ({
-                            ...prev,
-                            homePages: parseInt(e.target.value) || 1,
-                          }))
-                        }
-                        className="w-full p-2 border rounded"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        $499 each
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-500 mb-1">
-                        Inner Pages
-                      </label>
-                      <input
-                        type="number"
-                        min="0"
-                        value={projectDetails.innerPages}
-                        onChange={(e) =>
-                          setProjectDetails((prev) => ({
-                            ...prev,
-                            innerPages: parseInt(e.target.value) || 0,
-                          }))
-                        }
-                        className="w-full p-2 border rounded"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        $249 each
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Project Details - Conditionally Rendered */}
+                {[
+                  "custom-web",
+                  "headless-cms",
+                  "ecommerce",
+                  "wordpress",
+                ].includes(selectedService) && (
+                  <PageBasedServiceDetails serviceId={selectedService} />
+                )}
+                {selectedService === "email-templates" && (
+                  <UnitBasedServiceDetails
+                    serviceId={selectedService}
+                    unitName="Template"
+                    countField="templateCount"
+                  />
+                )}
+                {selectedService === "automation" && (
+                  <UnitBasedServiceDetails
+                    serviceId={selectedService}
+                    unitName="Workflow"
+                    countField="workflowCount"
+                  />
+                )}
 
                 {/* Contact Information */}
                 <div className="space-y-4 mb-6">
@@ -605,15 +884,22 @@ export default function OrderPage() {
                 </div>
 
                 {/* Action Button */}
-                <Button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-medium">
-                  Review Order & Pay
+                <Button
+                  onClick={handleSubmitOrder}
+                  disabled={!isFormValid() || isSubmitting}
+                  className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white py-3 text-lg font-medium"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Order Request"}
                 </Button>
 
                 <div className="text-center mt-3">
                   <div className="flex items-center justify-center space-x-1 text-sm text-gray-500">
                     <Shield className="w-4 h-4" />
-                    <span>100% Money Back Guarantee</span>
+                    <span>Secure Order Processing</span>
                   </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    You&apos;ll receive a payment invoice within 24 hours
+                  </p>
                 </div>
               </div>
             </div>

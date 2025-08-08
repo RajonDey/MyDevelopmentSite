@@ -5,7 +5,7 @@ const SchemaOrg = () => {
     "@context": "http://schema.org",
     "@type": "Person",
     name: "Rajon Dey",
-    jobTitle: "Freelance Software Developer",
+    jobTitle: "Software Developer",
     url: "https://development.rajondey.com",
     sameAs: [
       "https://github.com/RajonDey",
@@ -35,7 +35,7 @@ const SchemaOrg = () => {
     },
     worksFor: {
       "@type": "Organization",
-      name: "Rajon Dey - Freelance Software Development",
+      name: "Rajon Dey - Software Development",
       url: "https://development.rajondey.com",
     },
     offers: {

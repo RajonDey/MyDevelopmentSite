@@ -346,9 +346,9 @@ export const blogPosts = [
 
 export const staticPages = {
   home: {
-    metaTitle: "Rajon Dey | Freelance Software Developer",
+    metaTitle: "Rajon Dey | Software Developer",
     metaDescription:
-      "Hire Rajon Dey, a freelance software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
+      "Hire Rajon Dey, a software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
   },
   services: {
     metaTitle: "Software Development Services | Rajon Dey",
@@ -373,7 +373,7 @@ export const staticPages = {
   faq: {
     metaTitle: "FAQ | Rajon Dey Software Development Services",
     metaDescription:
-      "Got questions? Find answers about Rajon Dey's freelance software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
+      "Got questions? Find answers about Rajon Dey's software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
   },
   contact: {
     metaTitle: "Contact Rajon Dey | Software Developer",

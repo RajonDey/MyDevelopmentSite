@@ -2,9 +2,9 @@ import { StaticPageMetadata } from "../../types/common";
 
 export const staticPages: StaticPageMetadata = {
   home: {
-    title: "Rajon Dey | Freelance Software Developer",
+    title: "Rajon Dey | Software Developer",
     description:
-      "Hire Rajon Dey, a freelance software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
+      "Hire Rajon Dey, a software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
   },
   services: {
     title: "Software Development Services | Rajon Dey",
@@ -29,7 +29,7 @@ export const staticPages: StaticPageMetadata = {
   faq: {
     title: "FAQ | Rajon Dey Software Development Services",
     description:
-      "Got questions? Find answers about Rajon Dey's freelance software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
+      "Got questions? Find answers about Rajon Dey's software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
   },
   contact: {
     title: "Contact Rajon Dey | Software Developer",

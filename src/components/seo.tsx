@@ -43,7 +43,7 @@ export function SEO({
     jobTitle: "Software Developer",
     worksFor: {
       "@type": "Organization",
-      name: "Freelance",
+      name: "Software and Web Development",
     },
     description:
       "Full-stack developer specializing in React, Next.js, and modern web technologies",

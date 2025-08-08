@@ -2,13 +2,15 @@
 // We'll pass icon names instead of components for better server/client compatibility
 // import { Code, ShoppingCart, Layers, Globe, Mail, Wrench } from "lucide-react";
 
+import { servicePricing } from "./pricing";
+
 export const services = [
   {
-    id: 1,
+    id: "custom-web", // Match serviceId in pricing.ts
     title: "Custom Web Application Development",
     description:
       "Transform your ideas into reality with custom web applications designed for scalability, efficiency, and user engagement.",
-    price: 499,
+    price: servicePricing["custom-web"].basePrice,
     iconName: "Code", // Represents coding/development
     image: "/portfolio-images/clicks.jpg?height=200&width=300",
     features: [
@@ -47,11 +49,11 @@ export const services = [
       "Hire Rajon Dey for custom web application development using React, Next.js, and Node.js. Scalable and efficient solutions for your business.",
   },
   {
-    id: 2,
+    id: "ecommerce", // Match serviceId in pricing.ts
     title: "E-Commerce Website Development",
     description:
       "Build high-performing online stores with seamless user experiences, secure payment gateways, and robust inventory management.",
-    price: 799,
+    price: servicePricing["ecommerce"].basePrice,
     iconName: "ShoppingCart", // Represents e-commerce
     image: "/portfolio-images/coinic.jpg?height=200&width=300",
     features: [
@@ -89,13 +91,13 @@ export const services = [
       "Expert e-commerce website development by Rajon Dey. Build your online store with Shopify, WooCommerce, or custom solutions.",
   },
   {
-    id: 3,
+    id: "headless-cms", // Match serviceId in pricing.ts
     title: "Headless CMS Website Development",
     description:
-      "Develop modern, content-rich websites using headless CMS platforms for flexibility, scalability, and faster performance.",
-    price: 699,
-    iconName: "Layers", // Represents layered/headless architecture
-    image: "/portfolio-images/clicks.jpg?height=200&width=300",
+      "Separate your content management from your frontend for maximum flexibility, performance, and scalability across all devices.",
+    price: servicePricing["headless-cms"].basePrice,
+    iconName: "Layers", // Represents headless CMS architecture
+    image: "/portfolio-images/dashboard.jpg?height=200&width=300",
     features: [
       "Content management with platforms like Contentful or Strapi",
       "Dynamic content delivery via APIs",
@@ -130,12 +132,12 @@ export const services = [
       "Flexible and scalable headless CMS websites by Rajon Dey using Contentful, Strapi, and Next.js for modern content management.",
   },
   {
-    id: 4,
+    id: "wordpress", // Match serviceId in pricing.ts
     title: "WordPress Website Development",
     description:
-      "Design and develop custom WordPress websites with tailored themes, plugins, and functionalities to meet your business goals.",
-    price: 499,
-    iconName: "Globe",
+      "Leverage the world's most popular CMS with custom themes, plugins, and optimizations for performance and security.",
+    price: servicePricing["wordpress"].basePrice,
+    iconName: "Globe", // Represents WordPress websites
     image: "/portfolio-images/debtify.jpg?height=200&width=300",
     features: [
       "Custom theme development and customization",
@@ -172,12 +174,55 @@ export const services = [
       "Custom WordPress websites by Rajon Dey with tailored themes and plugins. SEO-optimized and performance-tuned for your business.",
   },
   {
-    id: 5,
-    title: "Email Template Development",
+    id: "automation", // Match serviceId in pricing.ts
+    title: "Workflow Automation",
     description:
-      "Design and code responsive email templates that work across all devices and email clients, ensuring your campaigns look professional and engaging.",
-    price: 199,
-    iconName: "Mail", // Represents email
+      "Streamline your business processes with custom automation solutions that save time, reduce errors, and increase productivity.",
+    price: servicePricing["automation"].basePrice,
+    iconName: "Settings", // Represents automation
+    image: "/portfolio-images/dashboard.jpg?height=200&width=300",
+    features: [
+      "Custom automation workflows",
+      "Integration with existing tools",
+      "Process optimization",
+      "Data synchronization",
+    ],
+    platforms: ["n8n", "Zapier", "Make"],
+    technologies: ["API", "Webhooks"],
+    // Enhanced properties for conversion
+    isRecommended: false,
+    benefits: [
+      "Save 5-15 hours per week on repetitive tasks",
+      "Eliminate human error in data handling",
+      "Improve customer experience with faster responses",
+      "Connect disparate systems for better data flow",
+      "Scale your operations without increasing staff",
+    ],
+    expectedOutcome:
+      "Automated workflows that reduce manual work by 60-80% and significantly improve operational efficiency",
+    faqs: [
+      {
+        question: "Which platforms do you work with?",
+        answer:
+          "I primarily use n8n, Zapier, Make, and custom API integrations.",
+      },
+      {
+        question: "Can you integrate with my existing systems?",
+        answer:
+          "Yes, I can integrate with most modern business tools including CRMs, email platforms, and payment systems.",
+      },
+    ],
+    metaTitle: "Workflow Automation Services | Rajon Dey",
+    metaDescription:
+      "Custom workflow automation solutions by Rajon Dey. Save time and reduce errors with n8n, Zapier, and Make integrations.",
+  },
+  {
+    id: "email-templates", // Match serviceId in pricing.ts
+    title: "Email Marketing Templates",
+    description:
+      "Create professional, responsive email templates that convert. Our designs ensure your message looks perfect across all email clients.",
+    price: servicePricing["email-templates"].basePrice,
+    iconName: "Mail", // Represents email marketing
     image: "/portfolio-images/rsvp-email.jpg?height=200&width=300",
     features: [
       "Mobile-friendly and responsive designs",
@@ -214,12 +259,12 @@ export const services = [
       "Responsive email templates by Rajon Dey. Professional designs compatible with Gmail, Outlook, and more for your campaigns.",
   },
   {
-    id: 6,
+    id: "maintenance", // Match serviceId in pricing.ts
     title: "Website Maintenance & Consultation",
     description:
-      "Ensure your website remains secure, up-to-date, and optimized with ongoing maintenance and expert consultation services.",
-    price: 299,
-    iconName: "Wrench", // Represents maintenance/repair
+      "Keep your website secure, up-to-date, and performing optimally with our comprehensive maintenance services and expert consultation.",
+    price: servicePricing["maintenance"].basePrice,
+    iconName: "Wrench", // Represents maintenance
     image: "/portfolio-images/hypo-hosting.jpg?height=200&width=300",
     features: [
       "Regular updates, backups, and security patches",
@@ -449,9 +494,9 @@ export const blogPosts = [
 
 export const staticPages = {
   home: {
-    metaTitle: "Rajon Dey | Freelance Software Developer",
+    metaTitle: "Rajon Dey | Software Developer",
     metaDescription:
-      "Hire Rajon Dey, a freelance software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
+      "Hire Rajon Dey, a software developer for custom web apps, e-commerce, and full-stack solutions with Next.js & React. High-quality services—contact me now!",
   },
   services: {
     metaTitle: "Software Development Services | Rajon Dey",
@@ -476,7 +521,7 @@ export const staticPages = {
   faq: {
     metaTitle: "FAQ | Rajon Dey Software Development Services",
     metaDescription:
-      "Got questions? Find answers about Rajon Dey's freelance software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
+      "Got questions? Find answers about Rajon Dey's software development services, pricing, and process. Contact me for custom Next.js and React solutions!",
   },
   contact: {
     metaTitle: "Contact Rajon Dey | Software Developer",
@@ -564,8 +609,13 @@ export const faqs = [
   },
   {
     question: "How much do your services cost?",
-    answer:
-      "Pricing varies by project scope. Examples include:<ul><li>Email templates: Starting at $199</li><li>Custom web applications: Starting at $499</li></ul>I'll provide a detailed quote after our consultation to match your budget and goals.",
+    answer: `Pricing varies by project scope. Examples include:<ul>
+        <li>WordPress websites: Starting at $${servicePricing["wordpress"].basePrice}</li>
+        <li>Email templates: Starting at $${servicePricing["email-templates"].basePrice}</li>
+        <li>Headless CMS websites: Starting at $${servicePricing["headless-cms"].basePrice}</li>
+        <li>E-commerce websites: Starting at $${servicePricing["ecommerce"].basePrice}</li>
+        <li>Custom web applications: Starting at $${servicePricing["custom-web"].basePrice}</li>
+      </ul>I'll provide a detailed quote after our consultation to match your budget and goals.`,
   },
   {
     question: "What technologies do you specialize in?",

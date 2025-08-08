@@ -18,7 +18,7 @@ export default function About() {
         <div>
           <h2 className="text-3xl font-bold mb-4">About Me</h2>
           <p className="text-gray-700 mb-4">
-            Hi, I’m Rajon Dey, a freelance web developer with 5+ years of
+            Hi, I’m Rajon Dey, a software developer with 5+ years of
             experience. I specialize in building modern, scalable, and
             user-friendly websites using technologies like Next.js, WordPress,
             and Tailwind CSS.

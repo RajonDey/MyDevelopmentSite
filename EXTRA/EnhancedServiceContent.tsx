@@ -15,7 +15,7 @@ import {
   Zap,
   MessageCircle,
 } from "lucide-react";
-import { WorkProcess } from "./sections/WorkProcess";
+import { WorkProcess } from "@/components/sections/WorkProcess";
 
 interface Service {
   id: number;
@@ -174,9 +174,9 @@ export default function EnhancedServiceContent({
 
       {/* Services Grid */}
       <section className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
-            <div key={service.id} className="h-full">
+            <div key={service.id} className="flex h-full">
               <EnhancedServiceCard {...service} />
             </div>
           ))}

@@ -6,6 +6,7 @@ import { Button } from "@/components/common/ui/Button";
 import { Card } from "@/components/common/ui/Card";
 import { Badge } from "@/components/common/ui/badge";
 import { Check, Star, Clock, Users } from "lucide-react";
+import { ServiceIcon } from "@/components/features/services/service-icon";
 import { Metadata } from "next";
 
 interface ServicePageProps {
@@ -84,7 +85,10 @@ export default function ServicePage({ params }: ServicePageProps) {
         <section className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-              <service.icon className="w-8 h-8 text-green-600" />
+              <ServiceIcon
+                iconName={service.iconName}
+                className="w-8 h-8 text-green-600"
+              />
             </div>
           </div>
           <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
@@ -155,8 +159,7 @@ export default function ServicePage({ params }: ServicePageProps) {
               {service.platforms.map((platform, index) => (
                 <Badge
                   key={index}
-                  variant="secondary"
-                  className="text-lg px-4 py-2"
+                  className="text-lg px-4 py-2 bg-gray-100 border border-gray-200"
                 >
                   {platform}
                 </Badge>
@@ -239,7 +242,8 @@ export default function ServicePage({ params }: ServicePageProps) {
         <section className="bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-2xl text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-lg text-muted-foreground mb-6">
-            Let's discuss your project and create something amazing together.
+            Let&apos;s discuss your project and create something amazing
+            together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/order">

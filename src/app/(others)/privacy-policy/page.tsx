@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
               <code className="font-mono text-gray-900">
                 development.rajondey.com
               </code>
-              ! I’m Rajon Dey, a freelance software developer, and this Privacy
+              ! I’m Rajon Dey, a software developer, and this Privacy
               Policy explains how I collect, use, and protect your information
               when you visit my site or use my services. I value your privacy
               and aim to keep things simple and transparent.

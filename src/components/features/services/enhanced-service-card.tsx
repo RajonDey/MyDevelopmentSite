@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/common/ui/Card";
 import { Button } from "@/components/common/ui/Button";
 import { Badge } from "@/components/common/ui/badge";
+import { getServicePriceDescription } from "@/data/pricing";
 import {
   CheckCircle,
   ChevronRight,
@@ -14,11 +15,12 @@ import {
   Globe,
   Mail,
   Wrench,
+  Settings,
   LucideIcon,
 } from "lucide-react";
 
 interface EnhancedServiceCardProps {
-  id: number;
+  id: string | number; // Updated to support string IDs
   title: string;
   description?: string;
   price?: number;
@@ -56,6 +58,7 @@ export function EnhancedServiceCard({
       Globe,
       Mail,
       Wrench,
+      Settings,
     };
 
     return iconMap[name as keyof typeof iconMap] || null;
@@ -71,7 +74,7 @@ export function EnhancedServiceCard({
       }`}
     >
       {isRecommended && (
-        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-medium z-10 shadow-md border border-green-500">
           Recommended
         </div>
       )}
@@ -86,16 +89,19 @@ export function EnhancedServiceCard({
                 isRecommended ? "bg-green-600" : "bg-gray-800"
               }`}
             >
-              <IconComponent className="w-5 h-5 text-white" />
+              {IconComponent && (
+                <IconComponent className="w-6 h-6 text-white" />
+              )}
             </div>
           )}
           <div>
             <h3 className="font-bold text-xl mb-1">{title}</h3>
             {price !== undefined && (
               <p className="text-gray-700 font-medium">
-                Starting at{" "}
                 <span className="text-xl font-bold text-green-600">
-                  ${price}
+                  {typeof id === "string"
+                    ? `${getServicePriceDescription(id)}`
+                    : `Starting at $${price}`}
                 </span>
               </p>
             )}
@@ -137,7 +143,7 @@ export function EnhancedServiceCard({
             {platforms.slice(0, 3).map((platform, index) => (
               <Badge
                 key={index}
-                className="bg-gray-100 text-gray-700 hover:bg-gray-200"
+                className="bg-gray-100 hover:bg-gray-200 border border-gray-200 font-medium"
               >
                 {platform}
               </Badge>
@@ -150,7 +156,7 @@ export function EnhancedServiceCard({
             {technologies.slice(0, 3).map((tech, index) => (
               <Badge
                 key={index}
-                className="bg-gray-100 text-gray-700 hover:bg-gray-200"
+                className="bg-gray-100 hover:bg-gray-200 border border-gray-200 font-medium"
               >
                 {tech}
               </Badge>
@@ -166,16 +172,16 @@ export function EnhancedServiceCard({
         {/* Spacer to push buttons to bottom */}
         <div className="flex-grow"></div>
 
-        <div className="flex flex-col sm:flex-row gap-3 mt-4">
-          <Link href={`/services/${id}`} className="flex-1">
-            <Button className="w-full bg-gray-800 hover:bg-gray-900 text-white flex items-center justify-center gap-2 whitespace-nowrap">
+        <div className="flex flex-col sm:flex-row gap-1 mt-4">
+          <Link href={`/services/${id}`} className="w-full sm:flex-1">
+            <Button className="w-full bg-gray-800 hover:bg-gray-900 text-white flex items-center justify-center gap-1">
               View Details
               <ChevronRight className="w-4 h-4" />
             </Button>
           </Link>
-          <Link href={`/hire?service=${id}`} className="flex-1">
+          <Link href={`/hire?service=${id}`} className="w-full sm:flex-1">
             <Button
-              className={`w-full flex items-center justify-center gap-2 whitespace-nowrap ${
+              className={`w-full flex items-center justify-center gap-2 ${
                 isRecommended
                   ? "bg-green-600 hover:bg-green-700 text-white"
                   : "border border-gray-300 bg-white text-gray-800 hover:bg-gray-50"
