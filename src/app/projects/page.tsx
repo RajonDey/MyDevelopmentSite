@@ -2,15 +2,11 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import Link from "next/link";
 
-import HeroSection from "../hire/sections/HeroSection";
-import StorySection from "../hire/sections/StorySection";
-import AudienceSection from "../hire/sections/AudienceSection";
 import FeaturesSection from "../hire/sections/FeatureSection";
 import TestimonialsSection from "../hire/sections/TestimonialSection";
 import FAQSection from "../hire/sections/FAQSection";
 import ContactSection from "../hire/sections/ContactSection";
 import PricingSection from "../hire/sections/PricingSection";
-import FiverrProjects from "../hire/sections/FiverrProjects";
 
 import { portfolio } from "@/data/mock-data";
 import { PortfolioCard } from "@/components/features/portfolio/portfolio-card";

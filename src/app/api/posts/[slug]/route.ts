@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { WPCategory } from "@/types/post";
 
 const WP_API_URL =
@@ -11,18 +10,16 @@ export const revalidate = 3600; // 1 hour
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await params;
   try {
-    const res = await fetch(
-      new URL(`${WP_API_URL}/posts?slug=${params.slug}`),
-      {
-        headers: {
-          Accept: "application/json",
-        },
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(new URL(`${WP_API_URL}/posts?slug=${slug}`), {
+      headers: {
+        Accept: "application/json",
+      },
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error(`Failed to fetch post: ${res.status} ${res.statusText}`);

@@ -6,7 +6,6 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import {
   Clock,
-  Phone,
   Mail,
   MessageCircle,
   Calendar,
@@ -35,11 +34,11 @@ export default function ContactPage() {
         {/* Header */}
         <section className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
-            Let's Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to transform your ideas into reality? I'm here to help you
-            create stunning, high-performing websites that drive results.
+            Ready to transform your ideas into reality? I&apos;m here to help
+            you create stunning, high-performing websites that drive results.
           </p>
         </section>
 
@@ -235,7 +234,8 @@ export default function ContactPage() {
               </form>
 
               <p className="text-sm text-gray-500 mt-4 text-center">
-                Your information is safe with me. I'll respond within 24 hours.
+                Your information is safe with me. I&apos;ll respond within 24
+                hours.
               </p>
             </Card>
           </div>

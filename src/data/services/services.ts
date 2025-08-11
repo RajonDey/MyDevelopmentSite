@@ -2,7 +2,7 @@ import { Service } from "../../types/services";
 
 export const services: Service[] = [
   {
-    id: 1,
+    id: "custom-web",
     title: "Custom Web Application Development",
     description:
       "Transform your ideas into reality with custom web applications designed for scalability, efficiency, and user engagement.",
@@ -45,7 +45,7 @@ export const services: Service[] = [
       "Hire Rajon Dey for custom web application development using React, Next.js, and Node.js. Scalable and efficient solutions for your business.",
   },
   {
-    id: 2,
+    id: "ecommerce",
     title: "E-Commerce Website Development",
     description:
       "Build high-performing online stores with seamless user experiences, secure payment gateways, and robust inventory management.",
@@ -87,7 +87,7 @@ export const services: Service[] = [
       "Expert e-commerce website development by Rajon Dey. Build your online store with Shopify, WooCommerce, or custom solutions.",
   },
   {
-    id: 3,
+    id: "headless-cms",
     title: "Headless CMS Website Development",
     description:
       "Develop modern, content-rich websites using headless CMS platforms for flexibility, scalability, and faster performance.",
@@ -128,7 +128,7 @@ export const services: Service[] = [
       "Flexible and scalable headless CMS websites by Rajon Dey using Contentful, Strapi, and Next.js for modern content management.",
   },
   {
-    id: 4,
+    id: "wordpress",
     title: "WordPress Website Development",
     description:
       "Design and develop custom WordPress websites with tailored themes, plugins, and functionalities to meet your business goals.",
@@ -170,7 +170,7 @@ export const services: Service[] = [
       "Custom WordPress websites by Rajon Dey with tailored themes and plugins. SEO-optimized and performance-tuned for your business.",
   },
   {
-    id: 5,
+    id: "email-templates",
     title: "Email Template Development",
     description:
       "Design and code responsive email templates that work across all devices and email clients, ensuring your campaigns look professional and engaging.",
@@ -212,7 +212,7 @@ export const services: Service[] = [
       "Responsive email templates by Rajon Dey. Professional designs compatible with Gmail, Outlook, and more for your campaigns.",
   },
   {
-    id: 6,
+    id: "maintenance",
     title: "Website Maintenance & Consultation",
     description:
       "Ensure your website remains secure, up-to-date, and optimized with ongoing maintenance and expert consultation services.",

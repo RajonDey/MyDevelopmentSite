@@ -4,6 +4,30 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function TestimonialsSection() {
+  const testimonials = [
+    {
+      quote:
+        "Working with this team transformed our online presence. Our conversion rate increased by 200% in just two months!",
+      author: "Sarah Johnson",
+      position: "CEO, Fashion Retailer",
+      image: "https://randomuser.me/api/portraits/women/32.jpg",
+    },
+    {
+      quote:
+        "The SEO optimization was amazing. We went from page 5 to the top of page 1 for our main keywords in just 6 weeks.",
+      author: "Michael Chen",
+      position: "Marketing Director, SaaS Company",
+      image: "https://randomuser.me/api/portraits/men/41.jpg",
+    },
+    {
+      quote:
+        "Finally, a website that doesn't just look good but actually generates leads! Our inquiry rate has tripled since launch.",
+      author: "Jessica Miller",
+      position: "Founder, Professional Services",
+      image: "https://randomuser.me/api/portraits/women/63.jpg",
+    },
+  ];
+
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
@@ -32,31 +56,7 @@ export default function TestimonialsSection() {
     }, 8000);
 
     return () => clearInterval(interval);
-  }, []);
-
-  const testimonials = [
-    {
-      quote:
-        "Working with this team transformed our online presence. Our conversion rate increased by 200% in just two months!",
-      author: "Sarah Johnson",
-      position: "CEO, Fashion Retailer",
-      image: "https://randomuser.me/api/portraits/women/32.jpg",
-    },
-    {
-      quote:
-        "The SEO optimization was amazing. We went from page 5 to the top of page 1 for our main keywords in just 6 weeks.",
-      author: "Michael Chen",
-      position: "Marketing Director, SaaS Company",
-      image: "https://randomuser.me/api/portraits/men/41.jpg",
-    },
-    {
-      quote:
-        "Finally, a website that doesn't just look good but actually generates leads! Our inquiry rate has tripled since launch.",
-      author: "Jessica Miller",
-      position: "Founder, Professional Services",
-      image: "https://randomuser.me/api/portraits/women/63.jpg",
-    },
-  ];
+  }, [testimonials.length]);
 
   return (
     <section className="py-24 px-4" id="testimonials">
@@ -144,8 +144,6 @@ export default function TestimonialsSection() {
             ))}
           </div>
         </div>
-
-        
       </div>
     </section>
   );

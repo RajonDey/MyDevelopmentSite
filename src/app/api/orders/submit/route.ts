@@ -39,7 +39,26 @@ export async function POST(request: NextRequest) {
 }
 
 // Send notification to admin (you)
-async function sendAdminNotification(orderData: any) {
+async function sendAdminNotification(orderData: {
+  orderId: string;
+  serviceTitle?: string;
+  service: string;
+  total: number;
+  upfrontPayment: number;
+  projectDetails: {
+    name: string;
+    email: string;
+    phone: string;
+    notes?: string;
+  };
+  serviceDetails: {
+    homePages: number;
+    innerPages: number;
+    templateCount: number;
+    workflowCount: number;
+  };
+  selectedOptions: Record<string, unknown>;
+}) {
   const serviceTitle = orderData.serviceTitle || orderData.service;
   const customer = orderData.projectDetails;
 
@@ -55,11 +74,6 @@ async function sendAdminNotification(orderData: any) {
       <li><strong>Name:</strong> ${customer.name}</li>
       <li><strong>Email:</strong> ${customer.email}</li>
       <li><strong>Phone:</strong> ${customer.phone}</li>
-      ${
-        customer.skype
-          ? `<li><strong>Skype:</strong> ${customer.skype}</li>`
-          : ""
-      }
     </ul>
     
     <h3>Project Details:</h3>
@@ -111,7 +125,19 @@ async function sendAdminNotification(orderData: any) {
 }
 
 // Send confirmation to customer
-async function sendCustomerConfirmation(orderData: any) {
+async function sendCustomerConfirmation(orderData: {
+  orderId: string;
+  serviceTitle?: string;
+  service: string;
+  total: number;
+  upfrontPayment: number;
+  projectDetails: {
+    name: string;
+    email: string;
+    phone: string;
+    notes?: string;
+  };
+}) {
   const serviceTitle = orderData.serviceTitle || orderData.service;
   const customer = orderData.projectDetails;
 

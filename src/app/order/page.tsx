@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { SEO } from "@/components/seo";
 import { Button } from "@/components/common/ui/Button";
-import {
-  servicePricing,
-  getServicePricing,
-  calculateServiceTotal,
-} from "@/data/pricing";
+import { servicePricing, getServicePricing } from "@/data/pricing";
 import {
   Code,
   ShoppingCart,
@@ -25,12 +21,21 @@ export default function OrderPage() {
     [key: string]: string | boolean;
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderSummary, setOrderSummary] = useState({
+    orderId: "",
+    total: 0,
+    upfrontPayment: 0,
+    serviceTitle: "",
+  });
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [couponDiscount, setCouponDiscount] = useState(0);
   const [projectDetails, setProjectDetails] = useState({
     // Common fields
     name: "",
     email: "",
     phone: "",
-    skype: "",
     notes: "",
     couponCode: "",
 
@@ -292,6 +297,41 @@ export default function OrderPage() {
     }));
   };
 
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    setSelectedFiles(files);
+  };
+
+  const handleRemoveFile = (index: number) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleApplyCoupon = () => {
+    if (projectDetails.couponCode.trim() === "") return;
+
+    // Simple coupon logic - you can enhance this
+    const coupon = projectDetails.couponCode.toLowerCase();
+    if (coupon === "welcome10") {
+      setCouponDiscount(total * 0.1); // 10% discount
+      setCouponApplied(true);
+    } else if (coupon === "launch20") {
+      setCouponDiscount(total * 0.2); // 20% discount
+      setCouponApplied(true);
+    } else {
+      setCouponDiscount(0);
+      setCouponApplied(false);
+      alert("Invalid coupon code");
+    }
+  };
+
+  const getFinalTotal = () => {
+    return total - couponDiscount;
+  };
+
+  const getFinalUpfront = () => {
+    return (total - couponDiscount) * 0.5;
+  };
+
   // Service-specific Project Detail Components
   // Service-specific Project Detail Components that use pricing data
   const PageBasedServiceDetails = ({ serviceId }: { serviceId: string }) => {
@@ -389,19 +429,75 @@ export default function OrderPage() {
   };
 
   const calculateTotal = () => {
-    // Using the centralized pricing logic from pricing.ts
-    return calculateServiceTotal(
-      selectedService,
-      projectDetails.homePages,
-      projectDetails.innerPages,
-      selectedService === "email-templates"
-        ? projectDetails.templateCount
-        : selectedService === "automation"
-        ? projectDetails.workflowCount
-        : 0,
-      selectedOptions,
-      serviceOptions[selectedService as keyof typeof serviceOptions]
-    );
+    // Get base price from centralized pricing
+    const basePrice =
+      servicePricing[selectedService as keyof typeof servicePricing]
+        ?.basePrice || 0;
+
+    let total = basePrice;
+
+    // Add page costs for page-based services
+    if (
+      ["custom-web", "headless-cms", "ecommerce", "wordpress"].includes(
+        selectedService
+      )
+    ) {
+      const homePagePrice =
+        servicePricing[selectedService as keyof typeof servicePricing]
+          ?.homePagePrice || 0;
+      const innerPagePrice =
+        servicePricing[selectedService as keyof typeof servicePricing]
+          ?.innerPagePrice || 0;
+
+      // Base price includes first home page, so subtract 1 from homePages count
+      total += Math.max(0, projectDetails.homePages - 1) * homePagePrice;
+      total += projectDetails.innerPages * innerPagePrice;
+    }
+
+    // Add unit costs for unit-based services
+    if (selectedService === "email-templates") {
+      const additionalUnitPrice =
+        servicePricing[selectedService as keyof typeof servicePricing]
+          ?.additionalUnitPrice || 0;
+      // First unit included in base price, charge for additional units
+      total +=
+        Math.max(0, projectDetails.templateCount - 1) * additionalUnitPrice;
+    } else if (selectedService === "automation") {
+      const additionalUnitPrice =
+        servicePricing[selectedService as keyof typeof servicePricing]
+          ?.additionalUnitPrice || 0;
+      // First unit included in base price, charge for additional units
+      total +=
+        Math.max(0, projectDetails.workflowCount - 1) * additionalUnitPrice;
+    }
+
+    // Add option costs
+    const currentServiceOptions =
+      serviceOptions[selectedService as keyof typeof serviceOptions];
+    if (currentServiceOptions?.options) {
+      Object.entries(selectedOptions).forEach(([key, value]) => {
+        const option = (
+          currentServiceOptions.options as Record<
+            string,
+            RadioOption | CheckboxOption
+          >
+        )[key];
+        if (option && value) {
+          if (option.type === "checkbox" && value === true) {
+            total += option.price;
+          } else if (option.type === "radio" && typeof value === "string") {
+            const selectedOption = option.options?.find(
+              (opt: { value: string; price: number }) => opt.value === value
+            );
+            if (selectedOption) {
+              total += selectedOption.price;
+            }
+          }
+        }
+      });
+    }
+
+    return total;
   };
 
   const total = calculateTotal();
@@ -412,14 +508,17 @@ export default function OrderPage() {
     return (
       projectDetails.name.trim() !== "" &&
       projectDetails.email.trim() !== "" &&
-      projectDetails.phone.trim() !== ""
+      projectDetails.phone.trim() !== "" &&
+      projectDetails.notes.trim() !== ""
     );
   };
 
   // Handle order submission
   const handleSubmitOrder = async () => {
     if (!isFormValid()) {
-      alert("Please fill in all required fields (Name, Email, Phone)");
+      alert(
+        "Please fill in all required fields (Name, Email, Phone, Project Details)"
+      );
       return;
     }
 
@@ -473,7 +572,6 @@ ${formatSelectedOptions()}
 Name: ${projectDetails.name}
 Email: ${projectDetails.email}
 Phone: ${projectDetails.phone}
-${projectDetails.skype ? `Skype: ${projectDetails.skype}` : ""}
 
 📝 PROJECT DETAILS:
 ${projectDetails.notes || "No additional details provided"}
@@ -535,21 +633,23 @@ Timestamp: ${new Date().toLocaleString()}
       const result = await response.json();
 
       if (response.ok && result.success) {
-        // Show success message
-        alert(
-          `✅ Order submitted successfully!\n\nOrder ID: ${result.orderId}\n\n${
-            result.message
-          }\n\nTotal: $${total.toFixed(
-            2
-          )}\nUpfront (50%): $${upfrontPayment.toFixed(2)}`
-        );
+        // Set order summary for modal
+        setOrderSummary({
+          orderId: result.orderId,
+          total: getFinalTotal(),
+          upfrontPayment: getFinalUpfront(),
+          serviceTitle:
+            serviceCategories.find((s) => s.id === selectedService)?.name || "",
+        });
+
+        // Show success modal
+        setShowSuccessModal(true);
 
         // Reset form
         setProjectDetails({
           name: "",
           email: "",
           phone: "",
-          skype: "",
           notes: "",
           couponCode: "",
           homePages: 1,
@@ -558,6 +658,9 @@ Timestamp: ${new Date().toLocaleString()}
           workflowCount: 1,
         });
         setSelectedOptions({});
+        setSelectedFiles([]);
+        setCouponApplied(false);
+        setCouponDiscount(0);
       } else {
         throw new Error(result.error || "Failed to submit order");
       }
@@ -756,64 +859,65 @@ Timestamp: ${new Date().toLocaleString()}
                 )}
 
                 {/* Contact Information */}
-                <div className="space-y-4 mb-6">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    value={projectDetails.name}
-                    onChange={(e) =>
-                      setProjectDetails((prev) => ({
-                        ...prev,
-                        name: e.target.value,
-                      }))
-                    }
-                    className="w-full p-3 border rounded"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    value={projectDetails.email}
-                    onChange={(e) =>
-                      setProjectDetails((prev) => ({
-                        ...prev,
-                        email: e.target.value,
-                      }))
-                    }
-                    className="w-full p-3 border rounded"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    value={projectDetails.phone}
-                    onChange={(e) =>
-                      setProjectDetails((prev) => ({
-                        ...prev,
-                        phone: e.target.value,
-                      }))
-                    }
-                    className="w-full p-3 border rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Skype (Optional)"
-                    value={projectDetails.skype}
-                    onChange={(e) =>
-                      setProjectDetails((prev) => ({
-                        ...prev,
-                        skype: e.target.value,
-                      }))
-                    }
-                    className="w-full p-3 border rounded"
-                  />
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold mb-3">
+                    Contact Information
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Fields marked with <span className="text-red-500">*</span>{" "}
+                    are required
+                  </p>
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
+                      value={projectDetails.name}
+                      onChange={(e) =>
+                        setProjectDetails((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                      className="w-full p-3 border rounded"
+                      required
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
+                      value={projectDetails.email}
+                      onChange={(e) =>
+                        setProjectDetails((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
+                      }
+                      className="w-full p-3 border rounded"
+                      required
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number *"
+                      value={projectDetails.phone}
+                      onChange={(e) =>
+                        setProjectDetails((prev) => ({
+                          ...prev,
+                          phone: e.target.value,
+                        }))
+                      }
+                      className="w-full p-3 border rounded"
+                      required
+                    />
+                  </div>
                 </div>
 
                 {/* Project Notes */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">
-                    Project Details
+                    Project Details / Specific Notes{" "}
+                    <span className="text-red-500">*</span>
                   </label>
                   <textarea
-                    placeholder="Describe your project requirements..."
+                    placeholder="Describe your project requirements, goals, and any specific features you need..."
                     value={projectDetails.notes}
                     onChange={(e) =>
                       setProjectDetails((prev) => ({
@@ -829,15 +933,53 @@ Timestamp: ${new Date().toLocaleString()}
                 {/* File Upload */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-2">
-                    Upload Files
+                    Upload Files (Optional)
                   </label>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                     <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
                     <p className="text-sm text-gray-500">
                       Drop files here or click to upload
                     </p>
-                    <input type="file" className="hidden" multiple />
+                    <input
+                      type="file"
+                      className="hidden"
+                      multiple
+                      onChange={handleFileSelect}
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,.rar"
+                      id="file-upload"
+                    />
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Choose Files
+                    </label>
                   </div>
+
+                  {/* Display selected files */}
+                  {selectedFiles.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      <p className="text-sm font-medium text-gray-700">
+                        Selected Files:
+                      </p>
+                      {selectedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-gray-50 p-2 rounded"
+                        >
+                          <span className="text-sm text-gray-600 truncate">
+                            {file.name}
+                          </span>
+                          <button
+                            onClick={() => handleRemoveFile(index)}
+                            className="text-red-500 hover:text-red-700 text-sm"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Coupon Code */}
@@ -845,7 +987,7 @@ Timestamp: ${new Date().toLocaleString()}
                   <div className="flex space-x-2">
                     <input
                       type="text"
-                      placeholder="Coupon Code"
+                      placeholder="Coupon Code (Optional)"
                       value={projectDetails.couponCode}
                       onChange={(e) =>
                         setProjectDetails((prev) => ({
@@ -855,8 +997,22 @@ Timestamp: ${new Date().toLocaleString()}
                       }
                       className="flex-1 p-3 border rounded"
                     />
-                    <Button variant="outline">Apply</Button>
+                    <Button
+                      variant="outline"
+                      onClick={handleApplyCoupon}
+                      disabled={!projectDetails.couponCode.trim()}
+                    >
+                      Apply
+                    </Button>
                   </div>
+                  {couponApplied && (
+                    <div className="mt-2 text-sm text-green-600">
+                      ✓ Coupon applied! Discount: ${couponDiscount.toFixed(2)}
+                    </div>
+                  )}
+                  <p className="text-xs text-gray-500 mt-1">
+                    Try: welcome10 (10% off) or launch20 (20% off)
+                  </p>
                 </div>
 
                 {/* Cost Summary */}
@@ -869,16 +1025,26 @@ Timestamp: ${new Date().toLocaleString()}
                       5-10 Business Days
                     </span>
                   </div>
+                  {couponApplied && (
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-600">
+                        Original Total:
+                      </span>
+                      <span className="text-sm text-gray-500 line-through">
+                        ${total.toFixed(2)}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm text-gray-600">Total Cost:</span>
                     <span className="text-lg font-bold">
-                      ${total.toFixed(2)}
+                      ${getFinalTotal().toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">50% Upfront:</span>
                     <span className="text-lg font-bold text-green-600">
-                      ${upfrontPayment.toFixed(2)}
+                      ${getFinalUpfront().toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -906,6 +1072,74 @@ Timestamp: ${new Date().toLocaleString()}
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-8 h-8 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Order Submitted Successfully! 🎉
+            </h3>
+
+            <div className="text-left bg-gray-50 rounded-lg p-4 mb-4">
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <span className="font-medium text-gray-600">Order ID:</span>
+                  <p className="text-gray-900 font-mono">
+                    {orderSummary.orderId}
+                  </p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-600">Service:</span>
+                  <p className="text-gray-900">{orderSummary.serviceTitle}</p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-600">Total:</span>
+                  <p className="text-gray-900 font-bold">
+                    ${orderSummary.total.toFixed(2)}
+                  </p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-600">
+                    Upfront (50%):
+                  </span>
+                  <p className="text-gray-900 font-bold text-green-600">
+                    ${orderSummary.upfrontPayment.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-600 mb-4">
+              You will receive a Payoneer invoice within 24 hours. Check your
+              email for confirmation.
+            </p>
+
+            <Button
+              onClick={() => setShowSuccessModal(false)}
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+            >
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

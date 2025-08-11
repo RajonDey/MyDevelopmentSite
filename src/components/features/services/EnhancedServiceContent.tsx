@@ -18,7 +18,7 @@ import {
 import { WorkProcess } from "@/components/sections/WorkProcess";
 
 interface Service {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;

@@ -91,8 +91,17 @@ export const calculateServiceTotal = (
   homePages: number = 0,
   innerPages: number = 0,
   additionalUnits: number = 0,
-  options: { [key: string]: any } = {},
-  serviceOptions: any = {}
+  options: { [key: string]: string | boolean } = {},
+  serviceOptions: {
+    options: Record<
+      string,
+      {
+        type: string;
+        price: number;
+        options?: Array<{ value: string; price: number }>;
+      }
+    >;
+  } = { options: {} }
 ) => {
   const pricing = getServicePricing(serviceId);
   if (!pricing) return 0;
@@ -121,7 +130,7 @@ export const calculateServiceTotal = (
 
       if (option.type === "checkbox" && selectedValue) {
         total += option.price;
-      } else if (option.type === "radio" && selectedValue) {
+      } else if (option.type === "radio" && selectedValue && option.options) {
         const selectedOption = option.options.find(
           (opt: { value: string; price: number }) => opt.value === selectedValue
         );

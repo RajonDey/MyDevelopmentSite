@@ -5,11 +5,11 @@ import { WPPost } from "@/types/post";
 import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
 
 type Props = {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const category = params.category;
+  const { category } = await params;
   const categoryName =
     category === "javascript"
       ? "JavaScript"
@@ -61,7 +61,7 @@ function LearnSkeleton() {
 
 export default async function CategoryPage({ params }: Props) {
   const posts = await getPosts();
-  const { category } = params;
+  const { category } = await params;
 
   // Format the category name for display
   const categoryName =

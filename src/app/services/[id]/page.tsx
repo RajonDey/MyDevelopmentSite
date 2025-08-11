@@ -10,15 +10,16 @@ import { ServiceIcon } from "@/components/features/services/service-icon";
 import { Metadata } from "next";
 
 interface ServicePageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
-  const service = services.find((s) => s.id.toString() === params.id);
+  const { id } = await params;
+  const service = services.find((s) => s.id.toString() === id);
 
   if (!service) {
     return {
@@ -32,13 +33,14 @@ export async function generateMetadata({
     openGraph: {
       title: service.metaTitle,
       description: service.metaDescription,
-      url: `https://development.rajondey.com/services/${params.id}`,
+      url: `https://development.rajondey.com/services/${id}`,
     },
   };
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  const service = services.find((s) => s.id.toString() === params.id);
+export default async function ServicePage({ params }: ServicePageProps) {
+  const { id } = await params;
+  const service = services.find((s) => s.id.toString() === id);
 
   if (!service) {
     notFound();
@@ -77,7 +79,7 @@ export default function ServicePage({ params }: ServicePageProps) {
       <SEO
         title={service.metaTitle}
         description={service.metaDescription}
-        url={`/services/${params.id}`}
+        url={`/services/${id}`}
       />
 
       <div className="max-w-6xl mx-auto px-4 py-8">

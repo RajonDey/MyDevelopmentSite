@@ -28,7 +28,7 @@ export interface WPService {
 
 // Enhanced service type used in the application
 export interface Service {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
