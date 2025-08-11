@@ -33,15 +33,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "development-admin.rajondey.com",
       },
-      {
-        protocol: "https",
-        hostname: "randomuser.me",
-        pathname: "/api/**",
-      },
-      {
-        protocol: "https",
-        hostname: "randomuser.me",
-      },
     ],
   },
 

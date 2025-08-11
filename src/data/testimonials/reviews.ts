@@ -8,7 +8,7 @@ export const reviews: Review[] = [
     comment:
       "Excellent work! Delivered the project on time and with great quality. The site loads incredibly fast and the SEO improvements are already showing results.",
     date: "2 weeks ago",
-    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+    avatar: "/avatar-1.svg",
     company: "Marketing Director, TechCorp",
   },
   {
@@ -18,7 +18,7 @@ export const reviews: Review[] = [
     comment:
       "Very professional and skilled developer. The attention to detail on our e-commerce store was exceptional. Would definitely work with again!",
     date: "1 month ago",
-    avatar: "https://randomuser.me/api/portraits/women/8.jpg",
+    avatar: "/avatar-2.svg",
     company: "Owner, Boutique Shop",
   },
   {
@@ -28,7 +28,7 @@ export const reviews: Review[] = [
     comment:
       "Rajon built our coaching website with impressive speed and quality. Conversion rates have improved by 35% since launch. Highly recommended!",
     date: "3 weeks ago",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    avatar: "/avatar-3.svg",
     company: "Business Coach, Growth Mentors",
   },
   {
@@ -38,7 +38,7 @@ export const reviews: Review[] = [
     comment:
       "The website Rajon created has completely transformed my personal brand. I'm getting more high-quality leads than ever before.",
     date: "1 month ago",
-    avatar: "https://randomuser.me/api/portraits/women/23.jpg",
+    avatar: "/avatar-4.svg",
     company: "Independent Creator",
   },
   {
@@ -48,7 +48,7 @@ export const reviews: Review[] = [
     comment:
       "Great communication throughout the project. Rajon was quick to implement changes and provided valuable suggestions to improve our site.",
     date: "2 months ago",
-    avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+    avatar: "/avatar-5.svg",
     company: "Founder, StartupX",
   },
 ];

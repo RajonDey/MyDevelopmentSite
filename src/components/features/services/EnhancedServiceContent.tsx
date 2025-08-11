@@ -54,8 +54,7 @@ export default function EnhancedServiceContent({
     platform: "Direct Client",
     comment:
       "Rajon's approach to our e-commerce site redesign was exceptional. He didn't just deliver a visually appealing site - he created a complete solution that actually increased our sales by 32% in the first month after launch!",
-    avatar:
-      "https://randomuser.me/api/portraits/women/8.jpg?height=60&width=60",
+    avatar: "/avatar-2.svg",
     company: "Owner, Boutique Shop",
   };
 

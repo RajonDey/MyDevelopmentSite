@@ -390,7 +390,7 @@ export const reviews = [
     comment:
       "Excellent work! Delivered the project on time and with great quality.",
     date: "2 weeks ago",
-    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+    avatar: "/avatar-1.svg",
   },
   {
     name: "Sarah Johnson",
@@ -399,7 +399,7 @@ export const reviews = [
     comment:
       "Very professional and skilled developer. Would definitely work with again!",
     date: "1 month ago",
-    avatar: "https://randomuser.me/api/portraits/women/8.jpg",
+    avatar: "/avatar-2.svg",
   },
 ];
 
