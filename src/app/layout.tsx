@@ -9,7 +9,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://development.rajondey.com"
+    process.env.NEXT_PUBLIC_WP_API_URL || "https://development.rajondey.com"
   ),
   title: staticPages.home.metaTitle,
   description: staticPages.home.metaDescription,

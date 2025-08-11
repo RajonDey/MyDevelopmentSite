@@ -2,7 +2,8 @@ import { WPPost } from "@/types/post";
 
 export async function fetchPosts(): Promise<WPPost[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl =
+      process.env.NEXT_PUBLIC_WP_API_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/posts`, {
       next: { revalidate: 3600 },
     });
@@ -25,7 +26,8 @@ export async function fetchPosts(): Promise<WPPost[]> {
 
 export async function fetchPost(slug: string): Promise<WPPost> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl =
+      process.env.NEXT_PUBLIC_WP_API_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
       next: { revalidate: 3600 },
     });

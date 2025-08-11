@@ -19,7 +19,7 @@ FROM_EMAIL=contact@rajondey.com
 
 ```bash
 # For Vercel deployment, set this to your domain
-NEXT_PUBLIC_BASE_URL=https://your-domain.vercel.app
+NEXT_PUBLIC_WP_API_URL=https://your-domain.vercel.app
 
 # For local development, this will default to localhost:3000
 ```
@@ -33,7 +33,7 @@ NEXT_PUBLIC_BASE_URL=https://your-domain.vercel.app
    - `RESEND_API_KEY`: Your Resend API key
    - `BUSINESS_EMAIL`: Your business email
    - `FROM_EMAIL`: Your from email (optional)
-   - `NEXT_PUBLIC_BASE_URL`: Your Vercel domain (e.g., `https://your-project.vercel.app`)
+   - `NEXT_PUBLIC_WP_API_URL`: Your Vercel domain (e.g., `https://your-project.vercel.app`)
 
 4. **Redeploy** your project after adding environment variables
 
