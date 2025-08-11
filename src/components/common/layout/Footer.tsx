@@ -47,7 +47,13 @@ export default function Footer() {
             href="/blog"
             className="hover:text-green-400 transition-colors duration-200 text-sm"
           >
-            Blog & Learn
+            Blog
+          </Link>
+          <Link
+            href="/learn"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Learning Resources
           </Link>
           <Link
             href="/contact"

@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom utilities */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
@@ -39,11 +51,9 @@ a:hover {
   text-decoration: none;
 }
 
-
-
 /* Custom scrollbar styles */
 .custom-scrollbar {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -51,34 +61,32 @@ a:hover {
 }
 
 .custom-scrollbar {
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar {
   display: block;
-  width: 6px; 
+  width: 6px;
 }
 
 .custom-scrollbar:hover {
-  -ms-overflow-style: auto; 
-  scrollbar-width: thin; 
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar-track {
-  background: transparent; 
+  background: transparent;
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background-color: #a3a3a3; 
+  background-color: #a3a3a3;
   border-radius: 3px;
 }
 
 .custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
   background-color: #717171;
 }
-
-
 
 /* From hire.css */
 .highlight {

@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 import { Suspense } from "react";
-import { WPPost } from "@/types/post";
-import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
+import LearningContent from "./LearningContent";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -27,22 +26,100 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-async function getPosts(): Promise<WPPost[]> {
+async function getPosts(category: string): Promise<{
+  [key: string]: Array<{
+    id: number;
+    title: string;
+    content: string;
+    categories: number[];
+    image: string;
+  }>;
+}> {
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_WP_API_URL || "http://localhost:3000";
+
+    // If we have a WordPress API URL, fetch directly from it
+    if (baseUrl.includes("wp-json")) {
+      const res = await fetch(`${baseUrl}/posts?per_page=100&status=publish`, {
+        next: { revalidate: 3600 },
+      });
+
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch posts: ${res.status} ${res.statusText}`
+        );
+      }
+
+      const posts = await res.json();
+
+      // Transform WordPress posts to match LearningContent interface
+      const transformedPosts = posts.map(
+        (post: {
+          id: number;
+          title: { rendered: string };
+          content: { rendered: string };
+          categories: number[];
+          featured_media: number;
+        }) => ({
+          id: post.id,
+          title: post.title.rendered,
+          content: post.content.rendered,
+          categories: post.categories || [],
+          image: post.featured_media
+            ? (() => {
+                // Extract the base domain from the WordPress API URL
+                const baseDomain = baseUrl.replace("/wp-json/wp/v2", "");
+                return `${baseDomain}/wp-json/wp/v2/media/${post.featured_media}`;
+              })()
+            : "/development-blog-placeholder.png",
+        })
+      );
+
+      // Filter posts by category and group them
+      const categoryPosts = transformedPosts.filter(() => {
+        // For now, let's include all posts for the learning page
+        // You can add category filtering logic here based on your WordPress categories
+        return true;
+      });
+
+      // Group by category name for display
+      const categoryName =
+        category === "javascript"
+          ? "JavaScript"
+          : category === "database"
+          ? "Databases"
+          : category.charAt(0).toUpperCase() + category.slice(1);
+
+      return {
+        [categoryName]: categoryPosts,
+      };
+    }
+
+    // Fallback to local API if no WordPress URL
     const res = await fetch(`${baseUrl}/api/posts`, {
       next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
       throw new Error("Failed to fetch posts");
+      return {};
     }
 
-    return res.json();
+    const posts = await res.json();
+    const categoryName =
+      category === "javascript"
+        ? "JavaScript"
+        : category === "database"
+        ? "Databases"
+        : category.charAt(0).toUpperCase() + category.slice(1);
+
+    return {
+      [categoryName]: posts,
+    };
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return [];
+    return {};
   }
 }
 
@@ -62,8 +139,8 @@ function LearnSkeleton() {
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const posts = await getPosts();
   const { category } = await params;
+  const posts = await getPosts(category);
 
   // Format the category name for display
   const categoryName =
@@ -106,7 +183,9 @@ export default async function CategoryPage({ params }: Props) {
 
         {/* Content */}
         <Suspense fallback={<LearnSkeleton />}>
-          <BlogLearnContent posts={posts} initialCategory={category} />
+          <div className="max-w-7xl mx-auto">
+            <LearningContent posts={posts} />
+          </div>
         </Suspense>
       </div>
     </>

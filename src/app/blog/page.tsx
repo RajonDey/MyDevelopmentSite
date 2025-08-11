@@ -8,11 +8,11 @@ import { BookOpen, Clock, TrendingUp } from "lucide-react";
 import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
 
 export const metadata: Metadata = {
-  title: "Blog & Learn - Web Development Tutorials & Resources | Rajon Dey",
+  title: "Blog - Web Development Insights & Tutorials | Rajon Dey",
   description:
-    "Learn web development with practical tutorials, courses and guides on React, Next.js, databases, and modern web technologies. Expert insights from Rajon Dey.",
+    "Explore web development insights, tutorials, and industry trends. Expert articles on React, Next.js, WordPress, and modern web technologies from Rajon Dey.",
   keywords:
-    "web development blog, React tutorials, Next.js guides, programming tips, software development, learning resources, database tutorials",
+    "web development blog, React tutorials, Next.js guides, programming tips, software development, WordPress development, frontend development",
 };
 
 function BlogSkeleton() {
@@ -43,6 +43,84 @@ async function getPosts(): Promise<WPPost[]> {
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_WP_API_URL || "http://localhost:3000";
+
+    // If we have a WordPress API URL, fetch directly from it
+    if (baseUrl.includes("wp-json")) {
+      const res = await fetch(`${baseUrl}/posts?per_page=100&status=publish`, {
+        next: { revalidate: 3600 },
+      });
+
+      if (!res.ok) {
+        throw new Error(
+          `Failed to fetch posts: ${res.status} ${res.statusText}`
+        );
+      }
+
+      const posts = await res.json();
+
+      // Transform WordPress posts to match our WPPost interface
+      const transformedPosts = await Promise.all(
+        posts.map(
+          async (post: {
+            id: number;
+            slug: string;
+            title: { rendered: string };
+            content: { rendered: string };
+            excerpt: { rendered: string };
+            date: string;
+            featured_media: number;
+            link: string;
+            categories: number[];
+          }) => {
+            let imageUrl = "/development-blog-placeholder.png";
+
+            if (post.featured_media) {
+              try {
+                // Fetch media metadata to get the actual image URL (same as homepage)
+                const mediaRes = await fetch(
+                  `${baseUrl}/media/${post.featured_media}`
+                );
+                if (mediaRes.ok) {
+                  const mediaData = await mediaRes.json();
+                  imageUrl =
+                    mediaData.source_url || "/development-blog-placeholder.png";
+                  console.log(
+                    "Blog listing: Post",
+                    post.id,
+                    "image URL:",
+                    imageUrl
+                  );
+                }
+              } catch (mediaError) {
+                console.warn(
+                  "Failed to fetch media for post",
+                  post.id,
+                  mediaError
+                );
+              }
+            }
+
+            return {
+              id: post.id,
+              slug: post.slug,
+              title: { rendered: post.title.rendered },
+              content: { rendered: post.content.rendered },
+              excerpt: { rendered: post.excerpt.rendered },
+              date: post.date,
+              featured_media: post.featured_media,
+              link: post.link,
+              image: imageUrl,
+              category_ids: post.categories || [],
+              categories: post.categories || [],
+            };
+          }
+        )
+      );
+
+      return transformedPosts;
+    }
+
+    // Fallback to local API if no WordPress URL
     const res = await fetch(`${baseUrl}/api/posts`, {
       next: { revalidate: 3600 },
     });
@@ -64,8 +142,8 @@ export default async function BlogPage() {
   return (
     <>
       <SEO
-        title="Blog & Learn - Web Development Tutorials & Resources | Rajon Dey"
-        description="Learn web development with practical tutorials, courses and guides on React, Next.js, databases, and modern web technologies. Expert insights from Rajon Dey."
+        title="Blog - Web Development Insights & Tutorials | Rajon Dey"
+        description="Explore web development insights, tutorials, and industry trends. Expert articles on React, Next.js, WordPress, and modern web technologies from Rajon Dey."
         url="/blog"
         type="blog"
         tags={[
@@ -74,18 +152,18 @@ export default async function BlogPage() {
           "Next.js",
           "tutorials",
           "programming",
-          "learning resources",
-          "database tutorials",
+          "WordPress development",
+          "frontend development",
         ]}
       />
       <div className="px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Blog & Learning Resources</h1>
+          <h1 className="text-4xl font-bold mb-4">Blog & Articles</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Learn from practical tutorials, industry insights, comprehensive
-            guides, and expert tips on React, Next.js, databases and modern web
-            development technologies.
+            Explore our latest articles, industry insights, and expert tips on
+            web development, technology trends, and software engineering best
+            practices.
           </p>
         </div>
 
@@ -117,8 +195,8 @@ export default async function BlogPage() {
         <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 rounded-2xl text-center mt-12 max-w-7xl mx-auto">
           <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
           <p className="text-lg mb-6 opacity-90">
-            Get the latest web development tutorials and insights delivered to
-            your inbox.
+            Get the latest web development articles and industry insights
+            delivered to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input

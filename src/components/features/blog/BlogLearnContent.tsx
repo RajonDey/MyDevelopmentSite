@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { WPPost } from "@/types/blog";
 import { BlogCard } from "@/components/features/blog/BlogCard";
-import { BookOpen, FileText, Code, Database, Search } from "lucide-react";
+import { BookOpen, FileText, Search } from "lucide-react";
 import {
   Tabs,
   TabsList,
@@ -12,18 +12,20 @@ import {
 } from "@/components/common/ui/tabs";
 import FilterDropdown from "@/components/common/ui/FilterDropdown";
 
-// Define content categories
+// Define content categories (Blog only)
 const categories = [
-  { id: "all", name: "All Content", icon: BookOpen },
-  { id: "blog", name: "Blog Posts", icon: FileText },
-  { id: "learn", name: "Learning", icon: Code },
-  // Blog subcategories
+  { id: "all", name: "All Posts", icon: BookOpen },
+  // Blog subcategories - focused on development topics
   { id: "react", name: "React", icon: FileText },
   { id: "nextjs", name: "Next.js", icon: FileText },
   { id: "wordpress", name: "WordPress", icon: FileText },
-  // Learning subcategories
-  { id: "javascript", name: "JavaScript", icon: Code },
-  { id: "database", name: "Databases", icon: Database },
+  { id: "web-development", name: "Web Development", icon: FileText },
+  { id: "frontend", name: "Frontend", icon: FileText },
+  { id: "backend", name: "Backend", icon: FileText },
+  { id: "devops", name: "DevOps", icon: FileText },
+  { id: "tools", name: "Tools & Libraries", icon: FileText },
+  { id: "industry", name: "Industry Insights", icon: FileText },
+  { id: "case-studies", name: "Case Studies", icon: FileText },
 ];
 
 // Extract unique category names for the filter dropdown
@@ -39,11 +41,7 @@ export default function BlogLearnContent({
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState(initialCategory || "all");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [isLearningView, setIsLearningView] = useState(
-    initialCategory === "javascript" ||
-      initialCategory === "database" ||
-      initialCategory === "learn"
-  );
+  // Blog only view - no learning view needed
 
   // Use memo for filtered posts based on search, tab, and category
   const filteredPosts = useMemo(() => {
@@ -76,15 +74,8 @@ export default function BlogLearnContent({
     });
   }, [searchTerm, activeTab, selectedCategory, posts]);
 
-  // Set learning view flag when tab changes and handle initialCategory setting
+  // Set active tab when initialCategory changes
   useEffect(() => {
-    // Update learning view flag when tab changes
-    setIsLearningView(
-      activeTab === "javascript" ||
-        activeTab === "database" ||
-        activeTab === "learn"
-    );
-
     // If initialCategory is provided but doesn't match any tab ID directly,
     // try to find a matching category by name or slug
     if (initialCategory && initialCategory !== activeTab) {
@@ -99,13 +90,12 @@ export default function BlogLearnContent({
         setActiveTab(matchingCategory.id);
       }
     }
-  }, [activeTab, initialCategory]);
+  }, [initialCategory, activeTab]);
 
-  // Additional setup for learning view if needed
+  // Blog view setup
   useEffect(() => {
-    // Any additional setup when switching to learning view
-    // For now we just use the isLearningView flag to determine the UI layout
-  }, [isLearningView]);
+    // Any additional setup for blog view
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -117,7 +107,7 @@ export default function BlogLearnContent({
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Search content..."
+              placeholder="Search blog posts..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -143,57 +133,27 @@ export default function BlogLearnContent({
         onValueChange={setActiveTab}
         className="mb-8"
       >
-        <TabsList className="bg-white p-1 border border-gray-200 rounded-lg shadow-sm flex flex-wrap">
-          {categories.map((category) => (
-            <TabsTrigger
-              key={category.id}
-              value={category.id}
-              className="flex items-center gap-2 data-[state=active]:bg-green-50 data-[state=active]:text-green-700"
-            >
-              <category.icon className="w-4 h-4" />
-              <span>{category.name}</span>
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="relative">
+          <TabsList className="bg-white p-1 border border-gray-200 rounded-lg shadow-sm flex overflow-x-auto scrollbar-hide gap-1 min-w-0">
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category.id}
+                value={category.id}
+                className="flex items-center gap-2 data-[state=active]:bg-green-50 data-[state=active]:text-green-700 whitespace-nowrap flex-shrink-0"
+              >
+                <category.icon className="w-4 h-4" />
+                <span>{category.name}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {/* Scroll indicators */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none rounded-l-lg" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none rounded-r-lg" />
+        </div>
 
         <TabsContent value={activeTab} className="mt-6">
-          {isLearningView ? (
-            // Learning View - Topic-based structured content
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-1 bg-gray-50 p-6 rounded-xl shadow-sm h-fit">
-                <h3 className="text-xl font-semibold mb-4">
-                  {activeTab === "javascript"
-                    ? "JavaScript Topics"
-                    : activeTab === "database"
-                    ? "Database Topics"
-                    : "Learning Topics"}
-                </h3>
-                <div className="space-y-2">
-                  {filteredPosts.slice(0, 5).map((post, idx) => (
-                    <button
-                      key={idx}
-                      className="w-full text-left p-3 rounded-lg transition-colors duration-200 hover:bg-green-100"
-                    >
-                      {post.title.rendered}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-sm">
-                <h2 className="text-2xl font-semibold mb-4">
-                  {filteredPosts[0]?.title.rendered || "Select a topic"}
-                </h2>
-                <div
-                  className="prose max-w-none"
-                  dangerouslySetInnerHTML={{
-                    __html: filteredPosts[0]?.content.rendered || "",
-                  }}
-                />
-              </div>
-            </div>
-          ) : // Blog View - Card-based content
-          filteredPosts.length > 0 ? (
+          {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPosts.map((post, index) => (
                 <BlogCard

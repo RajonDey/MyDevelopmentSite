@@ -32,7 +32,98 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   // Add async here
-  const posts: WPPost[] = await fetchPosts(); // Await is now valid
+  let posts: WPPost[] = [];
+  try {
+    // Try to fetch from WordPress API directly first
+    const baseUrl =
+      process.env.NEXT_PUBLIC_WP_API_URL || "http://localhost:3000";
+
+    if (baseUrl.includes("wp-json")) {
+      console.log("Homepage: Fetching from WordPress API:", baseUrl);
+      const res = await fetch(`${baseUrl}/posts?per_page=6&status=publish`, {
+        next: { revalidate: 3600 },
+      });
+
+      if (res.ok) {
+        const wpPosts = await res.json();
+        console.log("Homepage: Fetched", wpPosts.length, "posts");
+
+        // Process posts and fetch media URLs
+        const processedPosts = await Promise.all(
+          wpPosts.map(
+            async (post: {
+              id: number;
+              slug: string;
+              title: { rendered: string };
+              content: { rendered: string };
+              excerpt: { rendered: string };
+              date: string;
+              featured_media: number;
+              link: string;
+              categories: number[];
+            }) => {
+              let imageUrl = "/development-blog-placeholder.png";
+
+              if (post.featured_media) {
+                try {
+                  // Fetch media metadata to get the actual image URL
+                  const mediaRes = await fetch(
+                    `${baseUrl}/media/${post.featured_media}`
+                  );
+                  if (mediaRes.ok) {
+                    const mediaData = await mediaRes.json();
+                    imageUrl =
+                      mediaData.source_url ||
+                      "/development-blog-placeholder.png";
+                    console.log(
+                      "Homepage: Post",
+                      post.id,
+                      "media source URL:",
+                      imageUrl
+                    );
+                  }
+                } catch (mediaError) {
+                  console.warn(
+                    "Failed to fetch media for post",
+                    post.id,
+                    mediaError
+                  );
+                }
+              }
+
+              return {
+                id: post.id,
+                slug: post.slug,
+                title: { rendered: post.title.rendered },
+                content: { rendered: post.content.rendered },
+                excerpt: { rendered: post.excerpt.rendered },
+                date: post.date,
+                featured_media: post.featured_media,
+                link: post.link,
+                image: imageUrl,
+                category_ids: post.categories || [],
+                categories: post.categories || [],
+              };
+            }
+          )
+        );
+
+        posts = processedPosts;
+      }
+    } else {
+      // Fallback: try to fetch from local API if WordPress API is not available
+      try {
+        posts = await fetchPosts();
+      } catch (fallbackError) {
+        console.warn("Both WordPress API and local API failed:", fallbackError);
+        posts = [];
+      }
+    }
+  } catch (error) {
+    console.warn("Failed to fetch posts for home page:", error);
+    // Use empty array as fallback
+    posts = [];
+  }
 
   return (
     <>
@@ -212,39 +303,81 @@ export default async function AboutPage() {
 
         {/* Blog Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">Recent Blog Posts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">
+              Recent Blog Posts
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Stay updated with the latest insights, tutorials, and industry
+              trends in web development and technology.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {posts.length > 0 ? (
               posts.slice(0, 2).map((post) => (
-                <BlogCard
-                  key={post.id}
-                  title={post.title.rendered}
-                  excerpt={
-                    he
-                      .decode(
-                        post.excerpt.rendered
-                          .replace(/<[^>]+>/g, "") // Remove HTML tags
-                          .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
-                      )
-                      .trim() // Remove leading/trailing whitespace
-                      .slice(0, 100) + // Optional: Limit to 150 characters for consistency
-                    (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 100
-                      ? "..."
-                      : "") // Add ellipsis if truncated
-                  }
-                  date={new Date(post.date).toLocaleDateString()}
-                  slug={post.slug}
-                  image={post.image || "/development-blog-placeholder.png"}
-                  isDetailed={true}
-                />
+                <div key={post.id} className="h-full">
+                  <BlogCard
+                    title={post.title.rendered}
+                    excerpt={
+                      he
+                        .decode(
+                          post.excerpt.rendered
+                            .replace(/<[^>]+>/g, "") // Remove HTML tags
+                            .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
+                        )
+                        .trim() // Remove leading/trailing whitespace
+                        .slice(0, 120) + // Increased to 120 characters for better content
+                      (post.excerpt.rendered.replace(/<[^>]+>/g, "").length >
+                      120
+                        ? "..."
+                        : "") // Add ellipsis if truncated
+                    }
+                    date={new Date(post.date).toLocaleDateString()}
+                    slug={post.slug}
+                    image={post.image || "/development-blog-placeholder.png"}
+                    isDetailed={true}
+                    priority={true} // Prioritize loading for homepage
+                  />
+                </div>
               ))
             ) : (
-              <p>No blog posts available at the moment.</p>
+              <div className="col-span-full text-center py-12">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-8 h-8 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    />
+                  </svg>
+                </div>
+                <p className="text-gray-500 text-lg">
+                  No blog posts available at the moment.
+                </p>
+                <p className="text-gray-400 text-sm mt-2">
+                  Check back soon for new content!
+                </p>
+              </div>
             )}
           </div>
-          <Link href="/blog">
-            <Button variant="secondary">View All</Button>
-          </Link>
+
+          <div className="text-center">
+            <Link href="/blog">
+              <Button
+                variant="secondary"
+                className="px-8 py-3 text-lg font-semibold"
+              >
+                View All Blog Posts
+              </Button>
+            </Link>
+          </div>
         </section>
 
         {/* Enhanced Reviews Section */}

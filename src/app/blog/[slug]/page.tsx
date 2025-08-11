@@ -17,19 +17,34 @@ export async function generateMetadata({
 }: {
   params: Promise<BlogParams>;
 }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const post = await fetchPost(resolvedParams.slug);
+  try {
+    const resolvedParams = await params;
+    const post = await fetchPost(resolvedParams.slug);
 
-  return {
-    title: post.title.rendered,
-    description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
-    openGraph: {
+    return {
       title: post.title.rendered,
       description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
-      url: `https://development.rajondey.com/blog/${post.slug}`,
-      images: [{ url: post.image || "/development-blog-placeholder.png" }],
-    },
-  };
+      openGraph: {
+        title: post.title.rendered,
+        description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
+        url: `https://development.rajondey.com/blog/${post.slug}`,
+        images: [{ url: post.image || "/development-blog-placeholder.png" }],
+      },
+    };
+  } catch {
+    // Fallback metadata if post fetch fails during build
+    const resolvedParams = await params;
+    return {
+      title: `Blog Post | Rajon Dey`,
+      description: "Blog post content will be loaded at runtime.",
+      openGraph: {
+        title: `Blog Post | Rajon Dey`,
+        description: "Blog post content will be loaded at runtime.",
+        url: `https://development.rajondey.com/blog/${resolvedParams.slug}`,
+        images: [{ url: "/development-blog-placeholder.png" }],
+      },
+    };
+  }
 }
 
 export default async function BlogPostPage({
@@ -63,7 +78,14 @@ export default async function BlogPostPage({
           {/* Header */}
           <header className="space-y-6">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
-              {post.title.rendered}
+              {he.decode(
+                post.title.rendered
+                  .replace(/&#038;/g, "&")
+                  .replace(/&#8217;/g, "'")
+                  .replace(/&#8216;/g, "'")
+                  .replace(/&quot;/g, '"')
+                  .replace(/&amp;/g, "&")
+              )}
             </h1>
             <p className="text-gray-500 text-sm sm:text-base font-medium">
               {new Date(post.date).toLocaleDateString("en-US", {
