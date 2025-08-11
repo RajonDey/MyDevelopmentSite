@@ -8,9 +8,11 @@ import ClientSessionProvider from "@/components/ClientSessionProvider";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://development.rajondey.com"
+  ),
   title: staticPages.home.metaTitle,
   description: staticPages.home.metaDescription,
-  viewport: "width=device-width, initial-scale=1.0",
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
@@ -38,6 +40,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1.0,
 };
 
 export default function RootLayout({

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/common/ui/Button";
 import Link from "next/link";
-import { fetchPost, fetchPosts } from "@/lib/wp-api";
+import { fetchPost } from "@/lib/wp-api";
 import { WPPost } from "@/types/post";
 import he from "he";
 
@@ -156,14 +156,7 @@ export default async function BlogPostPage({
 }
 
 export async function generateStaticParams() {
-  try {
-    const posts = await fetchPosts();
-    return posts.map((post) => ({
-      slug: post.slug,
-    }));
-  } catch (error) {
-    console.warn("Failed to generate static params for blog posts:", error);
-    // Return empty array to prevent build failure
-    return [];
-  }
+  // Disable static generation during build to prevent localhost connection errors
+  // Posts will be generated dynamically at runtime
+  return [];
 }
