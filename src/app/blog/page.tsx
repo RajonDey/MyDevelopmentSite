@@ -41,7 +41,8 @@ function BlogSkeleton() {
 
 async function getPosts(): Promise<WPPost[]> {
   try {
-    const res = await fetch("http://localhost:3000/api/posts", {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/posts`, {
       next: { revalidate: 3600 },
     });
 

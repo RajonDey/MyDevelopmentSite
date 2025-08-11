@@ -27,7 +27,7 @@ export default function SignUpPage() {
         password,
         options: {
           data: { full_name: name }, // Store name as user metadata
-          emailRedirectTo: "http://localhost:3000/signin", // Redirect after verification
+          emailRedirectTo: "/signin", // Redirect after verification
         },
       });
 

@@ -19,7 +19,7 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "http://localhost:3000/reset-password", // Redirect after reset
+        redirectTo: "/reset-password", // Redirect after reset
       });
 
       if (error) throw error;
