@@ -156,8 +156,14 @@ export default async function BlogPostPage({
 }
 
 export async function generateStaticParams() {
-  const posts = await fetchPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    const posts = await fetchPosts();
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.warn("Failed to generate static params for blog posts:", error);
+    // Return empty array to prevent build failure
+    return [];
+  }
 }
