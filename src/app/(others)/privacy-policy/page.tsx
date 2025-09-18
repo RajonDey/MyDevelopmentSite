@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import { SEO } from "@/components/seo";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Rajon Dey",
+  title: "Privacy Policy | RDX Technologies",
   description:
-    "Learn how Rajon Dey collects, uses, and protects your personal information on development.rajondey.com.",
+    "Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com.",
   openGraph: {
-    title: "Privacy Policy | Rajon Dey",
+    title: "Privacy Policy | RDX Technologies",
     description:
-      "Learn how Rajon Dey collects, uses, and protects your personal information on development.rajondey.com.",
+      "Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com.",
     url: "https://development.rajondey.com/privacy-policy",
   },
 };
@@ -17,8 +17,8 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <SEO
-        title="Privacy Policy | Rajon Dey"
-        description="Learn how Rajon Dey collects, uses, and protects your personal information on development.rajondey.com."
+        title="Privacy Policy | RDX Technologies"
+        description="Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com."
         url="/privacy-policy"
       />
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -30,68 +30,162 @@ export default function PrivacyPolicyPage() {
           <p className="mt-2 text-sm text-gray-500">
             <strong>Last Updated:</strong> March 11, 2025
           </p>
+          <p className="mt-1 text-sm text-gray-600">
+            <strong>Business:</strong> RDX Technologies (Rajon Dey X
+            Technologies)
+          </p>
         </header>
+
+        {/* Bilingual Introduction */}
+        <section className="bg-gray-50 p-6 rounded-lg mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                English Version
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                Welcome to{" "}
+                <code className="font-mono text-gray-900">
+                  development.rajondey.com
+                </code>
+                ! I&rsquo;m Rajon Dey, founder of RDX Technologies, and this
+                Privacy Policy explains how we collect, use, and protect your
+                information when you visit our site or use our services. We
+                value your privacy and aim to keep things simple and
+                transparent.
+              </p>
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                বাংলা সংস্করণ
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                <code className="font-mono text-gray-900">
+                  development.rajondey.com
+                </code>{" "}
+                এ স্বাগতম! আমি রাজন দে, RDX Technologies-এর প্রতিষ্ঠাতা, এবং এই
+                গোপনীয়তা নীতি ব্যাখ্যা করে যে আমরা কীভাবে আপনার তথ্য সংগ্রহ,
+                ব্যবহার এবং সুরক্ষা করি যখন আপনি আমাদের সাইট পরিদর্শন করেন বা
+                আমাদের সেবা ব্যবহার করেন। আমরা আপনার গোপনীয়তাকে মূল্য দিই এবং
+                বিষয়গুলো সহজ ও স্বচ্ছ রাখার চেষ্টা করি।
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Main Content */}
         <main className="space-y-8 text-gray-700">
-          <section>
-            <p className="text-lg leading-relaxed">
-              Welcome to{" "}
-              <code className="font-mono text-gray-900">
-                development.rajondey.com
-              </code>
-              ! I’m Rajon Dey, a software developer, and this Privacy
-              Policy explains how I collect, use, and protect your information
-              when you visit my site or use my services. I value your privacy
-              and aim to keep things simple and transparent.
-            </p>
+          <section className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  1. What Information We Collect
+                </h2>
+                <p className="leading-relaxed">
+                  We may collect the following types of information:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    <span className="font-medium">Personal Information:</span>{" "}
+                    Your name, email address, or phone number if you contact us
+                    via the contact form, WhatsApp, or book a consultation
+                    through Calendly. Your email address if you subscribe to our
+                    newsletter via Beehiiv.
+                  </li>
+                  <li>
+                    <span className="font-medium">
+                      Non-Personal Information:
+                    </span>{" "}
+                    Usage data like your IP address, browser type, and pages
+                    visited, collected through analytics tools (e.g., Google
+                    Analytics, if implemented). Information from blog comments
+                    (e.g., name, email) if you leave a comment on our WordPress
+                    blog.
+                  </li>
+                </ul>
+                <p className="italic text-gray-600">
+                  We don&apos;t collect more than we need, and we don&apos;t
+                  sell your data.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  ১. আমরা কী তথ্য সংগ্রহ করি
+                </h2>
+                <p className="leading-relaxed">
+                  আমরা নিম্নলিখিত ধরনের তথ্য সংগ্রহ করতে পারি:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    <span className="font-medium">ব্যক্তিগত তথ্য:</span> আপনার
+                    নাম, ইমেইল ঠিকানা, বা ফোন নম্বর যদি আপনি যোগাযোগ ফর্ম,
+                    হোয়াটসঅ্যাপ বা ক্যালেন্ডলির মাধ্যমে পরামর্শের জন্য বুকিং
+                    করেন। আপনার ইমেইল ঠিকানা যদি আপনি বিহিভের মাধ্যমে আমাদের
+                    নিউজলেটারে সাবস্ক্রাইব করেন।
+                  </li>
+                  <li>
+                    <span className="font-medium">অব্যক্তিগত তথ্য:</span>{" "}
+                    ব্যবহারের তথ্য যেমন আপনার IP ঠিকানা, ব্রাউজার টাইপ এবং
+                    পরিদর্শিত পৃষ্ঠা, অ্যানালিটিক্স টুলের মাধ্যমে সংগ্রহ করা
+                    (যেমন Google Analytics)। ব্লগ কমেন্টের তথ্য (যেমন নাম,
+                    ইমেইল) যদি আপনি আমাদের ওয়ার্ডপ্রেস ব্লগে কমেন্ট করেন।
+                  </li>
+                </ul>
+                <p className="italic text-gray-600">
+                  আমরা প্রয়োজনের চেয়ে বেশি সংগ্রহ করি না এবং আপনার তথ্য বিক্রি
+                  করি না।
+                </p>
+              </div>
+            </div>
           </section>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-900">
-              1. What Information I Collect
-            </h2>
-            <p className="leading-relaxed">
-              I may collect the following types of information:
-            </p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                <span className="font-medium">Personal Information:</span> Your
-                name, email address, or phone number if you contact me via the
-                contact form, WhatsApp, or book a consultation through Calendly.
-                Your email address if you subscribe to my newsletter via
-                Beehiiv.
-              </li>
-              <li>
-                <span className="font-medium">Non-Personal Information:</span>{" "}
-                Usage data like your IP address, browser type, and pages
-                visited, collected through analytics tools (e.g., Google
-                Analytics, if implemented). Information from blog comments
-                (e.g., name, email) if you leave a comment on my WordPress blog.
-              </li>
-            </ul>
-            <p className="italic text-gray-600">
-              I don’t collect more than I need, and I don’t sell your data.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-900">
-              2. How I Use Your Information
-            </h2>
-            <p className="leading-relaxed">I use your information to:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Respond to your inquiries or schedule consultations.</li>
-              <li>
-                Send you newsletters or updates if you’ve subscribed (you can
-                unsubscribe anytime).
-              </li>
-              <li>
-                Improve my website by understanding how visitors use it (via
-                analytics).
-              </li>
-              <li>Display your comments on blog posts if you submit them.</li>
-            </ul>
+          <section className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  2. How We Use Your Information
+                </h2>
+                <p className="leading-relaxed">We use your information to:</p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>Respond to your inquiries or schedule consultations.</li>
+                  <li>
+                    Send you newsletters or updates if you&apos;ve subscribed
+                    (you can unsubscribe anytime).
+                  </li>
+                  <li>
+                    Improve our website by understanding how visitors use it
+                    (via analytics).
+                  </li>
+                  <li>
+                    Display your comments on blog posts if you submit them.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  ২. আমরা আপনার তথ্য কীভাবে ব্যবহার করি
+                </h2>
+                <p className="leading-relaxed">আমরা আপনার তথ্য ব্যবহার করি:</p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    আপনার জিজ্ঞাসার উত্তর দেওয়ার বা পরামর্শের সময় নির্ধারণের
+                    জন্য।
+                  </li>
+                  <li>
+                    নিউজলেটার বা আপডেট পাঠানোর জন্য যদি আপনি সাবস্ক্রাইব করেন
+                    (আপনি যেকোনো সময় আনসাবস্ক্রাইব করতে পারেন)।
+                  </li>
+                  <li>
+                    ভিজিটররা কীভাবে এটি ব্যবহার করে তা বুঝে আমাদের ওয়েবসাইট
+                    উন্নত করার জন্য (অ্যানালিটিক্সের মাধ্যমে)।
+                  </li>
+                  <li>
+                    ব্লগ পোস্টে আপনার কমেন্ট প্রদর্শনের জন্য যদি আপনি সেগুলো জমা
+                    দেন।
+                  </li>
+                </ul>
+              </div>
+            </div>
           </section>
 
           <section className="space-y-4">
@@ -177,10 +271,10 @@ export default function PrivacyPolicyPage() {
 
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold text-gray-900">
-              4. How I Protect Your Information
+              4. How We Protect Your Information
             </h2>
             <p className="leading-relaxed">
-              I take reasonable steps to keep your data safe:
+              We take reasonable steps to keep your data safe:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>My site uses HTTPS for secure connections.</li>
@@ -233,10 +327,10 @@ export default function PrivacyPolicyPage() {
             <p className="leading-relaxed">
               To exercise these rights, email me at{" "}
               <a
-                href="mailto:hello@rajondey.com"
+                href="mailto:contact@rajondey.com"
                 className="text-blue-600 hover:underline"
               >
-                hello@rajondey.com
+                contact@rajondey.com
               </a>
               .
             </p>
@@ -301,39 +395,90 @@ export default function PrivacyPolicyPage() {
             </p>
           </section>
 
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-900">
-              11. Contact Me
-            </h2>
-            <p className="leading-relaxed">Questions? Reach out:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                <span className="font-medium">Email:</span>{" "}
-                <a
-                  href="mailto:hello@rajondey.com"
-                  className="text-blue-600 hover:underline"
-                >
-                  hello@rajondey.com
-                </a>
-              </li>
-              <li>
-                <span className="font-medium">WhatsApp:</span>{" "}
-                <a
-                  href="https://wa.me/01737997143"
-                  className="text-blue-600 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  +880 1737-997143
-                </a>
-              </li>
-              <li>
-                <span className="font-medium">Address:</span> Sylhet, Bangladesh
-              </li>
-            </ul>
-            <p className="text-lg font-medium text-gray-900">
-              Thanks for trusting me with your information!
-            </p>
+          <section className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  11. Contact Us
+                </h2>
+                <p className="leading-relaxed">
+                  Questions? Reach out to RDX Technologies:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    <span className="font-medium">Email:</span>{" "}
+                    <a
+                      href="mailto:contact@rajondey.com"
+                      className="text-blue-600 hover:underline"
+                    >
+                      contact@rajondey.com
+                    </a>
+                  </li>
+                  <li>
+                    <span className="font-medium">WhatsApp:</span>{" "}
+                    <a
+                      href="https://wa.me/01737997143"
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      +880 1737-997143
+                    </a>
+                  </li>
+                  <li>
+                    <span className="font-medium">Address:</span> Sylhet,
+                    Bangladesh
+                  </li>
+                  <li>
+                    <span className="font-medium">Business:</span> RDX
+                    Technologies (Rajon Dey X Technologies)
+                  </li>
+                </ul>
+                <p className="text-lg font-medium text-gray-900">
+                  Thanks for trusting RDX Technologies with your information!
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  ১১. আমাদের সাথে যোগাযোগ
+                </h2>
+                <p className="leading-relaxed">
+                  প্রশ্ন আছে? RDX Technologies-এর সাথে যোগাযোগ করুন:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    <span className="font-medium">ইমেইল:</span>{" "}
+                    <a
+                      href="mailto:contact@rajondey.com"
+                      className="text-blue-600 hover:underline"
+                    >
+                      contact@rajondey.com
+                    </a>
+                  </li>
+                  <li>
+                    <span className="font-medium">হোয়াটসঅ্যাপ:</span>{" "}
+                    <a
+                      href="https://wa.me/01737997143"
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      +880 1737-997143
+                    </a>
+                  </li>
+                  <li>
+                    <span className="font-medium">ঠিকানা:</span> সিলেট, বাংলাদেশ
+                  </li>
+                  <li>
+                    <span className="font-medium">ব্যবসা:</span> RDX
+                    Technologies (Rajon Dey X Technologies)
+                  </li>
+                </ul>
+                <p className="text-lg font-medium text-gray-900">
+                  আপনার তথ্য আমাদের কাছে বিশ্বাস করার জন্য ধন্যবাদ!
+                </p>
+              </div>
+            </div>
           </section>
         </main>
       </div>

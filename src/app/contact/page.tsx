@@ -37,9 +37,18 @@ export default function ContactPage() {
             Let&apos;s Build Something Amazing Together
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to transform your ideas into reality? I&apos;m here to help
-            you create stunning, high-performing websites that drive results.
+            Ready to transform your ideas into reality? RDX Technologies is here
+            to help you create stunning, high-performing websites that drive
+            results.
           </p>
+          <div className="mt-4 p-4 bg-gray-50 rounded-lg max-w-md mx-auto">
+            <p className="text-sm text-gray-600">
+              <strong>RDX Technologies</strong> (Rajon Dey X Technologies)
+            </p>
+            <p className="text-xs text-gray-500">
+              Professional Software Development Services
+            </p>
+          </div>
         </section>
 
         {/* Quick Stats */}
@@ -316,9 +325,35 @@ export default function ContactPage() {
               </a>
             </Card>
 
+            {/* Business Information */}
+            <Card className="p-6 bg-blue-50">
+              <h3 className="text-lg font-semibold mb-4">
+                Business Information
+              </h3>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <span className="font-medium text-gray-700">Company:</span>
+                  <p className="text-gray-600">RDX Technologies</p>
+                  <p className="text-xs text-gray-500">
+                    (Rajon Dey X Technologies)
+                  </p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Address:</span>
+                  <p className="text-gray-600">Sylhet, Bangladesh</p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Services:</span>
+                  <p className="text-gray-600">
+                    Software Development, Web Apps, E-commerce
+                  </p>
+                </div>
+              </div>
+            </Card>
+
             {/* Response Time Promise */}
             <Card className="p-6 bg-gray-50">
-              <h3 className="text-lg font-semibold mb-2">My Promise to You</h3>
+              <h3 className="text-lg font-semibold mb-2">Our Promise to You</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-600" />

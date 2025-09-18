@@ -106,12 +106,17 @@ export function ServiceCard({
                   ))}
                 </div>
               )}
-              <Button
-                variant="outline"
-                className="transition-all duration-300 group-hover:scale-105 group-hover:text-primary"
-              >
-                View Details
-              </Button>
+              <div className="mt-auto">
+                <Button
+                  variant="outline"
+                  className="transition-all duration-300 group-hover:scale-105 group-hover:text-primary w-full"
+                >
+                  View Details
+                </Button>
+                <div className="text-xs text-gray-400 text-center mt-2">
+                  Powered by RDX Technologies
+                </div>
+              </div>
             </CardContent>
           </>
         ) : (
@@ -137,7 +142,14 @@ export function ServiceCard({
                 {getServicePriceDescription(`${id}`)}
               </p>
             )}
-            <Button variant="outline">Learn More</Button>
+            <div>
+              <Button variant="outline" className="w-full">
+                Learn More
+              </Button>
+              <div className="text-xs text-gray-400 text-center mt-2">
+                Powered by RDX Technologies
+              </div>
+            </div>
           </CardContent>
         )}
       </Card>

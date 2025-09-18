@@ -73,6 +73,12 @@ export default function Footer() {
             FAQ
           </Link>
           <Link
+            href="/terms-of-service"
+            className="hover:text-green-400 transition-colors duration-200 text-sm"
+          >
+            Terms of Service
+          </Link>
+          <Link
             href="/privacy-policy"
             className="hover:text-green-400 transition-colors duration-200 text-sm"
           >
@@ -139,7 +145,8 @@ export default function Footer() {
       {/* Copyright Notice */}
       <div className="text-center mt-8 pt-6 border-t border-gray-700">
         <p className="text-sm text-gray-400">
-          © {new Date().getFullYear()} Rajon Dey. All rights reserved.
+          © {new Date().getFullYear()} RDX Technologies (Rajon Dey). All rights
+          reserved.
         </p>
       </div>
     </footer>

@@ -145,7 +145,12 @@ export default async function AboutPage() {
                 className="rounded-full"
               />
               <div>
-                <h1 className="text-2xl font-bold">Rajon Dey</h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-2xl font-bold">Rajon Dey</h1>
+                  <Badge variant="outline" className="text-xs">
+                    RDX Technologies
+                  </Badge>
+                </div>
                 <div className="flex items-center gap-1 mt-1">
                   <Star className="w-4 h-4 fill-primary" />
                   <span className="font-medium">4.9</span>
@@ -159,15 +164,18 @@ export default async function AboutPage() {
             </div>
 
             <div className="mt-8 space-y-4">
-              <h2 className="text-xl font-semibold">About me</h2>
+              <h2 className="text-xl font-semibold">
+                About me & RDX Technologies
+              </h2>
               <p className="text-muted-foreground">
-                👨‍💻 A Software Developer with expertise in React, Next.js,
-                Node.js, and Three.js. I specialize in creating scalable,
-                efficient, and user-friendly web applications. My passion lies
-                in transforming ideas into reality by leveraging modern
-                technologies and collaborative problem-solving. I&apos;m also
-                experienced in building websites using Headless CMS and
-                platforms like WordPress, Shopify, Wix, and Squarespace.
+                👨‍💻 A Software Developer and founder of RDX Technologies with
+                expertise in React, Next.js, Node.js, and Three.js. I specialize
+                in creating scalable, efficient, and user-friendly web
+                applications. My passion lies in transforming ideas into reality
+                by leveraging modern technologies and collaborative
+                problem-solving. I&apos;m also experienced in building websites
+                using Headless CMS and platforms like WordPress, Shopify, Wix,
+                and Squarespace.
               </p>
             </div>
 

@@ -29,7 +29,7 @@ export default function Header() {
     { href: "/services", label: "Services", icon: Briefcase },
     { href: "/portfolio", label: "Portfolio", icon: FolderGit2 },
     { href: "/blog", label: "Blog & Learn", icon: BookOpen },
-    { href: "/hire", label: "Start a Project", icon: ShoppingCart },
+    { href: "/hire", label: "Work With Us", icon: ShoppingCart },
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 
@@ -41,7 +41,12 @@ export default function Header() {
           href="/"
           className="text-2xl font-bold text-gray-900 hover:text-green-600 transition-colors duration-200"
         >
-          Rajon Dey
+          <div>
+            <div>Rajon Dey</div>
+            <div className="text-xs text-gray-500 font-normal">
+              RDX Technologies
+            </div>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
