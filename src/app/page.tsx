@@ -147,7 +147,7 @@ export default async function AboutPage() {
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="text-2xl font-bold">Rajon Dey</h1>
-                  <Badge variant="outline" className="text-xs">
+                  <Badge className="text-xs">
                     RDX Technologies
                   </Badge>
                 </div>
