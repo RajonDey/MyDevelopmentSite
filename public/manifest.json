@@ -1,94 +1,46 @@
 {
-  "name": "Rajon Dey - Software Developer",
-  "short_name": "Rajon Dey",
-  "description": "Hire Rajon Dey, a Software Developer specializing in Next.js, React, and full-stack solutions. Get scalable, high-quality software tailored to your business needs—contact me today!",
+  "name": "RDX Technologies",
+  "short_name": "RDX",
+  "description": "Websites, CRM automation, and product builds for growth-focused teams. Fixed projects from $1,000.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#faf9f7",
+  "theme_color": "#1a1a1a",
   "orientation": "any",
   "icons": [
     {
-      "src": "/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
     }
-  ],
-  "categories": [
-    "technology",
-    "software",
-    "software development",
-    "programming",
-    "next.js",
-    "react",
-    "node.js",
-    "e-commerce",
-    "headless cms",
-    "wordpress",
-    "email templates",
-    "software development",
-    "mern stack",
-    "express",
-    "mongodb",
-    "typescript",
-    "react native",
-    "aws",
-    "docker",
-    "firebase",
-    "supabase",
-    "postgresql",
-    "mysql",
-    "javascript",
-    "html",
-    "css",
-    "git",
-    "github",
-    "problem solving",
-    "full stack development",
-    "software engineering",
-    "freelance developer",
-    "custom software solutions",
-    "shopify development",
-    "wordpress development"
   ],
   "lang": "en-US",
   "dir": "ltr",
-  "prefer_related_applications": false,
   "scope": "/",
   "shortcuts": [
     {
-      "name": "See My Work",
-      "short_name": "Portfolio",
-      "description": "See Rajon Dey’s successful software development projects",
-      "url": "/portfolio",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Contact Rajon",
-      "short_name": "Contact",
-      "description": "Get in touch for software development inquiries",
-      "url": "/contact",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "name": "Free review",
+      "short_name": "Start",
+      "description": "Request a free website and workflow review",
+      "url": "/start"
     },
     {
       "name": "Services",
       "short_name": "Services",
-      "description": "Check out Rajon’s software development services",
-      "url": "/services",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "description": "RDX service tiers and pricing",
+      "url": "/services"
     },
     {
-      "name": "Learn Software Development",
+      "name": "Work",
+      "short_name": "Work",
+      "description": "Client deliveries and products",
+      "url": "/work"
+    },
+    {
+      "name": "Blog",
       "short_name": "Blog",
-      "description": "Learn Next.js, React, and more with Rajon Dey’s blog",
-      "url": "/blog",
-      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+      "description": "Notes on websites and automation",
+      "url": "/blog"
     }
   ]
 }

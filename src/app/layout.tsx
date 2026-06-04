@@ -1,44 +1,51 @@
-import Header from "@/components/common/layout/Header";
-import Footer from "@/components/common/layout/Footer";
+import { RdxHeader } from "@/components/rdx/layout/Header";
+import { RdxFooter } from "@/components/rdx/layout/Footer";
 import "@/styles/globals.css";
-import { staticPages } from "@/data/mock-data";
+import { siteMetadata } from "@/content/rdx/metadata";
+import { seoKeywords } from "@/content/rdx/seo";
+import { rdxFontVariables } from "@/lib/rdx-fonts";
 import { Metadata } from "next";
 import SchemaOrg from "./SchemaOrg";
 import ClientSessionProvider from "@/components/ClientSessionProvider";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_WP_API_URL || "https://development.rajondey.com"
-  ),
-  title: staticPages.home.metaTitle,
-  description: staticPages.home.metaDescription,
+  metadataBase: new URL(siteMetadata.siteUrl),
+  title: siteMetadata.title,
+  description: siteMetadata.description,
+  keywords: [...seoKeywords],
+  applicationName: siteMetadata.siteName,
   robots: { index: true, follow: true },
+  alternates: {
+    types: {
+      "text/markdown": [{ url: "/llms.txt", title: "LLM site summary" }],
+    },
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://development.rajondey.com",
-    siteName: "Rajon Dey - Software Developer",
-    title: staticPages.home.metaTitle,
-    description: staticPages.home.metaDescription,
+    locale: siteMetadata.locale,
+    url: siteMetadata.siteUrl,
+    siteName: siteMetadata.siteName,
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     images: [
       {
-        url: "/og-image.jpg",
+        url: siteMetadata.ogImage,
         width: 1200,
         height: 630,
-        alt: "Rajon Dey - Software Developer",
+        alt: siteMetadata.siteName,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: staticPages.home.metaTitle,
-    description: staticPages.home.metaDescription,
-    images: ["/og-image.jpg"],
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [siteMetadata.ogImage],
   },
   manifest: "/manifest.json",
   icons: {
-    icon: "/favicon.ico",
+    icon: [{ url: "/favicon.ico", sizes: "16x16 32x32 48x48" }],
   },
 };
 
@@ -53,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={rdxFontVariables}>
       <head>
         <script async src="https://tally.so/widgets/embed.js" />
         {/* Google Tag Manager - Head */}
@@ -75,7 +82,7 @@ export default function RootLayout({
 
         <SchemaOrg />
       </head>
-      <body>
+      <body className="bg-rdx-paper font-rdx text-rdx-ink antialiased">
         {/* Google Tag Manager - Noscript */}
         <noscript>
           <iframe
@@ -86,9 +93,9 @@ export default function RootLayout({
           />
         </noscript>
         <ClientSessionProvider>
-          <Header />
-          <main className="py-16">{children}</main>
-          <Footer />
+          <RdxHeader />
+          <main className="min-h-screen pt-16">{children}</main>
+          <RdxFooter />
         </ClientSessionProvider>
       </body>
     </html>

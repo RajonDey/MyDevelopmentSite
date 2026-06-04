@@ -28,7 +28,7 @@ export default function TermsOfServicePage() {
             Terms of Service
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            <strong>Last Updated:</strong> March 11, 2025
+            <strong>Last Updated:</strong> June 2, 2026
           </p>
           <p className="mt-1 text-sm text-gray-600">
             <strong>Business:</strong> RDX Technologies (Rajon Dey X
@@ -530,6 +530,64 @@ export default function TermsOfServicePage() {
                       ব্যর্থতার জন্য আমরা দায়ী নই।
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Project inquiries */}
+          <section className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                  Project Inquiries &amp; Form Data
+                </h2>
+                <div className="space-y-3 text-gray-700 leading-relaxed">
+                  <p>
+                    When you submit the{" "}
+                    <strong>Free Website &amp; Workflow Review</strong> form at{" "}
+                    <code className="font-mono text-sm">/start</code>, you
+                    provide business contact details and project scope
+                    information so we can respond with next steps.
+                  </p>
+                  <p>
+                    Submissions are used only for sales follow-up and scoping.
+                    We may store them in our business email system and, when
+                    enabled, a secure database. See our{" "}
+                    <a
+                      href="/privacy-policy"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Privacy Policy
+                    </a>{" "}
+                    for retention and third-party processors (Resend, optional
+                    Supabase).
+                  </p>
+                  <p>
+                    Submitting the form does not create a binding contract.
+                    Fixed scope and pricing are confirmed in a written proposal
+                    after the review call.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                  প্রকল্প অনুসন্ধান ও ফর্ম ডেটা
+                </h2>
+                <div className="space-y-3 text-gray-700 leading-relaxed">
+                  <p>
+                    <code className="font-mono text-sm">/start</code> এ রিভিউ
+                    ফর্ম জমা দিলে আপনি যোগাযোগের তথ্য ও প্রকল্পের স্কোপ
+                    প্রদান করেন যাতে আমরা পরবর্তী পদক্ষেপ জানাতে পারি।
+                  </p>
+                  <p>
+                    জমা দেওয়া তথ্য শুধুমাত্র বিক্রয় ফলো-আপ ও স্কোপিংয়ের জন্য
+                    ব্যবহৃত হয়। বিস্তারিত আমাদের গোপনীয়তা নীতিতে দেখুন।
+                  </p>
+                  <p>
+                    ফর্ম জমা দেওয়া কোনো বাধ্যতামূলক চুক্তি তৈরি করে না — চূড়ান্ত
+                    স্কোপ ও মূল্য লিখিত প্রস্তাবে নিশ্চিত হয়।
+                  </p>
                 </div>
               </div>
             </div>

@@ -1,0 +1,148 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "RDX Technologies" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - button "Open menu" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+  - main [ref=e7]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - paragraph [ref=e11]: About
+        - heading "RDX Technologies" [level=2] [ref=e12]
+        - paragraph [ref=e13]: A global remote product & engineering company — client sites, platforms, and automation in fixed projects from $1,000.
+      - generic [ref=e14]:
+        - generic [ref=e15]: Global remote team
+        - generic [ref=e16]: Projects from $1,000
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - term [ref=e21]: Remote
+        - definition [ref=e22]: Global team
+      - generic [ref=e23]:
+        - term [ref=e24]: From $1K
+        - definition [ref=e25]: Project floor
+      - generic [ref=e26]:
+        - term [ref=e27]: Fixed
+        - definition [ref=e28]: Scoped tiers
+      - generic [ref=e29]:
+        - term [ref=e30]: US agencies
+        - definition [ref=e31]: Primary ICP
+    - generic [ref=e33]:
+      - paragraph [ref=e34]: We combine senior full-stack engineering (Next.js, React, Node.js) with practical automation (n8n, Make.com, CRM integrations). Most projects ship in 2–3 months with support when you need it — scoped in round numbers, not open-ended hourly work.
+      - paragraph [ref=e35]: We work with US marketing agencies, service businesses, and education brands that need a credible site and systems that do not depend on copying forms from email into a CRM.
+      - paragraph [ref=e36]: Founded by a senior full-stack engineer with agency and enterprise delivery experience — team-led builds on headless CMS, email systems, and product SaaS.
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: Product proof
+        - heading "We ship our own SaaS too" [level=2] [ref=e41]
+        - paragraph [ref=e42]: YearInReview is a live product we built on Next.js and PostgreSQL — the same stack and delivery standards we bring to agency projects.
+      - link "View YearInReview →" [ref=e43] [cursor=pointer]:
+        - /url: https://www.yearinreview.online/
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - paragraph [ref=e47]: Reviews
+        - heading "Verified client feedback" [level=2] [ref=e48]
+        - paragraph [ref=e49]: Google and Fiverr reviews from website and form projects — verbatim quotes only. Current RDX service tiers are listed on /services.
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - blockquote [ref=e52]: “I'm extremely satisfied with the website created for Härlig Städ AB. The team was professional and responsive and delivered a modern, user-friendly website. The quotation form is smooth, and the whole experience was seamless from start to finish. Highly Recommended.”
+          - generic [ref=e53]:
+            - paragraph [ref=e54]: Härlig Städ AB · Google review
+            - link "Verified on Google →" [ref=e55] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu
+        - generic [ref=e56]:
+          - blockquote [ref=e57]: “I'm very satisfied with the website. The design is clean, professional, and exactly what I was looking for. Great communication and support throughout. Highly recommended!”
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: Härlig Städ · Google review
+            - link "Verified on Google →" [ref=e60] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu
+        - generic [ref=e61]:
+          - blockquote [ref=e62]: “Great communication throughout the project. Rajon was quick to implement changes and provided valuable suggestions to improve our site.”
+          - generic [ref=e63]:
+            - paragraph [ref=e64]: David W. · Founder · Verified on Fiverr
+            - link "Verified on Fiverr →" [ref=e65] [cursor=pointer]:
+              - /url: https://www.fiverr.com/rajjohin#Reviews
+      - generic [ref=e66]:
+        - link "Fiverr reviews →" [ref=e67] [cursor=pointer]:
+          - /url: https://www.fiverr.com/rajjohin#Reviews
+        - link "Google reviews →" [ref=e68] [cursor=pointer]:
+          - /url: https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - paragraph [ref=e72]: Communication
+        - heading "How we work remotely" [level=2] [ref=e73]
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - heading "Async by default" [level=3] [ref=e76]
+          - paragraph [ref=e77]: Written updates in Slack or email — no standing daily meetings unless you want them.
+        - generic [ref=e78]:
+          - heading "Loom walkthroughs" [level=3] [ref=e79]
+          - paragraph [ref=e80]: Build progress and handoffs recorded so your team can review on their schedule.
+        - generic [ref=e81]:
+          - heading "Overlap for calls" [level=3] [ref=e82]
+          - paragraph [ref=e83]: Review, kickoff, and handoff calls scheduled with US-friendly overlap.
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - link "Free Website & Workflow Review" [ref=e87] [cursor=pointer]:
+          - /url: /start
+        - link "View work" [ref=e88] [cursor=pointer]:
+          - /url: /work
+      - link "Full technical portfolio →" [ref=e89] [cursor=pointer]:
+        - /url: https://portfolio.rajondey.com/projects?sort=impact
+    - link [ref=e91] [cursor=pointer]:
+      - /url: /start
+      - text: Free Review
+  - contentinfo [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - paragraph [ref=e96]: RDX Technologies
+          - paragraph [ref=e97]: Websites & systems for growth-focused teams
+          - paragraph [ref=e98]: Global remote team
+        - generic [ref=e99]:
+          - heading "Services" [level=2] [ref=e100]
+          - list [ref=e101]:
+            - listitem [ref=e102]:
+              - link "Agency Website" [ref=e103] [cursor=pointer]:
+                - /url: /services/agency-website
+            - listitem [ref=e104]:
+              - link "Lead & CRM Automation" [ref=e105] [cursor=pointer]:
+                - /url: /services/lead-automation
+            - listitem [ref=e106]:
+              - link "AI Chat & Search" [ref=e107] [cursor=pointer]:
+                - /url: /services/ai-chat-search
+            - listitem [ref=e108]:
+              - link "Care plans" [ref=e109] [cursor=pointer]:
+                - /url: /retainer
+        - generic [ref=e110]:
+          - heading "Company" [level=2] [ref=e111]
+          - list [ref=e112]:
+            - listitem [ref=e113]:
+              - link "Work" [ref=e114] [cursor=pointer]:
+                - /url: /work
+            - listitem [ref=e115]:
+              - link "Process" [ref=e116] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=e117]:
+              - link "About" [ref=e118] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e119]:
+              - link "Blog" [ref=e120] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e121]:
+              - link "Start a project" [ref=e122] [cursor=pointer]:
+                - /url: /start
+        - generic [ref=e123]:
+          - heading "Legal" [level=2] [ref=e124]
+          - list [ref=e125]:
+            - listitem [ref=e126]:
+              - link "Privacy" [ref=e127] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e128]:
+              - link "Terms" [ref=e129] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=e130]:
+              - link "FAQ" [ref=e131] [cursor=pointer]:
+                - /url: /faq
+      - paragraph [ref=e133]: © 2026 RDX Technologies
+  - alert [ref=e134]

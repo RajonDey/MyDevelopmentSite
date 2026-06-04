@@ -1,32 +1,36 @@
-
 import { Metadata } from "next";
+import { newsletterContent } from "@/content/rdx/newsletter";
+import { pageMeta } from "@/content/rdx/pages";
+import { siteMetadata } from "@/content/rdx/metadata";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
+import { RdxContainer } from "@/components/rdx/layout/Container";
+import { RdxSection } from "@/components/rdx/layout/Section";
 
 export const metadata: Metadata = {
-  title: "Developer Data Newsletter | Rajon Dey",
-  description:
-    "Subscribe to Rajon Dey’s Developer Data newsletter for the latest insights on software development trends and data.",
+  title: pageMeta.newsletter.title,
+  description: pageMeta.newsletter.description,
   openGraph: {
-    title: "Developer Data Newsletter | Rajon Dey",
-    description:
-      "Subscribe to Rajon Dey’s Developer Data newsletter for the latest insights on software development trends and data.",
-    url: "https://development.rajondey.com/newsletter",
+    title: pageMeta.newsletter.title,
+    description: pageMeta.newsletter.description,
+    url: `${siteMetadata.siteUrl}/newsletter`,
+    siteName: siteMetadata.siteName,
   },
 };
 
 export default function NewsletterPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <section className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Developer Data Newsletter
-        </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Stay ahead with the latest developer trends, data insights, and tips
-          from Rajon Dey.
-        </p>
-      </section>
-      <BeehiivSubscribe />
-    </div>
+    <RdxSection className="pt-4 md:pt-8">
+      <RdxContainer className="max-w-2xl">
+        <div className="mb-8 space-y-3 text-center">
+          <h1 className="text-3xl font-semibold tracking-tight text-rdx-ink md:text-4xl">
+            {newsletterContent.headline}
+          </h1>
+          <p className="text-base leading-relaxed text-rdx-muted">
+            {newsletterContent.subhead}
+          </p>
+        </div>
+        <BeehiivSubscribe />
+      </RdxContainer>
+    </RdxSection>
   );
 }

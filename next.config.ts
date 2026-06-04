@@ -95,13 +95,78 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/work",
-        destination: "/portfolio",
+        source: "/projects",
+        destination: "/work",
         permanent: true,
       },
       {
-        source: "/projects",
-        destination: "/portfolio",
+        source: "/resources",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/resources/:path*",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/hire",
+        destination: "/start",
+        permanent: true,
+      },
+      {
+        source: "/hire/:path*",
+        destination: "/start",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/start",
+        permanent: true,
+      },
+      {
+        source: "/audit",
+        destination: "/start",
+        permanent: true,
+      },
+      {
+        source: "/estimate",
+        destination: "/start?step=scope",
+        permanent: true,
+      },
+      {
+        source: "/order",
+        destination: "/start?step=scope",
+        permanent: true,
+      },
+      {
+        source: "/order/:path*",
+        destination: "/start?step=scope",
+        permanent: true,
+      },
+      {
+        source: "/portfolio",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/portfolio/:path*",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/work/marketing-agency-site",
+        destination: "/work/agency-headless-phase-one",
+        permanent: true,
+      },
+      {
+        source: "/learn",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/learn/:path*",
+        destination: "/blog",
         permanent: true,
       },
     ];

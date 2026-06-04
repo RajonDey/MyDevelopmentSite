@@ -1,0 +1,274 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "RDX Technologies" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - button "Open menu" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+  - main [ref=e7]:
+    - link "← All services" [ref=e10] [cursor=pointer]:
+      - /url: /services
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: From $1,000
+        - heading "Forms that reach your CRM." [level=1] [ref=e16]
+        - paragraph [ref=e17]: We build your agency marketing site and connect every form to HubSpot, Slack, Calendly, or email — fixed tiers, no surprise invoices.
+        - generic [ref=e18]:
+          - link "Free Website & Workflow Review" [ref=e19] [cursor=pointer]:
+            - /url: /start?need=website
+          - link "View all services" [ref=e20] [cursor=pointer]:
+            - /url: /services
+      - img "Website forms connected to CRM workflow" [ref=e22]:
+        - generic [ref=e25]: Website
+        - generic [ref=e27]: Forms
+        - generic [ref=e29]: CRM
+        - generic [ref=e30]: Slack · HubSpot
+        - generic [ref=e31]: Leads routed automatically — no inbox copy-paste
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - paragraph [ref=e35]: Deliverables
+        - heading "What you get" [level=2] [ref=e36]
+        - paragraph [ref=e37]: Every tier includes a fixed page count, timeline, and support window — details in the tier table below.
+      - list [ref=e38]:
+        - listitem [ref=e39]:
+          - generic [ref=e40]: •
+          - text: Marketing pages on Next.js (tier-based page count)
+        - listitem [ref=e41]:
+          - generic [ref=e42]: •
+          - text: Form capture with field mapping to your tool
+        - listitem [ref=e43]:
+          - generic [ref=e44]: •
+          - text: Headless WordPress for blog and key editable pages (Standard+)
+        - listitem [ref=e45]:
+          - generic [ref=e46]: •
+          - text: GA4 baseline and conversion events (Standard+)
+        - listitem [ref=e47]:
+          - generic [ref=e48]: •
+          - text: Handoff docs, walkthrough, and support window
+    - generic [ref=e51]:
+      - paragraph [ref=e52]: Connections
+      - paragraph [ref=e53]: "Pick one connection per slot: CRM capture · Slack/email alert · booking flow · follow-up trigger."
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - paragraph [ref=e57]: Pricing
+        - heading "Compare tiers" [level=2] [ref=e58]
+        - paragraph [ref=e59]: Round-number pricing — exact scope confirmed on your free review call.
+      - table "Agency Website pricing comparison" [ref=e61]:
+        - caption [ref=e62]: Agency Website pricing comparison
+        - rowgroup [ref=e63]:
+          - row "Tier Starter $1,000 Standard Recommended $3,000 Premium $5,000 Custom Quote" [ref=e64]:
+            - columnheader "Tier" [ref=e65]
+            - columnheader "Starter $1,000" [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e69]: Starter
+                - paragraph [ref=e70]: $1,000
+            - columnheader "Standard Recommended $3,000" [ref=e71]:
+              - generic [ref=e72]:
+                - generic [ref=e73]:
+                  - generic [ref=e74]: Standard
+                  - generic [ref=e75]: Recommended
+                - paragraph [ref=e76]: $3,000
+            - columnheader "Premium $5,000" [ref=e77]:
+              - generic [ref=e78]:
+                - generic [ref=e80]: Premium
+                - paragraph [ref=e81]: $5,000
+            - columnheader "Custom Quote" [ref=e82]:
+              - generic [ref=e83]:
+                - generic [ref=e85]: Custom
+                - paragraph [ref=e86]: Quote
+        - rowgroup [ref=e87]:
+          - row "Up to 3 pages Included Not included Not included Not included" [ref=e88]:
+            - rowheader "Up to 3 pages" [ref=e89]
+            - cell "Included" [ref=e90]: ✓
+            - cell "Not included" [ref=e91]: —
+            - cell "Not included" [ref=e92]: —
+            - cell "Not included" [ref=e93]: —
+          - row "10-day timeline Included Not included Not included Not included" [ref=e94]:
+            - rowheader "10-day timeline" [ref=e95]
+            - cell "Included" [ref=e96]: ✓
+            - cell "Not included" [ref=e97]: —
+            - cell "Not included" [ref=e98]: —
+            - cell "Not included" [ref=e99]: —
+          - row "Form → email Included Not included Not included Not included" [ref=e100]:
+            - rowheader "Form → email" [ref=e101]
+            - cell "Included" [ref=e102]: ✓
+            - cell "Not included" [ref=e103]: —
+            - cell "Not included" [ref=e104]: —
+            - cell "Not included" [ref=e105]: —
+          - row "Static site Included Not included Not included Not included" [ref=e106]:
+            - rowheader "Static site" [ref=e107]
+            - cell "Included" [ref=e108]: ✓
+            - cell "Not included" [ref=e109]: —
+            - cell "Not included" [ref=e110]: —
+            - cell "Not included" [ref=e111]: —
+          - row "7 days post-launch support Included Not included Not included Not included" [ref=e112]:
+            - rowheader "7 days post-launch support" [ref=e113]
+            - cell "Included" [ref=e114]: ✓
+            - cell "Not included" [ref=e115]: —
+            - cell "Not included" [ref=e116]: —
+            - cell "Not included" [ref=e117]: —
+          - row "Up to 6 pages Not included Included Not included Not included" [ref=e118]:
+            - rowheader "Up to 6 pages" [ref=e119]
+            - cell "Not included" [ref=e120]: —
+            - cell "Included" [ref=e121]: ✓
+            - cell "Not included" [ref=e122]: —
+            - cell "Not included" [ref=e123]: —
+          - row "2–3 week timeline Not included Included Not included Not included" [ref=e124]:
+            - rowheader "2–3 week timeline" [ref=e125]
+            - cell "Not included" [ref=e126]: —
+            - cell "Included" [ref=e127]: ✓
+            - cell "Not included" [ref=e128]: —
+            - cell "Not included" [ref=e129]: —
+          - row "1 CRM / Slack / booking connection Not included Included Not included Not included" [ref=e130]:
+            - rowheader "1 CRM / Slack / booking connection" [ref=e131]
+            - cell "Not included" [ref=e132]: —
+            - cell "Included" [ref=e133]: ✓
+            - cell "Not included" [ref=e134]: —
+            - cell "Not included" [ref=e135]: —
+          - row "Headless WP for blog & key pages Not included Included Not included Not included" [ref=e136]:
+            - rowheader "Headless WP for blog & key pages" [ref=e137]
+            - cell "Not included" [ref=e138]: —
+            - cell "Included" [ref=e139]: ✓
+            - cell "Not included" [ref=e140]: —
+            - cell "Not included" [ref=e141]: —
+          - row "GA4 basics + 14 days support Not included Included Not included Not included" [ref=e142]:
+            - rowheader "GA4 basics + 14 days support" [ref=e143]
+            - cell "Not included" [ref=e144]: —
+            - cell "Included" [ref=e145]: ✓
+            - cell "Not included" [ref=e146]: —
+            - cell "Not included" [ref=e147]: —
+          - row "Up to 10 pages Not included Not included Included Not included" [ref=e148]:
+            - rowheader "Up to 10 pages" [ref=e149]
+            - cell "Not included" [ref=e150]: —
+            - cell "Not included" [ref=e151]: —
+            - cell "Included" [ref=e152]: ✓
+            - cell "Not included" [ref=e153]: —
+          - row "3–4 week timeline Not included Not included Included Not included" [ref=e154]:
+            - rowheader "3–4 week timeline" [ref=e155]
+            - cell "Not included" [ref=e156]: —
+            - cell "Not included" [ref=e157]: —
+            - cell "Included" [ref=e158]: ✓
+            - cell "Not included" [ref=e159]: —
+          - row "2 tool connections Not included Not included Included Not included" [ref=e160]:
+            - rowheader "2 tool connections" [ref=e161]
+            - cell "Not included" [ref=e162]: —
+            - cell "Not included" [ref=e163]: —
+            - cell "Included" [ref=e164]: ✓
+            - cell "Not included" [ref=e165]: —
+          - row "Headless WP + content blocks Not included Not included Included Not included" [ref=e166]:
+            - rowheader "Headless WP + content blocks" [ref=e167]
+            - cell "Not included" [ref=e168]: —
+            - cell "Not included" [ref=e169]: —
+            - cell "Included" [ref=e170]: ✓
+            - cell "Not included" [ref=e171]: —
+          - row "GA4 event map + handoff call Not included Not included Included Not included" [ref=e172]:
+            - rowheader "GA4 event map + handoff call" [ref=e173]
+            - cell "Not included" [ref=e174]: —
+            - cell "Not included" [ref=e175]: —
+            - cell "Included" [ref=e176]: ✓
+            - cell "Not included" [ref=e177]: —
+          - row "Scoped pages & connections Not included Not included Not included Included" [ref=e178]:
+            - rowheader "Scoped pages & connections" [ref=e179]
+            - cell "Not included" [ref=e180]: —
+            - cell "Not included" [ref=e181]: —
+            - cell "Not included" [ref=e182]: —
+            - cell "Included" [ref=e183]: ✓
+          - row "Custom timeline Not included Not included Not included Included" [ref=e184]:
+            - rowheader "Custom timeline" [ref=e185]
+            - cell "Not included" [ref=e186]: —
+            - cell "Not included" [ref=e187]: —
+            - cell "Not included" [ref=e188]: —
+            - cell "Included" [ref=e189]: ✓
+          - row "Multiple integrations Not included Not included Not included Included" [ref=e190]:
+            - rowheader "Multiple integrations" [ref=e191]
+            - cell "Not included" [ref=e192]: —
+            - cell "Not included" [ref=e193]: —
+            - cell "Not included" [ref=e194]: —
+            - cell "Included" [ref=e195]: ✓
+          - row "Scoped support window Not included Not included Not included Included" [ref=e196]:
+            - rowheader "Scoped support window" [ref=e197]
+            - cell "Not included" [ref=e198]: —
+            - cell "Not included" [ref=e199]: —
+            - cell "Not included" [ref=e200]: —
+            - cell "Included" [ref=e201]: ✓
+    - generic [ref=e204]:
+      - generic [ref=e205]:
+        - heading "Not included" [level=2] [ref=e206]
+        - list [ref=e207]:
+          - listitem [ref=e208]: Copywriting & brand design
+          - listitem [ref=e209]: Unlimited revision rounds
+          - listitem [ref=e210]: E-commerce builds
+          - listitem [ref=e211]: Ads or SEO retainers
+          - listitem [ref=e212]: WordPress-only maintenance fixes
+      - generic [ref=e213]:
+        - heading "Add-ons" [level=2] [ref=e214]
+        - list [ref=e215]:
+          - listitem [ref=e216]: Extra page — $250
+          - listitem [ref=e217]: Extra connection — $600
+          - listitem [ref=e218]: Copy polish — $700
+          - listitem [ref=e219]: Care plan — $500/mo
+    - generic [ref=e222]:
+      - heading "Ready to scope your project?" [level=2] [ref=e223]
+      - paragraph [ref=e224]: Free review call — we'll send 3 specific fixes whether you hire us or not.
+      - generic [ref=e225]:
+        - link "Free Website & Workflow Review" [ref=e226] [cursor=pointer]:
+          - /url: /start?need=website
+        - link "Estimate scope" [ref=e227] [cursor=pointer]:
+          - /url: /start?step=scope
+    - link [ref=e229] [cursor=pointer]:
+      - /url: /start
+      - text: Free Review
+  - contentinfo [ref=e230]:
+    - generic [ref=e231]:
+      - generic [ref=e232]:
+        - generic [ref=e233]:
+          - paragraph [ref=e234]: RDX Technologies
+          - paragraph [ref=e235]: Websites & systems for growth-focused teams
+          - paragraph [ref=e236]: Global remote team
+        - generic [ref=e237]:
+          - heading "Services" [level=2] [ref=e238]
+          - list [ref=e239]:
+            - listitem [ref=e240]:
+              - link "Agency Website" [ref=e241] [cursor=pointer]:
+                - /url: /services/agency-website
+            - listitem [ref=e242]:
+              - link "Lead & CRM Automation" [ref=e243] [cursor=pointer]:
+                - /url: /services/lead-automation
+            - listitem [ref=e244]:
+              - link "AI Chat & Search" [ref=e245] [cursor=pointer]:
+                - /url: /services/ai-chat-search
+            - listitem [ref=e246]:
+              - link "Care plans" [ref=e247] [cursor=pointer]:
+                - /url: /retainer
+        - generic [ref=e248]:
+          - heading "Company" [level=2] [ref=e249]
+          - list [ref=e250]:
+            - listitem [ref=e251]:
+              - link "Work" [ref=e252] [cursor=pointer]:
+                - /url: /work
+            - listitem [ref=e253]:
+              - link "Process" [ref=e254] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=e255]:
+              - link "About" [ref=e256] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e257]:
+              - link "Blog" [ref=e258] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e259]:
+              - link "Start a project" [ref=e260] [cursor=pointer]:
+                - /url: /start
+        - generic [ref=e261]:
+          - heading "Legal" [level=2] [ref=e262]
+          - list [ref=e263]:
+            - listitem [ref=e264]:
+              - link "Privacy" [ref=e265] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e266]:
+              - link "Terms" [ref=e267] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=e268]:
+              - link "FAQ" [ref=e269] [cursor=pointer]:
+                - /url: /faq
+      - paragraph [ref=e271]: © 2026 RDX Technologies
+  - alert [ref=e272]
