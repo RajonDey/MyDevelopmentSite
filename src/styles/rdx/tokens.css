@@ -1,0 +1,55 @@
+/**
+ * RDX design tokens — Hallmark modern-minimal / Quiet
+ * Used by rdx components from Phase 1+. Legacy pages keep :root Fiverr vars until migrated.
+ */
+:root {
+  /* Color */
+  --rdx-color-paper: oklch(100% 0 0);
+  --rdx-color-ink: oklch(22% 0.01 260);
+  --rdx-color-muted: oklch(48% 0.01 260);
+  --rdx-color-subtle: oklch(62% 0.01 260);
+  --rdx-color-border: oklch(91% 0 0);
+  --rdx-color-surface: oklch(98% 0 0);
+  --rdx-color-accent: oklch(42% 0.07 200);
+  --rdx-color-accent-hover: oklch(36% 0.07 200);
+
+  /* Typography — loaded via next/font in layout */
+  --rdx-font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --rdx-font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  /* Type scale (perfect fourth ≈ 1.333) */
+  --rdx-text-xs: 0.75rem;
+  --rdx-text-sm: 0.875rem;
+  --rdx-text-base: 1rem;
+  --rdx-text-lg: 1.125rem;
+  --rdx-text-xl: 1.333rem;
+  --rdx-text-2xl: 1.777rem;
+  --rdx-text-3xl: 2.369rem;
+  --rdx-text-4xl: clamp(2rem, 4vw, 3.157rem);
+
+  --rdx-leading-display: 1.12;
+  --rdx-leading-body: 1.6;
+  --rdx-measure: 65ch;
+
+  /* Radius */
+  --rdx-radius-sm: 0.375rem;
+  --rdx-radius-md: 0.5rem;
+  --rdx-radius-lg: 0.75rem;
+  --rdx-radius-pill: 9999px;
+
+  /* Spacing */
+  --rdx-space-1: 0.25rem;
+  --rdx-space-2: 0.5rem;
+  --rdx-space-3: 0.75rem;
+  --rdx-space-4: 1rem;
+  --rdx-space-6: 1.5rem;
+  --rdx-space-8: 2rem;
+  --rdx-space-12: 3rem;
+  --rdx-space-section: clamp(3.5rem, 7vw, 5.5rem);
+  --rdx-space-section-tight: clamp(2.5rem, 5vw, 4rem);
+
+  /* Layout */
+  --rdx-max-width: 72rem;
+  --rdx-max-width-narrow: 42rem;
+  --rdx-max-width-wide: 80rem;
+}

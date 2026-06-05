@@ -1,0 +1,33 @@
+---
+description: RDX revamp code standards for src — clean, minimal, no AI bloat
+globs: src/**/*
+alwaysApply: false
+---
+
+# RDX Code Standards (src/)
+
+## Structure
+
+- New UI: `src/components/rdx/` only
+- New copy/data: `src/content/rdx/` — not `mock-data.ts`
+- Server Components default; `"use client"` only for forms/interactivity
+
+## Style
+
+- Use tokens from `src/styles/rdx/tokens.css`
+- No Fiverr green on rdx components
+- No `Enhanced*`, `*V2`, `*New` file names
+- Max ~150 lines/page — extract sections
+
+## Quality
+
+- No `console.log` in shipped code
+- No commented-out legacy blocks left behind
+- No `any` without comment
+- Reuse existing `Button`/`Card` before cloning
+
+## Copy
+
+Use `docs/RDX_Content_Copy_Bank.md`. Never invent stats.
+
+Full standards: `docs/RDX_Implementation_Standards.md`

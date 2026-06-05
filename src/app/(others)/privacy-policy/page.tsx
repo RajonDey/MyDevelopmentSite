@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            <strong>Last Updated:</strong> March 11, 2025
+            <strong>Last Updated:</strong> June 2, 2026
           </p>
           <p className="mt-1 text-sm text-gray-600">
             <strong>Business:</strong> RDX Technologies (Rajon Dey X
@@ -87,10 +87,13 @@ export default function PrivacyPolicyPage() {
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <span className="font-medium">Personal Information:</span>{" "}
-                    Your name, email address, or phone number if you contact us
-                    via the contact form, WhatsApp, or book a consultation
-                    through Calendly. Your email address if you subscribe to our
-                    newsletter via Beehiiv.
+                    Your name, email address, agency name, team size, timeline,
+                    website URL, and project details when you submit our{" "}
+                    <strong>Free Website &amp; Workflow Review</strong> form at{" "}
+                    <code className="font-mono text-gray-900">/start</code> (or
+                    legacy contact paths that redirect there). Your email if you
+                    subscribe to our newsletter via Beehiiv. Phone number if you
+                    contact us via WhatsApp or book through Calendly.
                   </li>
                   <li>
                     <span className="font-medium">
@@ -118,10 +121,11 @@ export default function PrivacyPolicyPage() {
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <span className="font-medium">ব্যক্তিগত তথ্য:</span> আপনার
-                    নাম, ইমেইল ঠিকানা, বা ফোন নম্বর যদি আপনি যোগাযোগ ফর্ম,
-                    হোয়াটসঅ্যাপ বা ক্যালেন্ডলির মাধ্যমে পরামর্শের জন্য বুকিং
-                    করেন। আপনার ইমেইল ঠিকানা যদি আপনি বিহিভের মাধ্যমে আমাদের
-                    নিউজলেটারে সাবস্ক্রাইব করেন।
+                    নাম, ইমেইল, এজেন্সির নাম, দলের আকার, সময়সীমা, ওয়েবসাইট URL
+                    এবং প্রকল্পের বিবরণ যখন আপনি{" "}
+                    <code className="font-mono text-gray-900">/start</code> এ
+                    রিভিউ ফর্ম জমা দেন। হোয়াটসঅ্যাপ বা ক্যালেন্ডলির মাধ্যমে
+                    যোগাযোগ। বিহিভ নিউজলেটার সাবস্ক্রিপশন।
                   </li>
                   <li>
                     <span className="font-medium">অব্যক্তিগত তথ্য:</span>{" "}
@@ -147,6 +151,10 @@ export default function PrivacyPolicyPage() {
                 </h2>
                 <p className="leading-relaxed">We use your information to:</p>
                 <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    Respond to project review requests and inquiries submitted
+                    via <code className="font-mono text-sm">/start</code>.
+                  </li>
                   <li>Respond to your inquiries or schedule consultations.</li>
                   <li>
                     Send you newsletters or updates if you&apos;ve subscribed
@@ -246,6 +254,46 @@ export default function PrivacyPolicyPage() {
                   rel="noopener noreferrer"
                 >
                   Beehiiv Privacy Policy
+                </a>
+                ).
+              </li>
+              <li>
+                <span className="font-medium">Resend:</span> Sends
+                confirmation and notification emails when you submit our review
+                form (
+                <a
+                  href="https://resend.com/legal/privacy-policy"
+                  className="text-blue-600 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Resend Privacy Policy
+                </a>
+                ).
+              </li>
+              <li>
+                <span className="font-medium">Supabase</span> (when enabled):
+                Secure database storage for lead submissions (
+                <a
+                  href="https://supabase.com/privacy"
+                  className="text-blue-600 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Supabase Privacy Policy
+                </a>
+                ). If not configured, submissions are processed by email only.
+              </li>
+              <li>
+                <span className="font-medium">Formspree</span> (fallback):
+                Form delivery when primary email delivery is unavailable (
+                <a
+                  href="https://formspree.io/legal/privacy-policy"
+                  className="text-blue-600 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Formspree Privacy Policy
                 </a>
                 ).
               </li>
@@ -357,17 +405,24 @@ export default function PrivacyPolicyPage() {
               8. Data Retention
             </h2>
             <p className="leading-relaxed">
-              I keep your data only as long as needed:
+              We keep your data only as long as needed:
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>
-                Contact info: Until our communication ends or you ask me to
+                <span className="font-medium">Review form submissions:</span>{" "}
+                Stored in our business email and, when enabled, a secure
+                database for sales follow-up until the inquiry is closed or you
+                ask us to delete it. Scope estimates and campaign attribution
+                (e.g., UTM parameters) are stored with the submission.
+              </li>
+              <li>
+                Contact info: Until our communication ends or you ask us to
                 delete it.
               </li>
               <li>Newsletter subscriptions: Until you unsubscribe.</li>
               <li>
                 Analytics data: As long as the third-party tool retains it
-                (e.g., Google Analytics).
+                (e.g., Google Analytics, Umami).
               </li>
             </ul>
           </section>
@@ -377,10 +432,11 @@ export default function PrivacyPolicyPage() {
               9. International Visitors
             </h2>
             <p className="leading-relaxed">
-              I’m based in Bangladesh, and my site is hosted in [insert hosting
-              location if known, e.g., the US]. If you’re from another country
-              (e.g., the EU), your data may cross borders. By using my site, you
-              agree to this transfer.
+              RDX Technologies is based in Bangladesh. Our site is hosted on
+              Vercel (United States). Email and form processors may store data
+              in the US or other regions. If you are from another country (e.g.,
+              the EU), your data may cross borders. By using our site, you agree
+              to this transfer.
             </p>
           </section>
 

@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom utilities */
+@import "./rdx/tokens.css";
+
+/* RDX typography utilities */
+@layer utilities {
+  .font-rdx-display {
+    font-family: var(--rdx-font-display);
+  }
+
+  .rdx-measure {
+    max-width: var(--rdx-measure);
+  }
+}
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -12,9 +23,21 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+  .rdx-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--rdx-border) transparent;
+  }
+
+  .rdx-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .rdx-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--rdx-border);
+    border-radius: 3px;
+  }
+}
 
 :root {
   --color-primary: #1dbf73; /* Fiverr's green */

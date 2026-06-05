@@ -1,0 +1,214 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "RDX Technologies" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - navigation "Primary navigation" [ref=e5]:
+        - link "Services" [ref=e6] [cursor=pointer]:
+          - /url: /services
+        - link "Work" [ref=e7] [cursor=pointer]:
+          - /url: /work
+        - link "Process" [ref=e8] [cursor=pointer]:
+          - /url: /process
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: /about
+        - link "Blog" [ref=e10] [cursor=pointer]:
+          - /url: /blog
+      - link "Free Review" [ref=e12] [cursor=pointer]:
+        - /url: /start
+  - main [ref=e13]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: From $1,000
+        - heading "RDX Technologies — websites and systems that keep leads moving." [level=1] [ref=e19]
+        - paragraph [ref=e20]: We build for marketing agencies, service businesses, and education brands — sites, forms, and CRM connections in fixed 2–3 month projects with support when you need it.
+        - generic [ref=e21]:
+          - link "Free Website & Workflow Review" [ref=e22] [cursor=pointer]:
+            - /url: /start
+          - link "View services" [ref=e23] [cursor=pointer]:
+            - /url: /services
+        - paragraph [ref=e24]: Global remote team
+      - img "Website forms connected to CRM workflow" [ref=e26]:
+        - generic [ref=e29]: Website
+        - generic [ref=e31]: Forms
+        - generic [ref=e33]: CRM
+        - generic [ref=e34]: Slack · HubSpot
+        - generic [ref=e35]: Leads routed automatically — no inbox copy-paste
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: Services
+          - heading "How we help growth teams" [level=2] [ref=e41]
+          - paragraph [ref=e42]: Fixed tiers with public pricing — websites, automations, and AI tools.
+        - link "View all services →" [ref=e43] [cursor=pointer]:
+          - /url: /services
+      - generic [ref=e44]:
+        - link "Agency Website From $1,000 A modern website with your forms connected to HubSpot, Slack, Calendly, or email. View tiers → Standard at $3,000 · most common starting point" [ref=e45] [cursor=pointer]:
+          - /url: /services/agency-website
+          - generic [ref=e46]:
+            - heading "Agency Website" [level=3] [ref=e47]
+            - generic [ref=e48]: From $1,000
+          - paragraph [ref=e49]: A modern website with your forms connected to HubSpot, Slack, Calendly, or email.
+          - paragraph [ref=e50]: View tiers →
+          - paragraph [ref=e51]: Standard at $3,000 · most common starting point
+        - link "Lead & CRM Automation From $1,000 Stop copying leads from email into your CRM — we connect your tools automatically. View tiers →" [ref=e52] [cursor=pointer]:
+          - /url: /services/lead-automation
+          - generic [ref=e53]:
+            - heading "Lead & CRM Automation" [level=3] [ref=e54]
+            - generic [ref=e55]: From $1,000
+          - paragraph [ref=e56]: Stop copying leads from email into your CRM — we connect your tools automatically.
+          - paragraph [ref=e57]: View tiers →
+        - link "AI Chat & Search From $3,000 FAQ chat, site search, or a custom AI tool — connected to your content and workflows. View tiers →" [ref=e58] [cursor=pointer]:
+          - /url: /services/ai-chat-search
+          - generic [ref=e59]:
+            - heading "AI Chat & Search" [level=3] [ref=e60]
+            - generic [ref=e61]: From $3,000
+          - paragraph [ref=e62]: FAQ chat, site search, or a custom AI tool — connected to your content and workflows.
+          - paragraph [ref=e63]: View tiers →
+    - generic [ref=e65]:
+      - paragraph [ref=e66]: Connects with tools you already use
+      - list [ref=e67]:
+        - listitem [ref=e68]: HubSpot
+        - listitem [ref=e69]: Slack
+        - listitem [ref=e70]: Calendly
+        - listitem [ref=e71]: GA4
+        - listitem [ref=e72]: n8n
+        - listitem [ref=e73]: WordPress
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - paragraph [ref=e78]: Work
+          - heading "Selected work" [level=2] [ref=e79]
+          - paragraph [ref=e80]: Representative builds with honest attribution — no inflated metrics.
+        - link "View all work →" [ref=e81] [cursor=pointer]:
+          - /url: /work
+      - generic [ref=e82]:
+        - article [ref=e83]:
+          - figure "harligstad.se — Swedish market" [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e90]: www.harligstad.se
+              - generic [ref=e92]:
+                - generic "Homepage — scroll to explore" [ref=e93]:
+                  - img "Härlig Städ AB homepage — professional cleaning services Sweden" [ref=e94]
+                - paragraph [ref=e95]: Scroll or hover to pause auto-preview
+            - generic [ref=e96]: harligstad.se — Swedish market
+          - generic [ref=e97]:
+            - heading "Härlig Städ AB — website & booking automation" [level=3] [ref=e98]:
+              - link "Härlig Städ AB — website & booking automation" [ref=e99] [cursor=pointer]:
+                - /url: /work/harlig-stad
+            - paragraph [ref=e100]: Swedish cleaning company site with bilingual UX, instant quote flow, and a full booking form — delivered by RDX with verified Google reviews.
+            - paragraph [ref=e101]: Delivered by RDX Technologies
+            - link "Read case study →" [ref=e102] [cursor=pointer]:
+              - /url: /work/harlig-stad
+        - article [ref=e103]:
+          - figure "hexaseducation.com" [ref=e104]:
+            - generic [ref=e105]:
+              - generic [ref=e110]: hexaseducation.com
+              - img "HEXA'S Education website homepage" [ref=e113]
+            - generic [ref=e114]: hexaseducation.com
+          - generic [ref=e115]:
+            - heading "HEXA'S Education — institute site & IELTS exam platform" [level=3] [ref=e116]:
+              - link "HEXA'S Education — institute site & IELTS exam platform" [ref=e117] [cursor=pointer]:
+                - /url: /work/hexa-education
+            - paragraph [ref=e118]: "Education client: marketing site plus an online IELTS test platform used across branches — listening, reading, and exam delivery on a preview deployment."
+            - paragraph [ref=e119]: Delivered by RDX Technologies
+            - link "Read case study →" [ref=e120] [cursor=pointer]:
+              - /url: /work/hexa-education
+      - paragraph [ref=e121]: From $1,000 · named client work and RDX products
+    - figure [ref=e124]:
+      - blockquote [ref=e125]:
+        - paragraph [ref=e126]: “I'm extremely satisfied with the website created for Härlig Städ AB. The quotation form is smooth, and the whole experience was seamless from start to finish.”
+        - generic [ref=e127]: — Härlig Städ AB · Google review
+      - complementary [ref=e128]: Client delivery · Sweden · website & booking
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - paragraph [ref=e132]: Process
+        - heading "How we work" [level=2] [ref=e133]
+        - paragraph [ref=e134]: Review call → fixed proposal within 1 business day → build in 2–4 weeks for most Standard projects.
+      - list [ref=e135]:
+        - listitem [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]: "1"
+            - generic [ref=e139]: 15-min call
+          - heading "Review" [level=3] [ref=e140]
+          - paragraph [ref=e141]: How your site and lead flow work today
+        - listitem [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]: "2"
+            - generic [ref=e145]: 1 business day
+          - heading "Plan" [level=3] [ref=e146]
+          - paragraph [ref=e147]: Fixed scope, timeline, and tool connections
+        - listitem [ref=e148]:
+          - generic [ref=e149]:
+            - generic [ref=e150]: "3"
+            - generic [ref=e151]: 2–4 weeks
+          - heading "Build" [level=3] [ref=e152]
+          - paragraph [ref=e153]: Site and/or automations
+        - listitem [ref=e154]:
+          - generic [ref=e155]:
+            - generic [ref=e156]: "4"
+            - generic [ref=e157]: 14 days support
+          - heading "Handoff" [level=3] [ref=e158]
+          - paragraph [ref=e159]: Docs, walkthrough, support window
+    - generic [ref=e162]:
+      - heading "Not sure where to start?" [level=2] [ref=e163]
+      - paragraph [ref=e164]: Tell us how your site and lead process work today — we'll send 3 specific fixes (whether you hire us or not).
+      - generic [ref=e165]:
+        - link "Free Website & Workflow Review" [ref=e166] [cursor=pointer]:
+          - /url: /start
+        - link "View services" [ref=e167] [cursor=pointer]:
+          - /url: /services
+      - paragraph [ref=e168]: From $1,000 · reply within 1 business day
+  - contentinfo [ref=e169]:
+    - generic [ref=e170]:
+      - generic [ref=e171]:
+        - generic [ref=e172]:
+          - paragraph [ref=e173]: RDX Technologies
+          - paragraph [ref=e174]: Websites & systems for growth-focused teams
+          - paragraph [ref=e175]: Global remote team
+        - generic [ref=e176]:
+          - heading "Services" [level=2] [ref=e177]
+          - list [ref=e178]:
+            - listitem [ref=e179]:
+              - link "Agency Website" [ref=e180] [cursor=pointer]:
+                - /url: /services/agency-website
+            - listitem [ref=e181]:
+              - link "Lead & CRM Automation" [ref=e182] [cursor=pointer]:
+                - /url: /services/lead-automation
+            - listitem [ref=e183]:
+              - link "AI Chat & Search" [ref=e184] [cursor=pointer]:
+                - /url: /services/ai-chat-search
+            - listitem [ref=e185]:
+              - link "Care plans" [ref=e186] [cursor=pointer]:
+                - /url: /retainer
+        - generic [ref=e187]:
+          - heading "Company" [level=2] [ref=e188]
+          - list [ref=e189]:
+            - listitem [ref=e190]:
+              - link "Work" [ref=e191] [cursor=pointer]:
+                - /url: /work
+            - listitem [ref=e192]:
+              - link "Process" [ref=e193] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=e194]:
+              - link "About" [ref=e195] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e196]:
+              - link "Blog" [ref=e197] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e198]:
+              - link "Start a project" [ref=e199] [cursor=pointer]:
+                - /url: /start
+        - generic [ref=e200]:
+          - heading "Legal" [level=2] [ref=e201]
+          - list [ref=e202]:
+            - listitem [ref=e203]:
+              - link "Privacy" [ref=e204] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e205]:
+              - link "Terms" [ref=e206] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=e207]:
+              - link "FAQ" [ref=e208] [cursor=pointer]:
+                - /url: /faq
+      - paragraph [ref=e210]: © 2026 RDX Technologies

@@ -1,0 +1,124 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "RDX Technologies" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - button "Open menu" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+  - main [ref=e7]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Free Website & Workflow Review" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Pick your scope, then tell us about your team and site — we'll send 3 specific fixes (whether you hire us or not).
+      - generic [ref=e13]:
+        - button "← Adjust scope" [ref=e95] [cursor=pointer]
+        - generic [ref=e96]:
+          - paragraph [ref=e97]: Suggested tier
+          - paragraph [ref=e98]: Agency Website · Standard
+          - paragraph [ref=e99]: $3,000 · $3,000 – $5,000
+          - paragraph [ref=e100]: Site plus one CRM, Slack, or booking connection.
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]: Agency name *
+              - textbox "Agency name *" [ref=e106]:
+                - /placeholder: Your agency
+            - generic [ref=e107]:
+              - generic [ref=e108]: Your name *
+              - textbox "Your name *" [ref=e109]:
+                - /placeholder: Jane Smith
+          - generic [ref=e110]:
+            - generic [ref=e111]: Email *
+            - textbox "Email *" [ref=e112]:
+              - /placeholder: you@agency.com
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - generic [ref=e115]: Team size *
+              - combobox "Team size *" [ref=e116]:
+                - option "Select team size" [disabled] [selected]
+                - option "1–5"
+                - option "6–15"
+                - option "16–30"
+            - generic [ref=e117]:
+              - generic [ref=e118]: Timeline *
+              - combobox "Timeline *" [ref=e119]:
+                - option "Select timeline" [disabled] [selected]
+                - option "ASAP"
+                - option "1–4 weeks"
+                - option "1–2 months"
+                - option "Flexible"
+          - generic [ref=e120]:
+            - generic [ref=e121]: Website URL
+            - textbox "Website URL" [ref=e122]:
+              - /placeholder: https://youragency.com
+          - generic [ref=e123]:
+            - generic [ref=e124]: Current tools
+            - textbox "Current tools" [ref=e125]:
+              - /placeholder: HubSpot, Slack, Calendly, etc.
+          - generic [ref=e126]:
+            - generic [ref=e127]: What's not working today? *
+            - textbox "What's not working today? *" [ref=e128]:
+              - /placeholder: Where do leads get stuck between your site and CRM?
+          - button "Request free review" [ref=e129] [cursor=pointer]
+          - paragraph [ref=e130]: Projects from $1,000.
+  - contentinfo [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - paragraph [ref=e46]: RDX Technologies
+          - paragraph [ref=e47]: Websites & systems for growth-focused teams
+          - paragraph [ref=e48]: Global remote team
+        - generic [ref=e49]:
+          - heading "Services" [level=2] [ref=e50]
+          - list [ref=e51]:
+            - listitem [ref=e52]:
+              - link "Agency Website" [ref=e53] [cursor=pointer]:
+                - /url: /services/agency-website
+            - listitem [ref=e54]:
+              - link "Lead & CRM Automation" [ref=e55] [cursor=pointer]:
+                - /url: /services/lead-automation
+            - listitem [ref=e56]:
+              - link "AI Chat & Search" [ref=e57] [cursor=pointer]:
+                - /url: /services/ai-chat-search
+            - listitem [ref=e58]:
+              - link "Care plans" [ref=e59] [cursor=pointer]:
+                - /url: /retainer
+        - generic [ref=e60]:
+          - heading "Company" [level=2] [ref=e61]
+          - list [ref=e62]:
+            - listitem [ref=e63]:
+              - link "Work" [ref=e64] [cursor=pointer]:
+                - /url: /work
+            - listitem [ref=e65]:
+              - link "Process" [ref=e66] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=e67]:
+              - link "About" [ref=e68] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e69]:
+              - link "Blog" [ref=e70] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e71]:
+              - link "Start a project" [ref=e72] [cursor=pointer]:
+                - /url: /start
+        - generic [ref=e73]:
+          - heading "Legal" [level=2] [ref=e74]
+          - list [ref=e75]:
+            - listitem [ref=e76]:
+              - link "Privacy" [ref=e77] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e78]:
+              - link "Terms" [ref=e79] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=e80]:
+              - link "FAQ" [ref=e81] [cursor=pointer]:
+                - /url: /faq
+      - paragraph [ref=e83]: © 2026 RDX Technologies
+  - status [ref=e85]:
+    - generic [ref=e86]:
+      - img [ref=e88]
+      - generic [ref=e90]:
+        - text: Static route
+        - button "Hide static indicator" [ref=e91] [cursor=pointer]:
+          - img [ref=e92]
+  - alert [ref=e84]

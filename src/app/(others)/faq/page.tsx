@@ -1,67 +1,65 @@
-import { faqs, staticPages } from "@/data/mock-data";
-import { SEO } from "@/components/seo";
-import { Card } from "@/components/common/ui/Card";
-import { Button } from "@/components/common/ui/Button";
-import FAQAccordion from "@/components/FAQAccordion";
+import { Metadata } from "next";
+import { pageMeta } from "@/content/rdx/pages";
+import { siteMetadata } from "@/content/rdx/metadata";
+import { siteFaq } from "@/content/rdx/seo";
+import { buildOgMeta } from "@/content/rdx/og";
+import { buildFaqSchema } from "@/lib/seo/schema";
+import { JsonLd } from "@/components/rdx/seo/JsonLd";
+import { RdxContainer } from "@/components/rdx/layout/Container";
+import { RdxSection } from "@/components/rdx/layout/Section";
+import { RdxButton } from "@/components/rdx/ui/Button";
+import { SectionHeader } from "@/components/rdx/ui/SectionHeader";
+import { FaqAccordion } from "@/components/rdx/sections/FaqAccordion";
 
-export const metadata = {
-  title: staticPages.faq.metaTitle,
-  description: staticPages.faq.metaDescription,
+export const metadata: Metadata = {
+  title: pageMeta.faq.title,
+  description: pageMeta.faq.description,
   openGraph: {
-    ...staticPages.faq,
-    url: "https://development.rajondey.com/faq",
+    title: pageMeta.faq.title,
+    description: pageMeta.faq.description,
+    url: `${siteMetadata.siteUrl}/faq`,
+    siteName: siteMetadata.siteName,
+    ...buildOgMeta("default"),
   },
 };
 
 export default function FAQPage() {
   return (
     <>
-      <SEO
-        title={staticPages.faq.metaTitle}
-        description={staticPages.faq.metaDescription}
-        url="/faq"
-      />
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <section className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Got questions about my development services? Find answers below or
-            reach out for personalized clarification!
-          </p>
-        </section>
+      <JsonLd id="schema-faq" data={buildFaqSchema(siteFaq)} />
 
-        <Card className="p-6 shadow-md">
-          <FAQAccordion faqs={faqs} />
-        </Card>
+      <RdxSection className="pt-4 md:pt-8">
+        <RdxContainer className="max-w-3xl">
+          <SectionHeader
+            eyebrow="FAQ"
+            title="Common questions"
+            description="Fixed-scope agency websites, CRM automation, and how to start a project with RDX."
+            titleAs="h1"
+          />
+        </RdxContainer>
+      </RdxSection>
 
-        <section className="text-center mt-12">
-          <Card className="p-6 inline-block bg-gray-100">
-            <h2 className="text-xl font-semibold mb-4">
-              Still Have Questions?
+      <RdxSection variant="surface" spacing="tight" className="pb-20 md:pb-24">
+        <RdxContainer className="max-w-3xl">
+          <FaqAccordion items={siteFaq} defaultOpenIndex={0} />
+
+          <div className="mt-12 rounded-rdx border border-rdx-border bg-rdx-paper p-8">
+            <h2 className="text-lg font-semibold text-rdx-ink">
+              Still have questions?
             </h2>
-            <p className="text-gray-600 mb-4">
-              I’m here to help! Contact me directly or schedule a call to
-              discuss your project.
+            <p className="mt-2 text-sm leading-relaxed text-rdx-muted">
+              Request a free review — we reply within 1 business day with 3
+              specific fixes for your agency site or lead workflow.
             </p>
-            <div className="flex gap-4 justify-center">
-              <a href="/order">
-                <Button className="bg-green-500 hover:bg-green-600 text-white">
-                  Order Services
-                </Button>
-              </a>
-              <a
-                href="https://calendly.com/rajondey"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="outline">Book a Call</Button>
-              </a>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <RdxButton href="/start">Free Website &amp; Workflow Review</RdxButton>
+              <RdxButton href="/services" variant="secondary">
+                View pricing
+              </RdxButton>
             </div>
-          </Card>
-        </section>
-      </div>
+          </div>
+        </RdxContainer>
+      </RdxSection>
     </>
   );
 }

@@ -1,26 +1,32 @@
-import { services, staticPages } from "@/data/mock-data";
-import { SEO } from "@/components/seo";
 import { Metadata } from "next";
-import EnhancedServiceContent from "@/components/features/services/EnhancedServiceContent";
+import { pageMeta } from "@/content/rdx/pages";
+import { siteMetadata } from "@/content/rdx/metadata";
+import { buildOgMeta } from "@/content/rdx/og";
+import { buildFaqSchema } from "@/lib/seo/schema";
+import { servicesOverviewContent } from "@/content/rdx/services-pages";
+import { JsonLd } from "@/components/rdx/seo/JsonLd";
+import { ServicesOverviewView } from "@/components/rdx/sections/services/ServicesOverviewView";
 
 export const metadata: Metadata = {
-  title: staticPages.services.metaTitle,
-  description: staticPages.services.metaDescription,
+  title: pageMeta.services.title,
+  description: pageMeta.services.description,
   openGraph: {
-    ...staticPages.services,
-    url: "https://development.rajondey.com/services",
+    title: pageMeta.services.title,
+    description: pageMeta.services.description,
+    url: `${siteMetadata.siteUrl}/services`,
+    siteName: siteMetadata.siteName,
+    ...buildOgMeta("service"),
   },
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <SEO
-        title={staticPages.services.metaTitle}
-        description={staticPages.services.metaDescription}
-        url="/services"
+      <JsonLd
+        id="schema-services-faq"
+        data={buildFaqSchema(servicesOverviewContent.faq)}
       />
-      <EnhancedServiceContent services={services} />
+      <ServicesOverviewView />
     </>
   );
 }

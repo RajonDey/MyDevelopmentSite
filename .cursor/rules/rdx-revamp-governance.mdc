@@ -1,0 +1,36 @@
+---
+description: RDX revamp governance — read docs first, one phase at a time, no scope creep
+alwaysApply: true
+---
+
+# RDX Revamp Governance
+
+This repo is in a **planned repositioning**. Implementation must follow `docs/`.
+
+## Before coding
+
+1. Read `docs/README.md` for active phase
+2. Read `docs/RDX_Scope_Boundaries.md` for that phase only
+3. Read `docs/RDX_File_Ownership_Map.md`
+
+State phase + files to touch + files to avoid at session start.
+
+## Hard stops
+
+- No work outside active phase
+- No deleting legacy routes/API without phase approval
+- No invented metrics or fake testimonials (see Content Copy Bank)
+- No new npm packages without founder OK
+- No mass refactors of `src/data/` or legacy components
+
+## New code goes here
+
+- `src/components/rdx/`
+- `src/content/rdx/`
+- `src/styles/rdx/tokens.css`
+
+## End of session
+
+Run `npm run build` and `npm run lint`. Update phase checklist if items completed.
+
+Skills: `.agents/skills/rdx-revamp/` + `.agents/skills/hallmark/` for design.

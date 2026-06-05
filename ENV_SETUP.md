@@ -13,6 +13,9 @@ BUSINESS_EMAIL=contact@rajondey.com
 
 # From email address (optional - defaults to your BUSINESS_EMAIL)
 FROM_EMAIL=contact@rajondey.com
+
+# Calendly booking link for qualified leads (Phase 13 — see docs/RDX_Phase13_Setup.md)
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/rajondey
 ```
 
 ### 2. Base URL Configuration
@@ -33,6 +36,7 @@ NEXT_PUBLIC_WP_API_URL=https://your-domain.vercel.app
    - `RESEND_API_KEY`: Your Resend API key
    - `BUSINESS_EMAIL`: Your business email
    - `FROM_EMAIL`: Your from email (optional)
+   - `NEXT_PUBLIC_CALENDLY_URL`: Calendly link for qualified `/start` leads
    - `NEXT_PUBLIC_WP_API_URL`: Your Vercel domain (e.g., `https://your-project.vercel.app`)
 
 4. **Redeploy** your project after adding environment variables
