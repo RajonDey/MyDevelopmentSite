@@ -15,7 +15,7 @@ export const salesOpsContent = {
     },
     qualified: {
       title: "Review request received",
-      body: "Your scope looks like a fit for a short review call. Book a slot below, or wait for our email — we'll still send written fixes within 1 business day.",
+      body: "Your scope looks like a fit for a short review call. Book a slot below, or wait for our email. We'll still send written fixes within 1 business day.",
       calendlyIntro: "Optional: book your 15-minute review now",
     },
   },

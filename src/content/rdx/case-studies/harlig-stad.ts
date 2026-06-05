@@ -3,9 +3,9 @@ import { workImagePaths } from "@/content/rdx/case-study-images";
 
 export const harligStad: CaseStudy = {
   slug: "harlig-stad",
-  title: "Härlig Städ AB — website & booking automation",
+  title: "Härlig Städ AB: website and booking automation",
   summary:
-    "Swedish cleaning company site with bilingual UX, instant quote flow, and a full booking form — delivered by RDX with verified Google reviews.",
+    "Swedish cleaning company site with bilingual UX, instant quote flow, and a full booking form. Delivered by RDX with verified Google reviews.",
   clientType: "Härlig Städ AB · Sweden",
   industryTag: "Local services",
   service: "both",

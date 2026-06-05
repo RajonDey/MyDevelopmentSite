@@ -6,7 +6,7 @@ export const FORMSPREE_ENDPOINT = "https://formspree.io/f/mpwpzgzq";
 export const auditFormContent = {
   title: "Free Website & Workflow Review",
   intro:
-    "Tell us how your site and lead process work today — we'll send 3 specific fixes (whether you hire us or not).",
+    "Tell us how your site and lead process work today. We'll send 3 specific fixes, whether you hire us or not.",
   floorCopy: "Projects from $1,000.",
   submitLabel: "Request free review",
   budgetBands: budgetBands.map((band) => ({
@@ -27,7 +27,7 @@ export const companyNameFieldLabel = "Company / agency name";
 export const startFormContent = {
   title: "Free Website & Workflow Review",
   intro:
-    "Pick your scope, then tell us about your team and site — we'll send 3 specific fixes (whether you hire us or not).",
+    "Pick your scope, then tell us about your team and site. We'll send 3 specific fixes, whether you hire us or not.",
   continueLabel: "Continue to details",
   submitLabel: "Request free review",
   floorCopy: "Projects from $1,000.",

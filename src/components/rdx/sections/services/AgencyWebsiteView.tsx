@@ -41,7 +41,7 @@ export function AgencyWebsiteView({ service }: AgencyWebsiteViewProps) {
           <SectionHeader
             eyebrow="Deliverables"
             title="What you get"
-            description="Every tier includes a fixed page count, timeline, and support window — details in the tier table below."
+            description="Every tier includes a fixed page count, timeline, and support window. Details in the tier table below."
           />
           <ul className="space-y-3">
             {deliverables.map((item) => (

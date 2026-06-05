@@ -73,18 +73,18 @@ export const workSections = {
     eyebrow: "Client delivery",
     title: "Named client work",
     description:
-      "Sites and platforms delivered by RDX — with public URLs and honest attribution.",
+      "Sites and platforms delivered by RDX, with public URLs and honest attribution.",
   },
   products: {
     eyebrow: "Products",
     title: "Built by RDX",
     description:
-      "Live and beta products we operate — proof we ship full stacks, not only client sites.",
+      "Live and beta products we operate. Proof we ship full stacks, not only client sites.",
   },
   prior: {
     eyebrow: "Prior experience",
     title: "Team-led under prior employment",
     description:
-      "Real deliveries through US marketing agencies — anonymized where RDX was not the contracting party.",
+      "Real deliveries through US marketing agencies, anonymized where RDX was not the contracting party.",
   },
 } as const;

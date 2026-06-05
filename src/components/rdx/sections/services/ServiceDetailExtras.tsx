@@ -25,7 +25,7 @@ export function ServiceDetailExtras({
             className="mb-6"
             eyebrow="Pricing"
             title="Compare tiers"
-            description="Round-number pricing — exact scope confirmed on your free review call."
+            description="Round-number pricing. Exact scope confirmed on your free review call."
           />
           <ComparisonTable service={service} />
         </RdxContainer>
@@ -65,7 +65,7 @@ export function ServiceDetailExtras({
               Ready to scope your project?
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-rdx-muted">
-              Free review call — we&apos;ll send 3 specific fixes whether you hire us or not.
+              Free review call. We&apos;ll send 3 specific fixes whether you hire us or not.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <RdxButton href={startHref}>Free Website & Workflow Review</RdxButton>

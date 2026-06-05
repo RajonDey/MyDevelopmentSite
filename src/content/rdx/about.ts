@@ -5,20 +5,20 @@ export const aboutContent = {
     eyebrow: "About",
     title: "RDX Technologies",
     description:
-      "A global remote product & engineering company — client sites, platforms, and automation in fixed projects from $1,000.",
+      "A global remote product and engineering company. Client sites, platforms, and automation in fixed projects from $1,000.",
   },
   story: [
-    "We combine senior full-stack engineering (Next.js, React, Node.js) with practical automation (n8n, Make.com, CRM integrations). Most Standard builds ship in 2–4 weeks; larger fixed scopes run 2–3 months with support when you need it — round numbers, not open-ended hourly work.",
+    "We combine senior full-stack engineering (Next.js, React, Node.js) with practical automation (n8n, Make.com, CRM integrations). Most Standard builds ship in 2–4 weeks; larger fixed scopes run 2–3 months with support when you need it. Round numbers, not open-ended hourly work.",
     "We work with US marketing agencies, service businesses, and education brands that need a credible site and systems that do not depend on copying forms from email into a CRM.",
   ],
   founder:
-    "Founded by a senior full-stack engineer with agency and enterprise delivery experience — team-led builds on headless CMS, email systems, and product SaaS.",
+    "Founded by a senior full-stack engineer with agency and enterprise delivery experience. Team-led builds on headless CMS, email systems, and product SaaS.",
   communication: {
     title: "How we work remotely",
     items: [
       {
         label: "Async by default",
-        detail: "Written updates in Slack or email — no standing daily meetings unless you want them.",
+        detail: "Written updates in Slack or email. No standing daily meetings unless you want them.",
       },
       {
         label: "Loom walkthroughs",
@@ -38,7 +38,7 @@ export const aboutContent = {
     eyebrow: "Product proof",
     title: "We ship our own SaaS too",
     description:
-      "YearInReview is a live product we built on Next.js and PostgreSQL — the same stack and delivery standards we bring to agency projects.",
+      "YearInReview is a live product we built on Next.js and PostgreSQL, with the same stack and delivery standards we bring to agency projects.",
     cta: {
       label: "View YearInReview",
       href: "https://www.yearinreview.online/",

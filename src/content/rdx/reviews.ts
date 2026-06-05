@@ -66,7 +66,7 @@ export const reviewsContent = {
   eyebrow: "Reviews",
   title: "Verified client feedback",
   description:
-    "Google and Fiverr reviews from website and form projects — verbatim quotes only. Current RDX service tiers are listed on /services.",
+    "Google and Fiverr reviews from website and form projects. Verbatim quotes only. Current RDX service tiers are listed on /services.",
   emptyHint:
     "Read verified reviews on Fiverr and Google.",
 } as const;

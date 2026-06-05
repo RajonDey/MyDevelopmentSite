@@ -68,7 +68,7 @@ export function AiChatSearchView({ service }: AiChatSearchViewProps) {
           <SectionHeader
             eyebrow="Scope"
             title="What's included per tier"
-            description="Fixed delivery window — guardrails and knowledge sources scoped on the review call."
+            description="Fixed delivery window. Guardrails and knowledge sources scoped on the review call."
           />
         </RdxContainer>
       </RdxSection>

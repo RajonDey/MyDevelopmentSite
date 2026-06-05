@@ -3,9 +3,9 @@ import { workImagePaths } from "@/content/rdx/case-study-images";
 
 export const hexaEducation: CaseStudy = {
   slug: "hexa-education",
-  title: "HEXA'S Education — institute site & IELTS exam platform",
+  title: "HEXA'S Education: institute site and IELTS exam platform",
   summary:
-    "Education client: marketing site plus an online IELTS test platform used across branches — listening, reading, and exam delivery on a preview deployment.",
+    "Education client: marketing site plus an online IELTS test platform used across branches. Listening, reading, and exam delivery on a preview deployment.",
   clientType: "Education client · IELTS institute",
   industryTag: "Education",
   service: "agency-website",

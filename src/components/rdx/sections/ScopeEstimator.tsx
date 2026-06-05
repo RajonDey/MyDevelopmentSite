@@ -104,7 +104,7 @@ export function ScopeEstimator() {
             {displayResult.summary}
           </p>
           <p className="text-xs text-rdx-subtle">
-            Estimates are directional — exact scope is confirmed on the free review
+            Estimates are directional. Exact scope is confirmed on the free review
             call. No checkout on this page.
           </p>
           <RdxButton href="/start">Get exact scope</RdxButton>

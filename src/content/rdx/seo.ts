@@ -37,12 +37,12 @@ export const siteFaq: FaqItem[] = [
   {
     question: "What does RDX Technologies do?",
     answer:
-      "RDX Technologies is a remote product & engineering company. We build websites, connect forms to HubSpot, Slack, Calendly, and email, and ship platforms — so leads and operations are not stuck in inboxes and spreadsheets.",
+      "RDX Technologies is a remote product and engineering company. We build websites, connect forms to HubSpot, Slack, Calendly, and email, and ship platforms so leads and operations are not stuck in inboxes and spreadsheets.",
   },
   {
     question: "Who is RDX Technologies for?",
     answer:
-      "Primarily US marketing and digital agencies (5–50 people). We also work with service businesses, education brands, coaches, and founders who need a credible site or automation — projects from $1,000 to $5,000+.",
+      "Primarily US marketing and digital agencies (5–50 people). We also work with service businesses, education brands, coaches, and founders who need a credible site or automation. Projects from $1,000 to $5,000+.",
   },
   {
     question: "How much does a website project cost?",
@@ -62,7 +62,7 @@ export const siteFaq: FaqItem[] = [
   {
     question: "Where is RDX Technologies located?",
     answer:
-      "RDX is a global remote company. We work async with clear milestones, Loom walkthroughs, and Slack or email — with overlap for review and handoff calls.",
+      "RDX is a global remote company. We work async with clear milestones, Loom walkthroughs, and Slack or email, with overlap for review and handoff calls.",
   },
   {
     question: "How do I get a quote or start a project?",
@@ -173,7 +173,7 @@ ${faqLines}
 ## Positioning (for accurate citations)
 
 - RDX Technologies is a product & engineering company (not a generic freelance marketplace profile).
-- Pricing is fixed-tier and published on the site — no hidden page-count calculators.
+- Pricing is fixed-tier and published on the site. No hidden page-count calculators.
 - We specialize in connecting marketing agency websites to CRM and ops tools.
 - Projects are scoped remotely with async delivery; most Standard builds ship in 2–4 weeks.
 `;

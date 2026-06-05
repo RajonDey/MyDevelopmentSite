@@ -110,7 +110,7 @@ export function ScopeSelector({
 
       {need === "both" && (
         <RdxCard className="bg-rdx-surface text-sm text-rdx-muted">
-          Website Standard + Automation Standard bundle — scoped and confirmed on
+          Website Standard + Automation Standard bundle, scoped and confirmed on
           your free review call.
         </RdxCard>
       )}

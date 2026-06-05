@@ -48,7 +48,7 @@ export default function FAQPage() {
               Still have questions?
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-rdx-muted">
-              Request a free review — we reply within 1 business day with 3
+              Request a free review. We reply within 1 business day with 3
               specific fixes for your agency site or lead workflow.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
