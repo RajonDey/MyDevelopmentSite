@@ -12,7 +12,7 @@ const slug = "agency-website";
 export const metadata: Metadata = {
   title: "Agency Website | RDX Technologies",
   description:
-    "Agency website tiers from $1,000 — forms connected to HubSpot, Slack, Calendly, or email.",
+    "Agency website tiers from $1,000. Forms connected to HubSpot, Slack, Calendly, or email.",
   openGraph: {
     title: "Agency Website | RDX Technologies",
     url: `${siteMetadata.siteUrl}/services/${slug}`,

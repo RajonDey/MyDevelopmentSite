@@ -3,7 +3,7 @@ import { workImagePaths } from "@/content/rdx/case-study-images";
 
 export const ieltsReady: CaseStudy = {
   slug: "ieltsready",
-  title: "IELTSReady — global practice test platform",
+  title: "IELTSReady: global practice test platform",
   summary:
     "RDX-owned IELTS practice platform — inspired by education delivery experience, built for a worldwide audience. Beta live; domain launch forthcoming.",
   clientType: "RDX product",
@@ -58,7 +58,7 @@ export const ieltsReady: CaseStudy = {
 
 export const yearInReview: CaseStudy = {
   slug: "yearinreview",
-  title: "YearInReview — yearly planning & reflection SaaS",
+  title: "YearInReview: yearly planning and reflection SaaS",
   summary:
     "Live product: one system for plan, weekly rhythm, daily habits, and year-end proof — Next.js and PostgreSQL, shipping under the RDX team.",
   clientType: "RDX product",
@@ -126,7 +126,7 @@ export const yearInReview: CaseStudy = {
 
 export const mediHelp: CaseStudy = {
   slug: "medi-help",
-  title: "Medi Help — AI healthcare assistant (public demo)",
+  title: "Medi Help: AI healthcare assistant (public demo)",
   summary:
     "Educational AI assistant for general health questions, clinician discovery, and appointment flows — RDX-built public demo; similar scoped work delivered under NDA for a healthcare client.",
   clientType: "RDX build · public demo",

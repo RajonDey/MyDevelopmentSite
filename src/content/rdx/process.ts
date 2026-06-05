@@ -15,7 +15,7 @@ export const processPageContent = {
     eyebrow: "Process",
     title: "Fixed scope from review call to handoff",
     description:
-      "Every project follows four steps — clear roles, round-number pricing, and a documented handoff.",
+      "Every project follows four steps: clear roles, round-number pricing, and a documented handoff.",
   },
   pricingLink: {
     label: "View public tier pricing",
@@ -33,7 +33,7 @@ export const processPageContent = {
       ],
       weDo: [
         "Map forms, inboxes, and CRM handoffs",
-        "Identify 3 specific fixes — even if you do not hire us",
+        "Identify 3 specific fixes, even if you do not hire us",
       ],
       deliverables: ["Call notes with recommended next steps"],
     },

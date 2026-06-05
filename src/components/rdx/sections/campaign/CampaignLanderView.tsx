@@ -90,7 +90,7 @@ export function CampaignLanderView({
               Request a free review
             </p>
             <p className="mt-3 text-sm leading-relaxed text-rdx-muted">
-              Tell us how your site and lead process work today — we&apos;ll send
+              Tell us how your site and lead process work today. We&apos;ll send
               3 specific fixes within 1 business day.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">

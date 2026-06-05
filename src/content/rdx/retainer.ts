@@ -5,7 +5,7 @@ export const retainerContent = {
     eyebrow: "Care plans",
     title: "After your project ships",
     description:
-      "Optional monthly support for agencies that want steady ops help — not a substitute for a scoped website or automation project.",
+      "Optional monthly support for agencies that want steady ops help. Not a substitute for a scoped website or automation project.",
   },
   whenToBuy: {
     title: "Project vs Care plan",

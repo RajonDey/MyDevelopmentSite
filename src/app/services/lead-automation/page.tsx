@@ -12,7 +12,7 @@ const slug = "lead-automation";
 export const metadata: Metadata = {
   title: "Lead & CRM Automation | RDX Technologies",
   description:
-    "Lead & CRM automation tiers from $1,000 — connect forms, CRM, Slack, and follow-ups.",
+    "Lead and CRM automation tiers from $1,000. Connect forms, CRM, Slack, and follow-ups.",
   openGraph: {
     title: "Lead & CRM Automation | RDX Technologies",
     url: `${siteMetadata.siteUrl}/services/${slug}`,

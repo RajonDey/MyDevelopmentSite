@@ -110,7 +110,7 @@ export function SystemDiagram({ className }: SystemDiagramProps) {
         textAnchor="middle"
         className="fill-rdx-subtle text-[11px]"
       >
-        Leads routed automatically — no inbox copy-paste
+        Leads routed automatically. No inbox copy-paste.
       </text>
 
       <defs>

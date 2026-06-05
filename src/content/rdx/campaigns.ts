@@ -42,18 +42,18 @@ export const forAgenciesCampaign: CampaignLanderContent = {
   meta: {
     title: "For marketing agencies | RDX Technologies",
     description:
-      "Fixed-scope agency websites with CRM-connected forms — from $1,000. Built for US marketing agencies tired of leads stuck in inboxes.",
+      "Fixed-scope agency websites with CRM-connected forms from $1,000. Built for US marketing agencies tired of leads stuck in inboxes.",
   },
   variants: {
     a: {
       eyebrow: "For US marketing agencies",
-      headline: "Your site should send leads to HubSpot — not a shared inbox.",
+      headline: "Your site should send leads to HubSpot, not a shared inbox.",
       intro:
         "RDX builds agency marketing sites and wires your forms to HubSpot, Slack, or Calendly. Fixed tiers, public pricing, and a free review before you commit.",
       bullets: [
-        "Fixed-scope builds from $1,000 — Starter, Standard, and Premium tiers on the site",
+        "Fixed-scope builds from $1,000: Starter, Standard, and Premium tiers on the site",
         "Standard tier connects one CRM, Slack channel, or booking tool to every form",
-        "Global remote team — async delivery with clear milestones and handoff docs",
+        "Global remote team with async delivery, clear milestones, and handoff docs",
       ],
     },
     b: {
@@ -62,8 +62,8 @@ export const forAgenciesCampaign: CampaignLanderContent = {
       intro:
         "If reps manually move form submissions into HubSpot, you are paying for a brochure site and a data-entry workflow. We rebuild the site and connect the pipes in one fixed scope.",
       bullets: [
-        "Scope estimator on the review form — see tier and band before the call",
-        "Representative builds for agencies like yours — no inflated metrics",
+        "Scope estimator on the review form: see tier and band before the call",
+        "Representative builds for agencies like yours. No inflated metrics.",
         "Reply within 1 business day with 3 specific fixes, hire us or not",
       ],
     },

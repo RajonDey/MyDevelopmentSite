@@ -136,7 +136,7 @@ export function ServicesOverviewView() {
             Not sure which offer fits?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-rdx-muted">
-            Start with the scope tool — then book a free review call to confirm tier and timeline.
+            Start with the scope tool, then book a free review call to confirm tier and timeline.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <RdxButton href="/start">Free Website & Workflow Review</RdxButton>

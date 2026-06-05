@@ -87,7 +87,7 @@ export function RetainerView() {
             className="mb-6"
             eyebrow="Plans"
             title="Care plan tiers"
-            description="Maintain $500/mo · Grow $1,000/mo — optional after project handoff"
+            description="Maintain $500/mo · Grow $1,000/mo. Optional after project handoff."
           />
           <div className="grid gap-6 md:grid-cols-2">
             {plans.map((plan) => (

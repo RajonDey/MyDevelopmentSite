@@ -16,19 +16,19 @@ export const ogImageConfig: Record<
   },
   service: {
     path: siteMetadata.ogImage,
-    alt: `${siteMetadata.siteName} — Services`,
+    alt: `${siteMetadata.siteName} | Services`,
     width: 1200,
     height: 630,
   },
   work: {
     path: siteMetadata.ogImage,
-    alt: `${siteMetadata.siteName} — Work`,
+    alt: `${siteMetadata.siteName} | Work`,
     width: 1200,
     height: 630,
   },
   start: {
     path: siteMetadata.ogImage,
-    alt: `${siteMetadata.siteName} — Free Review`,
+    alt: `${siteMetadata.siteName} | Free Review`,
     width: 1200,
     height: 630,
   },

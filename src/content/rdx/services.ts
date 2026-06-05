@@ -47,7 +47,7 @@ export const serviceOffers: ServiceOffer[] = [
     slug: "lead-automation",
     name: "Lead & CRM Automation",
     subtitle:
-      "Stop copying leads from email into your CRM — we connect your tools automatically.",
+      "Stop copying leads from email into your CRM. We connect your tools automatically.",
     startingPrice: 1000,
     tiers: [
       {
@@ -76,7 +76,7 @@ export const serviceOffers: ServiceOffer[] = [
     slug: "ai-chat-search",
     name: "AI Chat & Search",
     subtitle:
-      "FAQ chat, site search, or a custom AI tool — connected to your content and workflows.",
+      "FAQ chat, site search, or a custom AI tool, connected to your content and workflows.",
     startingPrice: 3000,
     tiers: [
       {
@@ -167,10 +167,10 @@ export const serviceDetails: ServiceOfferDetail[] = [
       "WordPress-only maintenance fixes",
     ],
     addOns: [
-      "Extra page — $250",
-      "Extra connection — $600",
-      "Copy polish — $700",
-      "Care plan — $500/mo",
+      "Extra page ($250)",
+      "Extra connection ($600)",
+      "Copy polish ($700)",
+      "Care plan ($500/mo)",
     ],
   },
   {
@@ -218,9 +218,9 @@ export const serviceDetails: ServiceOfferDetail[] = [
       "Unlimited change requests",
     ],
     addOns: [
-      "Extra automation — $500",
-      "Hosted n8n — $200/mo",
-      "Care plan — $500/mo",
+      "Extra automation ($500)",
+      "Hosted n8n ($200/mo)",
+      "Care plan ($500/mo)",
     ],
   },
   {
@@ -228,7 +228,7 @@ export const serviceDetails: ServiceOfferDetail[] = [
     slug: "ai-chat-search",
     name: "AI Chat & Search",
     subtitle:
-      "FAQ chat, site search, or a custom AI tool — connected to your content and workflows.",
+      "FAQ chat, site search, or a custom AI tool, connected to your content and workflows.",
     startingPrice: 3000,
     tiers: [
       {
@@ -267,13 +267,13 @@ export const serviceDetails: ServiceOfferDetail[] = [
       },
     ],
     notIncluded: [
-      "Open-ended token spend — client pays API usage",
+      "Open-ended token spend (client pays API usage)",
       "Full product R&D without scope",
       "Replacing your CRM or helpdesk",
     ],
     addOns: [
-      "Extra knowledge source — scoped on call",
-      "Monthly prompt tuning — via Care plan",
+      "Extra knowledge source (scoped on call)",
+      "Monthly prompt tuning (via Care plan)",
     ],
   },
 ];
@@ -284,13 +284,13 @@ export const bundleOffer = {
   name: "Website + Automation bundle",
   priceLabel: "$5,000",
   summary:
-    "Website Standard + Automation Standard — scoped on the audit call (save $500 vs separate).",
+    "Website Standard + Automation Standard, scoped on the audit call (save $500 vs separate).",
 } as const;
 
 export const servicesOverview = {
   title: "Services",
   intro:
-    "Fixed-scope projects for marketing agencies — websites, lead automation, and AI tools, priced in round numbers.",
+    "Fixed-scope projects for marketing agencies: websites, lead automation, and AI tools, priced in round numbers.",
   bundleNote: bundleOffer.summary,
 } as const;
 
