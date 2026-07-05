@@ -26,6 +26,8 @@
 | [RDX_Phase14_Setup.md](./RDX_Phase14_Setup.md) | Campaign landers + UTM attribution (Phase 14) |
 | [RDX_Phase13_Setup.md](./RDX_Phase13_Setup.md) | Calendly + confirmation emails (Phase 13) |
 | [RDX_Phase6_Setup.md](./RDX_Phase6_Setup.md) | Supabase leads + admin env setup |
+| [RDX_Lead_Desk_Plan.md](./RDX_Lead_Desk_Plan.md) | Lead desk schema + Notion replacement |
+| [RDX_Lead_Desk_Phase7b_Plan.md](./RDX_Lead_Desk_Phase7b_Plan.md) | **Phase 7b** — invoicing v2, projects, Shuvvo seed |
 | [RDX_Phase7_Completion_Plan.md](./RDX_Phase7_Completion_Plan.md) | **Phases 7–15** — finish design, one form, sales ops, launch | After Phase 6 |
 | [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md) | How AI agents should run each session | Agent sessions |
 

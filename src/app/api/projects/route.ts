@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import { requireAdminSession } from "@/lib/admin-auth";
 import {
-  buildLeadReport,
-  createLead,
-  listLeads,
-  updateLead,
-  validateCreateLeadInput,
-  validateUpdateLeadInput,
-} from "@/lib/leads";
+  createProject,
+  listProjects,
+  updateProject,
+  validateCreateProjectInput,
+  validateUpdateProjectInput,
+} from "@/lib/projects";
 
 export async function GET(request: Request) {
   const session = await requireAdminSession();
@@ -16,16 +15,10 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url);
-  if (searchParams.get("report") === "1") {
-    const report = await buildLeadReport();
-    if (!report) {
-      return NextResponse.json({ error: "Report unavailable" }, { status: 500 });
-    }
-    return NextResponse.json({ report });
-  }
+  const leadId = searchParams.get("leadId") ?? undefined;
+  const projects = await listProjects(leadId);
 
-  const leads = await listLeads();
-  return NextResponse.json({ leads });
+  return NextResponse.json({ projects });
 }
 
 export async function POST(request: Request) {
@@ -35,18 +28,18 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const parsed = validateCreateLeadInput(body);
+  const parsed = validateCreateProjectInput(body);
 
   if ("error" in parsed) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const lead = await createLead(parsed);
-  if (!lead) {
-    return NextResponse.json({ error: "Failed to create lead" }, { status: 500 });
+  const project = await createProject(parsed);
+  if (!project) {
+    return NextResponse.json({ error: "Failed to create project" }, { status: 500 });
   }
 
-  return NextResponse.json({ lead }, { status: 201 });
+  return NextResponse.json({ project }, { status: 201 });
 }
 
 export async function PATCH(request: Request) {
@@ -56,16 +49,16 @@ export async function PATCH(request: Request) {
   }
 
   const body = await request.json();
-  const parsed = validateUpdateLeadInput(body);
+  const parsed = validateUpdateProjectInput(body);
 
   if ("error" in parsed) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const lead = await updateLead(parsed);
-  if (!lead) {
+  const project = await updateProject(parsed);
+  if (!project) {
     return NextResponse.json({ error: "Update failed" }, { status: 500 });
   }
 
-  return NextResponse.json({ lead });
+  return NextResponse.json({ project });
 }

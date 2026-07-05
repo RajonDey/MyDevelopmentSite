@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@react-pdf/renderer"],
   // Enable experimental features for better performance
   experimental: {
     optimizePackageImports: ["lucide-react"],

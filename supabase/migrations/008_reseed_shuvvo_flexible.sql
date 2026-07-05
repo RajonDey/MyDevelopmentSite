@@ -1,0 +1,184 @@
+-- RDX Lead Desk Phase 7c: re-seed Shuvvo/Hexas invoices after lead rename
+-- Safe to re-run: skips by legacy_ref; removes orphan test drafts first
+
+do $$
+declare
+  shuvvo_id uuid;
+  hicu_id uuid;
+  seed_rate numeric := 122;
+begin
+  select id into shuvvo_id
+  from public.rdx_leads
+  where email = 'saikatdascee@gmail.com'
+     or agency_name = 'Shuvvo - Pujhons Vai'
+     or agency_name ilike 'hexas%'
+     or billing_name = 'Hexas'
+  order by created_at asc
+  limit 1;
+
+  if shuvvo_id is null then
+    raise notice 'Hexas/Shuvvo lead not found';
+    return;
+  end if;
+
+  update public.rdx_leads
+  set
+    billing_name = coalesce(nullif(trim(billing_name), ''), 'Hexas'),
+    billing_address = coalesce(nullif(trim(billing_address), ''), 'Sylhet'),
+    client_region = coalesce(client_region, 'bd')
+  where id = shuvvo_id;
+
+  -- Remove test drafts that block seed invoice numbers (no legacy_ref)
+  delete from public.rdx_invoices
+  where lead_id = shuvvo_id
+    and status = 'draft'
+    and legacy_ref is null;
+
+  insert into public.rdx_projects (lead_id, title, summary, status)
+  select
+    shuvvo_id,
+    'HICU Platform',
+    'Hexas — HICU development, platform work, and classes',
+    'active'
+  where not exists (
+    select 1
+    from public.rdx_projects
+    where lead_id = shuvvo_id and title = 'HICU Platform'
+  );
+
+  select id into hicu_id
+  from public.rdx_projects
+  where lead_id = shuvvo_id and title = 'HICU Platform'
+  limit 1;
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2025-0001', '2025AUG3102', 'Aug 2025',
+    770, round(770 * seed_rate), seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Aug 2025","amountUsd":770}]'::jsonb,
+    '2025-08-31', '2025-09-05'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2025AUG3102'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2025-0002', '2025SEP3001', 'Sep 2025',
+    660, round(660 * seed_rate), seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Sep 2025","amountUsd":660}]'::jsonb,
+    '2025-09-30', '2025-10-05'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2025SEP3001'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2025-0003', '2025OCT3103', 'Oct 2025',
+    650, round(650 * seed_rate), seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Oct 2025","amountUsd":650}]'::jsonb,
+    '2025-10-31', '2025-11-05'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2025OCT3103'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2025-0004', '2025NOV_DEC3103', 'Nov–Dec 2025',
+    greatest(1, round(88000 / seed_rate)), 88000, seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Nov–Dec 2025","amountUsd":722}]'::jsonb,
+    '2025-12-31', '2026-01-08'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2025NOV_DEC3103'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2026-0001', '26JAN_FEB', 'Jan–Feb 2026',
+    665, round(665 * seed_rate), seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Jan–Feb 2026","amountUsd":665}]'::jsonb,
+    '2026-02-28', '2026-03-05'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '26JAN_FEB'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2026-0002', '2026APRIL01', 'Apr 2026',
+    greatest(1, round(45000 / seed_rate)), 45000, seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — Apr 2026","amountUsd":369}]'::jsonb,
+    '2026-04-01', '2026-04-08'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2026APRIL01'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at, paid_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2026-0003', '2026MAY04', 'May 2026',
+    greatest(1, round(50000 / seed_rate)), 50000, seed_rate, 'paid',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[{"description":"Services — May 2026","amountUsd":410}]'::jsonb,
+    '2026-05-04', '2026-05-10'::timestamptz
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2026MAY04'
+  );
+
+  insert into public.rdx_invoices (
+    lead_id, project_id, invoice_number, legacy_ref, billing_period,
+    amount_usd, amount_bdt, usd_bdt_rate, status,
+    bill_to_name, bill_to_address, client_region, payment_method,
+    line_items, issued_at
+  )
+  select
+    shuvvo_id, hicu_id, 'RDX-2026-0004', '2026JUN01', 'Jun 2026',
+    176, 21600, seed_rate, 'sent',
+    'Hexas', 'Sylhet', 'bd', 'bank_transfer_bd',
+    '[
+      {"description":"HICU platform development","quantity":22,"unit":"hours","unitRateUsd":8,"amountUsd":176}
+    ]'::jsonb,
+    '2026-07-05'
+  where not exists (
+    select 1 from public.rdx_invoices where legacy_ref = '2026JUN01'
+  );
+
+end $$;

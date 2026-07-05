@@ -20,7 +20,8 @@ NEXTAUTH_URL=http://localhost:3000
 # Phase 6 — server only (never expose to client)
 SUPABASE_SERVICE_ROLE_KEY=
 
-# Comma-separated admin emails allowed to view /dashboard
+# Admin dashboard — password-only sign-in at /signin
+RDX_ADMIN_PASSWORD=              # openssl rand -base64 24
 RDX_ADMIN_EMAILS=contact@rajondey.com
 
 # Optional — lead notification emails (uses existing Resend setup)
@@ -31,7 +32,7 @@ FROM_EMAIL=contact@rajondey.com
 
 ## 3. Access leads admin
 
-1. Sign in at `/signin` with an email listed in `RDX_ADMIN_EMAILS`
+1. Sign in at `/signin` with `RDX_ADMIN_PASSWORD`
 2. Open `/dashboard` to view and update lead status
 
 ## 4. Form pipeline
