@@ -33,6 +33,18 @@ const config: Config = {
           accent: "var(--rdx-color-accent)",
           "accent-hover": "var(--rdx-color-accent-hover)",
         },
+        os: {
+          bg: "var(--os-color-bg)",
+          surface: "var(--os-color-surface)",
+          "surface-raised": "var(--os-color-surface-raised)",
+          border: "var(--os-color-border)",
+          text: "var(--os-color-text)",
+          muted: "var(--os-color-muted)",
+          accent: "var(--os-color-accent)",
+          green: "var(--os-color-green)",
+          yellow: "var(--os-color-yellow)",
+          red: "var(--os-color-red)",
+        },
       },
       fontFamily: {
         rdx: ["var(--rdx-font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],

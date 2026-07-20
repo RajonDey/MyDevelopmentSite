@@ -1,0 +1,30 @@
+/**
+ * RDX OS — dark cockpit theme
+ * Extends rdx tokens from tokens.css (loaded via globals.css)
+ */
+.os-theme {
+  --os-color-bg: oklch(16% 0.01 260);
+  --os-color-surface: oklch(20% 0.01 260);
+  --os-color-surface-raised: oklch(24% 0.01 260);
+  --os-color-border: oklch(30% 0.01 260);
+  --os-color-text: oklch(95% 0 0);
+  --os-color-muted: oklch(65% 0.01 260);
+  --os-color-accent: var(--rdx-color-accent);
+  --os-color-accent-hover: var(--rdx-color-accent-hover);
+  --os-color-green: oklch(72% 0.15 145);
+  --os-color-yellow: oklch(78% 0.12 85);
+  --os-color-red: oklch(65% 0.18 25);
+  --os-sidebar-width: 220px;
+}
+
+.os-theme .os-card {
+  background: var(--os-color-surface);
+  border: 1px solid var(--os-color-border);
+  border-radius: var(--rdx-radius-lg);
+}
+
+.os-theme .os-card-raised {
+  background: var(--os-color-surface-raised);
+  border: 1px solid var(--os-color-border);
+  border-radius: var(--rdx-radius-lg);
+}

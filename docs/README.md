@@ -30,6 +30,7 @@
 | [RDX_Lead_Desk_Phase7b_Plan.md](./RDX_Lead_Desk_Phase7b_Plan.md) | **Phase 7b** — invoicing v2, projects, Shuvvo seed |
 | [RDX_Phase7_Completion_Plan.md](./RDX_Phase7_Completion_Plan.md) | **Phases 7–15** — finish design, one form, sales ops, launch | After Phase 6 |
 | [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md) | How AI agents should run each session | Agent sessions |
+| [RDX_OS_Spec.md](./RDX_OS_Spec.md) | **Internal team OS** — goals, projects, command center (separate from marketing revamp) | Before RDX OS Phase 0 |
 
 ---
 
@@ -57,6 +58,10 @@
 | **Phase 6 — Client ops** | ✅ Complete (2026-06-02) — Supabase leads, `/dashboard` admin |
 
 **Active phase:** Phase 15 complete — **RDX v1 ready for deploy.** See [RDX_Phase15_Setup.md](./RDX_Phase15_Setup.md) for Lighthouse + launch tag.
+
+| Item | Status |
+|------|--------|
+| **RDX OS (internal)** | 🚧 Phase 0.5 — run team trial 2–4 weeks. Mock at `/os`. [Spec §16](./RDX_OS_Spec.md) |
 
 ---
 
@@ -87,4 +92,4 @@
 
 ---
 
-*Last updated: June 2, 2026*
+*Last updated: July 20, 2026*
