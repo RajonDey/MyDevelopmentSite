@@ -28,12 +28,14 @@ type OsSidebarProps = {
   currentMember: OsMember;
   mobileOpen: boolean;
   onMobileClose: () => void;
+  onSignOut?: () => void;
 };
 
 export function OsSidebar({
   currentMember,
   mobileOpen,
   onMobileClose,
+  onSignOut,
 }: OsSidebarProps) {
   const pathname = usePathname();
 
@@ -78,7 +80,7 @@ export function OsSidebar({
       <div className="border-t border-os-border p-4">
         <div className="flex items-center gap-3">
           <MemberAvatar member={currentMember} />
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium text-os-text">
               {currentMember.name}
             </p>
@@ -87,6 +89,15 @@ export function OsSidebar({
             </p>
           </div>
         </div>
+        {onSignOut ? (
+          <button
+            type="button"
+            onClick={onSignOut}
+            className="mt-3 w-full rounded-md border border-os-border px-2 py-1.5 text-xs text-os-muted hover:border-os-accent hover:text-os-accent"
+          >
+            Sign out
+          </button>
+        ) : null}
       </div>
     </>
   );

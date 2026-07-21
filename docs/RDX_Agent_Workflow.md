@@ -1,54 +1,53 @@
-# RDX Revamp — Agent Workflow
+# RDX — Agent Workflow
 
-How AI agents (Cursor, etc.) should operate on this project across sessions.
+How AI agents should operate on this project across sessions.
 
 ---
 
-## Session start (mandatory — 5 min)
+## Session start (mandatory)
 
-1. Read [`docs/README.md`](./README.md) — confirm **active phase**
-2. Read [`RDX_Scope_Boundaries.md`](./RDX_Scope_Boundaries.md) for that phase only
-3. Read [`RDX_File_Ownership_Map.md`](./RDX_File_Ownership_Map.md) — list files you will touch
+1. Read [`PRODUCTS.md`](./PRODUCTS.md) — which product (marketing / lead desk / OS)?
+2. Read [`docs/README.md`](./README.md) — confirm **active track** (maintenance / launch / OS / lead desk)
+3. Open the living doc for that track (Launch Runbook, Ops Reference, Lead Desk, OS Spec, or Standards)
 4. Skim [`RDX_Content_Copy_Bank.md`](./RDX_Content_Copy_Bank.md) if writing UI copy
-5. State aloud in response:
-   - Active phase
+5. State in response:
+   - Active track
    - Files to create/edit
    - Files explicitly NOT touching
-   - Exit criteria from [`RDX_Phase_Checklists.md`](./RDX_Phase_Checklists.md)
+   - Exit criteria (what “done” means this session)
 
-**If active phase is unknown:** stop — do not write code. Ask founder or default to Phase 0.
+**If the track is unclear:** stop — ask founder. Do not invent a new phase gate.
 
 ---
 
 ## During implementation
 
-1. Follow [`RDX_Code_Migration_Strategy.md`](./RDX_Code_Migration_Strategy.md) — additive first
+1. Follow [`RDX_Code_Migration_Strategy.md`](./RDX_Code_Migration_Strategy.md) — additive first; no mass legacy deletes
 2. Follow [`RDX_Implementation_Standards.md`](./RDX_Implementation_Standards.md)
-3. Design pages with **Hallmark** skill: `.agents/skills/hallmark/SKILL.md`
+3. Design pages with **Hallmark**: `.agents/skills/hallmark/SKILL.md`
 4. Use **rdx-revamp** skill: `.agents/skills/rdx-revamp/SKILL.md`
-5. One phase per session when possible — avoid starting Phase 3 work in Phase 2 session
-6. No drive-by refactors on legacy files
+5. One focus per session — avoid drive-by refactors on legacy files
+6. Marketing copy only from Copy Bank or founder approval
 
 ---
 
 ## Session end (mandatory)
 
-1. Run `npm run build` and `npm run lint`
-2. Update checkboxes in `RDX_Phase_Checklists.md` if items completed
-3. Update **Current status** table in `docs/README.md` if phase advanced
-4. Provide session log:
+1. Run `npm run build` and `npm run lint` (or `npm run prelaunch` before launch)
+2. Update **Current status** in `docs/README.md` if the track advanced
+3. Provide session log:
 
 ```markdown
 ## Session summary
-- **Phase:** N
-- **Completed:** (checklist items)
+- **Track:** maintenance | launch | OS | lead desk
+- **Completed:** ...
 - **Files touched:** ...
-- **Deferred (out of scope):** ...
+- **Deferred:** ...
 - **build/lint:** pass | fail
-- **Next session starts at:** Phase N, task X
+- **Next session:** ...
 ```
 
-5. Do **not** commit unless founder asks
+4. Do **not** commit unless founder asks
 
 ---
 
@@ -56,7 +55,7 @@ How AI agents (Cursor, etc.) should operate on this project across sessions.
 
 | Tool | When |
 |------|------|
-| `@rdx-revamp` or rdx-revamp skill | Any revamp implementation |
+| `@rdx-revamp` or rdx-revamp skill | rdx components / site work |
 | Hallmark skill | New rdx pages, sections, visual design |
 | `.cursor/rules/rdx-*.mdc` | Auto-loaded in Cursor |
 | `AGENTS.md` | Entry point every agent reads |
@@ -65,12 +64,20 @@ How AI agents (Cursor, etc.) should operate on this project across sessions.
 
 ## Escalation — stop and ask founder
 
-- Active phase unclear
+- Active track unclear
 - Need new npm dependency
-- Need to delete legacy route files
+- Need to delete legacy route/API files
 - Copy requires metrics not in Copy Bank
-- Scope request not in Phase Boundaries doc
+- Supabase schema changes or new env vars
 - Build fails on untouched legacy code (report, don't mass-fix)
+
+---
+
+## Global never / ask-first
+
+**Never (unless founder requests):** invent metrics/testimonials; SEO ad campaigns; migrate off WordPress; domain change without approval; full dark-theme rewrite unrelated to Hallmark Quiet.
+
+**Ask first:** new env variables; Supabase schema changes; removing redirected legacy page files; Framer Motion beyond hero + one section.
 
 ---
 
@@ -78,23 +85,22 @@ How AI agents (Cursor, etc.) should operate on this project across sessions.
 
 ```
 main                    — production
-rdx-revamp              — all revamp work
-rdx/phase-0-foundation  — optional per-phase branches
+feature/...             — focused work
 ```
-
-Merge to main only after phase checklist sign-off.
 
 ---
 
 ## What “done” means
 
-A phase is **not done** when “it looks OK.” It is done when:
+A session is done when:
 
-- Phase checklist 100% for that phase
+- Stated exit criteria met
 - build + lint pass
-- Scope boundaries respected
+- Living docs / README status updated if needed
 - Session log written
+
+Launch is done when [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md) Phase F boxes are checked.
 
 ---
 
-*This workflow exists so tomorrow's session does not redo today's decisions.*
+*Product map: [PRODUCTS.md](./PRODUCTS.md)*

@@ -19,6 +19,10 @@ export default async function DashboardPage() {
     redirect("/signin");
   }
 
+  if (session.osAccess && !session.deskAccess) {
+    redirect("/signin");
+  }
+
   return (
     <RdxSection className="pt-4 md:pt-8">
       <RdxContainer className="max-w-6xl">

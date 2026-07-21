@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, Plus } from "lucide-react";
+import { LogOut, Menu, Plus } from "lucide-react";
 import { OsBadge } from "@/components/os/ui/OsBadge";
 import { QuickAddModal } from "@/components/os/quick-add/QuickAddModal";
 import { useOsData } from "@/components/os/context/OsDataContext";
@@ -9,10 +9,11 @@ import { getQuarterLabel, getCurrentQuarter } from "@/lib/os/progress";
 
 type OsTopBarProps = {
   onMenuOpen: () => void;
+  onSignOut?: () => void;
 };
 
-export function OsTopBar({ onMenuOpen }: OsTopBarProps) {
-  const { data } = useOsData();
+export function OsTopBar({ onMenuOpen, onSignOut }: OsTopBarProps) {
+  const { data, currentMember } = useOsData();
   const [quickAddOpen, setQuickAddOpen] = useState(false);
 
   const quarter = getCurrentQuarter();
@@ -51,14 +52,30 @@ export function OsTopBar({ onMenuOpen }: OsTopBarProps) {
           ) : null}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setQuickAddOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-md border border-os-accent/40 bg-os-accent/10 px-3 py-1.5 text-sm text-os-accent hover:bg-os-accent/20"
-        >
-          <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Park idea</span>
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <span className="hidden text-xs text-os-muted sm:inline">
+            {currentMember.name}
+          </span>
+          <button
+            type="button"
+            onClick={() => setQuickAddOpen(true)}
+            className="inline-flex items-center gap-1.5 rounded-md border border-os-accent/40 bg-os-accent/10 px-3 py-1.5 text-sm text-os-accent hover:bg-os-accent/20"
+          >
+            <Plus className="h-4 w-4" />
+            <span className="hidden sm:inline">Park idea</span>
+          </button>
+          {onSignOut ? (
+            <button
+              type="button"
+              onClick={onSignOut}
+              className="inline-flex items-center gap-1.5 rounded-md border border-os-border px-2.5 py-1.5 text-sm text-os-muted hover:border-os-accent hover:text-os-accent"
+              aria-label="Sign out"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Sign out</span>
+            </button>
+          ) : null}
+        </div>
       </header>
 
       <QuickAddModal open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />

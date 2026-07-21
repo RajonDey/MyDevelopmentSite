@@ -1,6 +1,12 @@
-export type OsRole = "admin" | "member";
-/** Core team (OS access) vs future hired employees */
+/** App access level — what they can do in OS */
+export type OsAccessLevel = "admin" | "member";
+/** @deprecated Use OsAccessLevel — kept as alias during migration */
+export type OsRole = OsAccessLevel;
+
+/** Core team (OS access) vs future hired employees (no login until promoted) */
 export type MemberKind = "core" | "employee";
+
+export type MemberStatus = "active" | "invited" | "disabled";
 
 export type ProjectStatus =
   | "backlog"
@@ -13,12 +19,36 @@ export type ProjectStatus =
 export type ProjectPriority = "p1" | "p2" | "p3";
 export type Health = "green" | "yellow" | "red";
 
+/** Client work links to Lead Desk; internal work is owned in OS */
+export type ProjectKind = "client_linked" | "internal";
+
+/**
+ * Dynamic org role — seat definition with responsibilities & principles.
+ * Admin can create/edit these; not the same as access level (admin/member).
+ */
+export interface OsRoleDef {
+  id: string;
+  slug: string;
+  name: string;
+  /** One-line purpose of this seat */
+  summary: string;
+  responsibilities: string[];
+  principles: string[];
+  sortOrder: number;
+  /** Soft-archive — hidden from assign picker when false */
+  active: boolean;
+}
+
 export interface OsMember {
   id: string;
   email: string;
   name: string;
-  role: OsRole;
+  /** Access level: admin | member */
+  role: OsAccessLevel;
+  /** Primary org role (responsibilities / principles) */
+  orgRoleId?: string;
   kind?: MemberKind;
+  status?: MemberStatus;
   avatarUrl?: string;
   activeLimit?: number;
 }
@@ -78,6 +108,8 @@ export interface Project {
   id: string;
   objectiveId: string;
   title: string;
+  /** Desk-linked vs OS-owned internal work */
+  kind: ProjectKind;
   /** Accountable person — only this id counts toward load */
   ownerId: string;
   /** Helpers on the same project — display only, does not affect capacity */
@@ -85,12 +117,19 @@ export interface Project {
   status: ProjectStatus;
   priority: ProjectPriority;
   deadline: string | null;
+  /** Short description — required richness for internal; optional for client_linked */
+  summary?: string;
+  /** Working notes (OS-owned for internal projects) */
+  notes?: string;
   whoItHelps?: string;
   fulfillmentNote?: string;
   blockerNote?: string;
   backlogReason?: string;
   declineReason?: string;
   links?: ProjectLink[];
+  /** Lead Desk rdx_projects.id when kind === client_linked */
+  rdxProjectId?: string;
+  rdxLeadId?: string;
   completedAt?: string;
   createdAt: string;
   updatedAt: string;
@@ -148,6 +187,8 @@ export interface CommandCenterData {
   northStar: NorthStar;
   pillars: Pillar[];
   teamCapacity: TeamCapacity;
+  /** Dynamic org role catalog */
+  roleDefs: OsRoleDef[];
   objectives: Objective[];
   keyResults: KeyResult[];
   projects: Project[];
@@ -181,6 +222,11 @@ export const PROJECT_PRIORITY_LABELS: Record<ProjectPriority, string> = {
   p1: "P1",
   p2: "P2",
   p3: "P3",
+};
+
+export const PROJECT_KIND_LABELS: Record<ProjectKind, string> = {
+  client_linked: "Client (Desk)",
+  internal: "Internal",
 };
 
 export const REVIEW_STEP_IDS = [

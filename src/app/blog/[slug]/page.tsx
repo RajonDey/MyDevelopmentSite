@@ -1,15 +1,33 @@
 import { Metadata } from "next";
-import { SEO } from "@/components/seo";
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import { Button } from "@/components/common/ui/Button";
 import Link from "next/link";
-import { fetchPost } from "@/lib/wp-api";
-import { WPPost } from "@/types/post";
+import { notFound } from "next/navigation";
 import he from "he";
+import { fetchPost } from "@/lib/wp-api";
+import type { WPPost } from "@/types/post";
+import { siteMetadata } from "@/content/rdx/metadata";
+import { blogContent } from "@/content/rdx/blog";
+import { RdxContainer } from "@/components/rdx/layout/Container";
+import { RdxSection } from "@/components/rdx/layout/Section";
+import { RdxButton } from "@/components/rdx/ui/Button";
 
 interface BlogParams {
   slug: string;
+}
+
+function stripHtml(html: string) {
+  return html.replace(/<[^>]+>/g, "").replace(/class="[^"]*"/g, "");
+}
+
+function decodeTitle(title: string) {
+  return he.decode(
+    title
+      .replace(/&#038;/g, "&")
+      .replace(/&#8217;/g, "'")
+      .replace(/&#8216;/g, "'")
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, "&")
+  );
 }
 
 export async function generateMetadata({
@@ -18,30 +36,38 @@ export async function generateMetadata({
   params: Promise<BlogParams>;
 }): Promise<Metadata> {
   try {
-    const resolvedParams = await params;
-    const post = await fetchPost(resolvedParams.slug);
+    const { slug } = await params;
+    const post = await fetchPost(slug);
+    const description = stripHtml(post.excerpt.rendered).slice(0, 160);
+    const image = post.image || `${siteMetadata.siteUrl}${siteMetadata.ogImage}`;
 
     return {
-      title: post.title.rendered,
-      description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
+      title: `${decodeTitle(post.title.rendered)} | ${siteMetadata.siteName}`,
+      description,
       openGraph: {
-        title: post.title.rendered,
-        description: post.excerpt.rendered.replace(/<[^>]+>/g, ""),
-        url: `https://development.rajondey.com/blog/${post.slug}`,
-        images: [{ url: post.image || "/development-blog-placeholder.png" }],
+        title: decodeTitle(post.title.rendered),
+        description,
+        url: `${siteMetadata.siteUrl}/blog/${post.slug}`,
+        siteName: siteMetadata.siteName,
+        images: [{ url: image }],
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: decodeTitle(post.title.rendered),
+        description,
+        images: [image],
       },
     };
   } catch {
-    // Fallback metadata if post fetch fails during build
-    const resolvedParams = await params;
+    const { slug } = await params;
     return {
-      title: `Blog Post | Rajon Dey`,
-      description: "Blog post content will be loaded at runtime.",
+      title: `Blog | ${siteMetadata.siteName}`,
+      description: siteMetadata.description,
       openGraph: {
-        title: `Blog Post | Rajon Dey`,
-        description: "Blog post content will be loaded at runtime.",
-        url: `https://development.rajondey.com/blog/${resolvedParams.slug}`,
-        images: [{ url: "/development-blog-placeholder.png" }],
+        title: `Blog | ${siteMetadata.siteName}`,
+        url: `${siteMetadata.siteUrl}/blog/${slug}`,
+        images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
       },
     };
   }
@@ -52,133 +78,110 @@ export default async function BlogPostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const resolvedParams = await params;
+  const { slug } = await params;
   let post: WPPost;
   try {
-    post = await fetchPost(resolvedParams.slug);
+    post = await fetchPost(slug);
   } catch {
     return notFound();
   }
 
-  // Clean excerpt text for display (remove HTML and Tailwind classes if present)
-  const excerptText = post.excerpt.rendered
-    .replace(/<[^>]+>/g, "")
-    .replace(/class="[^"]*"/g, "");
+  const excerptText = he
+    .decode(stripHtml(post.excerpt.rendered).replace(/\[\s*\.{3}\s*\]/g, ""))
+    .trim();
 
   return (
     <>
-      <SEO
-        title={post.title.rendered}
-        description={excerptText}
-        url={`/blog/${post.slug}`}
-        image={post.image || "/development-blog-placeholder.png"}
-      />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <article className="blog-detail space-y-12">
-          {/* Header */}
-          <header className="space-y-6">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
-              {he.decode(
-                post.title.rendered
-                  .replace(/&#038;/g, "&")
-                  .replace(/&#8217;/g, "'")
-                  .replace(/&#8216;/g, "'")
-                  .replace(/&quot;/g, '"')
-                  .replace(/&amp;/g, "&")
+      <RdxSection className="pt-4 md:pt-8">
+        <RdxContainer className="max-w-3xl">
+          <article className="space-y-10">
+            <header className="space-y-4">
+              <p className="text-sm text-rdx-muted">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+              <h1 className="text-3xl font-semibold tracking-tight text-rdx-ink md:text-4xl">
+                {decodeTitle(post.title.rendered)}
+              </h1>
+              {post.image && (
+                <div className="relative mt-6 h-56 overflow-hidden rounded-rdx border border-rdx-border sm:h-72 md:h-80">
+                  <Image
+                    src={post.image || "/development-blog-placeholder.png"}
+                    alt={decodeTitle(post.title.rendered)}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 768px"
+                  />
+                </div>
               )}
-            </h1>
-            <p className="text-gray-500 text-sm sm:text-base font-medium">
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-            {post.image && (
-              <div className="relative mt-8 h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl border border-gray-100">
-                <Image
-                  src={post.image || "/development-blog-placeholder.png"}
-                  alt={post.title.rendered}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                  priority
-                />
-              </div>
-            )}
-          </header>
+            </header>
 
-          {/* Content */}
-          <section className="space-y-8 text-gray-700">
-            <p className="text-lg sm:text-xl italic text-gray-600 leading-relaxed border-l-4 border-green-500 pl-4">
-              {
-                he
-                  .decode(
-                    post.excerpt.rendered
-                      .replace(/<[^>]+>/g, "") // Remove HTML tags
-                      .replace(/\[\s*\.{3}\s*\]/g, "") // Remove "[…]" or similar "read more" indicators
-                  )
-                  .trim() // Remove leading/trailing whitespace
-                  .slice(0, 500) + // Optional: Limit to 150 characters for consistency
-                  (post.excerpt.rendered.replace(/<[^>]+>/g, "").length > 500
-                    ? "..."
-                    : "") // Add ellipsis if truncated
-              }
-            </p>
+            {excerptText && (
+              <p className="border-l-2 border-rdx-accent pl-4 text-base italic leading-relaxed text-rdx-muted md:text-lg">
+                {excerptText.length > 500
+                  ? `${excerptText.slice(0, 500)}…`
+                  : excerptText}
+              </p>
+            )}
+
             <div
-              className="space-y-6 leading-relaxed text-base sm:text-lg font-normal text-gray-800 
-              [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-gray-900 [&_h2]:mt-8 
-              [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-gray-800 [&_h3]:mt-6 
-              [&_h4]:text-lg [&_h4]:font-medium [&_h4]:text-gray-800 [&_h4]:mt-4 
-              [&_p]:leading-relaxed [&_p]:my-4 
-              [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 
-              [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 
-              [&_li]:my-2 
-              [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:my-6 [&_blockquote]:text-gray-600 [&_blockquote]:italic 
-              [&_code]:font-mono [&_code]:text-sm [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded 
-              [&_pre]:bg-gray-900 [&_pre]:text-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:my-6 [&_pre]:font-mono [&_pre]:text-sm 
-              [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse 
-              [&_th]:bg-gray-100 [&_th]:font-semibold [&_th]:text-gray-800 [&_th]:px-4 [&_th]:py-3 [&_th]:border [&_th]:border-gray-300 
-              [&_td]:px-4 [&_td]:py-3 [&_td]:border [&_td]:border-gray-300 [&_td]:text-gray-700 
-              [&_figure]:max-w-full [&_figure]:mx-auto [&_figure]:my-8 
-              [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-lg [&_img]:shadow-md 
-              [&_figcaption]:text-center [&_figcaption]:text-gray-600 [&_figcaption]:text-sm [&_figcaption]:mt-2 
-              [&_a]:text-green-600 [&_a]:hover:underline [&_a]:transition-colors [&_a]:duration-200"
+              className="space-y-5 text-base leading-relaxed text-rdx-ink
+                [&_a]:text-rdx-accent [&_a]:underline-offset-2 hover:[&_a]:underline
+                [&_blockquote]:my-6 [&_blockquote]:border-l-2 [&_blockquote]:border-rdx-border [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-rdx-muted
+                [&_code]:rounded [&_code]:bg-rdx-surface [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm
+                [&_figcaption]:mt-2 [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:text-rdx-muted
+                [&_figure]:my-8 [&_figure]:mx-auto [&_figure]:max-w-full
+                [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-rdx-ink
+                [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-rdx-ink
+                [&_h4]:mt-6 [&_h4]:text-lg [&_h4]:font-medium [&_h4]:text-rdx-ink
+                [&_img]:my-4 [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-rdx
+                [&_li]:my-1.5
+                [&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-6
+                [&_p]:my-4
+                [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:rounded-rdx [&_pre]:bg-rdx-ink [&_pre]:p-4 [&_pre]:font-mono [&_pre]:text-sm [&_pre]:text-rdx-paper
+                [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse
+                [&_td]:border [&_td]:border-rdx-border [&_td]:px-3 [&_td]:py-2
+                [&_th]:border [&_th]:border-rdx-border [&_th]:bg-rdx-surface [&_th]:px-3 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold
+                [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6"
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />
-          </section>
+          </article>
+        </RdxContainer>
+      </RdxSection>
 
-          {/* CTA Section */}
-          <aside className="bg-gray-50 p-6 sm:p-8 rounded-2xl shadow-md border border-gray-100">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 text-center">
-              Enjoyed This Post?
-            </h3>
-            <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 text-center">
-              Let’s connect to discuss your next project or idea!
+      <RdxSection className="bg-rdx-surface pt-0 pb-12">
+        <RdxContainer className="max-w-3xl">
+          <div className="rounded-rdx border border-rdx-border bg-rdx-paper p-6 md:p-8">
+            <h2 className="text-lg font-semibold text-rdx-ink">
+              {blogContent.auditCta.headline}
+            </h2>
+            <p className="mt-2 text-sm text-rdx-muted">
+              {blogContent.auditCta.subhead}
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="/order">
-                <Button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200">
-                  Order Services
-                </Button>
-              </a>
-              <Link href="/blog">
-                <Button
-                  variant="outline"
-                  className="w-full sm:w-auto text-gray-600 hover:text-green-600 border-gray-300 hover:border-green-400 hover:bg-green-50 font-semibold px-6 py-2.5 rounded-full transition-all duration-200"
-                >
-                  Back to Blog
-                </Button>
-              </Link>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <RdxButton href={blogContent.auditCta.href}>
+                {blogContent.auditCta.label}
+              </RdxButton>
+              <RdxButton href="/blog" variant="secondary">
+                Back to blog
+              </RdxButton>
             </div>
-          </aside>
-        </article>
-      </div>
+            <p className="mt-4 text-xs text-rdx-muted">
+              <Link href="/work" className="underline-offset-2 hover:underline">
+                See recent work
+              </Link>
+            </p>
+          </div>
+        </RdxContainer>
+      </RdxSection>
     </>
   );
 }
 
 export async function generateStaticParams() {
-  // Disable static generation during build to prevent localhost connection errors
-  // Posts will be generated dynamically at runtime
   return [];
 }

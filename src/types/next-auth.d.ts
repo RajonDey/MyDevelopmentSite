@@ -1,6 +1,5 @@
-// /types/next-auth.d.ts
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import NextAuth from "next-auth";
+import "next-auth";
+import "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
@@ -10,6 +9,11 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
     };
+    /** Lead Desk password session */
+    deskAccess?: boolean;
+    /** RDX OS magic-link session */
+    osAccess?: boolean;
+    osRole?: "admin" | "member";
   }
 
   interface User {
@@ -17,5 +21,17 @@ declare module "next-auth" {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+    deskAccess?: boolean;
+    osAccess?: boolean;
+    osRole?: "admin" | "member";
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id?: string;
+    deskAccess?: boolean;
+    osAccess?: boolean;
+    osRole?: "admin" | "member";
   }
 }

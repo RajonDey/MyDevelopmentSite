@@ -3,10 +3,10 @@ import { Suspense } from "react";
 import { blogContent } from "@/content/rdx/blog";
 import { pageMeta } from "@/content/rdx/pages";
 import { siteMetadata } from "@/content/rdx/metadata";
-import { WPPost } from "@/types/post";
+import type { WPPost } from "@/types/post";
 import BeehiivSubscribe from "@/components/BeehiivSubscribe";
-import BlogLearnContent from "@/components/features/blog/BlogLearnContent";
-import { BlogCardSkeleton } from "@/components/common/ui/skeleton";
+import { BlogFeed } from "@/components/rdx/blog/BlogFeed";
+import { BlogCardSkeleton } from "@/components/rdx/blog/BlogCardSkeleton";
 import { RdxContainer } from "@/components/rdx/layout/Container";
 import { RdxSection } from "@/components/rdx/layout/Section";
 import { RdxButton } from "@/components/rdx/ui/Button";
@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     description: pageMeta.blog.description,
     url: `${siteMetadata.siteUrl}/blog`,
     siteName: siteMetadata.siteName,
+    images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageMeta.blog.title,
+    description: pageMeta.blog.description,
+    images: [`${siteMetadata.siteUrl}${siteMetadata.ogImage}`],
   },
 };
 
@@ -159,7 +166,7 @@ export default async function BlogPage() {
       <RdxSection className="pt-8">
         <RdxContainer>
           <Suspense fallback={<BlogSkeleton />}>
-            <BlogLearnContent posts={posts} />
+            <BlogFeed posts={posts} />
           </Suspense>
         </RdxContainer>
       </RdxSection>

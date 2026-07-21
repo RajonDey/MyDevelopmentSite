@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { SEO } from "@/components/seo";
+import { siteMetadata } from "@/content/rdx/metadata";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | RDX Technologies",
@@ -9,18 +9,15 @@ export const metadata: Metadata = {
     title: "Privacy Policy | RDX Technologies",
     description:
       "Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com.",
-    url: "https://development.rajondey.com/privacy-policy",
+    url: `${siteMetadata.siteUrl}/privacy-policy`,
+    siteName: siteMetadata.siteName,
+    images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
   },
 };
 
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <SEO
-        title="Privacy Policy | RDX Technologies"
-        description="Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com."
-        url="/privacy-policy"
-      />
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Header */}
         <header className="mb-10 text-center">

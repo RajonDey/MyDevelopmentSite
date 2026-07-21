@@ -1,5 +1,5 @@
 ---
-description: RDX docs are source of truth for revamp scope and phases
+description: RDX docs are source of truth for product and ops
 globs: docs/**/*
 alwaysApply: false
 ---
@@ -8,9 +8,11 @@ alwaysApply: false
 
 When editing docs:
 
-- Keep `docs/README.md` index updated when adding files
-- Phase checkboxes in `RDX_Phase_Checklists.md` reflect actual completion
-- Strategic changes require updating: Strategic Decisions, Scope Boundaries, Copy Bank, File Map
+- Keep `docs/README.md` index updated when adding living files
+- Prefer updating living docs over adding new planning files
+- Strategic changes require updating: Strategic Decisions, Copy Bank, Services & Pricing
 - Do not contradict locked decisions without noting founder approval
 
 Implementation status lives in `docs/README.md` → Current status table.
+Product map: `docs/PRODUCTS.md`.
+Launch checklist: `docs/RDX_Launch_Runbook.md`.

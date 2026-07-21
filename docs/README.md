@@ -1,8 +1,10 @@
-# RDX Technologies — Revamp Documentation Hub
+# RDX Technologies — Documentation Hub
 
-**Read this first** before any implementation work. These docs define scope, architecture, and agent behavior so work stays consistent across days/weeks.
+**Read this first** before implementation work.
 
-👉 **Pricing & services:** [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md) — ✅ locked.
+👉 **Three products in this repo:** [PRODUCTS.md](./PRODUCTS.md) — marketing site · Lead Desk · RDX OS.  
+👉 **Pricing & services:** [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md) — locked.  
+👉 **Launch sign-off:** [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md) — Phase F open.
 
 ---
 
@@ -10,27 +12,18 @@
 
 | Doc | Purpose | When to read |
 |-----|---------|--------------|
-| [RDX_Repossitioning_Plan.md](./RDX_Repossitioning_Plan.md) | Original brief & vision | Context only |
-| [RDX_Strategic_Decisions_and_Phase_Plan.md](./RDX_Strategic_Decisions_and_Phase_Plan.md) | **Locked decisions** — ICP, services, pricing, phases | Every session start |
-| [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md) | **Service tiers, inclusions, market pricing** — approve before Phase 0 | Before implementation |
-| [RDX_Scope_Boundaries.md](./RDX_Scope_Boundaries.md) | In/out of scope per phase — **prevents scope creep** | Before starting any phase |
-| [RDX_Code_Migration_Strategy.md](./RDX_Code_Migration_Strategy.md) | How to revamp without breaking legacy code | Before writing code |
-| [RDX_Implementation_Standards.md](./RDX_Implementation_Standards.md) | Code quality, file rules, anti–AI-slop | During all coding |
-| [RDX_File_Ownership_Map.md](./RDX_File_Ownership_Map.md) | Which files are legacy / new / phase-owned | Before touching a file |
-| [RDX_Content_Copy_Bank.md](./RDX_Content_Copy_Bank.md) | Approved messaging, CTAs, service copy | When writing UI copy |
-| [RDX_Phase_Checklists.md](./RDX_Phase_Checklists.md) | Exit criteria per phase — **do not advance until checked** | End of each phase |
-| [RDX_Phase_Sequence.md](./RDX_Phase_Sequence.md) | **Phase order & dependencies** — read before Phase 0 |
-| [RDX_READINESS_CHECKLIST.md](./RDX_READINESS_CHECKLIST.md) | Pre-flight before Phase 0 |
-| [RDX_SEO_and_AI_Discoverability.md](./RDX_SEO_and_AI_Discoverability.md) | Google SEO + AI/LLM indexing (llms.txt, schema) |
-| [RDX_Phase15_Setup.md](./RDX_Phase15_Setup.md) | Final QA & launch sign-off (Phase 15) |
-| [RDX_Phase14_Setup.md](./RDX_Phase14_Setup.md) | Campaign landers + UTM attribution (Phase 14) |
-| [RDX_Phase13_Setup.md](./RDX_Phase13_Setup.md) | Calendly + confirmation emails (Phase 13) |
-| [RDX_Phase6_Setup.md](./RDX_Phase6_Setup.md) | Supabase leads + admin env setup |
-| [RDX_Lead_Desk_Plan.md](./RDX_Lead_Desk_Plan.md) | Lead desk schema + Notion replacement |
-| [RDX_Lead_Desk_Phase7b_Plan.md](./RDX_Lead_Desk_Phase7b_Plan.md) | **Phase 7b** — invoicing v2, projects, Shuvvo seed |
-| [RDX_Phase7_Completion_Plan.md](./RDX_Phase7_Completion_Plan.md) | **Phases 7–15** — finish design, one form, sales ops, launch | After Phase 6 |
-| [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md) | How AI agents should run each session | Agent sessions |
-| [RDX_OS_Spec.md](./RDX_OS_Spec.md) | **Internal team OS** — goals, projects, command center (separate from marketing revamp) | Before RDX OS Phase 0 |
+| [PRODUCTS.md](./PRODUCTS.md) | Map of the three products — avoid mixing them | Every session start |
+| [RDX_Strategic_Decisions_and_Phase_Plan.md](./RDX_Strategic_Decisions_and_Phase_Plan.md) | Locked decisions — ICP, services, pricing, routes | Positioning / pricing |
+| [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md) | Service tiers, inclusions, estimator mapping | Pricing / services UI |
+| [RDX_Content_Copy_Bank.md](./RDX_Content_Copy_Bank.md) | Approved messaging, CTAs | Writing UI copy |
+| [RDX_Implementation_Standards.md](./RDX_Implementation_Standards.md) | Code quality, living paths, anti–AI-slop | During coding |
+| [RDX_Code_Migration_Strategy.md](./RDX_Code_Migration_Strategy.md) | Additive migration / legacy rules | Touching legacy |
+| [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md) | How agents run each session | Agent sessions |
+| [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md) | Deploy, smoke, Lighthouse, launch tag | Before production tag |
+| [RDX_Ops_Reference.md](./RDX_Ops_Reference.md) | Env, forms, campaigns, redirects, admin | Ops / env setup |
+| [RDX_Lead_Desk.md](./RDX_Lead_Desk.md) | Lead desk schema, invoices, API | Dashboard / Supabase |
+| [RDX_SEO_and_AI_Discoverability.md](./RDX_SEO_and_AI_Discoverability.md) | SEO + llms.txt / schema | Discoverability |
+| [RDX_OS_Spec.md](./RDX_OS_Spec.md) | Internal team OS (`/os`) — separate product | Before OS work |
 
 ---
 
@@ -38,9 +31,9 @@
 
 | File | Purpose |
 |------|---------|
-| [`../AGENTS.md`](../AGENTS.md) | Agent entry point — links docs + hard rules |
-| [`../.cursor/rules/`](../.cursor/rules/) | Cursor rules (auto-loaded in IDE) |
-| [`../.agents/skills/rdx-revamp/`](../.agents/skills/rdx-revamp/) | Project skill: `@rdx-revamp` or revamp tasks |
+| [`../AGENTS.md`](../AGENTS.md) | Agent entry point |
+| [`../.cursor/rules/`](../.cursor/rules/) | Cursor rules |
+| [`../.agents/skills/rdx-revamp/`](../.agents/skills/rdx-revamp/) | Revamp skill |
 
 ---
 
@@ -48,48 +41,55 @@
 
 | Item | Status |
 |------|--------|
-| **Docs & planning** | ✅ Complete v1.2 — see [RDX_READINESS_CHECKLIST.md](./RDX_READINESS_CHECKLIST.md) |
-| **Phase 0 — Foundation** | ✅ Complete (2026-06-02) — tokens, content scaffold, metadata, analytics |
-| **Phase 1 — Design shell** | ✅ Complete (2026-06-02) — RdxHeader, RdxFooter, layout primitives, UI tokens |
-| **Phase 2 — Launch MVP** | ✅ Complete (2026-06-02) — homepage, `/audit`, `/contact`, `/hire` redirect |
-| **Phase 3 — Services** | ✅ Complete (2026-06-02) — `/services`, detail pages, `/estimate`, `/order` redirect |
-| **Phase 4 — Proof & trust** | ✅ Complete (2026-06-02) — `/work`, case studies, `/process`, `/about`, `/portfolio` redirect |
-| **Phase 5 — Expand** | ✅ Complete (2026-06-02) — blog CTAs, `/retainer`, AI service, `/learn` redirect |
-| **Phase 6 — Client ops** | ✅ Complete (2026-06-02) — Supabase leads, `/dashboard` admin |
+| **Marketing revamp (Phases 0–15)** | Shipped in repo |
+| **Launch Phase F** | Open — deploy, prod `/start` test, Lighthouse, `rdx-v1-launch` tag |
+| **Lead desk (7 / 7b / 7c)** | Shipped — client projects management · prod Supabase admin optional |
+| **RDX OS (internal)** | Phase 1 in progress · real §12 seed in mock + `010_os_core.sql` · magic-link auth wired · [Spec](./RDX_OS_Spec.md) §12 |
 
-**Active phase:** Phase 15 complete — **RDX v1 ready for deploy.** See [RDX_Phase15_Setup.md](./RDX_Phase15_Setup.md) for Lighthouse + launch tag.
+### Deferred (not blocking v1)
 
-| Item | Status |
-|------|--------|
-| **RDX OS (internal)** | 🚧 Phase 0.5 — run team trial 2–4 weeks. Mock at `/os`. [Spec §16](./RDX_OS_Spec.md) |
+- Prod Supabase + `/dashboard` enablement
+- Custom domain
+- Blog IA / full sitemap refresh (WordPress archive structure)
+
+---
+
+## Living code paths
+
+| Path | Use |
+|------|-----|
+| `src/components/rdx/` | Marketing + admin UI (incl. `rdx/blog/`) |
+| `src/content/rdx/` | Typed marketing / ops content |
+| `src/styles/rdx/tokens.css` | Design tokens |
+| `src/app/(os)/os/` · `src/components/os/` | RDX OS (isolated) |
+| `supabase/migrations/` | Lead desk schema |
 
 ---
 
 ## Quick reference (locked)
 
-- **Brand:** RDX Technologies (not Rajon Dey hero)
+- **Brand:** RDX Technologies
 - **ICP:** US marketing agencies, 5–20 employees
 - **Services:** Agency Website · Lead & CRM Automation
 - **Flagship tiers:** **$3,000** (website) · **$2,500** (automation)
-- **Range:** **$1,000 – $5,000+** · round numbers on site
+- **Range:** **$1,000 – $5,000+**
 - **Pricing on site:** Full tiers on `/services`; homepage “From $1,000” only
-- **Audit CTA:** Free Website & Workflow Review
+- **Audit CTA:** Free Website & Workflow Review → `/start`
 - **Site role:** Credibility for warm outbound — not primary SEO lead gen
-- **Design:** Hallmark `modern-minimal` / Quiet — not Vercel dark clone
+- **Design:** Hallmark `modern-minimal` / Quiet
 - **Domain (now):** `development.rajondey.com`
 
 ---
 
 ## How to start work (human or agent)
 
-0. Read [RDX_READINESS_CHECKLIST.md](./RDX_READINESS_CHECKLIST.md) once before Phase 0.
-1. Read [RDX_Strategic_Decisions_and_Phase_Plan.md](./RDX_Strategic_Decisions_and_Phase_Plan.md) — confirm active phase.
-2. Open [RDX_Scope_Boundaries.md](./RDX_Scope_Boundaries.md) for that phase only.
-3. Open [RDX_File_Ownership_Map.md](./RDX_File_Ownership_Map.md) — touch only allowed files.
-4. Follow [RDX_Code_Migration_Strategy.md](./RDX_Code_Migration_Strategy.md) and [RDX_Implementation_Standards.md](./RDX_Implementation_Standards.md).
-5. Use copy from [RDX_Content_Copy_Bank.md](./RDX_Content_Copy_Bank.md) — do not invent metrics.
-6. Complete [RDX_Phase_Checklists.md](./RDX_Phase_Checklists.md) before marking phase done.
+1. Read [PRODUCTS.md](./PRODUCTS.md) — which of the three products?
+2. Skim this hub — confirm track (maintenance / launch / OS / lead desk)
+3. Open the relevant living doc from the map above
+4. Follow [RDX_Implementation_Standards.md](./RDX_Implementation_Standards.md) and [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md)
+5. Use copy from [RDX_Content_Copy_Bank.md](./RDX_Content_Copy_Bank.md) — do not invent metrics
+6. For launch: complete [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md)
 
 ---
 
-*Last updated: July 20, 2026*
+*Last updated: July 21, 2026 — OS Phase 1: real seed + magic-link auth*

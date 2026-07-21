@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { OsModal } from "@/components/os/ui/OsModal";
 import { useOsData } from "@/components/os/context/OsDataContext";
-import type { Project, ProjectPriority } from "@/types/os";
+import type { Project, ProjectKind, ProjectPriority } from "@/types/os";
+import { PROJECT_KIND_LABELS } from "@/types/os";
 import { getObjective, getPillarForObjective } from "@/lib/os/selectors";
 
 type ProjectFormModalProps = {
@@ -23,7 +24,10 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
   const [collaboratorIds, setCollaboratorIds] = useState<string[]>([]);
   const [status, setStatus] = useState<"backlog" | "active">("backlog");
   const [priority, setPriority] = useState<ProjectPriority>("p2");
+  const [kind, setKind] = useState<ProjectKind>("internal");
   const [deadline, setDeadline] = useState("");
+  const [summary, setSummary] = useState("");
+  const [notes, setNotes] = useState("");
   const [whoItHelps, setWhoItHelps] = useState("");
   const [fulfillmentNote, setFulfillmentNote] = useState("");
   const [backlogReason, setBacklogReason] = useState("");
@@ -46,25 +50,44 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
           : "backlog"
       );
       setPriority(project.priority);
+      setKind(project.kind);
       setDeadline(project.deadline ?? "");
+      setSummary(project.summary ?? "");
+      setNotes(project.notes ?? "");
       setWhoItHelps(project.whoItHelps ?? "");
       setFulfillmentNote(project.fulfillmentNote ?? "");
       setBacklogReason(project.backlogReason ?? "");
       setBlockerNote(project.blockerNote ?? "");
     } else {
+      const firstPillar = data.pillars[0];
       setTitle("");
-      setPillarId(data.pillars[0]?.id ?? "");
+      setPillarId(firstPillar?.id ?? "");
       setOwnerId(currentMember.id);
       setCollaboratorIds([]);
       setStatus("backlog");
       setPriority("p2");
+      setKind(
+        firstPillar?.slug === "client-services" ? "client_linked" : "internal"
+      );
       setDeadline("");
+      setSummary("");
+      setNotes("");
       setWhoItHelps("");
       setFulfillmentNote("");
       setBacklogReason("");
       setBlockerNote("");
     }
   }, [open, project, data, currentMember.id]);
+
+  function handlePillarChange(nextPillarId: string) {
+    setPillarId(nextPillarId);
+    const pillar = data.pillars.find((p) => p.id === nextPillarId);
+    if (!isEdit) {
+      setKind(
+        pillar?.slug === "client-services" ? "client_linked" : "internal"
+      );
+    }
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -83,7 +106,10 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
         ownerId,
         collaboratorIds,
         priority,
+        kind,
         deadline: deadline || null,
+        summary: summary || undefined,
+        notes: notes || undefined,
         whoItHelps: whoItHelps || undefined,
         fulfillmentNote: fulfillmentNote || undefined,
         backlogReason: backlogReason || undefined,
@@ -101,7 +127,10 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
       collaboratorIds,
       status,
       priority,
+      kind,
       deadline: deadline || null,
+      summary: summary || undefined,
+      notes: notes || undefined,
       whoItHelps: whoItHelps || undefined,
       fulfillmentNote: fulfillmentNote || undefined,
       backlogReason: backlogReason || undefined,
@@ -151,7 +180,7 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
             <select
               id="pf-pillar"
               value={pillarId}
-              onChange={(e) => setPillarId(e.target.value)}
+              onChange={(e) => handlePillarChange(e.target.value)}
               className="mt-1.5 w-full rounded-md border border-os-border bg-os-bg px-3 py-2 text-sm text-os-text"
             >
               {data.pillars.map((p) => (
@@ -259,18 +288,69 @@ export function ProjectFormModal({ open, onClose, project }: ProjectFormModalPro
           </div>
 
           <div>
-            <label htmlFor="pf-deadline" className="block text-sm font-medium text-os-text">
-              Deadline
+            <label htmlFor="pf-kind" className="block text-sm font-medium text-os-text">
+              Kind
             </label>
-            <input
-              id="pf-deadline"
-              type="date"
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
+            <select
+              id="pf-kind"
+              value={kind}
+              onChange={(e) => setKind(e.target.value as ProjectKind)}
+              className="mt-1.5 w-full rounded-md border border-os-border bg-os-bg px-3 py-2 text-sm text-os-text"
+            >
+              <option value="internal">{PROJECT_KIND_LABELS.internal}</option>
+              <option value="client_linked">
+                {PROJECT_KIND_LABELS.client_linked}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="pf-deadline" className="block text-sm font-medium text-os-text">
+            Deadline
+          </label>
+          <input
+            id="pf-deadline"
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+            className="mt-1.5 w-full rounded-md border border-os-border bg-os-bg px-3 py-2 text-sm text-os-text"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="pf-summary" className="block text-sm font-medium text-os-text">
+            Summary
+          </label>
+          <textarea
+            id="pf-summary"
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
+            rows={2}
+            placeholder={
+              kind === "internal"
+                ? "What this is — stays in OS"
+                : "Optional — Desk holds full client context"
+            }
+            className="mt-1.5 w-full rounded-md border border-os-border bg-os-bg px-3 py-2 text-sm text-os-text"
+          />
+        </div>
+
+        {kind === "internal" ? (
+          <div>
+            <label htmlFor="pf-notes" className="block text-sm font-medium text-os-text">
+              Notes
+            </label>
+            <textarea
+              id="pf-notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              rows={3}
+              placeholder="Working notes, next slices, draft status…"
               className="mt-1.5 w-full rounded-md border border-os-border bg-os-bg px-3 py-2 text-sm text-os-text"
             />
           </div>
-        </div>
+        ) : null}
 
         <div>
           <label htmlFor="pf-who" className="block text-sm font-medium text-os-text">

@@ -1,6 +1,10 @@
 import { timingSafeEqual } from "crypto";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import {
+  consumeOsMagicToken,
+  resolveOsAllowlistedMember,
+} from "@/lib/os/magic-link";
 
 function getAdminEmail(): string {
   const allowlist = process.env.RDX_ADMIN_EMAILS?.split(",")
@@ -27,6 +31,7 @@ function verifyAdminPassword(password: string): boolean {
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
+      id: "credentials",
       name: "Credentials",
       credentials: {
         password: { label: "Password", type: "password" },
@@ -40,12 +45,38 @@ export const authOptions: NextAuthOptions = {
           id: "rdx-admin",
           email: getAdminEmail(),
           name: "RDX Admin",
+          deskAccess: true,
+          osAccess: false,
+        };
+      },
+    }),
+    CredentialsProvider({
+      id: "os-magic",
+      name: "OS Magic Link",
+      credentials: {
+        token: { label: "Token", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = await consumeOsMagicToken(credentials?.token ?? "");
+        if (!email) return null;
+
+        const member = resolveOsAllowlistedMember(email);
+        if (!member) return null;
+
+        return {
+          id: member.id,
+          email: member.email,
+          name: member.name,
+          deskAccess: false,
+          osAccess: true,
+          osRole: member.role,
         };
       },
     }),
   ],
   pages: {
     signIn: "/signin",
+    error: "/os/signin",
   },
   session: {
     strategy: "jwt",
@@ -55,6 +86,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        const u = user as {
+          deskAccess?: boolean;
+          osAccess?: boolean;
+          osRole?: "admin" | "member";
+        };
+        token.deskAccess = Boolean(u.deskAccess);
+        token.osAccess = Boolean(u.osAccess);
+        token.osRole = u.osRole;
       }
       return token;
     },
@@ -66,6 +105,9 @@ export const authOptions: NextAuthOptions = {
           session.user.id = token.id as string;
         }
       }
+      session.deskAccess = Boolean(token.deskAccess);
+      session.osAccess = Boolean(token.osAccess);
+      session.osRole = token.osRole as "admin" | "member" | undefined;
       return session;
     },
   },

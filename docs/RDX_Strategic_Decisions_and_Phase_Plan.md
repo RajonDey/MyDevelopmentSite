@@ -50,15 +50,15 @@
 
 ## Phases
 
-0 Foundation → 1 Shell → 2 MVP (audit-ready) → 3 Services (**full marketing starts**) → 4 Proof → 5–6 Expand
+0 Foundation → 1 Shell → 2 MVP (audit-ready) → 3 Services (**full marketing starts**) → 4 Proof → 5–6 Expand → 7–15 (funnel, ops, launch)
 
-**Sequence detail:** [RDX_Phase_Sequence.md](./RDX_Phase_Sequence.md)  
-**Checklists:** [RDX_Phase_Checklists.md](./RDX_Phase_Checklists.md)
+**Status:** Marketing revamp shipped. Launch sign-off: [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md).  
+**Product map:** [PRODUCTS.md](./PRODUCTS.md)
 
 ---
 
 ## Ready
 
-All docs aligned v1.2. Start with **Phase 0** when ready.
+Locked decisions v1.2 remain source of truth for positioning and pricing.
 
-*Version 1.2 — June 2, 2026*
+*Version 1.2 — June 2, 2026 · hub updated July 21, 2026*

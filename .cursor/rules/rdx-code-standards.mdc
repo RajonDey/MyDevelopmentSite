@@ -9,7 +9,7 @@ alwaysApply: false
 ## Structure
 
 - New UI: `src/components/rdx/` only
-- New copy/data: `src/content/rdx/` — not `mock-data.ts`
+- New copy/data: `src/content/rdx/` only
 - Server Components default; `"use client"` only for forms/interactivity
 
 ## Style

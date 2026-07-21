@@ -6,5 +6,9 @@ export async function requireAdminSession() {
   if (!session?.user?.email || !isAdminEmail(session.user.email)) {
     return null;
   }
+  // OS magic-link sessions must not open Lead Desk
+  if (session.osAccess && !session.deskAccess) {
+    return null;
+  }
   return session;
 }

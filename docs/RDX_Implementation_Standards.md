@@ -12,6 +12,19 @@
 
 ---
 
+## Living paths (prefer these)
+
+| Path | Use |
+|------|-----|
+| `src/components/rdx/` | Marketing + admin UI |
+| `src/content/rdx/` | Typed content |
+| `src/styles/rdx/tokens.css` | Design tokens |
+| `src/types/rdx/` | Shared types |
+| `src/app/(os)/os/`, `src/components/os/` | RDX OS only |
+| `supabase/migrations/` | Lead desk schema |
+
+Do **not** invent marketing metrics. Prefer `src/components/rdx/` and `src/content/rdx/`.
+
 ## File & naming rules
 
 | Rule | Example |
@@ -71,9 +84,9 @@
 ## Data & API rules
 
 1. New marketing content → `src/content/rdx/*.ts` (typed exports).
-2. Do not add content to `mock-data.ts` for new site — legacy file only.
+2. Do not add marketing content to legacy mock files — use `content/rdx/` only.
 3. Forms: reuse existing patterns (`contact`, Resend, API routes) — one submission pipeline.
-4. No new database tables until Phase 6.
+4. New DB tables / migrations require founder OK — see [RDX_Lead_Desk.md](./RDX_Lead_Desk.md).
 
 ---
 
@@ -81,9 +94,8 @@
 
 | Allowed without ask | Requires founder OK |
 |---------------------|---------------------|
-| None new Phase 0–2 | Any new npm package |
-| lucide-react icons | shadcn, radix full install |
-| framer-motion (sparingly) | New CMS, Stripe SDK |
+| lucide-react icons | Any new npm package |
+| framer-motion (sparingly) | shadcn / radix full install, new CMS, Stripe SDK |
 
 ---
 
@@ -112,17 +124,25 @@
 
 ## Git / session hygiene
 
-- One phase focus per PR/session
-- Commit message: `rdx(phase-N): short description`
+- One focus per PR/session
+- Commit message: `rdx: short description` (or track-specific prefix)
 - List files touched at end of agent session
-- Run `npm run build && npm run lint` before phase sign-off
+- Run `npm run build && npm run lint` before sign-off
+
+---
+
+## Global never / ask-first
+
+**Never (unless founder requests):** invent metrics or testimonials; mass-delete legacy routes/API; SEO ad tooling; migrate off WordPress; domain change without approval.
+
+**Ask first:** new env vars; Supabase schema changes; deleting redirected legacy page files; Framer Motion beyond hero + one section.
 
 ---
 
 ## Review checklist (every rdx PR)
 
 ```
-[ ] Only files for active phase touched
+[ ] Only files for this session’s track touched
 [ ] build passes
 [ ] lint passes
 [ ] No invented metrics
@@ -135,4 +155,4 @@
 
 ---
 
-*Agents: enforce this doc + [RDX_Scope_Boundaries.md](./RDX_Scope_Boundaries.md)*
+*Agents: enforce this doc + [RDX_Agent_Workflow.md](./RDX_Agent_Workflow.md)*

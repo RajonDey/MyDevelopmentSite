@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { SEO } from "@/components/seo";
+import { siteMetadata } from "@/content/rdx/metadata";
 
 export const metadata: Metadata = {
   title: "Terms of Service | RDX Technologies",
@@ -9,18 +9,15 @@ export const metadata: Metadata = {
     title: "Terms of Service | RDX Technologies",
     description:
       "Terms and conditions for RDX Technologies software development services. Learn about our service terms, payment policies, and business practices.",
-    url: "https://development.rajondey.com/terms-of-service",
+    url: `${siteMetadata.siteUrl}/terms-of-service`,
+    siteName: siteMetadata.siteName,
+    images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
   },
 };
 
 export default function TermsOfServicePage() {
   return (
     <>
-      <SEO
-        title="Terms of Service | RDX Technologies"
-        description="Terms and conditions for RDX Technologies software development services. Learn about our service terms, payment policies, and business practices."
-        url="/terms-of-service"
-      />
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <header className="mb-10 text-center">

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X, ExternalLink, Pencil, Trash2 } from "lucide-react";
-import { PROJECT_STATUS_LABELS, PROJECT_PRIORITY_LABELS } from "@/types/os";
+import { PROJECT_STATUS_LABELS, PROJECT_PRIORITY_LABELS, PROJECT_KIND_LABELS } from "@/types/os";
 import type { ProjectLink } from "@/types/os";
 import { useOsProject } from "@/components/os/context/OsProjectContext";
 import { useOsData } from "@/components/os/context/OsDataContext";
@@ -104,6 +104,9 @@ export function ProjectDetailPanel() {
               <span className="text-xs capitalize text-os-muted">
                 {PROJECT_STATUS_LABELS[project.status]}
               </span>
+              <span className="rounded border border-os-border px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-os-muted">
+                {PROJECT_KIND_LABELS[project.kind]}
+              </span>
             </div>
             <h2 className="mt-2 text-lg font-medium leading-snug text-os-text">
               {project.title}
@@ -142,6 +145,28 @@ export function ProjectDetailPanel() {
 
         <div className="flex-1 overflow-y-auto p-5">
           <dl className="space-y-5">
+            {project.summary ? (
+              <DetailRow label="Summary">{project.summary}</DetailRow>
+            ) : null}
+            {project.notes ? (
+              <DetailRow label="Notes">
+                <span className="whitespace-pre-wrap">{project.notes}</span>
+              </DetailRow>
+            ) : null}
+            {project.kind === "client_linked" ? (
+              <DetailRow label="Lead Desk">
+                <a
+                  href="/dashboard"
+                  className="text-os-accent hover:underline"
+                >
+                  Open in Lead Desk
+                </a>
+                <p className="mt-1 text-xs text-os-muted">
+                  Billing and client notes stay in Desk. OS owns priority and
+                  load.
+                </p>
+              </DetailRow>
+            ) : null}
             {project.whoItHelps ? (
               <DetailRow label="Who it helps">{project.whoItHelps}</DetailRow>
             ) : null}

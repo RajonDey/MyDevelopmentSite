@@ -14,7 +14,7 @@ BUSINESS_EMAIL=contact@rajondey.com
 # From email address (optional - defaults to your BUSINESS_EMAIL)
 FROM_EMAIL=contact@rajondey.com
 
-# Calendly booking link for qualified leads (Phase 13 — see docs/RDX_Phase13_Setup.md)
+# Calendly booking link for qualified leads (see docs/RDX_Ops_Reference.md)
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/rajondey
 ```
 

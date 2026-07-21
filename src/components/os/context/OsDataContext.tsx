@@ -33,8 +33,16 @@ import type {
   WeeklyCheckIn,
   Win,
   OsMember,
+  OsRoleDef,
 } from "@/types/os";
 import { MAX_BACKLOG_ITEMS, MAX_FOCUS_PROJECTS } from "@/types/os";
+
+export type RoleDefInput = {
+  name: string;
+  summary: string;
+  responsibilities: string[];
+  principles: string[];
+};
 
 export type AddBacklogInput = {
   title: string;
@@ -61,6 +69,9 @@ export type CreateProjectInput = {
   status: "backlog" | "active";
   priority?: ProjectPriority;
   deadline?: string | null;
+  kind?: Project["kind"];
+  summary?: string;
+  notes?: string;
   whoItHelps?: string;
   fulfillmentNote?: string;
   backlogReason?: string;
@@ -73,6 +84,9 @@ export type UpdateProjectInput = Partial<{
   collaboratorIds: string[];
   priority: ProjectPriority;
   deadline: string | null;
+  kind: Project["kind"];
+  summary: string;
+  notes: string;
   whoItHelps: string;
   fulfillmentNote: string;
   backlogReason: string;
@@ -120,6 +134,10 @@ type OsDataContextValue = {
     fields: Partial<Pick<QuarterlyReview, "learnings" | "completedSteps">>
   ) => void;
   toggleReviewStep: (stepId: ReviewStepId) => void;
+  createRoleDef: (input: RoleDefInput) => boolean;
+  updateRoleDef: (roleId: string, input: Partial<RoleDefInput> & { active?: boolean }) => void;
+  archiveRoleDef: (roleId: string) => void;
+  assignMemberOrgRole: (memberId: string, orgRoleId: string) => void;
 };
 
 const OsDataContext = createContext<OsDataContextValue | null>(null);
@@ -246,10 +264,12 @@ export function OsDataProvider({
       }
 
       const now = new Date().toISOString();
+      const pillarSlug = pillar.slug;
       const project: Project = {
         id: generateId("proj"),
         objectiveId: objective.id,
         title: input.title.trim(),
+        kind: pillarSlug === "client-services" ? "client_linked" : "internal",
         ownerId: input.ownerId ?? currentMember.id,
         status: "backlog",
         priority: input.priority ?? "p3",
@@ -290,15 +310,21 @@ export function OsDataProvider({
       const collaborators = (input.collaboratorIds ?? []).filter(
         (id) => id !== input.ownerId
       );
+      const pillar = data.pillars.find((p) => p.id === input.pillarId);
+      const defaultKind =
+        pillar?.slug === "client-services" ? "client_linked" : "internal";
       const project: Project = {
         id: generateId("proj"),
         objectiveId: objective.id,
         title: input.title.trim(),
+        kind: input.kind ?? defaultKind,
         ownerId: input.ownerId,
         collaboratorIds: collaborators.length > 0 ? collaborators : undefined,
         status: input.status === "active" ? "active" : "backlog",
         priority: input.priority ?? "p2",
         deadline: input.deadline ?? null,
+        summary: input.summary,
+        notes: input.notes,
         whoItHelps: input.whoItHelps,
         fulfillmentNote: input.fulfillmentNote,
         backlogReason: input.backlogReason,
@@ -790,6 +816,148 @@ export function OsDataProvider({
     });
   }, []);
 
+  const slugify = (name: string) =>
+    name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "") || "role";
+
+  const createRoleDef = useCallback(
+    (input: RoleDefInput): boolean => {
+      if (!isAdmin) {
+        showToast("Only admins can create roles.");
+        return false;
+      }
+      const name = input.name.trim();
+      if (!name) {
+        showToast("Role name is required.");
+        return false;
+      }
+      const responsibilities = input.responsibilities
+        .map((s) => s.trim())
+        .filter(Boolean);
+      const principles = input.principles.map((s) => s.trim()).filter(Boolean);
+      if (responsibilities.length === 0 || principles.length === 0) {
+        showToast("Add at least one responsibility and one principle.");
+        return false;
+      }
+
+      const baseSlug = slugify(name);
+      const existingSlugs = new Set((data.roleDefs ?? []).map((r) => r.slug));
+      let slug = baseSlug;
+      let n = 2;
+      while (existingSlugs.has(slug)) {
+        slug = `${baseSlug}-${n}`;
+        n += 1;
+      }
+
+      const maxOrder = (data.roleDefs ?? []).reduce(
+        (max, r) => Math.max(max, r.sortOrder),
+        0
+      );
+
+      const role: OsRoleDef = {
+        id: generateId("role"),
+        slug,
+        name,
+        summary: input.summary.trim(),
+        responsibilities,
+        principles,
+        sortOrder: maxOrder + 1,
+        active: true,
+      };
+
+      setData((prev) => ({
+        ...prev,
+        roleDefs: [...(prev.roleDefs ?? []), role],
+      }));
+      showToast(`Role created: ${name}`);
+      return true;
+    },
+    [data.roleDefs, isAdmin, showToast]
+  );
+
+  const updateRoleDef = useCallback(
+    (
+      roleId: string,
+      input: Partial<RoleDefInput> & { active?: boolean }
+    ) => {
+      if (!isAdmin) {
+        showToast("Only admins can edit roles.");
+        return;
+      }
+      setData((prev) => ({
+        ...prev,
+        roleDefs: (prev.roleDefs ?? []).map((r) => {
+          if (r.id !== roleId) return r;
+          return {
+            ...r,
+            name: input.name?.trim() ?? r.name,
+            summary: input.summary?.trim() ?? r.summary,
+            responsibilities: input.responsibilities
+              ? input.responsibilities.map((s) => s.trim()).filter(Boolean)
+              : r.responsibilities,
+            principles: input.principles
+              ? input.principles.map((s) => s.trim()).filter(Boolean)
+              : r.principles,
+            active: input.active ?? r.active,
+          };
+        }),
+      }));
+      showToast("Role updated.");
+    },
+    [isAdmin, showToast]
+  );
+
+  const archiveRoleDef = useCallback(
+    (roleId: string) => {
+      if (!isAdmin) {
+        showToast("Only admins can archive roles.");
+        return;
+      }
+      const assigned = data.members.some(
+        (m) => m.orgRoleId === roleId && m.status !== "disabled"
+      );
+      if (assigned) {
+        showToast("Reassign members before archiving this role.");
+        return;
+      }
+      setData((prev) => ({
+        ...prev,
+        roleDefs: (prev.roleDefs ?? []).map((r) =>
+          r.id === roleId ? { ...r, active: false } : r
+        ),
+      }));
+      showToast("Role archived.");
+    },
+    [data.members, isAdmin, showToast]
+  );
+
+  const assignMemberOrgRole = useCallback(
+    (memberId: string, orgRoleId: string) => {
+      if (!isAdmin) {
+        showToast("Only admins can assign roles.");
+        return;
+      }
+      const role = (data.roleDefs ?? []).find(
+        (r) => r.id === orgRoleId && r.active
+      );
+      if (!role) {
+        showToast("Pick an active role.");
+        return;
+      }
+      setData((prev) => ({
+        ...prev,
+        members: prev.members.map((m) =>
+          m.id === memberId ? { ...m, orgRoleId } : m
+        ),
+      }));
+      showToast("Role assigned.");
+    },
+    [data.roleDefs, isAdmin, showToast]
+  );
+
   const value = useMemo(
     (): OsDataContextValue => ({
       data,
@@ -818,6 +986,10 @@ export function OsDataProvider({
       updateKeyResult,
       updateQuarterlyReview,
       toggleReviewStep,
+      createRoleDef,
+      updateRoleDef,
+      archiveRoleDef,
+      assignMemberOrgRole,
     }),
     [
       data,
@@ -846,6 +1018,10 @@ export function OsDataProvider({
       updateKeyResult,
       updateQuarterlyReview,
       toggleReviewStep,
+      createRoleDef,
+      updateRoleDef,
+      archiveRoleDef,
+      assignMemberOrgRole,
     ]
   );
 

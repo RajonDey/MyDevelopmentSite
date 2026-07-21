@@ -2,6 +2,7 @@ import type {
   CommandCenterData,
   Objective,
   OsMember,
+  OsRoleDef,
   Pillar,
   Project,
 } from "@/types/os";
@@ -16,6 +17,20 @@ export function getMember(
   memberId: string
 ): OsMember | undefined {
   return data.members.find((m) => m.id === memberId);
+}
+
+export function getRoleDef(
+  data: CommandCenterData,
+  roleId: string | undefined
+): OsRoleDef | undefined {
+  if (!roleId) return undefined;
+  return (data.roleDefs ?? []).find((r) => r.id === roleId);
+}
+
+export function getActiveRoleDefs(data: CommandCenterData): OsRoleDef[] {
+  return [...(data.roleDefs ?? [])]
+    .filter((r) => r.active)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 export function getPillar(
