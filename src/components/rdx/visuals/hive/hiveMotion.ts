@@ -18,10 +18,4 @@ export const hiveMotion = {
     duration: 5.5,
     ease: "easeInOut" as const,
   },
-  /** Step marks wave across a row. */
-  step: {
-    duration: 3.8,
-    ease: "easeInOut" as const,
-    stagger: 0.4,
-  },
 } as const;
