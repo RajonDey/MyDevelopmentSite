@@ -121,7 +121,10 @@ export default function DesignSystemPage() {
             description="Screenshot frame for case studies."
           />
           <div className="max-w-xl">
-            <BrowserFrame url="agency.example.com" caption="Case study screenshot placeholder">
+            <BrowserFrame
+              url="agency.example.com"
+              caption="Case study screenshot placeholder"
+            >
               <div className="flex aspect-[16/10] items-center justify-center bg-rdx-surface p-8 text-sm text-rdx-muted">
                 Screenshot or mockup content
               </div>
@@ -135,16 +138,26 @@ export default function DesignSystemPage() {
           <SectionHeader eyebrow="UI primitives" title="Tokens in use" />
           <div className="grid gap-4 md:grid-cols-3">
             <RdxCard>
-              <p className="text-xs uppercase tracking-wide text-rdx-subtle">Display</p>
-              <p className="mt-2 font-rdx-display text-2xl text-rdx-ink">Instrument Serif</p>
+              <p className="text-xs uppercase tracking-wide text-rdx-subtle">
+                Display
+              </p>
+              <p className="mt-2 font-rdx-display text-2xl text-rdx-ink">
+                Instrument Serif
+              </p>
             </RdxCard>
             <RdxCard>
-              <p className="text-xs uppercase tracking-wide text-rdx-subtle">Body</p>
+              <p className="text-xs uppercase tracking-wide text-rdx-subtle">
+                Body
+              </p>
               <p className="mt-2 text-rdx-ink">Source Sans 3 — UI and prose</p>
             </RdxCard>
             <RdxCard>
-              <p className="text-xs uppercase tracking-wide text-rdx-subtle">Accent</p>
-              <p className="mt-2 text-rdx-accent">Teal accent · hairline borders</p>
+              <p className="text-xs uppercase tracking-wide text-rdx-subtle">
+                Accent
+              </p>
+              <p className="mt-2 text-rdx-accent">
+                Teal accent · hairline borders
+              </p>
             </RdxCard>
           </div>
           <div className="flex flex-wrap gap-3">

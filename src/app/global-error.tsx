@@ -33,7 +33,23 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
           }}
         >
           <div style={{ maxWidth: "28rem", textAlign: "center" }}>
-            <h1 style={{ fontSize: "1.75rem", fontWeight: 600 }}>
+            <h1
+              style={{
+                fontSize: "1.75rem",
+                fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/rdxhive-mark.png"
+                alt=""
+                width={32}
+                height={32}
+              />
               RDXHIVE
             </h1>
             <p style={{ marginTop: "1rem", lineHeight: 1.6, color: "#555" }}>

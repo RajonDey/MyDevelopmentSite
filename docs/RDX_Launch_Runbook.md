@@ -130,7 +130,7 @@ Only when production is verified.
 - Company-first positioning; agencies as primary wedge
 - Work assets compressed to WebP under `public/work/`
 - Legacy routes → thin redirects; orphan hire/mock layers removed from `src/`
-- Blog rewritten to rdx components; OG uses `/opengraph-image`
+- Blog rewritten to rdx components; OG uses `/og.png` (hex field + stacked lockup)
 
 ---
 

@@ -8,6 +8,7 @@ import { RdxSection } from "@/components/rdx/layout/Section";
 import { RdxButton } from "@/components/rdx/ui/Button";
 import { RdxCard } from "@/components/rdx/ui/Card";
 import { CalendlyBooking } from "@/components/rdx/sections/CalendlyBooking";
+import { HiveAssembleMark } from "@/components/rdx/visuals/hive/HiveAssembleMark";
 
 export const metadata: Metadata = {
   title: pageMeta.thankYou.title,
@@ -30,6 +31,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
     <RdxSection className="pt-4 md:pt-8 pb-16">
       <RdxContainer className={isQualified ? "max-w-2xl" : "max-w-lg"}>
         <div className="text-center">
+          <HiveAssembleMark className="mb-6" />
           <h1 className="font-rdx-display text-[length:var(--rdx-text-3xl)] font-normal tracking-tight text-rdx-ink">
             {content.title}
           </h1>

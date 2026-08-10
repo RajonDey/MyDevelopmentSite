@@ -6,7 +6,7 @@ export const siteMetadata = {
   title: "RDXHIVE | Agency Websites & CRM Automation",
   description:
     "RDXHIVE builds agency websites and connects them to your CRM — HubSpot, Slack, Calendly, and more. Fixed projects from $1,000.",
-  ogImage: "/opengraph-image",
+  ogImage: "/og.png",
   locale: "en_US",
   tagline: "Many minds. One direction.",
   serviceLine: "Websites & CRM automation for marketing agencies",

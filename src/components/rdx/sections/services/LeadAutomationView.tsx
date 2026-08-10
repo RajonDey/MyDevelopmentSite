@@ -7,10 +7,7 @@ import { RdxCard } from "@/components/rdx/ui/Card";
 import { SplitHero } from "@/components/rdx/sections/SplitHero";
 import { LogoIntegrationRow } from "@/components/rdx/sections/LogoIntegrationRow";
 import { WorkflowDiagram } from "@/components/rdx/visuals/workflow-diagram";
-import {
-  ServiceBackLink,
-  ServiceDetailExtras,
-} from "./ServiceDetailExtras";
+import { ServiceBackLink, ServiceDetailExtras } from "./ServiceDetailExtras";
 
 type LeadAutomationViewProps = {
   service: ServiceOfferDetail;
@@ -76,7 +73,10 @@ export function LeadAutomationView({ service }: LeadAutomationViewProps) {
         </RdxContainer>
       </RdxSection>
 
-      <ServiceDetailExtras service={service} startHref="/start?need=automation" />
+      <ServiceDetailExtras
+        service={service}
+        startHref="/start?need=automation"
+      />
     </>
   );
 }

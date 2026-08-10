@@ -6,6 +6,7 @@ import { RdxButton } from "@/components/rdx/ui/Button";
 import { RdxCard } from "@/components/rdx/ui/Card";
 import { SectionHeader } from "@/components/rdx/ui/SectionHeader";
 import { StickyCtaBar } from "@/components/rdx/sections/StickyCtaBar";
+import { HiveStepMark } from "@/components/rdx/visuals/hive/HiveStepMark";
 
 export function ProcessView() {
   const { hero, steps, pricingLink } = processPageContent;
@@ -29,23 +30,23 @@ export function ProcessView() {
         </RdxContainer>
       </RdxSection>
 
-      <RdxSection variant="surface" spacing="tight">
+      <RdxSection variant="surface" spacing="tight" className="rdx-hex-paper">
         <RdxContainer className="max-w-4xl">
           <ol className="space-y-8">
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <li key={step.step}>
                 <RdxCard className="bg-rdx-paper">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <span className="font-rdx-display text-[length:var(--rdx-text-xl)] text-rdx-accent">
-                      Step {step.step}
-                    </span>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-3">
+                      <HiveStepMark step={step.step} index={index} />
+                      <h2 className="text-xl font-semibold text-rdx-ink">
+                        {step.title}
+                      </h2>
+                    </div>
                     <span className="text-xs font-semibold uppercase tracking-wide text-rdx-subtle">
                       {step.timeline}
                     </span>
                   </div>
-                  <h2 className="mt-2 text-xl font-semibold text-rdx-ink">
-                    {step.title}
-                  </h2>
                   <p className="mt-1 text-sm text-rdx-muted">{step.description}</p>
 
                   <div className="mt-6 grid gap-6 md:grid-cols-2">

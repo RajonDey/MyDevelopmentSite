@@ -45,7 +45,7 @@
 | **Launch Phase F** | Open — deploy, prod `/start` test, Lighthouse, `rdx-v1-launch` tag |
 | **Lead desk (7 / 7b / 7c)** | Shipped — invoice line details + paste estimate · prod Supabase admin optional |
 | **RDXHIVE OS (internal)** | Phase 1 in progress · real §12 seed in mock + `010_os_core.sql` · magic-link auth wired · [Spec](./RDX_OS_Spec.md) §12 |
-| **Brand / domain** | RDXHIVE · rdxhive.com · hello@ / sales@ / team@ — Resend FROM still rajondey.com (free plan) |
+| **Brand / domain** | RDXHIVE · rdxhive.com · H mark + hive hero (hex flow + bee) · Resend FROM still rajondey.com (free plan) |
 
 ### Deferred (not blocking v1)
 
@@ -96,4 +96,4 @@
 
 ---
 
-*Last updated: August 10, 2026 — RDXHIVE brand + rdxhive.com*
+*Last updated: August 10, 2026 — homepage hero hive system diagram (hex + bee + H)*
