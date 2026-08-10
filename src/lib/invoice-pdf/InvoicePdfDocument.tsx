@@ -5,13 +5,18 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
-import type { InvoiceRecord } from "@/types/rdx/invoice";
+import type { InvoiceLineItem, InvoiceRecord } from "@/types/rdx/invoice";
 import { getPaymentBlock, invoiceIssuer } from "@/content/rdx/invoice-settings";
+import {
+  invoiceLineHours,
+  invoiceSharedHourlyRate,
+} from "@/lib/invoices";
 
 export type InvoicePdfProps = {
   invoice: InvoiceRecord;
   billToName: string;
   billToAddress: string | null;
+  projectTitle?: string | null;
 };
 
 const styles = StyleSheet.create({
@@ -22,23 +27,65 @@ const styles = StyleSheet.create({
     color: "#1a1a1a",
     lineHeight: 1.45,
   },
+  headerBlock: {
+    marginBottom: 28,
+  },
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 32,
+    alignItems: "flex-start",
+    marginBottom: 16,
   },
   brand: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 4,
+    color: "#1A1D21",
+    letterSpacing: 0.6,
+    marginBottom: 8,
+  },
+  tagline: {
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
+    color: "#5A5E66",
+    marginBottom: 8,
+  },
+  contact: {
+    fontSize: 9,
+    color: "#5A5E66",
+    lineHeight: 1.5,
   },
   muted: {
-    color: "#555555",
+    color: "#5A5E66",
+  },
+  invoiceMeta: {
+    alignItems: "flex-end",
   },
   invoiceTitle: {
-    fontSize: 22,
+    fontSize: 8,
     fontFamily: "Helvetica-Bold",
+    letterSpacing: 1.8,
+    color: "#5A5E66",
     textAlign: "right",
+    marginBottom: 6,
+  },
+  invoiceNumber: {
+    fontSize: 12,
+    fontFamily: "Helvetica-Bold",
+    color: "#1A1D21",
+    textAlign: "right",
+  },
+  headerRule: {
+    flexDirection: "row",
+    alignItems: "stretch",
+    height: 2,
+  },
+  headerRuleAccent: {
+    width: 56,
+    backgroundColor: "#2F5D66",
+  },
+  headerRuleLine: {
+    flex: 1,
+    backgroundColor: "#E6E6E6",
   },
   section: {
     marginBottom: 20,
@@ -81,6 +128,15 @@ const styles = StyleSheet.create({
     borderBottomColor: "#eeeeee",
     paddingVertical: 8,
     paddingHorizontal: 10,
+  },
+  detailRow: {
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    paddingLeft: 18,
+  },
+  detailText: {
+    fontSize: 9,
+    color: "#555555",
   },
   colDesc: { flex: 3 },
   colQty: { width: 48, textAlign: "right" },
@@ -157,24 +213,43 @@ function formatDate(value: string | null) {
   });
 }
 
-function formatQty(item: InvoiceRecord["line_items"][number]) {
-  if (item.quantity === undefined) return "—";
+function formatQty(item: InvoiceLineItem) {
+  if (item.kind === "info" || item.quantity === undefined) return "—";
   const unit = item.unit === "hours" ? " hrs" : item.unit === "fixed" ? "" : "";
   return `${item.quantity}${unit}`;
 }
 
-function formatRate(item: InvoiceRecord["line_items"][number]) {
-  if (item.unitRateUsd === undefined) return "—";
+function formatRate(item: InvoiceLineItem) {
+  if (item.kind === "info" || item.unitRateUsd === undefined) return "—";
   return formatUsd(item.unitRateUsd);
+}
+
+function formatAmount(item: InvoiceLineItem) {
+  if (item.kind === "info") return "—";
+  return formatUsd(item.amountUsd);
+}
+
+function formatHours(hours: number) {
+  if (!Number.isFinite(hours) || hours <= 0) return "0";
+  return Number.isInteger(hours)
+    ? String(hours)
+    : String(Math.round(hours * 100) / 100);
+}
+
+function formatDetail(detail: NonNullable<InvoiceLineItem["details"]>[number]) {
+  const mark = detail.done ? "✓" : "•";
+  const note = detail.note ? ` (${detail.note})` : "";
+  return `${mark} ${detail.text}${note}`;
 }
 
 export function InvoicePdfDocument({
   invoice,
   billToName,
   billToAddress,
+  projectTitle,
 }: InvoicePdfProps) {
   const payment = getPaymentBlock(invoice.payment_method);
-  const lineItems =
+  const lineItems: InvoiceLineItem[] =
     invoice.line_items.length > 0
       ? invoice.line_items
       : [
@@ -183,21 +258,33 @@ export function InvoicePdfDocument({
             amountUsd: invoice.amount_usd,
           },
         ];
+  const totalHours = invoiceLineHours(lineItems);
+  const sharedRate = invoiceSharedHourlyRate(lineItems);
 
   return (
     <Document title={invoice.invoice_number}>
       <Page size="A4" style={styles.page}>
-        <View style={styles.headerRow}>
-          <View>
-            <Text style={styles.brand}>{invoiceIssuer.name}</Text>
-            <Text style={styles.muted}>{invoiceIssuer.email}</Text>
-            <Text style={styles.muted}>{invoiceIssuer.website}</Text>
+        <View style={styles.headerBlock}>
+          <View style={styles.headerRow}>
+            <View>
+              <Text style={styles.brand}>{invoiceIssuer.name}</Text>
+              <Text style={styles.tagline}>{invoiceIssuer.tagline}</Text>
+              <Text style={styles.contact}>
+                {invoiceIssuer.email}
+                {"  ·  "}
+                {invoiceIssuer.displayUrl}
+              </Text>
+            </View>
+            <View style={styles.invoiceMeta}>
+              <Text style={styles.invoiceTitle}>INVOICE</Text>
+              <Text style={styles.invoiceNumber}>
+                {invoice.invoice_number}
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.invoiceTitle}>INVOICE</Text>
-            <Text style={[styles.muted, { textAlign: "right", marginTop: 4 }]}>
-              {invoice.invoice_number}
-            </Text>
+          <View style={styles.headerRule}>
+            <View style={styles.headerRuleAccent} />
+            <View style={styles.headerRuleLine} />
           </View>
         </View>
 
@@ -230,6 +317,13 @@ export function InvoicePdfDocument({
           </View>
         </View>
 
+        {projectTitle ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionLabel}>Project</Text>
+            <Text>{projectTitle}</Text>
+          </View>
+        ) : null}
+
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Services</Text>
           <View style={styles.table}>
@@ -240,17 +334,37 @@ export function InvoicePdfDocument({
               <Text style={[styles.colAmt, styles.headText]}>Amount</Text>
             </View>
             {lineItems.map((item, index) => (
-              <View key={`${item.description}-${index}`} style={styles.tableRow}>
-                <Text style={styles.colDesc}>{item.description}</Text>
-                <Text style={styles.colQty}>{formatQty(item)}</Text>
-                <Text style={styles.colRate}>{formatRate(item)}</Text>
-                <Text style={styles.colAmt}>{formatUsd(item.amountUsd)}</Text>
+              <View key={`${item.description}-${index}`}>
+                <View style={styles.tableRow}>
+                  <Text style={styles.colDesc}>{item.description}</Text>
+                  <Text style={styles.colQty}>{formatQty(item)}</Text>
+                  <Text style={styles.colRate}>{formatRate(item)}</Text>
+                  <Text style={styles.colAmt}>{formatAmount(item)}</Text>
+                </View>
+                {(item.details ?? []).map((detail, detailIndex) => (
+                  <View
+                    key={`${index}-d-${detailIndex}`}
+                    style={styles.detailRow}
+                  >
+                    <Text style={styles.detailText}>{formatDetail(detail)}</Text>
+                  </View>
+                ))}
               </View>
             ))}
           </View>
         </View>
 
         <View style={styles.totalsBox}>
+          {totalHours > 0 ? (
+            <View style={styles.totalRow}>
+              <Text>Hours</Text>
+              <Text>
+                {sharedRate
+                  ? `${formatHours(totalHours)} × ${formatUsd(sharedRate)}`
+                  : formatHours(totalHours)}
+              </Text>
+            </View>
+          ) : null}
           <View style={styles.totalRow}>
             <Text>Subtotal (USD)</Text>
             <Text>{formatUsd(invoice.amount_usd)}</Text>

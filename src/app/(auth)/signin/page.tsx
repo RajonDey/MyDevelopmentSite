@@ -8,11 +8,20 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function SignInPage() {
+type SignInPageProps = {
+  searchParams: Promise<{ password?: string; error?: string }>;
+};
+
+export default async function SignInPage({ searchParams }: SignInPageProps) {
+  const params = await searchParams;
+
   return (
     <RdxSection className="pt-4 md:pt-12">
       <RdxContainer className="max-w-lg">
-        <SignInForm />
+        <SignInForm
+          initialPassword={params.password ?? ""}
+          error={params.error === "1"}
+        />
       </RdxContainer>
     </RdxSection>
   );

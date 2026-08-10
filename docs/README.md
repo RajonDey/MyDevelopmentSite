@@ -43,7 +43,7 @@
 |------|--------|
 | **Marketing revamp (Phases 0–15)** | Shipped in repo |
 | **Launch Phase F** | Open — deploy, prod `/start` test, Lighthouse, `rdx-v1-launch` tag |
-| **Lead desk (7 / 7b / 7c)** | Shipped — client projects management · prod Supabase admin optional |
+| **Lead desk (7 / 7b / 7c)** | Shipped — invoice line details + paste estimate · prod Supabase admin optional |
 | **RDX OS (internal)** | Phase 1 in progress · real §12 seed in mock + `010_os_core.sql` · magic-link auth wired · [Spec](./RDX_OS_Spec.md) §12 |
 
 ### Deferred (not blocking v1)

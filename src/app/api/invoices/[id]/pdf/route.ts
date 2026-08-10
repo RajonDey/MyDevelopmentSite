@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { getInvoice } from "@/lib/invoices";
 import { getLead } from "@/lib/leads";
+import { getProject } from "@/lib/projects";
 import { renderInvoicePdfBuffer } from "@/lib/invoice-pdf/render";
 
 export const runtime = "nodejs";
@@ -34,11 +35,15 @@ export async function GET(_request: Request, context: RouteContext) {
     lead.agency_name;
   const billToAddress =
     invoice.bill_to_address?.trim() || lead.billing_address?.trim() || null;
+  const project = invoice.project_id
+    ? await getProject(invoice.project_id)
+    : null;
 
   const pdfBuffer = await renderInvoicePdfBuffer({
     invoice,
     billToName,
     billToAddress,
+    projectTitle: project?.title ?? null,
   });
 
   const filename = `${invoice.invoice_number.replace(/\s+/g, "-")}.pdf`;

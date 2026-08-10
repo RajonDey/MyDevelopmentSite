@@ -1,6 +1,6 @@
 # RDX Lead Desk
 
-**Status:** Shipped (Phase 7 + 7b + 7c)  
+**Status:** Shipped (Phase 7 + 7b + 7c) · invoice line details + paste estimate  
 **Replaces:** Notion Leads table  
 **UI:** `/dashboard` (admin)
 
@@ -102,9 +102,11 @@ Also stored: `legacy_ref` (Notion ID), `billing_period` (e.g. "Aug 2025").
 | `amount_bdt` | BD client totals on PDF |
 | `usd_bdt_rate` | Locked at issue (no live FX) |
 
-**PDF:** `@react-pdf/renderer` — USD + BDT when both exist; BD clients get Bank Asia block from `src/content/rdx/invoice-settings.ts`.
+**PDF:** `@react-pdf/renderer` — USD + BDT when both exist; BD clients get Bank Asia block from `src/content/rdx/invoice-settings.ts`. Issuer: RDXHIVE · hello@rdxhive.com · rdxhive.com.
 
 ### Line items shape
+
+Stored as JSONB on `rdx_invoices.line_items`. Additive fields (`kind`, `details`) are optional — old invoices without them still render.
 
 ```ts
 {
@@ -113,10 +115,14 @@ Also stored: `legacy_ref` (Notion ID), `billing_period` (e.g. "Aug 2025").
   unit?: "hours" | "fixed";
   unitRateUsd?: number;
   amountUsd: number;
+  kind?: "service" | "info"; // info = $0 note section (HICU extras, etc.)
+  details?: { text: string; done?: boolean; note?: string }[];
 }
 ```
 
-No default hourly rate — enter per line.
+Editor: default hourly rate applies to hour lines with empty rate (copied onto lines at save). Info lines do not count toward USD/BDT totals. PDF shows project title when `project_id` is set, plus detail bullets (`✓` / note).
+
+**Paste estimate:** draft editor accepts a written estimate (`## Section — N hrs`, `- bullet ✅`, `Deployment: 1hr`, `Invoice: 36*$8= $288; $288*123=35424`). Parser fills lines, hourly rate, and FX. Manual edit still wins after apply.
 
 ### Schema highlights
 
@@ -169,9 +175,9 @@ Migration display rate when deriving missing currency: **122**.
 | Area | Paths |
 |------|-------|
 | Types | `src/types/rdx/lead.ts`, `invoice.ts`, `project.ts` |
-| Lib | `src/lib/leads.ts`, `invoices.ts`, `projects.ts` |
+| Lib | `src/lib/leads.ts`, `invoices.ts`, `projects.ts`, `invoice-estimate-parse.ts` |
 | API | `src/app/api/leads/`, `src/app/api/invoices/`, `src/app/api/projects/` |
-| UI | `src/components/rdx/admin/LeadDesk.tsx` |
+| UI | `src/components/rdx/admin/LeadDesk.tsx`, `InvoicePanel.tsx`, `InvoiceLineEditor.tsx`, `InvoiceEstimatePaste.tsx` |
 | Content | `src/content/rdx/invoice-settings.ts`, `lead-desk.ts` |
 | Migrations | `supabase/migrations/001_*.sql` … `008_*.sql` |
 

@@ -1,11 +1,11 @@
 import type { PaymentMethod } from "@/types/rdx/invoice";
-import { siteMetadata } from "@/content/rdx/metadata";
-import { getBusinessEmail } from "@/content/rdx/sales-ops";
 
 export const invoiceIssuer = {
-  name: siteMetadata.siteName,
-  email: getBusinessEmail(),
-  website: siteMetadata.siteUrl,
+  name: "RDXHIVE",
+  tagline: "Many minds. One direction.",
+  email: "hello@rdxhive.com",
+  website: "https://rdxhive.com",
+  displayUrl: "rdxhive.com",
 } as const;
 
 export type PaymentBlock = {
@@ -26,7 +26,7 @@ export const paymentBlocks: Record<PaymentMethod, PaymentBlock> = {
   payoneer: {
     title: "Payoneer",
     lines: [
-      "Payment via Payoneer request to RDX Technologies.",
+      "Payment via Payoneer request to RDXHIVE.",
       `Email: ${invoiceIssuer.email}`,
     ],
   },

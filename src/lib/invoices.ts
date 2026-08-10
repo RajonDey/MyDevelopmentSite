@@ -2,7 +2,9 @@ import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import { getLead } from "@/lib/leads";
 import type {
   CreateInvoiceInput,
+  InvoiceLineDetail,
   InvoiceLineItem,
+  InvoiceLineItemKind,
   InvoiceRecord,
   InvoiceStatus,
   PaymentMethod,
@@ -119,6 +121,26 @@ const PAYMENT_METHODS: PaymentMethod[] = [
 
 const CLIENT_REGIONS: ClientRegion[] = ["bd", "international"];
 
+function mapLineDetails(raw: unknown): InvoiceLineDetail[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+
+  const details: InvoiceLineDetail[] = [];
+  for (const entry of raw) {
+    if (!entry || typeof entry !== "object") continue;
+    const row = entry as Record<string, unknown>;
+    const text = String(row.text ?? row.description ?? "").trim();
+    if (!text) continue;
+    const note = row.note ? String(row.note).trim() : "";
+    details.push({
+      text,
+      done: row.done === true,
+      note: note || undefined,
+    });
+  }
+
+  return details.length > 0 ? details : undefined;
+}
+
 function mapLineItem(row: Record<string, unknown>): InvoiceLineItem {
   const description = String(row.description ?? row.label ?? "");
   const quantity =
@@ -131,9 +153,17 @@ function mapLineItem(row: Record<string, unknown>): InvoiceLineItem {
       : row.unit_rate_usd !== undefined && row.unit_rate_usd !== null
         ? Number(row.unit_rate_usd)
         : undefined;
+  const kind: InvoiceLineItemKind | undefined =
+    row.kind === "info"
+      ? "info"
+      : row.kind === "service"
+        ? "service"
+        : undefined;
 
   let amountUsd = Number(row.amountUsd ?? row.amount_usd ?? 0);
-  if (
+  if (kind === "info") {
+    amountUsd = 0;
+  } else if (
     amountUsd <= 0 &&
     quantity !== undefined &&
     unitRateUsd !== undefined
@@ -149,6 +179,8 @@ function mapLineItem(row: Record<string, unknown>): InvoiceLineItem {
     unit: unit === "hours" || unit === "fixed" ? unit : undefined,
     unitRateUsd,
     amountUsd,
+    kind,
+    details: mapLineDetails(row.details),
   };
 }
 
@@ -194,13 +226,24 @@ function mapInvoiceRow(data: Record<string, unknown>): InvoiceRecord {
 }
 
 function serializeLineItems(items: InvoiceLineItem[]) {
-  return items.map((item) => ({
-    description: item.description,
-    quantity: item.quantity,
-    unit: item.unit,
-    unitRateUsd: item.unitRateUsd,
-    amountUsd: item.amountUsd,
-  }));
+  return items.map((item) => {
+    const row: Record<string, unknown> = {
+      description: item.description,
+      quantity: item.quantity,
+      unit: item.unit,
+      unitRateUsd: item.unitRateUsd,
+      amountUsd: item.kind === "info" ? 0 : item.amountUsd,
+    };
+    if (item.kind === "info") row.kind = "info";
+    if (item.details && item.details.length > 0) {
+      row.details = item.details.map((detail) => ({
+        text: detail.text,
+        ...(detail.done ? { done: true } : {}),
+        ...(detail.note ? { note: detail.note } : {}),
+      }));
+    }
+    return row;
+  });
 }
 
 function normalizeLineItems(
@@ -210,6 +253,9 @@ function normalizeLineItems(
 ): InvoiceLineItem[] {
   if (lineItems && lineItems.length > 0) {
     return lineItems.map((item) => {
+      if (item.kind === "info") {
+        return { ...item, amountUsd: 0 };
+      }
       const quantity = item.quantity;
       const unitRateUsd = item.unitRateUsd;
       let amount = item.amountUsd;
@@ -237,7 +283,38 @@ function normalizeLineItems(
 }
 
 function sumLineItemsUsd(items: InvoiceLineItem[]): number {
-  return items.reduce((sum, item) => sum + item.amountUsd, 0);
+  return items.reduce((sum, item) => {
+    if (item.kind === "info") return sum;
+    return sum + item.amountUsd;
+  }, 0);
+}
+
+export function invoiceLineHours(items: InvoiceLineItem[]): number {
+  return items.reduce((sum, item) => {
+    if (item.kind === "info" || item.unit !== "hours") return sum;
+    if (item.quantity === undefined || !Number.isFinite(item.quantity)) {
+      return sum;
+    }
+    return sum + item.quantity;
+  }, 0);
+}
+
+export function invoiceSharedHourlyRate(
+  items: InvoiceLineItem[]
+): number | null {
+  const rates = items
+    .filter(
+      (item) =>
+        item.kind !== "info" &&
+        item.unit === "hours" &&
+        item.unitRateUsd !== undefined &&
+        item.unitRateUsd > 0
+    )
+    .map((item) => item.unitRateUsd as number);
+
+  if (rates.length === 0) return null;
+  const first = rates[0];
+  return rates.every((rate) => rate === first) ? first : null;
 }
 
 function resolveAmounts(input: {
@@ -579,6 +656,10 @@ function parseLineItems(value: unknown): InvoiceLineItem[] | undefined {
     if (!description) continue;
 
     const item = mapLineItem({ ...row, description });
+    if (item.kind === "info") {
+      items.push({ ...item, amountUsd: 0 });
+      continue;
+    }
     if (item.amountUsd <= 0 && item.quantity && item.unitRateUsd) {
       item.amountUsd = item.quantity * item.unitRateUsd;
     }
@@ -608,13 +689,16 @@ export function validateCreateInvoiceInput(
   const amountBdt =
     typeof record.amountBdt === "number" ? record.amountBdt : undefined;
   const lineItems = parseLineItems(record.lineItems);
+  const hasBillableLine = lineItems?.some(
+    (item) => item.kind !== "info" && item.amountUsd > 0
+  );
 
   if (
     (amountUsd === undefined || amountUsd <= 0) &&
     (amountBdt === undefined || amountBdt <= 0) &&
-    !lineItems
+    !hasBillableLine
   ) {
-    return { error: "Valid amount or line items required" };
+    return { error: "Valid amount or billable line items required" };
   }
 
   const status = record.status;

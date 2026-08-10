@@ -176,7 +176,7 @@ App-level redirects also on `/audit`, `/contact`, `/estimate` pages.
 
 ## Access lead desk (local / when configured)
 
-1. Sign in at `/signin` with `RDX_ADMIN_PASSWORD`
+1. Sign in at `/signin` with `RDX_ADMIN_PASSWORD` (local shortcut: `/signin?password=…` posts to `/api/admin/desk-login`)
 2. Open `/dashboard`
 
 ---

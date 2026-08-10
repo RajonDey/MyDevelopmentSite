@@ -64,7 +64,7 @@ npm run prelaunch  # lint + typecheck + build
 | Field | Value |
 |-------|-------|
 | **Marketing revamp** | Shipped (Phases 0–15) |
-| **Active track** | Launch Phase F open · RDX OS Phase 1 (real seed + magic link) |
+| **Active track** | Launch Phase F open · RDX OS Phase 1 (real seed + magic link) · Lead desk invoice paste estimate |
 | **Next step** | Launch: [Runbook](./docs/RDX_Launch_Runbook.md) · OS: apply `010_os_core.sql` in Supabase · wire `/api/os/*` data layer |
 
 ---

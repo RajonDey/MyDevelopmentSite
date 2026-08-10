@@ -29,7 +29,9 @@ export type {
   SubmitLeadInput,
 } from "./lead";
 export type {
+  InvoiceLineDetail,
   InvoiceLineItem,
+  InvoiceLineItemKind,
   InvoiceRecord,
   InvoiceStatus,
   PaymentMethod,

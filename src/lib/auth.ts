@@ -6,14 +6,14 @@ import {
   resolveOsAllowlistedMember,
 } from "@/lib/os/magic-link";
 
-function getAdminEmail(): string {
+export function getAdminEmail(): string {
   const allowlist = process.env.RDX_ADMIN_EMAILS?.split(",")
     .map((entry) => entry.trim())
     .filter(Boolean);
   return allowlist?.[0] ?? "admin@rdx.local";
 }
 
-function verifyAdminPassword(password: string): boolean {
+export function verifyAdminPassword(password: string): boolean {
   const expected = process.env.RDX_ADMIN_PASSWORD;
   if (!expected || !password) {
     return false;

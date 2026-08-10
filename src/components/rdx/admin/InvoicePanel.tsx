@@ -5,7 +5,6 @@ import type { ClientRegion, LeadRecord } from "@/types/rdx/lead";
 import type {
   CreateInvoiceInput,
   InvoiceLineItem,
-  InvoiceLineItemUnit,
   InvoiceRecord,
   PaymentMethod,
   UpdateInvoiceInput,
@@ -27,21 +26,25 @@ import {
 } from "@/lib/invoices";
 import { RdxButton } from "@/components/rdx/ui/Button";
 import { FormField, rdxInputClassName } from "@/components/rdx/forms/FormField";
-
-type LineItemDraft = {
-  key: string;
-  description: string;
-  quantity: string;
-  unit: InvoiceLineItemUnit | "";
-  unitRateUsd: string;
-  amountUsd: string;
-};
+import { InvoiceLineEditor } from "@/components/rdx/admin/InvoiceLineEditor";
+import { InvoiceEstimatePaste } from "@/components/rdx/admin/InvoiceEstimatePaste";
+import {
+  emptyLineItem,
+  formatHours,
+  inferSharedHourlyRate,
+  lineItemToDraft,
+  parseLineItemDraft,
+  sumDraftHours,
+  sumLineItemsUsd,
+  type LineItemDraft,
+} from "@/components/rdx/admin/invoice-draft";
 
 type InvoiceFormState = {
   billingPeriod: string;
   issuedAt: string;
   dueAt: string;
   description: string;
+  hourlyRateUsd: string;
   lineItems: LineItemDraft[];
   amountBdt: string;
   usdBdtRate: string;
@@ -59,27 +62,6 @@ type InvoicePanelProps = {
   onRefresh: () => Promise<void>;
   embedded?: boolean;
 };
-
-const unitOptions: { value: InvoiceLineItemUnit | ""; label: string }[] = [
-  { value: "", label: "—" },
-  { value: "hours", label: "Hours" },
-  { value: "fixed", label: "Fixed" },
-];
-
-function lineItemKey() {
-  return `line-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-}
-
-function emptyLineItem(): LineItemDraft {
-  return {
-    key: lineItemKey(),
-    description: "",
-    quantity: "",
-    unit: "",
-    unitRateUsd: "",
-    amountUsd: "",
-  };
-}
 
 function todayIsoDate() {
   return new Date().toISOString().slice(0, 10);
@@ -102,6 +84,7 @@ function emptyForm(lead: LeadRecord): InvoiceFormState {
     issuedAt: todayIsoDate(),
     dueAt: "",
     description: "",
+    hourlyRateUsd: "",
     lineItems: [emptyLineItem()],
     amountBdt: "",
     usdBdtRate: defaultUsdBdtRate(lead),
@@ -114,15 +97,7 @@ function emptyForm(lead: LeadRecord): InvoiceFormState {
 function invoiceToForm(invoice: InvoiceRecord): InvoiceFormState {
   const lineItems =
     invoice.line_items.length > 0
-      ? invoice.line_items.map((item) => ({
-          key: lineItemKey(),
-          description: item.description,
-          quantity: item.quantity !== undefined ? String(item.quantity) : "",
-          unit: (item.unit ?? "") as InvoiceLineItemUnit | "",
-          unitRateUsd:
-            item.unitRateUsd !== undefined ? String(item.unitRateUsd) : "",
-          amountUsd: String(item.amountUsd),
-        }))
+      ? invoice.line_items.map(lineItemToDraft)
       : [emptyLineItem()];
 
   return {
@@ -130,6 +105,7 @@ function invoiceToForm(invoice: InvoiceRecord): InvoiceFormState {
     issuedAt: invoice.issued_at?.slice(0, 10) ?? todayIsoDate(),
     dueAt: invoice.due_at?.slice(0, 10) ?? "",
     description: invoice.description ?? "",
+    hourlyRateUsd: inferSharedHourlyRate(invoice.line_items),
     lineItems,
     amountBdt: invoice.amount_bdt !== null ? String(invoice.amount_bdt) : "",
     usdBdtRate:
@@ -144,51 +120,12 @@ function invoiceToForm(invoice: InvoiceRecord): InvoiceFormState {
   };
 }
 
-function parseLineItemDraft(row: LineItemDraft): InvoiceLineItem | null {
-  const description = row.description.trim();
-  if (!description) return null;
-
-  const quantity = row.quantity.trim() ? Number(row.quantity) : undefined;
-  const unitRateUsd = row.unitRateUsd.trim()
-    ? Number(row.unitRateUsd)
-    : undefined;
-  const unit = row.unit || undefined;
-
-  let amountUsd = row.amountUsd.trim() ? Number(row.amountUsd) : 0;
-  if (
-    amountUsd <= 0 &&
-    quantity !== undefined &&
-    !Number.isNaN(quantity) &&
-    unitRateUsd !== undefined &&
-    !Number.isNaN(unitRateUsd)
-  ) {
-    amountUsd = quantity * unitRateUsd;
-  }
-
-  if (amountUsd <= 0 || Number.isNaN(amountUsd)) return null;
-
-  return {
-    description,
-    quantity: quantity !== undefined && !Number.isNaN(quantity) ? quantity : undefined,
-    unit,
-    unitRateUsd:
-      unitRateUsd !== undefined && !Number.isNaN(unitRateUsd)
-        ? unitRateUsd
-        : undefined,
-    amountUsd,
-  };
-}
-
-function sumLineItemsUsd(items: InvoiceLineItem[]): number {
-  return items.reduce((sum, item) => sum + item.amountUsd, 0);
-}
-
 function buildPayload(
   leadId: string,
   form: InvoiceFormState
 ): CreateInvoiceInput | { error: string } {
   const lineItems = form.lineItems
-    .map(parseLineItemDraft)
+    .map((row) => parseLineItemDraft(row, form.hourlyRateUsd))
     .filter((item): item is InvoiceLineItem => item !== null);
 
   const amountBdt = form.amountBdt.trim() ? Number(form.amountBdt) : undefined;
@@ -198,11 +135,8 @@ function buildPayload(
 
   const amountUsd = sumLineItemsUsd(lineItems);
 
-  if (
-    lineItems.length === 0 &&
-    (amountBdt === undefined || amountBdt <= 0)
-  ) {
-    return { error: "Add at least one line item or a BDT total." };
+  if (amountUsd <= 0 && (amountBdt === undefined || amountBdt <= 0)) {
+    return { error: "Add at least one billable line or a BDT total." };
   }
 
   if (amountBdt !== undefined && Number.isNaN(amountBdt)) {
@@ -264,10 +198,20 @@ export function InvoicePanel({
 
   const computedUsd = useMemo(() => {
     const items = form.lineItems
-      .map(parseLineItemDraft)
+      .map((row) => parseLineItemDraft(row, form.hourlyRateUsd))
       .filter((item): item is InvoiceLineItem => item !== null);
     return sumLineItemsUsd(items);
-  }, [form.lineItems]);
+  }, [form.lineItems, form.hourlyRateUsd]);
+
+  const computedHours = useMemo(
+    () => sumDraftHours(form.lineItems),
+    [form.lineItems]
+  );
+
+  const hourlyRateNum = useMemo(() => {
+    const rate = form.hourlyRateUsd.trim() ? Number(form.hourlyRateUsd) : 0;
+    return Number.isFinite(rate) && rate > 0 ? rate : 0;
+  }, [form.hourlyRateUsd]);
 
   const billingSummary = useMemo(
     () => summarizeInvoices(invoices),
@@ -544,110 +488,72 @@ export function InvoicePanel({
             </FormField>
           </div>
 
+          <FormField label="Hourly rate ($)" htmlFor="inv_hourly_rate">
+            <input
+              id="inv_hourly_rate"
+              type="number"
+              min="0"
+              step="1"
+              className={rdxInputClassName}
+              value={form.hourlyRateUsd}
+              disabled={!isEditable}
+              placeholder="e.g. 8"
+              onChange={(event) =>
+                setForm((current) => ({
+                  ...current,
+                  hourlyRateUsd: event.target.value,
+                }))
+              }
+            />
+            <p className="mt-1 text-xs text-rdx-muted">
+              Used for hour lines with empty rate. Saved on each line.
+            </p>
+          </FormField>
+
+          <InvoiceEstimatePaste
+            disabled={!isEditable}
+            projects={projects}
+            hasExistingLines={form.lineItems.some(
+              (row) =>
+                row.description.trim() ||
+                row.details.some((detail) => detail.text.trim())
+            )}
+            onApply={(parsed) => {
+              setForm((current) => ({
+                ...current,
+                hourlyRateUsd:
+                  parsed.hourlyRateUsd !== undefined
+                    ? String(parsed.hourlyRateUsd)
+                    : current.hourlyRateUsd,
+                usdBdtRate:
+                  parsed.usdBdtRate !== undefined
+                    ? String(parsed.usdBdtRate)
+                    : current.usdBdtRate,
+                projectId: parsed.projectId ?? current.projectId,
+                lineItems:
+                  parsed.lines.length > 0
+                    ? parsed.lines.map(lineItemToDraft)
+                    : current.lineItems,
+              }));
+              setFormError(null);
+            }}
+          />
+
           <div className="space-y-2">
             <p className="text-xs font-medium uppercase tracking-wide text-rdx-muted">
               Line items
             </p>
             {form.lineItems.map((row, index) => (
-              <div
+              <InvoiceLineEditor
                 key={row.key}
-                className="space-y-2 rounded-rdx border border-rdx-border p-2"
-              >
-                <FormField
-                  label={`Service ${index + 1}`}
-                  htmlFor={`inv_line_desc_${row.key}`}
-                >
-                  <input
-                    id={`inv_line_desc_${row.key}`}
-                    className={rdxInputClassName}
-                    value={row.description}
-                    disabled={!isEditable}
-                    placeholder="What you delivered"
-                    onChange={(event) =>
-                      updateLineItem(row.key, {
-                        description: event.target.value,
-                      })
-                    }
-                  />
-                </FormField>
-                <div className="grid grid-cols-2 gap-2">
-                  <FormField label="Qty" htmlFor={`inv_line_qty_${row.key}`}>
-                    <input
-                      id={`inv_line_qty_${row.key}`}
-                      type="number"
-                      min="0"
-                      step="0.5"
-                      className={rdxInputClassName}
-                      value={row.quantity}
-                      disabled={!isEditable}
-                      onChange={(event) =>
-                        updateLineItem(row.key, { quantity: event.target.value })
-                      }
-                    />
-                  </FormField>
-                  <FormField label="Unit" htmlFor={`inv_line_unit_${row.key}`}>
-                    <select
-                      id={`inv_line_unit_${row.key}`}
-                      className={rdxInputClassName}
-                      value={row.unit}
-                      disabled={!isEditable}
-                      onChange={(event) =>
-                        updateLineItem(row.key, {
-                          unit: event.target.value as InvoiceLineItemUnit | "",
-                        })
-                      }
-                    >
-                      {unitOptions.map((option) => (
-                        <option key={option.value || "none"} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </FormField>
-                  <FormField label="Rate $" htmlFor={`inv_line_rate_${row.key}`}>
-                    <input
-                      id={`inv_line_rate_${row.key}`}
-                      type="number"
-                      min="0"
-                      step="1"
-                      className={rdxInputClassName}
-                      value={row.unitRateUsd}
-                      disabled={!isEditable}
-                      onChange={(event) =>
-                        updateLineItem(row.key, {
-                          unitRateUsd: event.target.value,
-                        })
-                      }
-                    />
-                  </FormField>
-                  <FormField label="Amount $" htmlFor={`inv_line_amt_${row.key}`}>
-                    <input
-                      id={`inv_line_amt_${row.key}`}
-                      type="number"
-                      min="0"
-                      step="1"
-                      className={rdxInputClassName}
-                      value={row.amountUsd}
-                      disabled={!isEditable}
-                      placeholder="Auto from qty × rate"
-                      onChange={(event) =>
-                        updateLineItem(row.key, {
-                          amountUsd: event.target.value,
-                        })
-                      }
-                    />
-                  </FormField>
-                </div>
-                {isEditable && form.lineItems.length > 1 && (
-                  <button
-                    type="button"
-                    className="text-xs text-rdx-muted hover:text-red-600"
-                    onClick={() => removeLineItem(row.key)}
-                  >
-                    Remove line
-                  </button>
-                )}
-              </div>
+                index={index}
+                row={row}
+                disabled={!isEditable}
+                defaultHourlyRate={form.hourlyRateUsd}
+                canRemove={form.lineItems.length > 1}
+                onChange={(patch) => updateLineItem(row.key, patch)}
+                onRemove={() => removeLineItem(row.key)}
+              />
             ))}
             {isEditable && (
               <button
@@ -661,6 +567,18 @@ export function InvoicePanel({
           </div>
 
           <div className="rounded-rdx bg-rdx-surface px-3 py-2 text-sm">
+            {computedHours > 0 && (
+              <div className="mb-1 flex justify-between text-rdx-muted">
+                <span>Hours</span>
+                <span>
+                  {formatHours(computedHours)}
+                  {hourlyRateNum > 0 ? ` × ${formatUsd(hourlyRateNum)}` : ""}
+                  {computedUsd > 0 && hourlyRateNum > 0
+                    ? ` = ${formatUsd(computedUsd)}`
+                    : ""}
+                </span>
+              </div>
+            )}
             <div className="flex justify-between text-rdx-ink">
               <span>Total USD (reporting)</span>
               <span className="font-medium">{formatUsd(computedReportingUsd)}</span>

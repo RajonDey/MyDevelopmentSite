@@ -11,12 +11,22 @@ export type PaymentMethod =
 
 export type InvoiceLineItemUnit = "hours" | "fixed";
 
+export type InvoiceLineItemKind = "service" | "info";
+
+export type InvoiceLineDetail = {
+  text: string;
+  done?: boolean;
+  note?: string;
+};
+
 export type InvoiceLineItem = {
   description: string;
   quantity?: number;
   unit?: InvoiceLineItemUnit;
   unitRateUsd?: number;
   amountUsd: number;
+  kind?: InvoiceLineItemKind;
+  details?: InvoiceLineDetail[];
 };
 
 export type InvoiceRecord = {
