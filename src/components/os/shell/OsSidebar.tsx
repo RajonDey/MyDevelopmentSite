@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MemberAvatar } from "@/components/os/ui/MemberAvatar";
+import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 import type { OsMember } from "@/types/os";
 
 const navItems = [
@@ -42,9 +43,13 @@ export function OsSidebar({
   const content = (
     <>
       <div className="flex h-14 items-center justify-between border-b border-os-border px-4">
-        <Link href="/os" className="font-rdx-display text-lg text-os-text">
-          RDXHIVE OS
-        </Link>
+        <RdxLogo
+          href="/os"
+          invert
+          size="sm"
+          wordmarkSuffix="OS"
+          className="text-lg text-os-text"
+        />
         <button
           type="button"
           className="rounded-md p-1 text-os-muted hover:text-os-text md:hidden"

@@ -66,7 +66,7 @@ npm run prelaunch  # lint + typecheck + build
 | Field | Value |
 |-------|-------|
 | **Marketing revamp** | Shipped (Phases 0–15) |
-| **Active track** | Launch Phase F open · RDXHIVE OS Phase 1 · Lead desk · **RDXHIVE brand cutover** |
+| **Active track** | Launch Phase F open · RDXHIVE OS Phase 1 · Lead desk · **RDXHIVE brand cutover** (logo + favicon from identity sheet) |
 | **Next step** | Launch: [Runbook](./docs/RDX_Launch_Runbook.md) · OS: apply `010_os_core.sql` in Supabase · wire `/api/os/*` data layer · host env: `NEXT_PUBLIC_SITE_URL` + `BUSINESS_EMAIL=sales@rdxhive.com` (keep Resend `FROM_EMAIL` on verified rajondey.com) |
 
 ---

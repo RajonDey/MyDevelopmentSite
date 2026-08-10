@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { OsCard } from "@/components/os/ui/OsCard";
+import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 
 export function OsVerifyClient() {
   const router = useRouter();
@@ -51,7 +52,13 @@ export function OsVerifyClient() {
 
   return (
     <OsCard raised className="mx-auto max-w-md text-center">
-      <p className="font-rdx-display text-2xl text-os-text">RDXHIVE OS</p>
+      <RdxLogo
+        href="/os"
+        invert
+        size="lg"
+        wordmarkSuffix="OS"
+        className="justify-center text-2xl text-os-text"
+      />
       {error ? (
         <>
           <p className="mt-4 text-sm text-os-red">{error}</p>

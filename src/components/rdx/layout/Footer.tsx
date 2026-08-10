@@ -2,6 +2,7 @@ import Link from "next/link";
 import { rdxFooterLinks } from "@/content/rdx/navigation";
 import { siteMetadata } from "@/content/rdx/metadata";
 import { RdxContainer } from "@/components/rdx/layout/Container";
+import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 
 export function RdxFooter() {
   const year = new Date().getFullYear();
@@ -11,9 +12,7 @@ export function RdxFooter() {
       <RdxContainer className="py-12 md:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3 lg:col-span-1">
-            <p className="font-rdx text-base font-semibold text-rdx-ink">
-              {siteMetadata.siteName}
-            </p>
+            <RdxLogo href="/" className="text-base text-rdx-ink" />
             <p className="max-w-xs text-sm leading-relaxed text-rdx-muted">
               {siteMetadata.tagline}
             </p>

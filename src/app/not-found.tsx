@@ -4,6 +4,7 @@ import { siteMetadata } from "@/content/rdx/metadata";
 import { RdxContainer } from "@/components/rdx/layout/Container";
 import { RdxSection } from "@/components/rdx/layout/Section";
 import { RdxButton } from "@/components/rdx/ui/Button";
+import { HiveEmptyCell } from "@/components/rdx/visuals/hive/HiveEmptyCell";
 
 export const metadata: Metadata = {
   title: `Page not found | ${siteMetadata.siteName}`,
@@ -15,6 +16,7 @@ export default function NotFound() {
   return (
     <RdxSection className="pt-4 md:pt-12 pb-20">
       <RdxContainer className="max-w-xl text-center">
+        <HiveEmptyCell className="mb-6" />
         <p className="text-sm font-medium uppercase tracking-wide text-rdx-subtle">
           404
         </p>

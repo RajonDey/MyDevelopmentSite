@@ -9,6 +9,7 @@ import { SectionHeader } from "@/components/rdx/ui/SectionHeader";
 import { StatStrip } from "@/components/rdx/sections/StatStrip";
 import { StickyCtaBar } from "@/components/rdx/sections/StickyCtaBar";
 import { VerifiedReviewsSection } from "@/components/rdx/sections/trust/VerifiedReviewsSection";
+import { HiveSwarmMark } from "@/components/rdx/visuals/hive/HiveSwarmMark";
 
 const aboutStats = [
   { value: "Remote", label: "Global team" },
@@ -35,6 +36,7 @@ export function AboutView() {
             <RdxBadge>{locationLine}</RdxBadge>
             <RdxBadge>{priceLine}</RdxBadge>
           </div>
+          <HiveSwarmMark className="mt-10" />
         </RdxContainer>
       </RdxSection>
 

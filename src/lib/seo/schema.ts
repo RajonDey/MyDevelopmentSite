@@ -18,6 +18,7 @@ export function buildOrganizationNode() {
     "@id": ORG_ID,
     name: siteMetadata.siteName,
     url: siteMetadata.siteUrl,
+    logo: `${siteMetadata.siteUrl}/brand/rdxhive-icon.png`,
     description: siteMetadata.description,
     email: contactEmails.hello,
     areaServed: {

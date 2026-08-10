@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { rdxNavCta, rdxPrimaryNav } from "@/content/rdx/navigation";
-import { siteMetadata } from "@/content/rdx/metadata";
 import { cn } from "@/lib/utils";
 import { RdxButton } from "@/components/rdx/ui/Button";
 import { RdxContainer } from "@/components/rdx/layout/Container";
+import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 
 export function RdxHeader() {
   const pathname = usePathname();
@@ -20,12 +20,11 @@ export function RdxHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-rdx-border bg-rdx-paper/95 backdrop-blur-sm">
       <RdxContainer className="flex h-16 items-center justify-between">
-        <Link
+        <RdxLogo
           href="/"
-          className="font-rdx-display text-lg font-normal tracking-tight text-rdx-ink transition-colors hover:text-rdx-accent"
-        >
-          {siteMetadata.siteName}
-        </Link>
+          priority
+          className="text-lg text-rdx-ink transition-colors hover:text-rdx-accent"
+        />
 
         <nav
           className="hidden items-center gap-6 md:flex"

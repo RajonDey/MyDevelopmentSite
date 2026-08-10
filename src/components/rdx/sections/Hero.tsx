@@ -1,5 +1,5 @@
 import { homeContent } from "@/content/rdx/home";
-import { SystemDiagram } from "@/components/rdx/visuals/system-diagram";
+import { HiveSystemDiagram } from "@/components/rdx/visuals/hive/HiveSystemDiagram";
 import { SplitHero } from "@/components/rdx/sections/SplitHero";
 
 export function Hero() {
@@ -13,7 +13,7 @@ export function Hero() {
       primaryCta={hero.primaryCta}
       secondaryCta={hero.secondaryCta}
       footnote={hero.footnote}
-      visual={<SystemDiagram className="w-full max-w-lg" />}
+      visual={<HiveSystemDiagram className="w-full" />}
     />
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { OsCard } from "@/components/os/ui/OsCard";
+import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 import { mockCommandCenter } from "@/content/os/mock-data";
 import { findCoreMemberByEmail } from "@/lib/os/team-allowlist";
 import {
@@ -111,7 +112,13 @@ export function OsSignInForm() {
   return (
     <OsCard raised className="mx-auto max-w-md">
       <div className="text-center">
-        <p className="font-rdx-display text-2xl text-os-text">RDXHIVE OS</p>
+        <RdxLogo
+          href="/os"
+          invert
+          size="lg"
+          wordmarkSuffix="OS"
+          className="justify-center text-2xl text-os-text"
+        />
         <p className="mt-2 text-sm text-os-muted">
           RDX Core only — we&apos;ll email a magic link to your allowlisted
           address

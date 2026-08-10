@@ -52,4 +52,7 @@
   --rdx-max-width: 72rem;
   --rdx-max-width-narrow: 42rem;
   --rdx-max-width-wide: 80rem;
+
+  /* Hive motif — hex field only, never on the H mark */
+  --rdx-hex-ink: #081328;
 }

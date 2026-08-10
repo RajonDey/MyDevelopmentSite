@@ -1,5 +1,7 @@
+import path from "node:path";
 import {
   Document,
+  Image,
   Page,
   StyleSheet,
   Text,
@@ -11,6 +13,11 @@ import {
   invoiceLineHours,
   invoiceSharedHourlyRate,
 } from "@/lib/invoices";
+
+const invoiceLogoSrc = path.join(
+  process.cwd(),
+  "public/brand/rdxhive-mark.png"
+);
 
 export type InvoicePdfProps = {
   invoice: InvoiceRecord;
@@ -36,12 +43,21 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 16,
   },
+  logoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  logoMark: {
+    width: 22,
+    height: 24,
+    marginRight: 8,
+  },
   brand: {
     fontSize: 16,
     fontFamily: "Helvetica-Bold",
     color: "#1A1D21",
     letterSpacing: 0.6,
-    marginBottom: 8,
   },
   tagline: {
     fontSize: 9,
@@ -267,7 +283,12 @@ export function InvoicePdfDocument({
         <View style={styles.headerBlock}>
           <View style={styles.headerRow}>
             <View>
-              <Text style={styles.brand}>{invoiceIssuer.name}</Text>
+              <View style={styles.logoRow}>
+                {/* react-pdf Image has no alt; wordmark text sits beside it */}
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                <Image src={invoiceLogoSrc} style={styles.logoMark} />
+                <Text style={styles.brand}>{invoiceIssuer.name}</Text>
+              </View>
               <Text style={styles.tagline}>{invoiceIssuer.tagline}</Text>
               <Text style={styles.contact}>
                 {invoiceIssuer.email}
