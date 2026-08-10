@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { contactEmails } from "@/content/rdx/contact";
 import { insertLead, validateSubmitLeadInput } from "@/lib/leads";
 import { sendLeadEmails } from "@/lib/lead-notifications";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Submission is temporarily unavailable. Email contact@rajondey.com directly.",
+            `Submission is temporarily unavailable. Email ${contactEmails.sales} directly.`,
         },
         { status: 503 }
       );

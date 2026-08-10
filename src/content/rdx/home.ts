@@ -28,7 +28,7 @@ export const homeContent = {
     heading: "Selected work",
     description: "Representative builds with honest attribution. No inflated metrics.",
     viewAllLabel: "View all work",
-    footnote: "From $1,000 · named client work and RDX products",
+    footnote: "From $1,000 · named client work and RDXHIVE products",
   },
   quote: {
     quote:

@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import { siteMetadata } from "@/content/rdx/metadata";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | RDX Technologies",
+  title: `Privacy Policy | ${siteMetadata.siteName}`,
   description:
-    "Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com.",
+    "Learn how RDXHIVE collects, uses, and protects your personal information on rdxhive.com.",
   openGraph: {
-    title: "Privacy Policy | RDX Technologies",
+    title: `Privacy Policy | ${siteMetadata.siteName}`,
     description:
-      "Learn how RDX Technologies collects, uses, and protects your personal information on development.rajondey.com.",
+      "Learn how RDXHIVE collects, uses, and protects your personal information on rdxhive.com.",
     url: `${siteMetadata.siteUrl}/privacy-policy`,
     siteName: siteMetadata.siteName,
     images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
@@ -25,11 +25,11 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            <strong>Last Updated:</strong> June 2, 2026
+            <strong>Last Updated:</strong> August 10, 2026
           </p>
           <p className="mt-1 text-sm text-gray-600">
-            <strong>Business:</strong> RDX Technologies (Rajon Dey X
-            Technologies)
+            <strong>Business:</strong> RDXHIVE (trading name), operated by Rajon
+            Dey (formerly Rajon Dey X Technologies)
           </p>
         </header>
 
@@ -43,9 +43,9 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-700 leading-relaxed">
                 Welcome to{" "}
                 <code className="font-mono text-gray-900">
-                  development.rajondey.com
+                  rdxhive.com
                 </code>
-                ! I&rsquo;m Rajon Dey, founder of RDX Technologies, and this
+                ! I&rsquo;m Rajon Dey, founder of RDXHIVE, and this
                 Privacy Policy explains how we collect, use, and protect your
                 information when you visit our site or use our services. We
                 value your privacy and aim to keep things simple and
@@ -58,9 +58,9 @@ export default function PrivacyPolicyPage() {
               </h2>
               <p className="text-gray-700 leading-relaxed">
                 <code className="font-mono text-gray-900">
-                  development.rajondey.com
+                  rdxhive.com
                 </code>{" "}
-                এ স্বাগতম! আমি রাজন দে, RDX Technologies-এর প্রতিষ্ঠাতা, এবং এই
+                এ স্বাগতম! আমি রাজন দে, RDXHIVE-এর প্রতিষ্ঠাতা, এবং এই
                 গোপনীয়তা নীতি ব্যাখ্যা করে যে আমরা কীভাবে আপনার তথ্য সংগ্রহ,
                 ব্যবহার এবং সুরক্ষা করি যখন আপনি আমাদের সাইট পরিদর্শন করেন বা
                 আমাদের সেবা ব্যবহার করেন। আমরা আপনার গোপনীয়তাকে মূল্য দিই এবং
@@ -372,10 +372,10 @@ export default function PrivacyPolicyPage() {
             <p className="leading-relaxed">
               To exercise these rights, email me at{" "}
               <a
-                href="mailto:contact@rajondey.com"
+                href="mailto:hello@rdxhive.com"
                 className="text-blue-600 hover:underline"
               >
-                contact@rajondey.com
+                hello@rdxhive.com
               </a>
               .
             </p>
@@ -429,7 +429,7 @@ export default function PrivacyPolicyPage() {
               9. International Visitors
             </h2>
             <p className="leading-relaxed">
-              RDX Technologies is based in Bangladesh. Our site is hosted on
+              RDXHIVE is based in Bangladesh. Our site is hosted on
               Vercel (United States). Email and form processors may store data
               in the US or other regions. If you are from another country (e.g.,
               the EU), your data may cross borders. By using our site, you agree
@@ -455,16 +455,16 @@ export default function PrivacyPolicyPage() {
                   11. Contact Us
                 </h2>
                 <p className="leading-relaxed">
-                  Questions? Reach out to RDX Technologies:
+                  Questions? Reach out to RDXHIVE:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <span className="font-medium">Email:</span>{" "}
                     <a
-                      href="mailto:contact@rajondey.com"
+                      href="mailto:hello@rdxhive.com"
                       className="text-blue-600 hover:underline"
                     >
-                      contact@rajondey.com
+                      hello@rdxhive.com
                     </a>
                   </li>
                   <li>
@@ -483,12 +483,13 @@ export default function PrivacyPolicyPage() {
                     Bangladesh
                   </li>
                   <li>
-                    <span className="font-medium">Business:</span> RDX
-                    Technologies (Rajon Dey X Technologies)
+                    <span className="font-medium">Business:</span> RDXHIVE
+                    (trading name), operated by Rajon Dey (formerly Rajon Dey X
+                    Technologies)
                   </li>
                 </ul>
                 <p className="text-lg font-medium text-gray-900">
-                  Thanks for trusting RDX Technologies with your information!
+                  Thanks for trusting RDXHIVE with your information!
                 </p>
               </div>
               <div>
@@ -496,16 +497,16 @@ export default function PrivacyPolicyPage() {
                   ১১. আমাদের সাথে যোগাযোগ
                 </h2>
                 <p className="leading-relaxed">
-                  প্রশ্ন আছে? RDX Technologies-এর সাথে যোগাযোগ করুন:
+                  প্রশ্ন আছে? RDXHIVE-এর সাথে যোগাযোগ করুন:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <span className="font-medium">ইমেইল:</span>{" "}
                     <a
-                      href="mailto:contact@rajondey.com"
+                      href="mailto:hello@rdxhive.com"
                       className="text-blue-600 hover:underline"
                     >
-                      contact@rajondey.com
+                      hello@rdxhive.com
                     </a>
                   </li>
                   <li>
@@ -523,8 +524,9 @@ export default function PrivacyPolicyPage() {
                     <span className="font-medium">ঠিকানা:</span> সিলেট, বাংলাদেশ
                   </li>
                   <li>
-                    <span className="font-medium">ব্যবসা:</span> RDX
-                    Technologies (Rajon Dey X Technologies)
+                    <span className="font-medium">ব্যবসা:</span> RDXHIVE
+                    (ট্রেডিং নাম), পরিচালনায় রাজন দে (পূর্বে Rajon Dey X
+                    Technologies)
                   </li>
                 </ul>
                 <p className="text-lg font-medium text-gray-900">

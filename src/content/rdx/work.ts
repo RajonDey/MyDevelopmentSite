@@ -1,16 +1,16 @@
-/** Work index — RDX Technologies */
+/** Work index — RDXHIVE */
 
 export const workContent = {
   hero: {
     eyebrow: "Work",
     title: "Deliveries, products, and prior experience",
     description:
-      "RDX Technologies builds for marketing agencies, service businesses, and education brands in fixed-scope projects with support when you need it. Most Standard builds ship in 2–4 weeks; larger scopes run 2–3 months. Named client work first. Honest labels everywhere.",
+      "RDXHIVE builds for marketing agencies, service businesses, and education brands in fixed-scope projects with support when you need it. Most Standard builds ship in 2–4 weeks; larger scopes run 2–3 months. Named client work first. Honest labels everywhere.",
   },
   extendedPortfolio: {
     label: "Full technical portfolio →",
     href: "https://portfolio.rajondey.com/projects?sort=impact",
   },
   footnote:
-    "Prior team-led work is anonymized · Products are owned and operated by RDX",
+    "Prior team-led work is anonymized · Products are owned and operated by RDXHIVE",
 } as const;

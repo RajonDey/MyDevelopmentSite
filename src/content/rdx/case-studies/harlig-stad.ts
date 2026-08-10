@@ -11,7 +11,7 @@ export const harligStad: CaseStudy = {
   service: "both",
   serviceLabel: "Website & forms",
   attribution: "rdx-led",
-  attributionLabel: "Delivered by RDX Technologies",
+  attributionLabel: "Delivered by RDXHIVE",
   category: "client",
   status: "live",
   liveUrl: "https://www.harligstad.se/sv",

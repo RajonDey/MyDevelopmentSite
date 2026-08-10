@@ -1,4 +1,5 @@
 import type { FaqItem } from "@/content/rdx/design-system-demos";
+import { contactEmails } from "@/content/rdx/contact";
 import {
   organizationKnowsAbout,
   siteFaq,
@@ -18,7 +19,7 @@ export function buildOrganizationNode() {
     name: siteMetadata.siteName,
     url: siteMetadata.siteUrl,
     description: siteMetadata.description,
-    email: "contact@rajondey.com",
+    email: contactEmails.hello,
     areaServed: {
       "@type": "Country",
       name: "United States",
@@ -60,7 +61,7 @@ export function buildProfessionalServiceNode() {
     parentOrganization: { "@id": ORG_ID },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "RDX Technologies Services",
+      name: `${siteMetadata.siteName} Services`,
       itemListElement: serviceOffers.map((offer, index) => ({
         "@type": "Offer",
         position: index + 1,
@@ -76,7 +77,7 @@ export function buildProfessionalServiceNode() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      email: "contact@rajondey.com",
+      email: contactEmails.sales,
       url: `${siteMetadata.siteUrl}/start`,
       availableLanguage: "English",
     },

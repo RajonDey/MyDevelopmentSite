@@ -10,10 +10,11 @@ Operational reference for forms, email, campaigns, redirects, and admin. For lau
 
 ```bash
 RESEND_API_KEY=
-BUSINESS_EMAIL=contact@rajondey.com
+BUSINESS_EMAIL=sales@rdxhive.com
+# Verified Resend sender — free plan cannot add rdxhive.com yet
 FROM_EMAIL=contact@rajondey.com
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/rajondey
-NEXT_PUBLIC_SITE_URL=https://development.rajondey.com
+NEXT_PUBLIC_SITE_URL=https://rdxhive.com
 ```
 
 If `RESEND_API_KEY` is missing: API returns 503 → client may fall back to Formspree (submit only — no confirmation emails).
@@ -27,10 +28,10 @@ SUPABASE_SERVICE_ROLE_KEY=     # server only
 NEXTAUTH_SECRET=
 NEXTAUTH_URL=http://localhost:3000
 RDX_ADMIN_PASSWORD=            # openssl rand -base64 24
-RDX_ADMIN_EMAILS=contact@rajondey.com
+RDX_ADMIN_EMAILS=hello@rdxhive.com
 ```
 
-### Optional — RDX OS (internal team)
+### Optional — RDXHIVE OS (internal team)
 
 ```bash
 # Core allowlist — only these emails may sign in to /os
@@ -83,7 +84,7 @@ Outbound-only, **not in main nav**, **noindexed**.
 Example:
 
 ```
-https://development.rajondey.com/for-agencies?utm_source=email&utm_medium=outbound&utm_campaign=agencies-q2-2026
+https://rdxhive.com/for-agencies?utm_source=email&utm_medium=outbound&utm_campaign=agencies-q2-2026
 ```
 
 CTA forwards UTMs to `/start` and sets `source=for-agencies`.

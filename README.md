@@ -1,4 +1,4 @@
-# Rajon Dey Development Website
+# RDXHIVE Website
 
 This is a personal portfolio website built with **Next.js** to showcase web development services, portfolio projects, blog posts, and contact information. It’s designed to be fast, SEO-friendly, and user-focused, leveraging modern tools and services for a seamless experience.
 
@@ -105,7 +105,9 @@ src/
 - **Purpose**: Collects leads (name, email, message) and sends them to the configured email.
 - **Setup**:
   - Form endpoint is embedded in `src/app/contact/page.tsx`.
-  - Submissions redirect to `https://development.rajondey.com/thank-you`.Why This README Works
+  - Submissions redirect to `https://rdxhive.com/thank-you`.
+
+Why This README Works
 - **How to Update**: Sign into the service dashboard, create a form, and replace the endpoint in the code if needed (avoid sharing the ID publicly).
 - **Limits**: Free tier allows 50 submissions/month.
 

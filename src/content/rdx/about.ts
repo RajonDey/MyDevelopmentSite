@@ -3,7 +3,7 @@
 export const aboutContent = {
   hero: {
     eyebrow: "About",
-    title: "RDX Technologies",
+    title: "RDXHIVE",
     description:
       "A global remote product and engineering company. Client sites, platforms, and automation in fixed projects from $1,000.",
   },

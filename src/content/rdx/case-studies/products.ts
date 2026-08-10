@@ -11,7 +11,7 @@ export const ieltsReady: CaseStudy = {
   service: "agency-website",
   serviceLabel: "SaaS product",
   attribution: "rdx-led",
-  attributionLabel: "Built and operated by RDX Technologies",
+  attributionLabel: "Built and operated by RDXHIVE",
   category: "product",
   status: "beta",
   liveUrl: "https://ieltsready.vercel.app/",
@@ -28,7 +28,7 @@ export const ieltsReady: CaseStudy = {
     "Launch-ready beta deployment",
   ],
   outcome:
-    "A near-launch product that demonstrates RDX can ship full platforms — not only client sites.",
+    "A near-launch product that demonstrates RDXHIVE can ship full platforms — not only client sites.",
   visuals: [
     {
       label: "Admin portal",
@@ -66,7 +66,7 @@ export const yearInReview: CaseStudy = {
   service: "agency-website",
   serviceLabel: "SaaS product",
   attribution: "rdx-led",
-  attributionLabel: "Built and operated by RDX Technologies",
+  attributionLabel: "Built and operated by RDXHIVE",
   category: "product",
   status: "live",
   liveUrl: "https://www.yearinreview.online/",

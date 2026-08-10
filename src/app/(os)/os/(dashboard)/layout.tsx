@@ -3,7 +3,7 @@ import { getCommandCenter } from "@/lib/os/data";
 import { OsShell } from "@/components/os/shell/OsShell";
 
 export const metadata: Metadata = {
-  title: "RDX OS",
+  title: "RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

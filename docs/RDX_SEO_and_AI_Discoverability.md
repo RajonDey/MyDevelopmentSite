@@ -1,4 +1,4 @@
-# SEO & AI discoverability — RDX Technologies
+# SEO & AI discoverability — RDXHIVE
 
 How the site is optimized for **Google Search** and **AI answer engines** (ChatGPT, Perplexity, Claude, Google AI Overviews).
 
@@ -37,8 +37,8 @@ Campaign lander `/for-agencies` stays **noindex** but is not blocked for all bot
 
 ## Google Search Console setup (you)
 
-1. Verify property: `https://development.rajondey.com`
-2. Submit sitemap: `https://development.rajondey.com/sitemap.xml`
+1. ~~Verify property: `https://rdxhive.com`~~ **Done** (property created Aug 2026)
+2. Submit sitemap: `https://rdxhive.com/sitemap.xml`
 3. Request indexing for:
    - `/`
    - `/services`
@@ -72,7 +72,7 @@ AI tools prefer **clear, factual, citable statements**. Already on site:
 Share with partners or link in email footers for AI-aware audiences:
 
 ```
-https://development.rajondey.com/llms.txt
+https://rdxhive.com/llms.txt
 ```
 
 Regenerated from `src/content/rdx/seo.ts` — update that file when pricing or services change.

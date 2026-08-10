@@ -1,10 +1,12 @@
 import type { PaymentMethod } from "@/types/rdx/invoice";
+import { contactEmails } from "@/content/rdx/contact";
+import { siteMetadata } from "@/content/rdx/metadata";
 
 export const invoiceIssuer = {
-  name: "RDXHIVE",
-  tagline: "Many minds. One direction.",
-  email: "hello@rdxhive.com",
-  website: "https://rdxhive.com",
+  name: siteMetadata.siteName,
+  tagline: siteMetadata.tagline,
+  email: contactEmails.hello,
+  website: siteMetadata.siteUrl,
   displayUrl: "rdxhive.com",
 } as const;
 

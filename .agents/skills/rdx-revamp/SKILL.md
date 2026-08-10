@@ -1,7 +1,7 @@
 ---
 name: rdx-revamp
 description: >-
-  RDX Technologies site — agency marketing site + lead desk. Use when editing
+  RDXHIVE site — agency marketing site + lead desk. Use when editing
   rdx components, /start funnel, services, case studies, or admin. Always read
   docs/PRODUCTS.md then docs/README.md first.
 ---

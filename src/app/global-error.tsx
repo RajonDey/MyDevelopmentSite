@@ -34,7 +34,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
         >
           <div style={{ maxWidth: "28rem", textAlign: "center" }}>
             <h1 style={{ fontSize: "1.75rem", fontWeight: 600 }}>
-              RDX Technologies
+              RDXHIVE
             </h1>
             <p style={{ marginTop: "1rem", lineHeight: 1.6, color: "#555" }}>
               Something went wrong loading this page. Please try again.

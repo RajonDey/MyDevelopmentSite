@@ -1,4 +1,4 @@
-# RDX — Products in this repo
+# RDXHIVE — Products in this repo
 
 This repository holds **three products**. They share one Next.js app and deploy, but they are **not the same product**. Always know which one you are changing.
 
@@ -12,13 +12,13 @@ This repository holds **three products**. They share one Next.js app and deploy,
 |---------|----------|-----|-------|--------|
 | **1. Marketing site** | Public (agencies / prospects) | Credibility + `/start` | `/`, `/services`, `/work`, `/start` | Shipped · launch Phase F open |
 | **2. Lead Desk** | Founder / ops (admin) | **Client projects management** — leads, invoices, billing, client notes | `/dashboard` (via `/signin`) | Shipped · prod Supabase optional |
-| **3. RDX OS** | Internal team | **Team management** — North Star, goals, capacity, rituals | `/os` | Phase 1 · real seed + magic link |
+| **3. RDXHIVE OS** | Internal team | **Team management** — North Star, goals, capacity, rituals | `/os` | Phase 1 · real seed + magic link |
 
 ```text
 Prospect  →  Marketing site (/start)
                 ↓
             Lead Desk (/dashboard)  — client / revenue ops
-Team      →  RDX OS (/os)           — team execution & rhythm
+Team      →  RDXHIVE OS (/os)       — team execution & rhythm
 ```
 
 Lead Desk and OS are **both internal**, but they solve different jobs. Do not merge UI or data models.
@@ -60,7 +60,7 @@ Forms post to `POST /api/leads/submit` → email (Resend) and optionally Supabas
 
 ---
 
-## 3. RDX OS (team OS)
+## 3. RDXHIVE OS (team OS)
 
 | | |
 |--|--|

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ProgressView } from "@/components/os/progress/ProgressView";
 
 export const metadata: Metadata = {
-  title: "Progress · RDX OS",
+  title: "Progress · RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

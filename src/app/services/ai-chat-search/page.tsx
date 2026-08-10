@@ -10,11 +10,11 @@ import { AiChatSearchView } from "@/components/rdx/sections/services/AiChatSearc
 const slug = "ai-chat-search";
 
 export const metadata: Metadata = {
-  title: "AI Chat & Search | RDX Technologies",
+  title: `AI Chat & Search | ${siteMetadata.siteName}`,
   description:
     "AI chat, site search, and custom tools from $3,000. Scoped fixed projects for marketing agencies.",
   openGraph: {
-    title: "AI Chat & Search | RDX Technologies",
+    title: `AI Chat & Search | ${siteMetadata.siteName}`,
     url: `${siteMetadata.siteUrl}/services/${slug}`,
     siteName: siteMetadata.siteName,
     ...buildOgMeta("service"),

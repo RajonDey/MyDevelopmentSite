@@ -1,6 +1,6 @@
-# AGENTS.md — RDX Technologies Site
+# AGENTS.md — RDXHIVE Site
 
-Marketing site repositioned to **RDX Technologies** (agency). Revamp Phases 0–15 are shipped; remaining work is launch sign-off, maintenance, lead desk ops, and RDX OS.
+Marketing site for **RDXHIVE** (agency). Revamp Phases 0–15 are shipped; remaining work is launch sign-off, maintenance, lead desk ops, and RDXHIVE OS.
 
 ---
 
@@ -27,7 +27,9 @@ Marketing site repositioned to **RDX Technologies** (agency). Revamp Phases 0–
 
 | Item | Value |
 |------|-------|
-| Brand | RDX Technologies |
+| Brand | RDXHIVE · Many minds. One direction. |
+| Domain | rdxhive.com |
+| Emails | hello@ · sales@ · team@ rdxhive.com |
 | ICP | US marketing agencies, 5–20 employees |
 | Pricing | **$1K–$5K+** round · public tiers on `/services` — see `docs/RDX_Services_and_Pricing.md` |
 | Pricing display | Homepage “from $1,000”; full tiers on service pages; no checkout on estimator |
@@ -64,8 +66,8 @@ npm run prelaunch  # lint + typecheck + build
 | Field | Value |
 |-------|-------|
 | **Marketing revamp** | Shipped (Phases 0–15) |
-| **Active track** | Launch Phase F open · RDX OS Phase 1 (real seed + magic link) · Lead desk invoice paste estimate |
-| **Next step** | Launch: [Runbook](./docs/RDX_Launch_Runbook.md) · OS: apply `010_os_core.sql` in Supabase · wire `/api/os/*` data layer |
+| **Active track** | Launch Phase F open · RDXHIVE OS Phase 1 · Lead desk · **RDXHIVE brand cutover** |
+| **Next step** | Launch: [Runbook](./docs/RDX_Launch_Runbook.md) · OS: apply `010_os_core.sql` in Supabase · wire `/api/os/*` data layer · host env: `NEXT_PUBLIC_SITE_URL` + `BUSINESS_EMAIL=sales@rdxhive.com` (keep Resend `FROM_EMAIL` on verified rajondey.com) |
 
 ---
 

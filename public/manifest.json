@@ -1,7 +1,7 @@
 {
-  "name": "RDX Technologies",
-  "short_name": "RDX",
-  "description": "Websites, CRM automation, and product builds for growth-focused teams. Fixed projects from $1,000.",
+  "name": "RDXHIVE",
+  "short_name": "RDXHIVE",
+  "description": "Many minds. One direction. Websites, CRM automation, and product builds for growth-focused teams. Fixed projects from $1,000.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#faf9f7",
@@ -27,7 +27,7 @@
     {
       "name": "Services",
       "short_name": "Services",
-      "description": "RDX service tiers and pricing",
+      "description": "RDXHIVE service tiers and pricing",
       "url": "/services"
     },
     {
