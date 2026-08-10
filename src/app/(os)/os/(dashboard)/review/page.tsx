@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ReviewView } from "@/components/os/review/ReviewView";
 
 export const metadata: Metadata = {
-  title: "Quarterly review · RDX OS",
+  title: "Quarterly review · RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

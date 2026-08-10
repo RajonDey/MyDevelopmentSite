@@ -51,7 +51,7 @@ export function OsVerifyClient() {
 
   return (
     <OsCard raised className="mx-auto max-w-md text-center">
-      <p className="font-rdx-display text-2xl text-os-text">RDX OS</p>
+      <p className="font-rdx-display text-2xl text-os-text">RDXHIVE OS</p>
       {error ? (
         <>
           <p className="mt-4 text-sm text-os-red">{error}</p>

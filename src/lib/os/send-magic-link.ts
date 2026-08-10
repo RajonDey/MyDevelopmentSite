@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { resendFromFallback } from "@/content/rdx/contact";
 import {
   createOsMagicToken,
   resolveOsAllowlistedMember,
@@ -41,25 +42,22 @@ export async function requestOsMagicLink(email: string): Promise<{
     return { ok: true };
   }
 
-  const from =
-    process.env.FROM_EMAIL ||
-    process.env.BUSINESS_EMAIL ||
-    "contact@rajondey.com";
+  const from = process.env.FROM_EMAIL?.trim() || resendFromFallback;
 
   await resend.emails.send({
-    from: `RDX OS <${from}>`,
+    from: `RDXHIVE OS <${from}>`,
     to: [member.email],
-    subject: "Your RDX OS sign-in link",
+    subject: "Your RDXHIVE OS sign-in link",
     text: [
-      "Sign in to RDX OS (core team only).",
+      "Sign in to RDXHIVE OS (core team only).",
       "",
       verifyUrl,
       "",
       "This link expires in 20 minutes and can only be used once (when DB tokens are enabled).",
       "If you did not request this, ignore the email.",
     ].join("\n"),
-    html: `<p>Sign in to <strong>RDX OS</strong> (core team only).</p>
-<p><a href="${verifyUrl}">Open RDX OS</a></p>
+    html: `<p>Sign in to <strong>RDXHIVE OS</strong> (core team only).</p>
+<p><a href="${verifyUrl}">Open RDXHIVE OS</a></p>
 <p style="color:#666;font-size:13px">Expires in 20 minutes. If you did not request this, ignore the email.</p>`,
   });
 

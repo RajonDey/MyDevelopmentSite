@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import { siteMetadata } from "@/content/rdx/metadata";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | RDX Technologies",
+  title: `Terms of Service | ${siteMetadata.siteName}`,
   description:
-    "Terms and conditions for RDX Technologies software development services. Learn about our service terms, payment policies, and business practices.",
+    "Terms and conditions for RDXHIVE software development services. Learn about our service terms, payment policies, and business practices.",
   openGraph: {
-    title: "Terms of Service | RDX Technologies",
+    title: `Terms of Service | ${siteMetadata.siteName}`,
     description:
-      "Terms and conditions for RDX Technologies software development services. Learn about our service terms, payment policies, and business practices.",
+      "Terms and conditions for RDXHIVE software development services. Learn about our service terms, payment policies, and business practices.",
     url: `${siteMetadata.siteUrl}/terms-of-service`,
     siteName: siteMetadata.siteName,
     images: [{ url: `${siteMetadata.siteUrl}${siteMetadata.ogImage}` }],
@@ -25,11 +25,11 @@ export default function TermsOfServicePage() {
             Terms of Service
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            <strong>Last Updated:</strong> June 2, 2026
+            <strong>Last Updated:</strong> August 10, 2026
           </p>
           <p className="mt-1 text-sm text-gray-600">
-            <strong>Business:</strong> RDX Technologies (Rajon Dey X
-            Technologies)
+            <strong>Business:</strong> RDXHIVE (trading name), operated by Rajon
+            Dey (formerly Rajon Dey X Technologies)
           </p>
         </header>
 
@@ -43,7 +43,7 @@ export default function TermsOfServicePage() {
                   Introduction
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Welcome to RDX Technologies! These Terms of Service govern
+                  Welcome to RDXHIVE! These Terms of Service govern
                   your use of our website and services. By accessing our website
                   or engaging our services, you agree to be bound by these
                   terms.
@@ -54,7 +54,7 @@ export default function TermsOfServicePage() {
                   ভূমিকা
                 </h2>
                 <p className="text-gray-700 leading-relaxed">
-                  RDX Technologies-এ স্বাগতম! এই সেবার শর্তাবলী আমাদের ওয়েবসাইট
+                  RDXHIVE-এ স্বাগতম! এই সেবার শর্তাবলী আমাদের ওয়েবসাইট
                   এবং সেবা ব্যবহারের নিয়ম নির্ধারণ করে। আমাদের ওয়েবসাইট
                   ব্যবহার বা সেবা গ্রহণের মাধ্যমে আপনি এই শর্তাবলী মেনে চলতে
                   সম্মত হন।
@@ -72,16 +72,17 @@ export default function TermsOfServicePage() {
                 </h2>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    <strong>Company Name:</strong> RDX Technologies
+                    <strong>Company Name:</strong> RDXHIVE
                   </p>
                   <p>
-                    <strong>Legal Name:</strong> Rajon Dey X Technologies
+                    <strong>Legal Name:</strong> Rajon Dey (formerly Rajon Dey X
+                    Technologies)
                   </p>
                   <p>
-                    <strong>Website:</strong> development.rajondey.com
+                    <strong>Website:</strong> rdxhive.com
                   </p>
                   <p>
-                    <strong>Email:</strong> contact@rajondey.com
+                    <strong>Email:</strong> hello@rdxhive.com
                   </p>
                   <p>
                     <strong>Phone:</strong> +880 1737-997143
@@ -97,16 +98,17 @@ export default function TermsOfServicePage() {
                 </h2>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    <strong>কোম্পানির নাম:</strong> RDX Technologies
+                    <strong>কোম্পানির নাম:</strong> RDXHIVE
                   </p>
                   <p>
-                    <strong>আইনি নাম:</strong> Rajon Dey X Technologies
+                    <strong>আইনি নাম:</strong> রাজন দে (পূর্বে Rajon Dey X
+                    Technologies)
                   </p>
                   <p>
-                    <strong>ওয়েবসাইট:</strong> development.rajondey.com
+                    <strong>ওয়েবসাইট:</strong> rdxhive.com
                   </p>
                   <p>
-                    <strong>ইমেইল:</strong> contact@rajondey.com
+                    <strong>ইমেইল:</strong> hello@rdxhive.com
                   </p>
                   <p>
                     <strong>ফোন:</strong> +880 1737-997143
@@ -599,7 +601,7 @@ export default function TermsOfServicePage() {
                 </h2>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    <strong>Email:</strong> contact@rajondey.com
+                    <strong>Email:</strong> hello@rdxhive.com
                   </p>
                   <p>
                     <strong>WhatsApp:</strong> +880 1737-997143
@@ -608,7 +610,7 @@ export default function TermsOfServicePage() {
                     <strong>Address:</strong> Sylhet, Bangladesh
                   </p>
                   <p>
-                    <strong>Website:</strong> development.rajondey.com
+                    <strong>Website:</strong> rdxhive.com
                   </p>
                 </div>
               </div>
@@ -618,7 +620,7 @@ export default function TermsOfServicePage() {
                 </h2>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    <strong>ইমেইল:</strong> contact@rajondey.com
+                    <strong>ইমেইল:</strong> hello@rdxhive.com
                   </p>
                   <p>
                     <strong>হোয়াটসঅ্যাপ:</strong> +880 1737-997143
@@ -627,7 +629,7 @@ export default function TermsOfServicePage() {
                     <strong>ঠিকানা:</strong> সিলেট, বাংলাদেশ
                   </p>
                   <p>
-                    <strong>ওয়েবসাইট:</strong> development.rajondey.com
+                    <strong>ওয়েবসাইট:</strong> rdxhive.com
                   </p>
                 </div>
               </div>

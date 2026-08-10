@@ -23,7 +23,7 @@ export const verifiedReviews: VerifiedReview[] = [
     role: "Google review",
     platform: "Google",
     platformUrl:
-      "https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
+      "https://www.google.com/maps/place/RDXHIVE/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
     dateLabel: "1 month ago",
   },
   {
@@ -34,7 +34,7 @@ export const verifiedReviews: VerifiedReview[] = [
     role: "Google review",
     platform: "Google",
     platformUrl:
-      "https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
+      "https://www.google.com/maps/place/RDXHIVE/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
     dateLabel: "Recent",
   },
   {
@@ -57,8 +57,8 @@ export const reviewPlatforms = {
   },
   google: {
     label: "Google",
-    url: "https://www.google.com/maps/place/RDX+Technologies/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
-    description: "RDX Technologies on Google",
+    url: "https://www.google.com/maps/place/RDXHIVE/@24.8999862,91.8610356,13z/data=!3m1!4b1!4m6!3m5!1s0x696622180942f9af:0x4d46f4585e7b071!8m2!3d24.8999862!4d91.8610356!16s%2Fg%2F11m6l43c23?entry=ttu",
+    description: "RDXHIVE on Google",
   },
 } as const;
 
@@ -66,7 +66,7 @@ export const reviewsContent = {
   eyebrow: "Reviews",
   title: "Verified client feedback",
   description:
-    "Google and Fiverr reviews from website and form projects. Verbatim quotes only. Current RDX service tiers are listed on /services.",
+    "Google and Fiverr reviews from website and form projects. Verbatim quotes only. Current RDXHIVE service tiers are listed on /services.",
   emptyHint:
     "Read verified reviews on Fiverr and Google.",
 } as const;

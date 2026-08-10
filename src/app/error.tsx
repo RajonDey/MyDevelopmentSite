@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { contactEmails } from "@/content/rdx/contact";
 import { RdxContainer } from "@/components/rdx/layout/Container";
 import { RdxSection } from "@/components/rdx/layout/Section";
 import { RdxButton } from "@/components/rdx/ui/Button";
@@ -37,10 +38,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         </div>
         <p className="mt-8 text-sm text-rdx-subtle">
           <a
-            href="mailto:contact@rajondey.com"
+            href={`mailto:${contactEmails.hello}`}
             className="text-rdx-accent hover:text-rdx-accent-hover"
           >
-            contact@rajondey.com
+            {contactEmails.hello}
           </a>
         </p>
       </RdxContainer>

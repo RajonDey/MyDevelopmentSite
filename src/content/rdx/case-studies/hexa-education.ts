@@ -11,7 +11,7 @@ export const hexaEducation: CaseStudy = {
   service: "agency-website",
   serviceLabel: "Website & platform",
   attribution: "rdx-led",
-  attributionLabel: "Delivered by RDX Technologies",
+  attributionLabel: "Delivered by RDXHIVE",
   category: "client",
   status: "live",
   liveUrl: "https://hexaseducation.com/",

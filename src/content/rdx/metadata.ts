@@ -1,14 +1,15 @@
-/** RDX site metadata — single source for layout, SEO, Schema.org */
+/** RDXHIVE site metadata — single source for layout, SEO, Schema.org */
 
 export const siteMetadata = {
-  siteUrl: "https://development.rajondey.com",
-  siteName: "RDX Technologies",
-  title: "RDX Technologies | Websites, CRM & Product Builds",
+  siteUrl: "https://rdxhive.com",
+  siteName: "RDXHIVE",
+  title: "RDXHIVE | Agency Websites & CRM Automation",
   description:
-    "RDX Technologies is a remote product and engineering company. We build websites, form automation, and platforms for marketing agencies, service businesses, and education brands. Fixed projects from $1,000.",
+    "RDXHIVE builds agency websites and connects them to your CRM — HubSpot, Slack, Calendly, and more. Fixed projects from $1,000.",
   ogImage: "/opengraph-image",
   locale: "en_US",
-  tagline: "Websites & systems for growth-focused teams",
+  tagline: "Many minds. One direction.",
+  serviceLine: "Websites & CRM automation for marketing agencies",
   priceFloorLabel: "From $1,000",
 } as const;
 

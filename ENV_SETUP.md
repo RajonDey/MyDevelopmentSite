@@ -8,10 +8,10 @@
 # Resend API Key for sending emails
 RESEND_API_KEY=re_your_actual_api_key_here
 
-# Your business email (where you'll receive order notifications)
-BUSINESS_EMAIL=contact@rajondey.com
+# Lead notifications inbox
+BUSINESS_EMAIL=sales@rdxhive.com
 
-# From email address (optional - defaults to your BUSINESS_EMAIL)
+# From email — must be a verified Resend sender (free plan: rajondey.com)
 FROM_EMAIL=contact@rajondey.com
 
 # Calendly booking link for qualified leads (see docs/RDX_Ops_Reference.md)

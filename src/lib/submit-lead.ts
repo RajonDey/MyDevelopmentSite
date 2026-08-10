@@ -1,3 +1,4 @@
+import { contactEmails } from "@/content/rdx/contact";
 import { FORMSPREE_ENDPOINT } from "@/content/rdx/forms";
 import type { LeadFormType } from "@/types/rdx/lead";
 
@@ -27,7 +28,7 @@ async function submitViaFormspree(
   if (!response.ok) {
     return {
       ok: false,
-      error: "Submission failed. Email contact@rajondey.com directly.",
+      error: `Submission failed. Email ${contactEmails.sales} directly.`,
     };
   }
 

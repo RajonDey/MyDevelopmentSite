@@ -1,8 +1,8 @@
-# RDX Technologies — Documentation Hub
+# RDXHIVE — Documentation Hub
 
 **Read this first** before implementation work.
 
-👉 **Three products in this repo:** [PRODUCTS.md](./PRODUCTS.md) — marketing site · Lead Desk · RDX OS.  
+👉 **Three products in this repo:** [PRODUCTS.md](./PRODUCTS.md) — marketing site · Lead Desk · RDXHIVE OS.  
 👉 **Pricing & services:** [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md) — locked.  
 👉 **Launch sign-off:** [RDX_Launch_Runbook.md](./RDX_Launch_Runbook.md) — Phase F open.
 
@@ -44,12 +44,13 @@
 | **Marketing revamp (Phases 0–15)** | Shipped in repo |
 | **Launch Phase F** | Open — deploy, prod `/start` test, Lighthouse, `rdx-v1-launch` tag |
 | **Lead desk (7 / 7b / 7c)** | Shipped — invoice line details + paste estimate · prod Supabase admin optional |
-| **RDX OS (internal)** | Phase 1 in progress · real §12 seed in mock + `010_os_core.sql` · magic-link auth wired · [Spec](./RDX_OS_Spec.md) §12 |
+| **RDXHIVE OS (internal)** | Phase 1 in progress · real §12 seed in mock + `010_os_core.sql` · magic-link auth wired · [Spec](./RDX_OS_Spec.md) §12 |
+| **Brand / domain** | RDXHIVE · rdxhive.com · hello@ / sales@ / team@ — Resend FROM still rajondey.com (free plan) |
 
 ### Deferred (not blocking v1)
 
 - Prod Supabase + `/dashboard` enablement
-- Custom domain
+- Resend verify rdxhive.com (paid plan) so FROM can leave rajondey.com
 - Blog IA / full sitemap refresh (WordPress archive structure)
 
 ---
@@ -68,7 +69,9 @@
 
 ## Quick reference (locked)
 
-- **Brand:** RDX Technologies
+- **Brand:** RDXHIVE
+- **Tagline:** Many minds. One direction.
+- **Service line:** Websites & CRM automation for marketing agencies
 - **ICP:** US marketing agencies, 5–20 employees
 - **Services:** Agency Website · Lead & CRM Automation
 - **Flagship tiers:** **$3,000** (website) · **$2,500** (automation)
@@ -77,7 +80,8 @@
 - **Audit CTA:** Free Website & Workflow Review → `/start`
 - **Site role:** Credibility for warm outbound — not primary SEO lead gen
 - **Design:** Hallmark `modern-minimal` / Quiet
-- **Domain (now):** `development.rajondey.com`
+- **Domain:** `rdxhive.com`
+- **Emails:** hello@ (public) · sales@ (leads) · team@ (internal)
 
 ---
 
@@ -92,4 +96,4 @@
 
 ---
 
-*Last updated: July 21, 2026 — OS Phase 1: real seed + magic-link auth*
+*Last updated: August 10, 2026 — RDXHIVE brand + rdxhive.com*

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { contactEmails } from "@/content/rdx/contact";
 import { pageMeta } from "@/content/rdx/pages";
 import { salesOpsContent } from "@/content/rdx/sales-ops";
 import { RdxContainer } from "@/components/rdx/layout/Container";
@@ -62,10 +63,10 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
         <p className="mt-8 text-center text-xs text-rdx-subtle">
           Questions? Email{" "}
           <a
-            href="mailto:contact@rajondey.com"
+            href={`mailto:${contactEmails.hello}`}
             className="text-rdx-accent hover:text-rdx-accent-hover"
           >
-            contact@rajondey.com
+            {contactEmails.hello}
           </a>
         </p>
       </RdxContainer>

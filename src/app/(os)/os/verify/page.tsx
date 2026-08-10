@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { OsVerifyClient } from "@/components/os/signin/OsVerifyClient";
 
 export const metadata: Metadata = {
-  title: "Verifying — RDX OS",
+  title: "Verifying — RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

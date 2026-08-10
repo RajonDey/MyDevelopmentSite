@@ -10,11 +10,11 @@ import { LeadAutomationView } from "@/components/rdx/sections/services/LeadAutom
 const slug = "lead-automation";
 
 export const metadata: Metadata = {
-  title: "Lead & CRM Automation | RDX Technologies",
+  title: `Lead & CRM Automation | ${siteMetadata.siteName}`,
   description:
     "Lead and CRM automation tiers from $1,000. Connect forms, CRM, Slack, and follow-ups.",
   openGraph: {
-    title: "Lead & CRM Automation | RDX Technologies",
+    title: `Lead & CRM Automation | ${siteMetadata.siteName}`,
     url: `${siteMetadata.siteUrl}/services/${slug}`,
     siteName: siteMetadata.siteName,
     ...buildOgMeta("service"),

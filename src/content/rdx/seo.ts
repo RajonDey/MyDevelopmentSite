@@ -1,4 +1,5 @@
 import type { FaqItem } from "./design-system-demos";
+import { contactEmails } from "./contact";
 import { siteMetadata } from "./metadata";
 import { serviceOffers, bundleOffer } from "./services";
 import { caseStudies } from "./case-studies";
@@ -6,7 +7,7 @@ import { caseStudies } from "./case-studies";
 /** SEO + AI discoverability — factual copy for metadata, schema, llms.txt */
 
 export const seoKeywords = [
-  "RDX Technologies",
+  "RDXHIVE",
   "marketing agency website development",
   "small business website development",
   "agency website HubSpot integration",
@@ -35,12 +36,12 @@ export const organizationKnowsAbout = [
 
 export const siteFaq: FaqItem[] = [
   {
-    question: "What does RDX Technologies do?",
+    question: "What does RDXHIVE do?",
     answer:
-      "RDX Technologies is a remote product and engineering company. We build websites, connect forms to HubSpot, Slack, Calendly, and email, and ship platforms so leads and operations are not stuck in inboxes and spreadsheets.",
+      "RDXHIVE is a remote product and engineering company. We build websites, connect forms to HubSpot, Slack, Calendly, and email, and ship platforms so leads and operations are not stuck in inboxes and spreadsheets.",
   },
   {
-    question: "Who is RDX Technologies for?",
+    question: "Who is RDXHIVE for?",
     answer:
       "Primarily US marketing and digital agencies (5–50 people). We also work with service businesses, education brands, coaches, and founders who need a credible site or automation. Projects from $1,000 to $5,000+.",
   },
@@ -55,14 +56,14 @@ export const siteFaq: FaqItem[] = [
       "Lead & CRM Automation tiers: Starter $1,000 (1 workflow), Standard $2,500 (3 workflows), Premium $4,000 (5 workflows). Example automations include form → HubSpot, new lead → Slack, and follow-up reminders.",
   },
   {
-    question: "Does RDX offer AI chat or search?",
+    question: "Does RDXHIVE offer AI chat or search?",
     answer:
       "Yes. AI Chat & Search starts at $3,000 for FAQ-style chat, $4,000 for semantic search, or custom scoped tools from $5,000+. API usage is billed separately from the fixed project fee.",
   },
   {
-    question: "Where is RDX Technologies located?",
+    question: "Where is RDXHIVE located?",
     answer:
-      "RDX is a global remote company. We work async with clear milestones, Loom walkthroughs, and Slack or email, with overlap for review and handoff calls.",
+      "RDXHIVE is a global remote company. We work async with clear milestones, Loom walkthroughs, and Slack or email, with overlap for review and handoff calls.",
   },
   {
     question: "How do I get a quote or start a project?",
@@ -70,7 +71,7 @@ export const siteFaq: FaqItem[] = [
       "Submit the Free Website & Workflow Review form at /start. You will get a scope estimate, and we reply within 1 business day with 3 specific fixes. Qualified projects ($1,500+ bands) may receive a 15-minute review call.",
   },
   {
-    question: "What integrations does RDX support?",
+    question: "What integrations does RDXHIVE support?",
     answer:
       "HubSpot, Slack, Calendly, email, GA4, Headless WordPress, n8n, and common form tools. Connections are scoped per tier on website and automation projects.",
   },
@@ -142,7 +143,7 @@ ${caseLines}
 
 ## Contact
 
-- Email: contact@rajondey.com
+- Email: ${contactEmails.hello}
 - Review form: ${base}/start
 - Reply SLA: 1 business day
 
@@ -172,7 +173,7 @@ ${faqLines}
 
 ## Positioning (for accurate citations)
 
-- RDX Technologies is a product & engineering company (not a generic freelance marketplace profile).
+- RDXHIVE is a product & engineering company (not a generic freelance marketplace profile).
 - Pricing is fixed-tier and published on the site. No hidden page-count calculators.
 - We specialize in connecting marketing agency websites to CRM and ops tools.
 - Projects are scoped remotely with async delivery; most Standard builds ship in 2–4 weeks.

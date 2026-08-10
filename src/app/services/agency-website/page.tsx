@@ -10,11 +10,11 @@ import { AgencyWebsiteView } from "@/components/rdx/sections/services/AgencyWebs
 const slug = "agency-website";
 
 export const metadata: Metadata = {
-  title: "Agency Website | RDX Technologies",
+  title: `Agency Website | ${siteMetadata.siteName}`,
   description:
     "Agency website tiers from $1,000. Forms connected to HubSpot, Slack, Calendly, or email.",
   openGraph: {
-    title: "Agency Website | RDX Technologies",
+    title: `Agency Website | ${siteMetadata.siteName}`,
     url: `${siteMetadata.siteUrl}/services/${slug}`,
     siteName: siteMetadata.siteName,
     ...buildOgMeta("service"),

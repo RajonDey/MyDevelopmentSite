@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { CommandCenterView } from "@/components/os/home/CommandCenterView";
 
 export const metadata: Metadata = {
-  title: "Command Center · RDX OS",
+  title: "Command Center · RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

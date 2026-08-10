@@ -43,7 +43,7 @@ export function OsSidebar({
     <>
       <div className="flex h-14 items-center justify-between border-b border-os-border px-4">
         <Link href="/os" className="font-rdx-display text-lg text-os-text">
-          RDX OS
+          RDXHIVE OS
         </Link>
         <button
           type="button"

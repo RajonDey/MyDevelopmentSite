@@ -40,7 +40,7 @@ export const forAgenciesCampaign: CampaignLanderContent = {
   source: "for-agencies",
   defaultNeed: "website",
   meta: {
-    title: "For marketing agencies | RDX Technologies",
+    title: "For marketing agencies | RDXHIVE",
     description:
       "Fixed-scope agency websites with CRM-connected forms from $1,000. Built for US marketing agencies tired of leads stuck in inboxes.",
   },

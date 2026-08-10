@@ -68,7 +68,7 @@ export default function OpenGraphImage() {
             margin: 0,
           }}
         >
-          development.rajondey.com
+          rdxhive.com
         </p>
       </div>
     ),

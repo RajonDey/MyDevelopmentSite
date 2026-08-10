@@ -1,6 +1,8 @@
 import { Resend } from "resend";
 import type { SubmitLeadInput } from "@/types/rdx/lead";
 import { isQualifiedForReviewCall } from "@/lib/lead-qualification";
+import { resendFromFallback } from "@/content/rdx/contact";
+import { siteMetadata } from "@/content/rdx/metadata";
 import {
   getBusinessEmail,
   getCalendlyUrl,
@@ -12,7 +14,7 @@ const resend = process.env.RESEND_API_KEY
   : null;
 
 function getFromAddress(): string {
-  return process.env.FROM_EMAIL?.trim() || getBusinessEmail();
+  return process.env.FROM_EMAIL?.trim() || resendFromFallback;
 }
 
 function formatPayload(payload: Record<string, string>): string {
@@ -53,7 +55,7 @@ async function sendAdminLeadNotification(
   ].join("\n");
 
   await resend!.emails.send({
-    from: `RDX Technologies <${getFromAddress()}>`,
+    from: `${siteMetadata.siteName} <${getFromAddress()}>`,
     to: [getBusinessEmail()],
     replyTo: input.email,
     subject: `${prefix} — ${input.agencyName}`,
@@ -71,7 +73,7 @@ async function sendLeadConfirmation(
   const text = [
     `Hi ${input.contactName},`,
     "",
-    "Thanks for reaching out to RDX Technologies — we received your review request.",
+    `Thanks for reaching out to ${siteMetadata.siteName} — we received your review request.`,
     "",
     `We reply within ${salesOpsContent.replySla} with next steps and specific fixes for your site or lead workflow.`,
     "",
@@ -87,12 +89,12 @@ async function sendLeadConfirmation(
       : []),
     "If you have urgent questions, reply to this email.",
     "",
-    "— RDX Technologies",
+    `— ${siteMetadata.siteName}`,
     getBusinessEmail(),
   ].join("\n");
 
   await resend!.emails.send({
-    from: `RDX Technologies <${getFromAddress()}>`,
+    from: `${siteMetadata.siteName} <${getFromAddress()}>`,
     to: [input.email],
     replyTo: getBusinessEmail(),
     subject: salesOpsContent.emails.confirmSubject,

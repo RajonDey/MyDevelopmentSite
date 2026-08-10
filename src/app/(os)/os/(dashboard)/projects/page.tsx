@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ProjectsWorkspace } from "@/components/os/projects/ProjectsWorkspace";
 
 export const metadata: Metadata = {
-  title: "Projects · RDX OS",
+  title: "Projects · RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

@@ -27,10 +27,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${study.title} | RDX Technologies`,
+    title: `${study.title} | ${siteMetadata.siteName}`,
     description: study.summary,
     openGraph: {
-      title: `${study.title} | RDX Technologies`,
+      title: `${study.title} | ${siteMetadata.siteName}`,
       description: study.summary,
       url: `${siteMetadata.siteUrl}/work/${study.slug}`,
       siteName: siteMetadata.siteName,

@@ -1,3 +1,5 @@
+import { contactEmails } from "./contact";
+
 /** Sales ops copy — Phase 13 */
 
 export const salesOpsContent = {
@@ -20,7 +22,7 @@ export const salesOpsContent = {
     },
   },
   emails: {
-    confirmSubject: "We received your RDX review request",
+    confirmSubject: "We received your RDXHIVE review request",
     adminQualifiedTag: "QUALIFIED — offer review call",
     adminStandardTag: "Reply by email — review call optional",
   },
@@ -34,5 +36,5 @@ export function getCalendlyUrl(): string {
 }
 
 export function getBusinessEmail(): string {
-  return process.env.BUSINESS_EMAIL?.trim() || "contact@rajondey.com";
+  return process.env.BUSINESS_EMAIL?.trim() || contactEmails.sales;
 }

@@ -1,4 +1,6 @@
 import { Resend } from "resend";
+import { contactEmails, resendFromFallback } from "@/content/rdx/contact";
+import { siteMetadata } from "@/content/rdx/metadata";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -102,10 +104,10 @@ This order was submitted through your website. Please create a Payoneer invoice 
     `.trim();
 
     // Send email to you (business owner)
-    const businessEmail = process.env.BUSINESS_EMAIL || "contact@rajondey.com";
-    const fromEmail = process.env.FROM_EMAIL || businessEmail; // Use your real email as default
+    const businessEmail = process.env.BUSINESS_EMAIL || contactEmails.sales;
+    const fromEmail = process.env.FROM_EMAIL || resendFromFallback;
     const businessEmailResult = await resend.emails.send({
-      from: `Rajon Dey Development <${fromEmail}>`,
+      from: `${siteMetadata.siteName} <${fromEmail}>`,
       to: [businessEmail],
       subject: `🛒 New Order: ${orderData.serviceTitle} - ${orderData.orderId}`,
       text: emailContent,
@@ -125,14 +127,14 @@ Your order has been received and is being processed.
 
 I will create your Payoneer invoice and share it with you within 24 hours.
 
-If you have any questions, please don't hesitate to contact me at contact@rajondey.com
+If you have any questions, please don't hesitate to contact us at ${contactEmails.hello}
 
 Best regards,
-Rajon Dey
+${siteMetadata.siteName}
     `.trim();
 
     const clientEmailResult = await resend.emails.send({
-      from: `Rajon Dey Development <${fromEmail}>`,
+      from: `${siteMetadata.siteName} <${fromEmail}>`,
       to: [orderData.projectDetails.email],
       subject: `Order Confirmation - ${orderData.orderId}`,
       text: clientEmailContent,

@@ -1,7 +1,9 @@
 # RDX Launch Runbook
 
-**Site (v1):** https://development.rajondey.com  
-**Email:** contact@rajondey.com  
+**Site (v1):** https://rdxhive.com  
+**Public email:** hello@rdxhive.com  
+**Sales inbox:** sales@rdxhive.com  
+**Resend FROM:** contact@rajondey.com (free plan — rdxhive.com not verified yet)  
 **Calendly:** https://calendly.com/rajondey
 
 Marketing revamp Phases 0–15 are shipped in repo. This doc is the remaining **founder launch sign-off**.
@@ -21,7 +23,7 @@ Marketing revamp Phases 0–15 are shipped in repo. This doc is the remaining **
 ## Founder sign-off (Phase F)
 
 - [x] `npm run prelaunch` locally (lint + typecheck + build)
-- [ ] Deploy to `development.rajondey.com`
+- [ ] Deploy to `rdxhive.com`
 - [ ] Prod `/start` submit → admin + confirmation emails + thank-you (+ Calendly if qualified)
 - [ ] Lighthouse mobile ≥ 85 on prod homepage
 - [ ] `git tag rdx-v1-launch` when ready
@@ -43,10 +45,10 @@ Set on host (Vercel, etc.) — see `.env.example`:
 | Variable | Required v1 | Notes |
 |----------|-------------|--------|
 | `RESEND_API_KEY` | **Yes** | Without it, submit returns 503 → Formspree fallback |
-| `BUSINESS_EMAIL` | Yes | `contact@rajondey.com` |
-| `FROM_EMAIL` | Yes | Verified Resend sender domain |
+| `BUSINESS_EMAIL` | Yes | `sales@rdxhive.com` |
+| `FROM_EMAIL` | Yes | Verified Resend sender (`contact@rajondey.com` until rdxhive.com is verified) |
 | `NEXT_PUBLIC_CALENDLY_URL` | Yes | `https://calendly.com/rajondey` |
-| `NEXT_PUBLIC_SITE_URL` | Recommended | `https://development.rajondey.com` |
+| `NEXT_PUBLIC_SITE_URL` | Recommended | `https://rdxhive.com` |
 
 **Optional (not blocking v1):** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RDX_ADMIN_EMAILS`
 
@@ -70,7 +72,7 @@ Set on host (Vercel, etc.) — see `.env.example`:
 | 4 | `/work` + `/work/harlig-stad` | Images, reviews link |
 | 5 | `/services/agency-website` | Tiers visible |
 | 6 | `/hire`, `/portfolio` | Redirect to `/start` or `/work` |
-| 7 | `/privacy-policy`, `/terms-of-service` | RDX / form data mentioned |
+| 7 | `/privacy-policy`, `/terms-of-service` | RDXHIVE / form data mentioned |
 
 ### Form submit
 
@@ -84,7 +86,7 @@ Set on host (Vercel, etc.) — see `.env.example`:
 ## 5. Lighthouse (mobile)
 
 ```bash
-npx lighthouse https://development.rajondey.com \
+npx lighthouse https://rdxhive.com \
   --only-categories=performance,accessibility,best-practices,seo \
   --form-factor=mobile \
   --chrome-flags="--headless"
@@ -97,7 +99,7 @@ npx lighthouse https://development.rajondey.com \
 ## 6. Launch tag
 
 ```bash
-git tag -a rdx-v1-launch -m "RDX Technologies site v1 — development.rajondey.com"
+git tag -a rdx-v1-launch -m "RDXHIVE site v1 — rdxhive.com"
 git push origin rdx-v1-launch
 ```
 
@@ -107,7 +109,7 @@ Only when production is verified.
 
 ## 7. Post-launch (optional)
 
-- [ ] Submit sitemap in GSC: `https://development.rajondey.com/sitemap.xml`
+- [ ] Submit sitemap in GSC: `https://rdxhive.com/sitemap.xml`
 - [ ] Share `/work/harlig-stad` + Google reviews in outbound
 - [ ] Enable prod Supabase admin when ready — [RDX_Ops_Reference.md](./RDX_Ops_Reference.md)
 
@@ -116,7 +118,7 @@ Only when production is verified.
 ## Deferred (not blocking v1)
 
 - Supabase + `/dashboard` on production
-- Custom production domain
+- Verify rdxhive.com on Resend (paid) so FROM can leave rajondey.com
 - Blog IA / full sitemap refresh (WP structure)
 - Client portal (manual invoicing OK)
 

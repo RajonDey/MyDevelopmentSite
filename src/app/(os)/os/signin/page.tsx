@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { OsSignInForm } from "@/components/os/signin/OsSignInForm";
 
 export const metadata: Metadata = {
-  title: "Sign in · RDX OS",
+  title: "Sign in · RDXHIVE OS",
   robots: { index: false, follow: false },
 };
 

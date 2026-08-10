@@ -111,7 +111,7 @@ export function OsSignInForm() {
   return (
     <OsCard raised className="mx-auto max-w-md">
       <div className="text-center">
-        <p className="font-rdx-display text-2xl text-os-text">RDX OS</p>
+        <p className="font-rdx-display text-2xl text-os-text">RDXHIVE OS</p>
         <p className="mt-2 text-sm text-os-muted">
           RDX Core only — we&apos;ll email a magic link to your allowlisted
           address

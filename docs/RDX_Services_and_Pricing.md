@@ -1,4 +1,4 @@
-# RDX Technologies — Services & Pricing
+# RDXHIVE — Services & Pricing
 
 > **Purpose:** Locked service menu, tiers, pricing, and **how prices appear on the site**.  
 > **Status:** ✅ Locked — v1.2 (round numbers + public tier pricing)

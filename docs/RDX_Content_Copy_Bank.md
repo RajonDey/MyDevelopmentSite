@@ -1,4 +1,4 @@
-# RDX Technologies — Content Copy Bank
+# RDXHIVE — Content Copy Bank
 
 **Approved messaging.** Do not paraphrase headlines without founder OK. Do not invent metrics.
 
@@ -8,11 +8,19 @@
 
 | Key | Copy |
 |-----|------|
-| Company name | RDX Technologies |
-| Tagline (short) | Websites & CRM automation for marketing agencies |
-| Tagline (long) | RDX Technologies builds agency websites and connects them to your CRM — fixed projects from $1,000. |
+| Company name | RDXHIVE |
+| Trading / legal | RDXHIVE (trading name), operated by Rajon Dey (formerly Rajon Dey X Technologies) |
+| Brand tagline | Many minds. One direction. |
+| Service line | Websites & CRM automation for marketing agencies |
+| Tagline (long) | RDXHIVE builds agency websites and connects them to your CRM — fixed projects from $1,000. |
+| Domain | rdxhive.com |
+| Public email | hello@rdxhive.com |
+| Sales email | sales@rdxhive.com |
+| Team email | team@rdxhive.com |
 | Location line | Global remote team |
 | Founder mention (About only) | Founded by a senior full-stack engineer with agency and enterprise delivery experience. |
+
+Use **RDXHIVE** everywhere (wordmark, sentences, invoices). Do not spell it “RDX Hive”.
 
 ---
 
@@ -31,7 +39,7 @@
 
 **Headline:** Stop losing leads between your site and your CRM.
 
-**Subhead:** RDX builds high-performance sites with built-in automation for US marketing agencies ready to scale delivery without scaling headcount.
+**Subhead:** RDXHIVE builds high-performance sites with built-in automation for US marketing agencies ready to scale delivery without scaling headcount.
 
 ---
 
@@ -124,7 +132,7 @@ Website Standard + Automation Standard = **$5,000**
 
 ## About (RDX)
 
-RDX Technologies is a global remote team that builds agency websites and connects them to CRMs and automation tools.
+RDXHIVE is a global remote team that builds agency websites and connects them to CRMs and automation tools.
 
 We combine senior full-stack engineering (Next.js, React, Node.js) with practical automation (n8n, Make.com, CRM integrations) — packaged as fixed-scope projects, not open-ended retainers.
 
@@ -136,14 +144,14 @@ We combine senior full-stack engineering (Next.js, React, Node.js) with practica
 
 - Delivered as part of an agency development team  
 - Team-led build under agency engagement  
-- RDX-led project *(only when true)*  
+- RDXHIVE-led project *(only when true)*  
 
 ---
 
 ## Proof — DO NOT USE on new site
 
 - ❌ "4.9 (150 reviews)"  
-- ❌ "50+ clients worldwide" as RDX claim  
+- ❌ "50+ clients worldwide" as RDXHIVE claim  
 - ❌ "24–48 hour delivery"  
 - ❌ "Order Services"  
 - ❌ Fiverr / Upwork links in hero or primary sections  
@@ -164,18 +172,19 @@ We combine senior full-stack engineering (Next.js, React, Node.js) with practica
 
 ## Footer
 
-**Tagline:** Websites & CRM automation for marketing agencies.  
+**Brand tagline:** Many minds. One direction.  
 **Legal:** Privacy · Terms · FAQ  
-**Credit:** © {year} RDX Technologies  
+**Credit:** © {year} RDXHIVE  
+**Public email:** hello@rdxhive.com
 
 ---
 
 ## Meta tags (default)
 
 ```
-title: RDX Technologies | Agency Websites & CRM Automation
-description: RDX Technologies builds agency websites and connects them to your CRM — HubSpot, Slack, Calendly, and more. Fixed projects from $1,000.
-og:site_name: RDX Technologies
+title: RDXHIVE | Agency Websites & CRM Automation
+description: RDXHIVE builds agency websites and connects them to your CRM — HubSpot, Slack, Calendly, and more. Fixed projects from $1,000.
+og:site_name: RDXHIVE
 ```
 
 ---
@@ -187,4 +196,4 @@ og:site_name: RDX Technologies
 
 ---
 
-*Version 1.2 — round pricing + public tiers on service pages*
+*Version 1.3 — RDXHIVE brand + rdxhive.com*

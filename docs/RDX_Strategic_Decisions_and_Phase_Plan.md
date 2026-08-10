@@ -1,4 +1,4 @@
-# RDX Technologies — Strategic Decisions & Phase Plan
+# RDXHIVE — Strategic Decisions & Phase Plan
 
 > **Status:** ✅ Locked v1.2  
 > **Services & pricing:** [RDX_Services_and_Pricing.md](./RDX_Services_and_Pricing.md)
@@ -15,7 +15,8 @@
 | Flagship defaults | Website **$3,000** · Automation **$2,500** |
 | **Pricing on site** | **Yes** — full tiers on `/services/*`; homepage **“From $1,000”** only |
 | Audit CTA | **Free Website & Workflow Review** |
-| Brand | RDX Technologies · global remote team |
+| Brand | RDXHIVE · Many minds. One direction. · global remote team |
+| Domain | rdxhive.com |
 
 **Pitch:** We build agency websites and connect them to your CRM — fixed projects from $1,000.
 
