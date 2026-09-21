@@ -66,10 +66,11 @@ supabase/migrations/01x_os_*.sql
 
 ### Do not touch (unless explicitly approved)
 
-- `src/data/*` legacy mock data
-- `src/components/sections/*`, `src/app/hire/*`, `src/app/order/*`
-- Marketing rdx pages under revamp phase ownership
+- Marketing rdx pages and `src/content/rdx/`
 - Existing `/dashboard` Lead Desk (leads/invoices/client projects) — separate product surface
+- `next.config.ts` redirects for old public URLs (`/hire`, `/portfolio`, `/learn`, …)
+
+Legacy trees (`src/data/`, `src/components/sections/`, `src/_legacy/`) were removed. Do not restore them.
 
 ### Shared (read/reuse, don’t couple)
 
@@ -1119,8 +1120,9 @@ src/styles/os/theme.css
 
 - [PRODUCTS.md](./PRODUCTS.md) — three products in this repo
 - [RDX_Lead_Desk.md](./RDX_Lead_Desk.md) — separate admin surface (`/dashboard`)
-- [RDX_Implementation_Standards.md](./RDX_Implementation_Standards.md) — code quality (adapt: use `os/` not `rdx/` for OS components)
-- [README.md](./README.md) — living paths (OS zone isolated from marketing)
+- [`../context/code-standards.md`](../context/code-standards.md) — code quality (`os/` not `rdx/` for OS UI)
+- [`../plot.md`](../plot.md) — which files to open for OS work
+- [README.md](./README.md) — human doc shelf
 
 ---
 

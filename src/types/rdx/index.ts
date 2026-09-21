@@ -1,3 +1,4 @@
+export type { BrandBook, BrandColorRole } from "./brand-book";
 export type {
   AutomationScope,
   BudgetBand,

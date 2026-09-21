@@ -1,18 +1,17 @@
 ---
-description: RDX docs are source of truth for product and ops
-globs: docs/**/*
+description: Where writing lives — context, specs, slim docs
+globs: "{docs,context,specs}/**/*.md"
 alwaysApply: false
 ---
 
-# RDX Documentation
+# RDX writing
 
-When editing docs:
+| Folder | Job |
+|--------|-----|
+| `context/` | How the system works (agents) |
+| `specs/` | Numbered feature plans |
+| `docs/` | Human + locked product (pricing, copy, ops, OS spec, desk) |
 
-- Keep `docs/README.md` index updated when adding living files
-- Prefer updating living docs over adding new planning files
-- Strategic changes require updating: Strategic Decisions, Copy Bank, Services & Pricing
-- Do not contradict locked decisions without noting founder approval
-
-Implementation status lives in `docs/README.md` → Current status table.
-Product map: `docs/PRODUCTS.md`.
-Launch checklist: `docs/RDX_Launch_Runbook.md`.
+- Do not add new process docs under `docs/`
+- Locked pricing/copy/strategy changes need founder OK
+- After a spec ships, set it **Done** and update `context/progress-tracker.md`

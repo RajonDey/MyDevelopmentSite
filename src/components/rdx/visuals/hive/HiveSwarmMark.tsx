@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { rdxBrandAssets } from "@/content/rdx/brand";
 import { siteMetadata } from "@/content/rdx/metadata";
 import { cn } from "@/lib/utils";
+import { RdxMark } from "@/components/rdx/brand/RdxMark";
 import { hiveMotion } from "./hiveMotion";
 
 type Cell = { cx: number; cy: number; r: number; opacity: number };
@@ -143,13 +142,7 @@ export function HiveSwarmMark({ className }: HiveSwarmMarkProps) {
                 : { duration: 0 }
             }
           >
-            <Image
-              src={rdxBrandAssets.mark}
-              alt=""
-              width={140}
-              height={156}
-              className="h-[4.5rem] w-auto object-contain"
-            />
+            <RdxMark className="h-[4.5rem] w-auto text-rdx-ink" />
           </motion.div>
         </div>
       </div>

@@ -1,35 +1,32 @@
 ---
-description: RDX governance — read docs hub first, living paths, no scope creep
+description: RDX governance — plot first, spec-approved features, three products
 alwaysApply: true
 ---
 
-# RDX Revamp Governance
+# RDX Governance
 
-Marketing revamp is shipped. Work follows living docs in `docs/` (not archived phase plans).
+Three products in one app: marketing, Lead Desk, OS. Do not mix folders or tables.
 
 ## Before coding
 
-1. Read `docs/PRODUCTS.md` — which product (marketing / lead desk / OS)
-2. Read `docs/README.md` — confirm active track (maintenance / launch / OS / lead desk)
-3. Open the relevant living doc (Launch Runbook, Ops, Lead Desk, OS Spec, or Standards)
-4. State track + files to touch + files to avoid at session start
+1. Read `plot.md` — open only the files for this job
+2. Read `context/progress-tracker.md`
+3. New feature: require `specs/` status **Approved**, or write a Draft spec and stop
+4. State: product · spec id or “maintenance” · files to touch · files to avoid
 
 ## Hard stops
 
-- No mass deletes of legacy routes/API without founder OK
-- No invented metrics or fake testimonials (see Content Copy Bank)
+- No mass deletes of living routes/API without founder OK
+- No invented metrics (Copy Bank only)
 - No new npm packages without founder OK
+- No secrets in markdown
 
-## New code goes here
+## New code
 
-- `src/components/rdx/`
-- `src/content/rdx/`
-- `src/styles/rdx/tokens.css`
+- `src/components/rdx/` · `src/content/rdx/`
 - OS: `src/app/(os)/os/`, `src/components/os/`
+- Plans: `specs/`
 
 ## End of session
 
-Run `npm run build` and `npm run lint`. Update `docs/README.md` status if the track advanced.
-
-Skills: `.agents/skills/rdx-revamp/` + `.agents/skills/hallmark/` for design.
-Product map: `docs/PRODUCTS.md`.
+`npm run build` && `npm run lint`. Update `context/progress-tracker.md`.

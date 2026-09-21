@@ -1,33 +1,15 @@
 ---
-description: RDX revamp code standards for src — clean, minimal, no AI bloat
+description: RDX code standards for src
 globs: src/**/*
 alwaysApply: false
 ---
 
-# RDX Code Standards (src/)
+# RDX Code (src/)
 
-## Structure
-
-- New UI: `src/components/rdx/` only
-- New copy/data: `src/content/rdx/` only
-- Server Components default; `"use client"` only for forms/interactivity
-
-## Style
-
-- Use tokens from `src/styles/rdx/tokens.css`
-- No Fiverr green on rdx components
-- No `Enhanced*`, `*V2`, `*New` file names
-- Max ~150 lines/page — extract sections
-
-## Quality
-
-- No `console.log` in shipped code
-- No commented-out legacy blocks left behind
-- No `any` without comment
-- Reuse existing `Button`/`Card` before cloning
-
-## Copy
-
-Use `docs/RDX_Content_Copy_Bank.md`. Never invent stats.
-
-Full standards: `docs/RDX_Implementation_Standards.md`
+- New marketing/desk UI: `src/components/rdx/`
+- New OS UI: `src/components/os/` only
+- Copy: `src/content/rdx/` · Copy Bank for public words
+- Server Components default; `"use client"` only when needed
+- Tokens: `src/styles/rdx/tokens.css` or `src/styles/os/theme.css`
+- No `Enhanced*`, `*V2`, Fiverr green, invented stats
+- Full rules: `context/code-standards.md`

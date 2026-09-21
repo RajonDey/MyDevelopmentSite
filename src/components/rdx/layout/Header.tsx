@@ -22,7 +22,6 @@ export function RdxHeader() {
       <RdxContainer className="flex h-16 items-center justify-between">
         <RdxLogo
           href="/"
-          priority
           className="text-lg text-rdx-ink transition-colors hover:text-rdx-accent"
         />
 

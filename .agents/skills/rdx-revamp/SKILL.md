@@ -1,51 +1,43 @@
 ---
 name: rdx-revamp
 description: >-
-  RDXHIVE site — agency marketing site + lead desk. Use when editing
-  rdx components, /start funnel, services, case studies, or admin. Always read
-  docs/PRODUCTS.md then docs/README.md first.
+  RDXHIVE site — marketing + lead desk. Use when editing rdx components,
+  /start, services, case studies, or admin. Read plot.md first.
 ---
 
 # RDX Site Skill
 
 ## Before any code
 
-1. Read `docs/PRODUCTS.md` — which product?
-2. Read `docs/README.md` — confirm **active track**
-3. Open the living doc for that track (Launch, Ops, Lead Desk, OS Spec, Standards)
-4. State: track, files to edit, files NOT touching, exit criteria
+1. `plot.md` — match the job; open only those files
+2. `context/progress-tracker.md`
+3. New feature → `specs/` **Approved**, or write Draft and stop
+4. State: product, spec id or maintenance, files to touch, files to avoid
 
-If track unknown → **stop and ask**.
+## Implementation
 
-## Implementation rules
+- Standards: `context/code-standards.md`
+- Copy: `docs/RDX_Content_Copy_Bank.md`
+- Design: Hallmark · `modern-minimal` / Quiet
+- Desk schema: `docs/RDX_Lead_Desk.md`
+- Ops / env: `docs/RDX_Ops_Reference.md`
 
-- **Migration:** `docs/RDX_Code_Migration_Strategy.md` — additive first, no mass deletes
-- **Standards:** `docs/RDX_Implementation_Standards.md`
-- **Copy:** `docs/RDX_Content_Copy_Bank.md` — never invent metrics
-- **Design:** Hallmark (`.agents/skills/hallmark/`) — genre `modern-minimal`, theme `Quiet`
-- **Ops:** `docs/RDX_Ops_Reference.md` · Lead desk: `docs/RDX_Lead_Desk.md`
-- **Launch:** `docs/RDX_Launch_Runbook.md`
-
-## Folder conventions
+## Folders
 
 ```
-src/components/rdx/     # marketing + admin UI
-src/content/rdx/        # typed marketing content
+src/components/rdx/      marketing + admin
+src/content/rdx/
 src/styles/rdx/tokens.css
-src/lib/                 # analytics, leads, invoices, etc.
-supabase/migrations/     # lead desk
+src/app/api/leads|invoices|projects/
 ```
 
-Do **not** add to legacy mock files for new content. Do **not** create `Enhanced*V2` files.
+No `Enhanced*V2`. No new content in deleted `src/data/`.
 
-## Status
+## Out of scope
 
-| Track | Focus |
-|-------|--------|
-| Marketing revamp | **Complete** (Phases 0–15 shipped) |
-| Launch Phase F | Deploy + prod smoke + tag — see Launch Runbook |
-| Lead desk | Shipped; prod Supabase admin optional |
-| RDX OS | Separate — `docs/RDX_OS_Spec.md` |
+- New npm deps without founder OK
+- OS work (use `docs/RDX_OS_Spec.md` + an OS spec)
+- Invented metrics
 
 ## Session end
 
@@ -53,20 +45,4 @@ Do **not** add to legacy mock files for new content. Do **not** create `Enhanced
 npm run build && npm run lint
 ```
 
-Update `docs/README.md` status per `docs/RDX_Agent_Workflow.md`.
-
-## Out of scope (always)
-
-- New npm deps without founder OK
-- shadcn full install, CMS migration, domain change without approval
-- Deleting legacy routes without founder OK + redirect plan
-- Fiverr proof on marketing pages
-- Invented client counts or % stats
-
-## Reference docs
-
-- Products: `docs/PRODUCTS.md`
-- Hub: `docs/README.md`
-- Strategy: `docs/RDX_Strategic_Decisions_and_Phase_Plan.md`
-- Agent workflow: `docs/RDX_Agent_Workflow.md`
-- Root entry: `AGENTS.md`
+Update `context/progress-tracker.md`.

@@ -19,6 +19,7 @@ Prospect  →  Marketing site (/start)
                 ↓
             Lead Desk (/dashboard)  — client / revenue ops
 Team      →  RDXHIVE OS (/os)       — team execution & rhythm
+Identity  →  brand/                 — shared; not a fourth product
 ```
 
 Lead Desk and OS are **both internal**, but they solve different jobs. Do not merge UI or data models.
@@ -73,6 +74,20 @@ Separate from Lead Desk: OS = team execution; Lead Desk = client/revenue ops. Do
 
 ---
 
+## Shared brand (not a product)
+
+| | |
+|--|--|
+| **Job** | One identity for every product in this repo — and for new SaaS, decks, and social |
+| **Source** | [`../brand/README.md`](../brand/README.md) · `BRAND.md` · `brand.json` · `assets.md` |
+| **Served files** | `public/brand/` (rasters today). App pointer: `src/content/rdx/brand.ts` |
+| **Page** | `/brand` — editorial HQ (spec 05). Public, noindex |
+| **Program** | [`../specs/01-brand-hq-program.md`](../specs/01-brand-hq-program.md) |
+
+Do not put Brand HQ UI under `components/os/` or desk admin. Do not rewrite homepage / ICP / pricing from this folder. Public words stay in the Copy Bank.
+
+---
+
 ## Shared vs isolated
 
 | Shared | Isolated |
@@ -80,13 +95,15 @@ Separate from Lead Desk: OS = team execution; Lead Desk = client/revenue ops. Do
 | Next.js app, deploy, auth primitives, Resend patterns | Marketing pages vs `/dashboard` vs `/os` |
 | Design tokens where it makes sense | OS components (`os/`) vs rdx marketing (`rdx/`) |
 | Repo docs under `docs/` | Lead desk DB schema vs OS schema (when live) |
+| Identity (`brand/` + `public/brand/`) | `/brand` page (later) vs `/design-system` (dev-only) |
 
 **Rules of thumb**
 
 1. Public marketing copy → Copy Bank + `content/rdx/`
 2. Admin lead/invoice work → Lead Desk docs + `admin/` + APIs
 3. Team planning / rituals → OS Spec + `os/` only
-4. When unsure which product — ask before mixing folders
+4. Logos, colors, fonts, company identity → `brand/` first
+5. When unsure which product — ask before mixing folders
 
 ---
 
@@ -95,10 +112,12 @@ Separate from Lead Desk: OS = team execution; Lead Desk = client/revenue ops. Do
 | You want to… | Open |
 |--------------|------|
 | Orient yourself | This file |
-| Code standards / paths | [Implementation Standards](./RDX_Implementation_Standards.md) |
-| Agent session protocol | [Agent Workflow](./RDX_Agent_Workflow.md) |
+| Agent job routing | [`../plot.md`](../plot.md) |
+| How the system works | [`../context/`](../context/) |
+| New feature | [`../specs/`](../specs/) |
+| Identity / logo / Brand HQ | [`../brand/README.md`](../brand/README.md) |
 | Ship production | [Launch Runbook](./RDX_Launch_Runbook.md) |
-| Full doc index | [README.md](./README.md) |
+| Human doc shelf | [README.md](./README.md) |
 
 ---
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="RDXHIVE visual style">
+  <title>RDXHIVE visual style</title>
+  <rect width="1600" height="900" fill="#F8F8F8"/>
+  <polygon points="0,0 1180,0 720,900 0,900" fill="#FFFFFF"/>
+  <polygon points="1180,0 1600,0 1600,900 720,900" fill="#E1E1E1"/>
+  <polygon points="1180,0 1600,0 1600,520 980,0" fill="#181B1F"/>
+  <line x1="1180" y1="0" x2="720" y2="900" stroke="#181B1F" stroke-opacity="0.12" stroke-width="1"/>
+</svg>

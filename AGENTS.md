@@ -1,83 +1,56 @@
-# AGENTS.md — RDXHIVE Site
+# AGENTS.md — RDXHIVE
 
-Marketing site for **RDXHIVE** (agency). Revamp Phases 0–15 are shipped; remaining work is launch sign-off, maintenance, lead desk ops, and RDXHIVE OS.
-
----
+One Next.js app. Three products: **marketing site**, **Lead Desk**, **RDXHIVE OS**. Do not mix them.
 
 ## Start here
 
-1. **[docs/PRODUCTS.md](./docs/PRODUCTS.md)** — three products in this repo (don’t mix them)
-2. **[docs/README.md](./docs/README.md)** — documentation hub and current status
+1. **[plot.md](./plot.md)** — which context and docs to open for this job
+2. **[context/progress-tracker.md](./context/progress-tracker.md)** — current status
+3. **[specs/README.md](./specs/README.md)** — new features need an **Approved** spec first
 
----
+Product map (human): [docs/PRODUCTS.md](./docs/PRODUCTS.md).  
+Identity: [brand/README.md](./brand/README.md) — not a fourth product.
 
 ## Hard rules
 
-1. **Know the product** — [PRODUCTS.md](./docs/PRODUCTS.md) then [docs/README.md](./docs/README.md); know which track you’re on (marketing / lead desk / OS / launch).
-2. **Additive migration** — [RDX_Code_Migration_Strategy.md](./docs/RDX_Code_Migration_Strategy.md). No mass deletes of legacy without founder OK.
-3. **Clean code** — [RDX_Implementation_Standards.md](./docs/RDX_Implementation_Standards.md). No AI bloat, no invented metrics.
-4. **Copy** — use [RDX_Content_Copy_Bank.md](./docs/RDX_Content_Copy_Bank.md) only.
-5. **Living paths** — prefer `src/components/rdx/`, `src/content/rdx/`, OS zones.
-6. **Session protocol** — [RDX_Agent_Workflow.md](./docs/RDX_Agent_Workflow.md).
-7. **Launch** — founder checklist in [RDX_Launch_Runbook.md](./docs/RDX_Launch_Runbook.md).
+1. Match the job in `plot.md`. Do not load every doc.
+2. New feature → `specs/` Draft → founder **approved** → then code.
+3. Copy from [docs/RDX_Content_Copy_Bank.md](./docs/RDX_Content_Copy_Bank.md) only. No invented metrics.
+4. Living paths: `src/components/rdx/`, `src/content/rdx/`, OS under `src/app/(os)/` and `src/components/os/`. Identity: `brand/`.
+5. No new npm packages, no mass route deletes, no secrets in markdown.
 
----
-
-## Locked product decisions
+## Locked facts
 
 | Item | Value |
-|------|-------|
+|------|--------|
 | Brand | RDXHIVE · Many minds. One direction. |
 | Domain | rdxhive.com |
-| Emails | hello@ · sales@ · team@ rdxhive.com |
+| Emails | hello@ · sales@ · team@ |
 | ICP | US marketing agencies, 5–20 employees |
-| Pricing | **$1K–$5K+** round · public tiers on `/services` — see `docs/RDX_Services_and_Pricing.md` |
-| Pricing display | Homepage “from $1,000”; full tiers on service pages; no checkout on estimator |
-| Design | Hallmark modern-minimal / Quiet — not Vercel clone |
-| Site role | Credibility for outbound — not SEO-first |
-
-Full detail: [RDX_Strategic_Decisions_and_Phase_Plan.md](./docs/RDX_Strategic_Decisions_and_Phase_Plan.md)
-
----
+| Pricing | $1K–$5K+ · homepage “from $1,000” · tiers on `/services` |
+| Design | Hallmark modern-minimal / Quiet |
 
 ## Skills
 
-| Skill | Path | Use |
-|-------|------|-----|
-| **rdx-revamp** | `.agents/skills/rdx-revamp/SKILL.md` | Site / rdx component work |
-| **hallmark** | `.agents/skills/hallmark/SKILL.md` | Visual design for rdx pages |
-
----
+| Skill | When |
+|-------|------|
+| `.agents/skills/rdx-revamp/SKILL.md` | Marketing / desk UI |
+| `.agents/skills/hallmark/SKILL.md` | Visual design |
 
 ## Commands
 
 ```bash
-npm run dev      # local dev
-npm run build    # required before sign-off
-npm run lint     # required before sign-off
+npm run dev
+npm run build
+npm run lint
 npm run typecheck
-npm run prelaunch  # lint + typecheck + build
+npm run prelaunch
 ```
 
----
+## New code
 
-## Current status
-
-| Field | Value |
-|-------|-------|
-| **Marketing revamp** | Shipped (Phases 0–15) |
-| **Active track** | Launch Phase F open · RDXHIVE OS Phase 1 · Lead desk · **RDXHIVE brand cutover** (logo + favicon from identity sheet) |
-| **Next step** | Launch: [Runbook](./docs/RDX_Launch_Runbook.md) · OS: apply `010_os_core.sql` in Supabase · wire `/api/os/*` data layer · host env: `NEXT_PUBLIC_SITE_URL` + `BUSINESS_EMAIL=sales@rdxhive.com` (keep Resend `FROM_EMAIL` on verified rajondey.com) |
-
----
-
-## New code locations
-
-- Components: `src/components/rdx/`
-- Content: `src/content/rdx/`
-- Tokens: `src/styles/rdx/tokens.css`
+- Marketing + desk UI: `src/components/rdx/`
+- Copy: `src/content/rdx/`
 - OS: `src/app/(os)/os/`, `src/components/os/`
-
----
-
-*Update "Current status" when tracks advance.*
+- Identity: `brand/` (`BRAND.md` + `brand.json`)
+- Feature plans: `specs/`

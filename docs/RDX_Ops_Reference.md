@@ -136,9 +136,10 @@ Configured in `next.config.ts`:
 | `/portfolio`, `/portfolio/*` | `/work` |
 | `/learn`, `/learn/*` | `/blog` |
 | `/home` | `/` |
-| `/projects` | `/portfolio` → `/work` |
+| `/projects` | `/work` |
+| `/resources`, `/resources/*` | `/blog` |
 
-App-level redirects also on `/audit`, `/contact`, `/estimate` pages.
+Redirects live only in `next.config.ts`. Stub page files were removed (cleanup Wave C).
 
 ---
 

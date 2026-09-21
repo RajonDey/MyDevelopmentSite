@@ -92,7 +92,7 @@ npx lighthouse https://rdxhive.com \
   --chrome-flags="--headless"
 ```
 
-**Target:** Performance ≥ 85. Known weight: GTM + Umami + Tally + WP media.
+**Target:** Performance ≥ 85. Known weight: GTM + Umami + WP media.
 
 ---
 

@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { siteMetadata } from "@/content/rdx/metadata";
-import { rdxBrandAssets } from "@/content/rdx/brand";
 import { cn } from "@/lib/utils";
+import { RdxMark } from "@/components/rdx/brand/RdxMark";
 
 const markSizes = {
   sm: "h-6 w-auto",
@@ -27,7 +26,6 @@ export function RdxLogo({
   wordmarkSuffix,
   size = "md",
   className,
-  priority = false,
 }: RdxLogoProps) {
   const label = wordmarkSuffix
     ? `${siteMetadata.siteName} ${wordmarkSuffix}`
@@ -35,13 +33,8 @@ export function RdxLogo({
 
   const inner = (
     <>
-      <Image
-        src={invert ? rdxBrandAssets.markOnDark : rdxBrandAssets.mark}
-        alt=""
-        width={140}
-        height={156}
-        className={cn(markSizes[size], "shrink-0 object-contain")}
-        priority={priority}
+      <RdxMark
+        className={cn(markSizes[size], invert ? "text-white" : "text-current")}
       />
       {showWordmark ? (
         <span className="font-rdx-display tracking-tight">{label}</span>
