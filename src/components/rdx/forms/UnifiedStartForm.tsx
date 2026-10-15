@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { formPrivacyNotice } from "@/content/rdx/legal";
 import {
   startFormContent,
   teamSizeOptions,
@@ -314,6 +316,18 @@ export function UnifiedStartForm() {
           >
             {submitting ? "Submitting…" : startFormContent.submitLabel}
           </RdxButton>
+
+          <p className="text-xs text-rdx-subtle">
+            {formPrivacyNotice.lead}{" "}
+            <Link href="/terms-of-service" className="underline underline-offset-4 hover:text-rdx-accent">
+              {formPrivacyNotice.termsLabel}
+            </Link>{" "}
+            {formPrivacyNotice.joiner}{" "}
+            <Link href="/privacy-policy" className="underline underline-offset-4 hover:text-rdx-accent">
+              {formPrivacyNotice.privacyLabel}
+            </Link>
+            .
+          </p>
 
           <p className="text-sm text-rdx-subtle">{startFormContent.floorCopy}</p>
         </form>

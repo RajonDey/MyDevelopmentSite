@@ -96,6 +96,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/privacy",
+        destination: "/privacy-policy",
+        permanent: true,
+      },
+      {
+        source: "/terms",
+        destination: "/terms-of-service",
+        permanent: true,
+      },
+      {
+        source: "/refund",
+        destination: "/refund-policy",
+        permanent: true,
+      },
+      {
+        source: "/refunds",
+        destination: "/refund-policy",
+        permanent: true,
+      },
+      {
         source: "/projects",
         destination: "/work",
         permanent: true,

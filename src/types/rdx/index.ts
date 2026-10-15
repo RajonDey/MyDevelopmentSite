@@ -29,6 +29,7 @@ export type {
   LeadStatus,
   SubmitLeadInput,
 } from "./lead";
+export type { LegalDocument, LegalSection } from "./legal";
 export type {
   InvoiceLineDetail,
   InvoiceLineItem,

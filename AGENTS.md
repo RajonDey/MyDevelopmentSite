@@ -25,7 +25,7 @@ Identity: [brand/README.md](./brand/README.md) — not a fourth product.
 |------|--------|
 | Brand | RDXHIVE · Many minds. One direction. |
 | Domain | rdxhive.com |
-| Emails | hello@ · sales@ · team@ |
+| Emails | hello@ · sales@ · team@ · support@ (support, refunds, privacy) |
 | ICP | US marketing agencies, 5–20 employees |
 | Pricing | $1K–$5K+ · homepage “from $1,000” · tiers on `/services` |
 | Design | Hallmark modern-minimal / Quiet |

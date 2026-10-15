@@ -28,8 +28,9 @@ export const rdxFooterLinks = {
     { label: "Start a project", href: "/start" },
   ],
   legal: [
-    { label: "Privacy", href: "/privacy-policy" },
-    { label: "Terms", href: "/terms-of-service" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Refund Policy", href: "/refund-policy" },
     { label: "FAQ", href: "/faq" },
   ],
 } as const;

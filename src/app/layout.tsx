@@ -8,6 +8,8 @@ import { Metadata } from "next";
 import SchemaOrg from "./SchemaOrg";
 import ClientSessionProvider from "@/components/ClientSessionProvider";
 import Script from "next/script";
+import { CookieConsent } from "@/components/rdx/legal/CookieConsent";
+import { consentDefaultScript } from "@/lib/rdx/consent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -68,6 +70,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={rdxFontVariables}>
       <head>
+        <Script id="consent-default" strategy="beforeInteractive">
+          {consentDefaultScript}
+        </Script>
+
         {/* Google Tag Manager - Head */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -101,6 +107,7 @@ export default function RootLayout({
           <RdxHeader />
           <main className="min-h-screen pt-16">{children}</main>
           <RdxFooter />
+          <CookieConsent />
         </ClientSessionProvider>
       </body>
     </html>

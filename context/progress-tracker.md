@@ -75,3 +75,5 @@ Update after every meaningful implementation change.
 - 22 Sep 2026: Spec 08 unit 3 Done. Business card concept (original H front, locked contact facts on back). All templates listed on `/brand` Assets.
 - 22 Sep 2026: Card type scaled up, stack tightened, corners rounded to match the mock.
 - 22 Sep 2026: Brand HQ in-page nav centered in the page container; close band sits inside `RdxContainer` (not full-bleed).
+- 15 Oct 2026: Spec 09 Done. English-only Privacy/Terms rewritten and new `/refund-policy` added, all from `src/content/rdx/legal.ts`. Short URLs `/privacy` `/terms` `/refund` redirect to them. Footer now shows the support email, a contact link, the address, and the legal name. Still to do: fill LLC name + US address in `legal.ts` after the Wyoming filing.
+- 15 Oct 2026: Spec 10 Done. Cookie banner (Consent Mode v2, default denied before GTM, choice stored 12 months, "Cookie settings" in the footer, hidden on `/os`). `/start` now shows a Terms + Privacy notice under the submit button. No new packages.

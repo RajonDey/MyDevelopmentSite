@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { rdxFooterLinks } from "@/content/rdx/navigation";
 import { siteMetadata } from "@/content/rdx/metadata";
+import { legalEntity } from "@/content/rdx/legal";
+import { CookieSettingsButton } from "@/components/rdx/legal/CookieConsent";
 import { RdxContainer } from "@/components/rdx/layout/Container";
 import { RdxLogo } from "@/components/rdx/brand/RdxLogo";
 
@@ -16,7 +18,26 @@ export function RdxFooter() {
             <p className="max-w-xs text-sm leading-relaxed text-rdx-muted">
               {siteMetadata.tagline}
             </p>
-            <p className="text-sm text-rdx-subtle">Global remote team</p>
+            <address className="space-y-1 text-sm not-italic text-rdx-muted">
+              <p>
+                Support:{" "}
+                <a
+                  href={`mailto:${legalEntity.supportEmail}`}
+                  className="text-rdx-ink transition-colors hover:text-rdx-accent"
+                >
+                  {legalEntity.supportEmail}
+                </a>
+              </p>
+              <p>
+                <Link
+                  href={legalEntity.contactPath}
+                  className="text-rdx-ink transition-colors hover:text-rdx-accent"
+                >
+                  Contact us
+                </Link>
+              </p>
+              <p className="text-rdx-subtle">{legalEntity.address}</p>
+            </address>
           </div>
 
           <div>
@@ -64,14 +85,18 @@ export function RdxFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <CookieSettingsButton className="text-sm text-rdx-muted transition-colors hover:text-rdx-accent" />
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-rdx-border pt-6">
-          <p className="text-sm text-rdx-subtle">
-            © {year} {siteMetadata.siteName}
+        <div className="mt-10 flex flex-col gap-2 border-t border-rdx-border pt-6 text-sm text-rdx-subtle sm:flex-row sm:justify-between">
+          <p>
+            © {year} {legalEntity.legalName}. All rights reserved.
           </p>
+          <p>{legalEntity.operatingNote}</p>
         </div>
       </RdxContainer>
     </footer>

@@ -94,6 +94,7 @@ export const publicSitemapRoutes = [
   { path: "/newsletter", changeFrequency: "monthly" as const, priority: 0.5 },
   { path: "/privacy-policy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms-of-service", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/refund-policy", changeFrequency: "yearly" as const, priority: 0.3 },
 ];
 
 export function buildLlmsTxt(short = true): string {
