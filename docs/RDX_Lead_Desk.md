@@ -122,7 +122,7 @@ Stored as JSONB on `rdx_invoices.line_items`. Additive fields (`kind`, `details`
 
 Editor: default hourly rate applies to hour lines with empty rate (copied onto lines at save). Info lines do not count toward USD/BDT totals. PDF shows project title when `project_id` is set, plus detail bullets (`✓` / note).
 
-**Paste estimate:** draft editor accepts a written estimate (`## Section — N hrs`, `- bullet ✅`, `Deployment: 1hr`, `Invoice: 36*$8= $288; $288*123=35424`). Parser fills lines, hourly rate, and FX. Manual edit still wins after apply.
+**Paste estimate:** draft editor accepts a written estimate. Task times (`1 hr`, `30 min`, `5 hrs × 2 = 10 hrs`) are what get billed. A heading total is used only when the tasks under it have no times. Lines below `Total` are not billed. The invoice formula sets the hourly rate and USD/BDT rate. `After discount` fills the discount. Payment details on the draft can be edited or cleared; an empty box is left off the PDF. Saving a draft stays on that draft and opens **Review PDF**.
 
 ### Schema highlights
 

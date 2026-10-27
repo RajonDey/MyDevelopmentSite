@@ -21,6 +21,11 @@ import {
 import type { ProjectRecord } from "@/types/rdx/project";
 import { DEFAULT_USD_BDT_RATE } from "@/content/rdx/invoice-settings";
 import {
+  decodeInvoiceAdjustments,
+  defaultPaymentDetails,
+  encodeInvoiceAdjustments,
+} from "@/lib/invoice-payment-notes";
+import {
   invoiceReportingUsd,
   summarizeInvoices,
 } from "@/lib/invoices";
@@ -48,6 +53,9 @@ type InvoiceFormState = {
   lineItems: LineItemDraft[];
   amountBdt: string;
   usdBdtRate: string;
+  discountBdt: string;
+  discountUsd: string;
+  paymentDetails: string;
   paymentMethod: PaymentMethod | "";
   clientRegion: ClientRegion | "";
   projectId: string;
@@ -88,6 +96,9 @@ function emptyForm(lead: LeadRecord): InvoiceFormState {
     lineItems: [emptyLineItem()],
     amountBdt: "",
     usdBdtRate: defaultUsdBdtRate(lead),
+    discountBdt: "",
+    discountUsd: "",
+    paymentDetails: defaultPaymentDetails(defaultPaymentMethod(lead)),
     paymentMethod: defaultPaymentMethod(lead),
     clientRegion: lead.client_region ?? "",
     projectId: "",
@@ -99,6 +110,8 @@ function invoiceToForm(invoice: InvoiceRecord): InvoiceFormState {
     invoice.line_items.length > 0
       ? invoice.line_items.map(lineItemToDraft)
       : [emptyLineItem()];
+  const adjustments = decodeInvoiceAdjustments(invoice.payment_notes);
+  const paymentMethod = invoice.payment_method ?? "";
 
   return {
     billingPeriod: invoice.billing_period ?? "",
@@ -114,7 +127,15 @@ function invoiceToForm(invoice: InvoiceRecord): InvoiceFormState {
         : invoice.amount_bdt
           ? String(DEFAULT_USD_BDT_RATE)
           : "",
-    paymentMethod: invoice.payment_method ?? "",
+    discountBdt:
+      adjustments.discountBdt > 0 ? String(adjustments.discountBdt) : "",
+    discountUsd:
+      adjustments.discountUsd > 0 ? String(adjustments.discountUsd) : "",
+    paymentDetails:
+      adjustments.bankDetails === null
+        ? defaultPaymentDetails(paymentMethod)
+        : adjustments.bankDetails,
+    paymentMethod,
     clientRegion: invoice.client_region ?? "",
     projectId: invoice.project_id ?? "",
   };
@@ -128,12 +149,20 @@ function buildPayload(
     .map((row) => parseLineItemDraft(row, form.hourlyRateUsd))
     .filter((item): item is InvoiceLineItem => item !== null);
 
-  const amountBdt = form.amountBdt.trim() ? Number(form.amountBdt) : undefined;
+  const discountBdt = form.discountBdt.trim() ? Number(form.discountBdt) : 0;
+  const discountUsd = form.discountUsd.trim() ? Number(form.discountUsd) : 0;
   const usdBdtRate = form.usdBdtRate.trim()
     ? Number(form.usdBdtRate)
     : undefined;
 
   const amountUsd = sumLineItemsUsd(lineItems);
+  const computedDueBdt =
+    usdBdtRate && usdBdtRate > 0 && amountUsd > 0
+      ? Math.max(0, Math.round(amountUsd * usdBdtRate) - (discountBdt > 0 ? discountBdt : 0))
+      : undefined;
+  const amountBdt = form.amountBdt.trim()
+    ? Number(form.amountBdt)
+    : computedDueBdt;
 
   if (amountUsd <= 0 && (amountBdt === undefined || amountBdt <= 0)) {
     return { error: "Add at least one billable line or a BDT total." };
@@ -141,6 +170,14 @@ function buildPayload(
 
   if (amountBdt !== undefined && Number.isNaN(amountBdt)) {
     return { error: "Invalid BDT amount." };
+  }
+
+  if (Number.isNaN(discountBdt) || discountBdt < 0 || Number.isNaN(discountUsd) || discountUsd < 0) {
+    return { error: "Invalid discount." };
+  }
+
+  if (discountBdt > 0 && (amountBdt === undefined || amountBdt <= 0)) {
+    return { error: "Discount is larger than the BDT total." };
   }
 
   if (usdBdtRate !== undefined && Number.isNaN(usdBdtRate)) {
@@ -170,6 +207,11 @@ function buildPayload(
     issuedAt: form.issuedAt || undefined,
     dueAt: form.dueAt || undefined,
     paymentMethod: form.paymentMethod || undefined,
+    paymentNotes: encodeInvoiceAdjustments({
+      bankDetails: form.paymentDetails,
+      discountBdt: discountBdt > 0 ? discountBdt : 0,
+      discountUsd: discountUsd > 0 ? discountUsd : 0,
+    }),
     clientRegion: form.clientRegion || undefined,
     status: "draft",
   };
@@ -194,7 +236,8 @@ export function InvoicePanel({
     [invoices, editingId]
   );
 
-  const isEditable = mode === "new" || editingInvoice?.status === "draft";
+  const isEditable =
+    mode === "new" || !editingInvoice || editingInvoice.status === "draft";
 
   const computedUsd = useMemo(() => {
     const items = form.lineItems
@@ -218,13 +261,25 @@ export function InvoicePanel({
     [invoices]
   );
 
+  const discountBdtNum = useMemo(() => {
+    const amount = form.discountBdt.trim() ? Number(form.discountBdt) : 0;
+    return Number.isFinite(amount) && amount > 0 ? amount : 0;
+  }, [form.discountBdt]);
+
+  const discountUsdNum = useMemo(() => {
+    const amount = form.discountUsd.trim() ? Number(form.discountUsd) : 0;
+    return Number.isFinite(amount) && amount > 0 ? amount : 0;
+  }, [form.discountUsd]);
+
   const computedBdt = useMemo(() => {
     const rate = form.usdBdtRate.trim() ? Number(form.usdBdtRate) : 0;
     const explicit = form.amountBdt.trim() ? Number(form.amountBdt) : 0;
     if (explicit > 0) return explicit;
-    if (rate > 0 && computedUsd > 0) return Math.round(computedUsd * rate);
+    if (rate > 0 && computedUsd > 0) {
+      return Math.max(0, Math.round(computedUsd * rate) - discountBdtNum);
+    }
     return 0;
-  }, [form.amountBdt, form.usdBdtRate, computedUsd]);
+  }, [form.amountBdt, form.usdBdtRate, computedUsd, discountBdtNum]);
 
   const computedReportingUsd = useMemo(() => {
     const bdt = form.amountBdt.trim() ? Number(form.amountBdt) : 0;
@@ -327,7 +382,17 @@ export function InvoicePanel({
       return;
     }
 
+    const body = (await response.json().catch(() => null)) as {
+      invoice?: InvoiceRecord;
+    } | null;
     await onRefresh();
+    if (body?.invoice) {
+      setForm(invoiceToForm(body.invoice));
+      setEditingId(body.invoice.id);
+      setMode("edit");
+      setFormError(null);
+      return;
+    }
     closeEditor();
   }
 
@@ -529,6 +594,15 @@ export function InvoicePanel({
                   parsed.usdBdtRate !== undefined
                     ? String(parsed.usdBdtRate)
                     : current.usdBdtRate,
+                discountBdt:
+                  parsed.discountBdt !== undefined
+                    ? String(parsed.discountBdt)
+                    : "",
+                discountUsd:
+                  parsed.discountUsd !== undefined
+                    ? String(parsed.discountUsd)
+                    : "",
+                amountBdt: "",
                 projectId: parsed.projectId ?? current.projectId,
                 lineItems:
                   parsed.lines.length > 0
@@ -579,6 +653,18 @@ export function InvoicePanel({
                 </span>
               </div>
             )}
+            {discountUsdNum > 0 && (
+              <div className="mb-1 flex justify-between text-rdx-muted">
+                <span>Discount (USD)</span>
+                <span>−{formatUsd(discountUsdNum)}</span>
+              </div>
+            )}
+            {discountBdtNum > 0 && (
+              <div className="mb-1 flex justify-between text-rdx-muted">
+                <span>Discount (BDT)</span>
+                <span>−{formatBdt(discountBdtNum)}</span>
+              </div>
+            )}
             <div className="flex justify-between text-rdx-ink">
               <span>Total USD (reporting)</span>
               <span className="font-medium">{formatUsd(computedReportingUsd)}</span>
@@ -598,7 +684,47 @@ export function InvoicePanel({
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            <FormField label="BDT total" htmlFor="inv_amount_bdt">
+            <FormField label="Discount (BDT)" htmlFor="inv_discount_bdt">
+              <input
+                id="inv_discount_bdt"
+                type="number"
+                min="0"
+                step="1"
+                className={rdxInputClassName}
+                value={form.discountBdt}
+                disabled={!isEditable}
+                placeholder="0"
+                onChange={(event) =>
+                  setForm((current) => ({
+                    ...current,
+                    discountBdt: event.target.value,
+                    amountBdt: "",
+                  }))
+                }
+              />
+            </FormField>
+            <FormField label="Discount (USD)" htmlFor="inv_discount_usd">
+              <input
+                id="inv_discount_usd"
+                type="number"
+                min="0"
+                step="1"
+                className={rdxInputClassName}
+                value={form.discountUsd}
+                disabled={!isEditable}
+                placeholder="0"
+                onChange={(event) =>
+                  setForm((current) => ({
+                    ...current,
+                    discountUsd: event.target.value,
+                  }))
+                }
+              />
+            </FormField>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <FormField label="BDT due" htmlFor="inv_amount_bdt">
               <input
                 id="inv_amount_bdt"
                 type="number"
@@ -607,7 +733,7 @@ export function InvoicePanel({
                 className={rdxInputClassName}
                 value={form.amountBdt}
                 disabled={!isEditable}
-                placeholder="21600"
+                placeholder={computedBdt > 0 ? String(computedBdt) : "21600"}
                 onChange={(event) =>
                   setForm((current) => ({
                     ...current,
@@ -615,6 +741,9 @@ export function InvoicePanel({
                   }))
                 }
               />
+              <p className="mt-1 text-xs text-rdx-muted">
+                Leave blank to use hours × rate, minus the BDT discount.
+              </p>
             </FormField>
             <FormField label="USD/BDT rate" htmlFor="inv_usd_bdt_rate">
               <input
@@ -645,12 +774,14 @@ export function InvoicePanel({
               className={rdxInputClassName}
               value={form.paymentMethod}
               disabled={!isEditable}
-              onChange={(event) =>
+              onChange={(event) => {
+                const paymentMethod = event.target.value as PaymentMethod | "";
                 setForm((current) => ({
                   ...current,
-                  paymentMethod: event.target.value as PaymentMethod | "",
-                }))
-              }
+                  paymentMethod,
+                  paymentDetails: defaultPaymentDetails(paymentMethod),
+                }));
+              }}
             >
               <option value="">—</option>
               {paymentMethodOptions.map((method) => (
@@ -659,6 +790,27 @@ export function InvoicePanel({
                 </option>
               ))}
             </select>
+          </FormField>
+
+          <FormField label="Payment details" htmlFor="inv_payment_details">
+            <textarea
+              id="inv_payment_details"
+              rows={4}
+              className={rdxInputClassName}
+              value={form.paymentDetails}
+              disabled={!isEditable}
+              placeholder="Leave empty to omit payment details from the PDF"
+              onChange={(event) =>
+                setForm((current) => ({
+                  ...current,
+                  paymentDetails: event.target.value,
+                }))
+              }
+            />
+            <p className="mt-1 text-xs text-rdx-muted">
+              Printed on the PDF. Clear it to leave bank details off. Changing
+              the payment method fills the usual details again.
+            </p>
           </FormField>
 
           <FormField label="Client region" htmlFor="inv_client_region">
@@ -740,14 +892,15 @@ export function InvoicePanel({
                 Mark paid
               </RdxButton>
             )}
-            {editingInvoice && (
-              <RdxButton
-                type="button"
-                variant="secondary"
-                href={invoicePdfHref(editingInvoice.id)}
+            {editingId && (
+              <a
+                href={`${invoicePdfHref(editingId)}?preview=1`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-rdx border border-rdx-border bg-rdx-paper px-4 py-2 text-sm font-medium text-rdx-ink hover:bg-rdx-surface"
               >
-                Download PDF
-              </RdxButton>
+                Review PDF
+              </a>
             )}
           </div>
         </div>
@@ -793,10 +946,12 @@ export function InvoicePanel({
                 </button>
                 <div className="mt-2 flex flex-wrap gap-2">
                   <a
-                    href={invoicePdfHref(invoice.id)}
+                    href={`${invoicePdfHref(invoice.id)}?preview=1`}
+                    target="_blank"
+                    rel="noreferrer"
                     className="text-xs text-rdx-accent hover:text-rdx-accent-hover"
                   >
-                    PDF
+                    Review PDF
                   </a>
                   {invoice.status === "draft" && (
                     <>
@@ -879,6 +1034,7 @@ function toUpdatePayload(
     issuedAt: input.issuedAt ?? null,
     dueAt: input.dueAt ?? null,
     paymentMethod: input.paymentMethod ?? null,
+    paymentNotes: input.paymentNotes ?? null,
     clientRegion: input.clientRegion ?? null,
   };
 }

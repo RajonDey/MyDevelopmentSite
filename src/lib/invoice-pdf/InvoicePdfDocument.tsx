@@ -9,6 +9,7 @@ import {
 } from "@react-pdf/renderer";
 import type { InvoiceLineItem, InvoiceRecord } from "@/types/rdx/invoice";
 import { getPaymentBlock, invoiceIssuer } from "@/content/rdx/invoice-settings";
+import { decodeInvoiceAdjustments } from "@/lib/invoice-payment-notes";
 import {
   invoiceLineHours,
   invoiceSharedHourlyRate,
@@ -231,8 +232,8 @@ function formatDate(value: string | null) {
 
 function formatQty(item: InvoiceLineItem) {
   if (item.kind === "info" || item.quantity === undefined) return "—";
-  const unit = item.unit === "hours" ? " hrs" : item.unit === "fixed" ? "" : "";
-  return `${item.quantity}${unit}`;
+  if (item.unit === "hours") return `${formatHours(item.quantity)} hrs`;
+  return String(item.quantity);
 }
 
 function formatRate(item: InvoiceLineItem) {
@@ -264,7 +265,21 @@ export function InvoicePdfDocument({
   billToAddress,
   projectTitle,
 }: InvoicePdfProps) {
-  const payment = getPaymentBlock(invoice.payment_method);
+  const adjustments = decodeInvoiceAdjustments(invoice.payment_notes);
+  const methodBlock = getPaymentBlock(invoice.payment_method);
+  const paymentLines =
+    adjustments.bankDetails === null
+      ? methodBlock.lines
+      : adjustments.bankDetails
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean);
+  const paymentTitle = invoice.payment_method ? methodBlock.title : "Payment";
+  const dueUsd = Math.max(0, invoice.amount_usd - adjustments.discountUsd);
+  const bdtSubtotal =
+    invoice.amount_bdt !== null
+      ? invoice.amount_bdt + adjustments.discountBdt
+      : null;
   const lineItems: InvoiceLineItem[] =
     invoice.line_items.length > 0
       ? invoice.line_items
@@ -390,7 +405,25 @@ export function InvoicePdfDocument({
             <Text>Subtotal (USD)</Text>
             <Text>{formatUsd(invoice.amount_usd)}</Text>
           </View>
-          {invoice.amount_bdt ? (
+          {adjustments.discountUsd > 0 ? (
+            <View style={styles.totalRow}>
+              <Text>Discount (USD)</Text>
+              <Text>−{formatUsd(adjustments.discountUsd)}</Text>
+            </View>
+          ) : null}
+          {bdtSubtotal && adjustments.discountBdt > 0 ? (
+            <View style={styles.totalRow}>
+              <Text>Subtotal (BDT)</Text>
+              <Text>{formatBdt(bdtSubtotal)}</Text>
+            </View>
+          ) : null}
+          {adjustments.discountBdt > 0 ? (
+            <View style={styles.totalRow}>
+              <Text>Discount (BDT)</Text>
+              <Text>−{formatBdt(adjustments.discountBdt)}</Text>
+            </View>
+          ) : null}
+          {invoice.amount_bdt && adjustments.discountBdt <= 0 ? (
             <View style={styles.totalRow}>
               <Text>Total (BDT)</Text>
               <Text>{formatBdt(invoice.amount_bdt)}</Text>
@@ -405,23 +438,27 @@ export function InvoicePdfDocument({
             <Text>Total due</Text>
             <Text>
               {invoice.amount_bdt
-                ? `${formatUsd(invoice.amount_usd)} · ${formatBdt(invoice.amount_bdt)}`
-                : formatUsd(invoice.amount_usd)}
+                ? adjustments.discountBdt > 0 && adjustments.discountUsd <= 0
+                  ? formatBdt(invoice.amount_bdt)
+                  : `${formatUsd(dueUsd)} · ${formatBdt(invoice.amount_bdt)}`
+                : formatUsd(dueUsd)}
             </Text>
           </View>
         </View>
 
-        <View style={[styles.section, { marginTop: 24 }]}>
-          <Text style={styles.sectionLabel}>Payment</Text>
-          <View style={styles.paymentBox}>
-            <Text style={styles.paymentTitle}>{payment.title}</Text>
-            {payment.lines.map((line) => (
-              <Text key={line} style={styles.muted}>
-                {line}
-              </Text>
-            ))}
+        {paymentLines.length > 0 ? (
+          <View style={[styles.section, { marginTop: 24 }]}>
+            <Text style={styles.sectionLabel}>Payment</Text>
+            <View style={styles.paymentBox}>
+              <Text style={styles.paymentTitle}>{paymentTitle}</Text>
+              {paymentLines.map((line) => (
+                <Text key={line} style={styles.muted}>
+                  {line}
+                </Text>
+              ))}
+            </View>
           </View>
-        </View>
+        ) : null}
 
         {invoice.description ? (
           <View style={styles.section}>

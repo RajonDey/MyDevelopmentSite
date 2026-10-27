@@ -30,5 +30,5 @@
     ".next/types/**/*.ts",
     "src/types/**/*" // Ensure tally.d.ts is included
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/lib/invoice-estimate-parse.test.ts"]
 }

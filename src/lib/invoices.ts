@@ -323,7 +323,7 @@ function resolveAmounts(input: {
   usdBdtRate?: number;
   lineItems: InvoiceLineItem[];
 }): { amountUsd: number; amountBdt: number | null; usdBdtRate: number | null } {
-  let amountUsd = sumLineItemsUsd(input.lineItems);
+  let amountUsd = Math.round(sumLineItemsUsd(input.lineItems));
   if (amountUsd <= 0 && input.amountUsd !== undefined && input.amountUsd > 0) {
     amountUsd = input.amountUsd;
   }
@@ -344,7 +344,7 @@ function resolveAmounts(input: {
   }
 
   return {
-    amountUsd: amountUsd > 0 ? amountUsd : 0,
+    amountUsd: amountUsd > 0 ? Math.round(amountUsd) : 0,
     amountBdt,
     usdBdtRate: rate,
   };
@@ -490,6 +490,7 @@ export async function createInvoice(
       issued_at: issuedAt,
       due_at: input.dueAt ?? null,
       payment_method: paymentMethod,
+      payment_notes: input.paymentNotes?.trim() || null,
       client_region: clientRegion,
       status: input.status ?? "draft",
     })
@@ -748,6 +749,12 @@ export function validateCreateInvoiceInput(
     issuedAt: typeof record.issuedAt === "string" ? record.issuedAt : undefined,
     dueAt: typeof record.dueAt === "string" ? record.dueAt : undefined,
     paymentMethod: paymentMethod as PaymentMethod | undefined,
+    paymentNotes:
+      record.paymentNotes === null
+        ? null
+        : typeof record.paymentNotes === "string"
+          ? record.paymentNotes
+          : undefined,
     clientRegion: clientRegion as ClientRegion | undefined,
     status: status as InvoiceStatus | undefined,
   };

@@ -57,6 +57,8 @@ Update after every meaningful implementation change.
 
 ## Session notes
 
+- 27 Oct 2026: Lead Desk invoice paste bills task times (including minutes) instead of adding the heading total on top. Discount, editable or empty payment details, and Review PDF after saving a draft.
+
 - 20 Sep 2026: leftover A–F applied. Tally script and 410 APIs gone. Living intake is `/api/leads/submit`.
 - 20 Sep 2026: moved agent process out of `docs/` into `context/` + `plot.md` + `specs/`.
 - 20 Sep 2026: Brand HQ program drafted (`specs/01`–`08`). ChatGPT’s dual folder trees and mock Playfair / hive-green path rejected as the default. No `brand/` or `/brand` page until 01+02 approved.

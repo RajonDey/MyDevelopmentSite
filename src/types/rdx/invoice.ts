@@ -68,6 +68,7 @@ export type CreateInvoiceInput = {
   issuedAt?: string;
   dueAt?: string;
   paymentMethod?: PaymentMethod;
+  paymentNotes?: string | null;
   clientRegion?: ClientRegion;
   status?: InvoiceStatus;
 };

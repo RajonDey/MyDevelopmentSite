@@ -80,9 +80,11 @@ export function InvoiceEstimatePaste({
           onChange={(event) => setText(event.target.value)}
         />
         <p className="text-xs text-rdx-muted">
-          Headings with hours become services. Bullets become details. “No
-          additional hours” becomes a note line. Invoice formula sets rate and
-          FX.
+          A heading total is kept only when the tasks under it have no times
+          of their own. Minutes count (30 min = 0.5 hr). A line under the
+          total, such as a later “Deployment: 1 hr”, is not billed — move it
+          above the total to include it. The invoice line sets the rate and
+          exchange rate. “After discount” fills the discount.
         </p>
         <RdxButton type="button" variant="secondary" onClick={apply}>
           Apply to lines
